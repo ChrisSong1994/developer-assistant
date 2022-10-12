@@ -1,0 +1,73 @@
+@import '../styles/theme.less';
+
+.developer-container {
+  :global {
+    .ant-tabs-nav {
+      display: none !important;
+    }
+  }
+
+  .developer-container-sider {
+    padding: 16px 6px 0;
+    background: @backgroundColor;
+  }
+
+  .developer-container-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    padding: 0 20px;
+    background-color: @backgroundColor;
+    -webkit-app-region: drag;
+
+    .developer-container-header-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 34.4px;
+        height: 40px;
+        margin: 0 10px;
+        margin-right: 6px;
+        border-radius: 4px;
+      }
+      div {
+        color: @primary-color;
+        font-weight: 500;
+        font-size: 22px;
+      }
+    }
+
+    .developer-container-header-action {
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      i {
+        color: @primary-color;
+        font-size: 22px;
+        opacity: 0.8;
+      }
+      .action-item {
+        margin: 0 4px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .developer-container-content {
+    margin: 0;
+    padding: 0 24px 24px;
+    overflow: auto;
+    background-color: @backgroundColor;
+
+    .developer-container-content-keep-alive {
+      height: 100%;
+      padding: 24px;
+      overflow: auto;
+      background-color: #fff;
+      border-radius: 12px;
+    }
+  }
+}

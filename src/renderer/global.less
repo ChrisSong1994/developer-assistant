@@ -1,0 +1,34 @@
+@import './styles/theme.less';
+@import './styles/iconfont/iconfont.css';
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+.ant-layout {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+
+.ant-menu {
+  font-size: 18px;
+  background: @backgroundColor;
+}
+
+.ant-menu-sub.ant-menu-inline {
+  background: @backgroundColor !important;
+}
+.ant-menu-item-selected::after {
+  display: none !important;
+}
+
+.ant-menu-item-selected {
+  color: #fff;
+  background-color: @primary-color !important;
+  border-radius: 4px;
+
+  &:hover {
+    color: #fff !important;
+  }
+}
