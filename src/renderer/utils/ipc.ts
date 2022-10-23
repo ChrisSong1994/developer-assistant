@@ -1,8 +1,8 @@
 // 主进程通信
-import { ipcRenderer } from 'electron';
 import { message } from 'antd';
 import { to } from './index';
 
+const { ipcRenderer } = window.electronBridge;
 // 同步通信
 export const syncAction = (action: string, params?: Record<string, any>) => {
   const data = { action, params };

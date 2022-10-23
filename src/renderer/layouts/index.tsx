@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import type { FC } from 'react';
-import { Layout, Menu, Tabs, Button } from 'antd';
+import { Layout, Menu, Tabs } from 'antd';
+
+import { minimize, maximize, winclose } from '@/servies';
 import logo from '../assets/images/logo.svg';
 import routes from './routes';
 import Icon from '../components/Icon';
@@ -49,11 +51,11 @@ const BaseLayout: FC = () => {
         <div className={styles['developer-container-header-logo']}>
           <img src={logo} /> <div>开发者助手</div>
         </div>
-        <div className={styles['developer-container-header-action']}>
-          <Icon className={styles['action-item']} type="icon-minus" />
-          <Icon className={styles['action-item']} type="icon-quanping" />
-          <Icon className={styles['action-item']} type="icon-guanbi" />
-        </div>
+        {/* <div className={styles['developer-container-header-action']}>
+          <Icon className={styles['action-item']} type="icon-minus" onClick={minimize} />
+          <Icon className={styles['action-item']} type="icon-quanping" onClick={maximize} />
+          <Icon className={styles['action-item']} type="icon-guanbi" onClick={winclose} />
+        </div> */}
       </Header>
 
       <Layout>

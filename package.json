@@ -5,11 +5,12 @@
   "description": "前端开发助手",
   "author": "ChrisSong",
   "scripts": {
+    "build:icon": "electron-icon-builder --input=./resource/images/logo.png --output=./resource/images --flatten ",
     "dev": "cross-env APP_ROOT=src/renderer umi dev electron",
-    "electron:build:linux": "umi build electron --linux",
+    "electron:build:linux": "cross-env APP_ROOT=src/renderer umi build electron --linux",
     "electron:build:mac": "cross-env APP_ROOT=src/renderer umi build electron --mac",
     "electron:build:win": "cross-env APP_ROOT=src/renderer umi build electron --win",
-    "electron:dev": "umi dev electron",
+    "electron:dev": "cross-env APP_ROOT=src/renderer umi dev electron",
     "electron:init": "umi electron init",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,less,md}\"",
     "rebuild-deps": "electron-builder install-app-deps",
@@ -26,6 +27,7 @@
     ]
   },
   "dependencies": {
+    "@chrissong/suger": "^0.0.1",
     "electron-log": "^4.4.7",
     "execa": "^6.1.0",
     "fs-extra": "^10.1.0",
