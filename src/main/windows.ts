@@ -1,5 +1,6 @@
 import * as path from 'path';
-import { BrowserWindow, app } from 'electron';
+import { BrowserWindow, app, protocol } from 'electron';
+import createProtocol from 'umi-plugin-electron-builder/lib/createProtocol';
 
 import { IpcEvents } from '../ipc-events';
 
@@ -13,6 +14,9 @@ const RESOURCES_PATH = app.isPackaged
 const getAssetPath = (...paths: string[]): string => {
   return path.join(RESOURCES_PATH, ...paths);
 };
+
+// 协议注册
+protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }]);
 
 /**
  * Gets default options for the main window
@@ -48,7 +52,8 @@ export function createMainWindow(): Electron.BrowserWindow {
   if (isDevelopment) {
     mainWindow.loadURL('http://localhost:8000');
   } else {
-    mainWindow.loadURL('./index.html');
+    createProtocol('app');
+    mainWindow.loadURL('app://./index.html');
   }
 
   mainWindow.webContents.once('dom-ready', () => {

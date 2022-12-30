@@ -2,10 +2,7 @@ import path from 'path';
 import { app, BrowserWindow, protocol, Menu, Tray } from 'electron';
 import { IpcMainEvent } from 'electron/main';
 import createProtocol from 'umi-plugin-electron-builder/lib/createProtocol';
-import installExtension, {
-  REDUX_DEVTOOLS,
-  REACT_DEVELOPER_TOOLS,
-} from 'electron-devtools-installer';
+import installExtension, { REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
 import { getOrCreateMainWindow } from './windows';
 import { setupAboutPanel } from './about-panel';

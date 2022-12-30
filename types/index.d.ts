@@ -13,3 +13,4 @@ declare global {
 }
 
 declare module 'react-copy-to-clipboard';
+declare module 'react-color';
