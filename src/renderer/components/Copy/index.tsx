@@ -16,7 +16,11 @@ const CopyComponent = (props: IProps) => {
 
   const handleCopy = () => {
     setCopied(true);
-    timer.current = setTimeout(() => setCopied(false), 1000);
+    timer.current = setTimeout(() => {
+      setCopied(false);
+      clearTimeout(timer.current);
+      timer.current = null;
+    }, 1000);
   };
 
   useEffect(() => {
