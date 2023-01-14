@@ -1,6 +1,8 @@
 import * as color from 'react-color/es/helpers/color';
+import { Col, Row } from 'antd';
 
 import EditableInput from '@/components/EditableInput';
+import styles from './index.less';
 
 interface IProps {
   onChange: (val: Record<string, any>, e: any) => void;
@@ -81,8 +83,21 @@ const Fields = (porps: IProps) => {
   };
 
   return (
-    <section>
-      <EditableInput value={hex} onChange={handleChange} />
+    <section className={styles['color-picker-fields']}>
+      <Row gutter={[16, 16]}>
+        <Col span={24}>
+          <EditableInput labelPosition="center" label="HEX" value={hex} onChange={handleChange} />
+        </Col>
+        <Col span={8}>
+          <EditableInput labelPosition="left" label="RGB" value={rgbValue} onChange={handleChange} />
+        </Col>
+        <Col span={8}>
+          <EditableInput labelPosition="left" label="HSV" value={hslValue} onChange={handleChange} />
+        </Col>
+        <Col span={8}>
+          <EditableInput labelPosition="left" label="HSL" value={hsvValue} onChange={handleChange} />
+        </Col>
+      </Row>
     </section>
   );
 };

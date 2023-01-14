@@ -2,7 +2,7 @@ import { Input, Tooltip, message } from 'antd';
 import type { TextAreaProps } from 'antd/lib/input';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import Icon from '../Icon';
+import Icon from '@/components/Icon';
 import styles from './index.less';
 
 const TextArea = Input.TextArea;
@@ -21,10 +21,7 @@ const CustomTextArea = (props: IProps) => {
         <div className={styles['custom-textarea-label']}>{`${label}：`}</div>
         <div className={styles['custom-textarea-actions']}>
           <Tooltip title="复制" color={'#fff'} overlayInnerStyle={{ color: '#000' }}>
-            <CopyToClipboard
-              text={originProps.value}
-              onCopy={() => message.success(`已复制${label}到剪贴板`)}
-            >
+            <CopyToClipboard text={originProps.value} onCopy={() => message.success(`已复制${label}到剪贴板`)}>
               <span>
                 <Icon type="icon-fuzhi" />
               </span>
@@ -37,9 +34,7 @@ const CustomTextArea = (props: IProps) => {
           </Tooltip>
         </div>
       </div>
-      {description ? (
-        <div className={styles['custom-textarea-description']}>{description}</div>
-      ) : null}
+      {description ? <div className={styles['custom-textarea-description']}>{description}</div> : null}
       <TextArea {...originProps} autoSize={{ minRows: 8, maxRows: 12 }} />
     </div>
   );

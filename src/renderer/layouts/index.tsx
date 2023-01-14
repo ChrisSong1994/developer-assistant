@@ -9,7 +9,6 @@ import Icon from '../components/Icon';
 import styles from './index.less';
 
 const { Header, Content, Sider } = Layout;
-const { TabPane } = Tabs;
 
 // 菜单栏
 const MenuItems = routes.map((item) => {
@@ -45,17 +44,23 @@ const BaseLayout: FC = () => {
     setActiveTitle(page.title);
   };
 
+  const tabItems = pages.map((page: any) => ({
+    label: '',
+    key: page.key,
+    children: React.createElement(page.component),
+  }));
+
   return (
     <Layout className={styles['developer-container']}>
       <Header className={styles['developer-container-header']}>
         <div className={styles['developer-container-header-logo']}>
           <img src={logo} /> <div>开发者助手</div>
         </div>
-        {/* <div className={styles['developer-container-header-action']}>
+        <div className={styles['developer-container-header-action']}>
           <Icon className={styles['action-item']} type="icon-minus" onClick={minimize} />
           <Icon className={styles['action-item']} type="icon-quanping" onClick={maximize} />
           <Icon className={styles['action-item']} type="icon-guanbi" onClick={winclose} />
-        </div> */}
+        </div>
       </Header>
 
       <Layout>
@@ -72,15 +77,7 @@ const BaseLayout: FC = () => {
         <Content className={styles['developer-container-content']}>
           <section className={styles['developer-container-content-keep-alive']}>
             {/* 为了保证在桌面端模拟页面 keep alive */}
-            <Tabs activeKey={activeKey}>
-              {pages.map((page) => {
-                return (
-                  <TabPane tab={page.key} key={page.key}>
-                    {React.createElement(page.component)}
-                  </TabPane>
-                );
-              })}
-            </Tabs>
+            <Tabs activeKey={activeKey} items={tabItems} />
           </section>
         </Content>
       </Layout>

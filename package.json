@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@chrissong/suger": "^0.0.1",
+    "@emotion/css": "^11.10.5",
     "@types/react-color": "^3.0.6",
     "electron-log": "^4.4.7",
     "execa": "^6.1.0",
