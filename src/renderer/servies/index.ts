@@ -1,4 +1,10 @@
-import { syncAction, asyncAction } from '../utils/ipc';
+import {
+  syncAction,
+  asyncAction,
+  handleWindowMinimize,
+  handleWindowMaximize,
+  handleWindowClose,
+} from '../utils/ipc_events';
 
 type PlainObject = Record<string, any>;
 
@@ -6,6 +12,6 @@ export const getAppPath = () => syncAction('getAppPath');
 
 export const generateKey = (params: PlainObject) => asyncAction('generateKey', params);
 
-export const minimize = () => syncAction('window-min');
-export const maximize = () => syncAction('window-max');
-export const winclose = () => syncAction('window-close');
+export const minimize = handleWindowMinimize;
+export const maximize = handleWindowMaximize;
+export const winclose = handleWindowClose;

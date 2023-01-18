@@ -1,21 +1,24 @@
-import path from 'path';
-import { app, BrowserWindow, protocol, Menu, Tray } from 'electron';
-import { IpcMainEvent } from 'electron/main';
-import createProtocol from 'umi-plugin-electron-builder/lib/createProtocol';
+import { app, BrowserWindow } from 'electron';
 import installExtension, { REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
 import { getOrCreateMainWindow } from './windows';
-import { setupAboutPanel } from './about-panel';
-import { ipcMainCreate } from './utils/ipcMain';
+import initIpcEvents from './ipc-events';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 let mainWindow: BrowserWindow;
 
 export async function onReady() {
-  getOrCreateMainWindow();
+  // 创建主窗口
+  mainWindow = getOrCreateMainWindow();
+  // 事件初始化
+  initIpcEvents(mainWindow);
+
+  // 加载开发插件
   if (isDevelopment) {
     await installExtension([REACT_DEVELOPER_TOOLS.id, REDUX_DEVTOOLS.id]);
   }
+
+  // 注册窗口事件
 }
 
 app.whenReady().then(onReady);

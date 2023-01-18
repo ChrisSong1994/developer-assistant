@@ -2,7 +2,7 @@ import * as path from 'path';
 import { BrowserWindow, app, protocol } from 'electron';
 import createProtocol from 'umi-plugin-electron-builder/lib/createProtocol';
 
-import { IpcEvents } from '../ipc-events';
+import { IpcEvents } from '../../types/ipc-events';
 
 export let browserWindows: Array<BrowserWindow | null> = [];
 
