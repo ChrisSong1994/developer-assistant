@@ -1,0 +1,31 @@
+.json-parse {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .tool-panel {
+    height: 36px;
+    i {
+      margin: 0 3px;
+      cursor: pointer;
+    }
+  }
+  .json-panel {
+    width: 100%;
+  }
+
+  .error-panel {
+    position: absolute;
+    bottom: 0;
+    left: 16;
+    z-index: 100;
+    width: 100%;
+    padding: 12px;
+    color: #f5222d;
+    font-size: 16;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+}

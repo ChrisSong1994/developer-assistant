@@ -1,4 +1,5 @@
 import os from 'os';
+import _ from 'lodash';
 /**
  * promise 结果转数组
  */
@@ -20,3 +21,37 @@ export function isInWin() {
 export function isInMac() {
   return os.platform() === 'darwin';
 }
+
+// 判断一个值是不是空值、undefined、null、空字符串等；
+export const isEmpty = (value: any) => {
+  if (typeof value === 'string') {
+    return value === '';
+  }
+
+  if (_.isObject(value)) {
+    return _.isEmpty(value);
+  }
+
+  return value === undefined || value === null;
+};
+
+export const jsonParse = (value: string) => {
+  try {
+    return JSON.parse(value);
+  } catch (err: any) {
+    const result = /\d*$/.exec(err.message);
+    if (!result) throw err;
+    const position = Number(result[0]);
+    const stringLineSplitArr = value.split('\n').map((str) => str.length);
+    let line = 0;
+    let column = 0;
+    let index = 0;
+    while (index + stringLineSplitArr[line] <= position) {
+      index += stringLineSplitArr[line];
+      line += 1;
+    }
+    column = position - index;
+    const message = err.message.replace(`position ${position}`, `line ${line + 1} column ${column}`);
+    throw new Error(message);
+  }
+};

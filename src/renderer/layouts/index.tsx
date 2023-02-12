@@ -64,7 +64,7 @@ const BaseLayout: FC = () => {
       </Header>
 
       <Layout>
-        <Sider width={220} theme="light" className={styles['developer-container-sider']}>
+        <Sider width={180} theme="light" className={styles['developer-container-sider']}>
           <Menu
             mode="inline"
             selectedKeys={[activeKey]}

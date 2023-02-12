@@ -7,10 +7,11 @@ import Icon from '@/components/Icon';
 interface IProps {
   value: string;
   className?: string;
+  size?: number;
 }
 
 const CopyComponent = (props: IProps) => {
-  const { value, className } = props;
+  const { value, className, size = 20 } = props;
   const timer = useRef<any>(null);
   const [copied, setCopied] = useState<boolean>(false);
 
@@ -39,16 +40,16 @@ const CopyComponent = (props: IProps) => {
           <Icon
             className={css(`
             color: #52c41a;
-            font-size:20px;
+            font-size:${size}px;
           `)}
             type="icon-icon_duihao-xian"
           />
         ) : (
           <Icon
             className={css(`
-          font-size:20px;
+          font-size:${size}px;
         `)}
-            type="icon-fuzhi"
+            type="icon-kaobei"
           />
         )}
       </span>

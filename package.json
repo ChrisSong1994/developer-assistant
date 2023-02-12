@@ -33,11 +33,15 @@
     "electron-log": "^4.4.7",
     "execa": "^6.1.0",
     "fs-extra": "^10.1.0",
+    "json5": "^2.2.3",
     "lodash": "^4.17.21",
+    "parse-json": "^6.0.2",
     "react": "^18.1.0",
+    "react-ace": "^10.1.0",
     "react-color": "^2.19.3",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.1.0",
+    "react-json-view": "^1.21.3",
     "umi": "^3.5.24"
   },
   "devDependencies": {
