@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { FC } from 'react';
 import { Layout, Menu, Tabs } from 'antd';
+import { cx } from '@emotion/css';
 
 import { minimize, maximize, winclose } from '@/servies';
 import logo from '../assets/images/logo.svg';
@@ -38,7 +39,7 @@ const BaseLayout: FC = () => {
   const [activeTitle, setActiveTitle] = useState<string>(defaultTitle);
 
   // 选择
-  const handleSelect = ({ key }: any) => {
+  const handleSelect = (key: string) => {
     const page = pages.filter((item) => item.key === key)[0];
     setActiveKey(key);
     setActiveTitle(page.title);
@@ -64,15 +65,22 @@ const BaseLayout: FC = () => {
       </Header>
 
       <Layout>
-        <Sider width={180} theme="light" className={styles['developer-container-sider']}>
-          <Menu
-            mode="inline"
-            selectedKeys={[activeKey]}
-            defaultOpenKeys={[defaultOpenKey]}
-            style={{ borderRight: 0 }}
-            items={MenuItems}
-            onSelect={handleSelect}
-          />
+        <Sider width={75} theme="light" className={styles['developer-container-sider']}>
+          <div className={styles['developer-container-sider-menu']}>
+            {MenuItems.map((item) => (
+              <div
+                className={cx([
+                  styles['developer-container-sider-menu-item'],
+                  activeKey === item.key ? styles['developer-container-sider-menu-item-active'] : '',
+                ])}
+                key={item.key}
+                onClick={() => handleSelect(item.key)}
+              >
+                <Icon size={21} type={item.icon} />
+                <span>{item.label}</span>
+              </div>
+            ))}
+          </div>
         </Sider>
         <Content className={styles['developer-container-content']}>
           <section className={styles['developer-container-content-keep-alive']}>
