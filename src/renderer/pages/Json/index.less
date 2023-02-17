@@ -1,3 +1,4 @@
+// json parse
 .json-parse {
   position: relative;
   display: flex;
@@ -17,15 +18,30 @@
 
   .error-panel {
     position: absolute;
-    bottom: 0;
-    left: 16;
+    bottom: -12px;
+    left: 0;
     z-index: 100;
     width: 100%;
     padding: 12px;
     color: #f5222d;
-    font-size: 16;
+    font-size: 20;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
+  }
+}
+
+// json convert
+.json-convert {
+  display: flex;
+  .json-convert-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 66px;
+    button {
+      margin-bottom: 8px;
+    }
   }
 }

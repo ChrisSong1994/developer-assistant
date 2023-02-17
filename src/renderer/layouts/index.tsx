@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { FC } from 'react';
-import { Layout, Menu, Tabs } from 'antd';
+import { Layout, Tabs } from 'antd';
 import { cx } from '@emotion/css';
 
 import { minimize, maximize, winclose } from '@/servies';
@@ -55,12 +55,18 @@ const BaseLayout: FC = () => {
     <Layout className={styles['developer-container']}>
       <Header className={styles['developer-container-header']}>
         <div className={styles['developer-container-header-logo']}>
-          <img src={logo} /> <div>开发者助手</div>
+          <img src={logo} /> <div>开发者工具</div>
         </div>
         <div className={styles['developer-container-header-action']}>
-          <Icon className={styles['action-item']} type="icon-minus" onClick={minimize} />
-          <Icon className={styles['action-item']} type="icon-quanping" onClick={maximize} />
-          <Icon className={styles['action-item']} type="icon-guanbi" onClick={winclose} />
+          <div className={styles['developer-container-header-action-btn']}>
+            <Icon className={styles['icon']} type="icon-minus" onClick={minimize} />
+          </div>
+          <div className={styles['developer-container-header-action-btn']}>
+            <Icon className={styles['action-item']} type="icon-quanping" onClick={maximize} />
+          </div>
+          <div className={styles['developer-container-header-action-btn']}>
+            <Icon className={styles['action-item']} type="icon-guanbi" onClick={winclose} />
+          </div>
         </div>
       </Header>
 

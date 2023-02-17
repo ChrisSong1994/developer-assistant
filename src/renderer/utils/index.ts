@@ -35,6 +35,7 @@ export const isEmpty = (value: any) => {
   return value === undefined || value === null;
 };
 
+// 感觉需要废弃掉了 参考下 jsonlint-mod的代码
 export const jsonParse = (value: string) => {
   try {
     return JSON.parse(value);

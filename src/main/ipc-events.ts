@@ -1,5 +1,5 @@
 import { ipcMain, app, BrowserWindow } from 'electron';
-import { IpcEvents } from '../../types/ipc-events';
+import { IpcEvents } from '../types/ipc-events';
 
 export default (mainWindow: any) => {
   ipcMain.on(IpcEvents.WINDOW_MINIMIZE, () => {
@@ -13,7 +13,6 @@ export default (mainWindow: any) => {
     } else {
       mainWindow.maximize();
     }
-    // global.mainWindow.setMinimumSize(1600, 900)
     mainWindow.setMinimumSize(1200, 800);
     mainWindow.center();
   });

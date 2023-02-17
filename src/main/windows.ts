@@ -1,8 +1,7 @@
 import * as path from 'path';
 import { BrowserWindow, app, protocol } from 'electron';
 import createProtocol from 'umi-plugin-electron-builder/lib/createProtocol';
-
-import { IpcEvents } from '../../types/ipc-events';
+import { EWindowSize } from '../types/window';
 
 export let browserWindows: Array<BrowserWindow | null> = [];
 
@@ -25,8 +24,8 @@ protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: tru
  */
 export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions {
   return {
-    width: 1400,
-    height: 900,
+    width: EWindowSize.width,
+    height: EWindowSize.height,
     titleBarStyle: 'hidden',
     resizable: true,
     icon: getAssetPath('icon.png'),

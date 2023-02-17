@@ -1,8 +1,9 @@
 // 主进程通信
 import { message } from 'antd';
 import { to } from './index';
-import { IpcEvents } from '../../../types/ipc-events';
+import { IpcEvents } from '../../types/ipc-events';
 
+// @ts-ignore
 const { ipcRenderer } = window.electronBridge;
 
 // 慎用： 同步通信 （阻塞渲染进程直到主进程返回结果）
