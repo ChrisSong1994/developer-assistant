@@ -1,8 +1,8 @@
 import { app, BrowserWindow } from 'electron';
 import installExtension, { REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
-import { getOrCreateMainWindow } from './windows';
-import initIpcEvents from './ipc-events';
+import { getOrCreateMainWindow } from './modules/windows';
+import eventsRegister from './eventsRegister';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 let mainWindow: BrowserWindow;
@@ -10,15 +10,14 @@ let mainWindow: BrowserWindow;
 export async function onReady() {
   // 创建主窗口
   mainWindow = getOrCreateMainWindow();
-  // 事件初始化
-  initIpcEvents(mainWindow);
+
+  // 事件注册
+  eventsRegister(mainWindow);
 
   // 加载开发插件
   if (isDevelopment) {
     await installExtension([REACT_DEVELOPER_TOOLS.id, REDUX_DEVTOOLS.id]);
   }
-
-  // 注册窗口事件
 }
 
 app.whenReady().then(onReady);

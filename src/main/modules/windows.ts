@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { BrowserWindow, app, protocol } from 'electron';
 import createProtocol from 'umi-plugin-electron-builder/lib/createProtocol';
-import { EWindowSize } from '../types/window';
+import { EWindowSize } from '../../types/window';
 
 export let browserWindows: Array<BrowserWindow | null> = [];
 
@@ -38,8 +38,7 @@ export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions
 }
 
 /**
- * Creates a new main window.
- *
+ * 创建窗口
  * @export
  * @returns {Electron.BrowserWindow}
  */
@@ -80,3 +79,28 @@ export function createMainWindow(): Electron.BrowserWindow {
 export function getOrCreateMainWindow(): Electron.BrowserWindow {
   return BrowserWindow.getFocusedWindow() || browserWindows[0] || createMainWindow();
 }
+
+// 窗口缩小
+export const windowMinimize = (mainWindow: any) => () => {
+  mainWindow.minimize();
+  mainWindow.setResizable(true);
+  return;
+};
+
+// 窗口放大
+export const windowMaxmize = (mainWindow: any) => () => {
+  if (mainWindow.isMaximized()) {
+    mainWindow.restore();
+  } else {
+    mainWindow.maximize();
+  }
+  mainWindow.setMinimumSize(1200, 800);
+  mainWindow.center();
+  return;
+};
+
+// 窗口关闭
+export const windowClose = (mainWindow: any) => () => {
+  mainWindow.close();
+  return;
+};
