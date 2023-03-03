@@ -1,4 +1,5 @@
 export default {
+  buildType: 'webpack',
   rendererTarget: 'web',
   outputDir: 'release', //默认打包目录
   debugPort: 5858, //主进程调试端口，
@@ -15,8 +16,8 @@ export default {
       type: 'distribution',
       hardenedRuntime: true,
     },
-    win: {
-      icon: '../assets/icon.png',
-    },
+    // win: {
+    //   icon: '../assets/icon.png',
+    // },
   },
 };

@@ -1,5 +1,5 @@
+import { Radio, Tabs } from 'antd';
 import React, { memo, useState } from 'react';
-import { Tabs, Radio } from 'antd';
 
 export interface ICustomTabItem {
   label: string;
@@ -19,7 +19,7 @@ const JsonComponent = (props: IProps) => {
 
   return (
     <div>
-      <div style={{ textAlign: 'center', marginBottom: 12 }}>
+      <div style={{ textAlign: 'center' }}>
         <Radio.Group buttonStyle="solid" value={activeKey} onChange={(e) => setActiveKey(e.target.value)}>
           {items.map((item) => (
             <Radio.Button key={item.key} value={item.key}>

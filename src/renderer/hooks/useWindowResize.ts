@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { EWindowSize } from '../../types/window';
+import { EWindowSize } from '../../types/global';
 
 // Hook
 export default function useWindowSize() {

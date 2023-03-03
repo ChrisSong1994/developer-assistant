@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
-import Saturation from 'react-color/es/components/common/Saturation';
-import Hue from 'react-color/es/components/common/Hue';
 import ColorWrap from 'react-color/es/components/common/ColorWrap';
-import GooglePointerCircle from 'react-color/es/components/google/GooglePointerCircle';
+import Hue from 'react-color/es/components/common/Hue';
+import Saturation from 'react-color/es/components/common/Saturation';
 import GooglePointer from 'react-color/es/components/google/GooglePointer';
+import GooglePointerCircle from 'react-color/es/components/google/GooglePointerCircle';
 
 import Fields from './Fields';
 

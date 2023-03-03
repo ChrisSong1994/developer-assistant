@@ -1,9 +1,9 @@
-import GenerateKey from '../pages/KeyTool/GenerateKey';
-import Setting from '../pages/Setting';
 import Color from '@/pages/Color';
-import JsonComponent from '@/pages/Json';
+import Encryption from '@/pages/Encryption';
 import Image from '@/pages/Image';
+import JsonComponent from '@/pages/Json';
 import Regexp from '@/pages/Regexp';
+import Setting from '@/pages/Setting';
 import Transcoding from '@/pages/Transcoding';
 
 const routes = [
@@ -26,10 +26,10 @@ const routes = [
     component: Transcoding,
   },
   {
-    key: 'KeyTool',
+    key: 'Encryption',
     title: '加解密',
     icon: 'icon-31mima',
-    component: GenerateKey,
+    component: Encryption,
   },
   {
     key: 'Regexp',

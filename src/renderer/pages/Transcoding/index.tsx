@@ -1,11 +1,24 @@
-import React from 'react';
+import CustomTabs from '@/components/CustomTabs';
+import Base64CodingComponent from './Base64';
+import UrlCodingComponent from './Url';
 
-const Transcoding = (props: any) => {
+const JsonComponent = () => {
   return (
-    <div>
-      <h1>Transcoding</h1>
-    </div>
+    <CustomTabs
+      items={[
+        {
+          label: `URL编解码`,
+          key: '1',
+          children: <UrlCodingComponent />,
+        },
+        {
+          label: `BASE64编解码`,
+          key: '2',
+          children: <Base64CodingComponent />,
+        },
+      ]}
+    />
   );
 };
 
-export default Transcoding;
+export default JsonComponent;

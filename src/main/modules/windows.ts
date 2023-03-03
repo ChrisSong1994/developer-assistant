@@ -1,7 +1,7 @@
+import { app, BrowserWindow, protocol } from 'electron';
 import * as path from 'path';
-import { BrowserWindow, app, protocol } from 'electron';
-import createProtocol from 'umi-plugin-electron-builder/lib/createProtocol';
-import { EWindowSize } from '../../types/window';
+import { EWindowSize } from '../../types/global';
+import { createProtocol } from '../../utils';
 
 export let browserWindows: Array<BrowserWindow | null> = [];
 
@@ -31,6 +31,7 @@ export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions
     icon: getAssetPath('icon.png'),
     webPreferences: {
       devTools: isDevelopment,
+      nodeIntegration: true,
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js'),
     },

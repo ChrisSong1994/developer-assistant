@@ -9,19 +9,15 @@
  */
 import { useEffect, useMemo, useState } from 'react';
 // @ts-ignore
-import jsonlint from 'jsonlint-mod';
-import AceEditor from 'react-ace';
 import { Tooltip } from 'antd';
-import 'ace-builds/src-noconflict/mode-json';
-import 'ace-builds/src-noconflict/theme-chrome';
-import 'ace-builds/src-min-noconflict/ext-searchbox';
-import 'ace-builds/src-min-noconflict/ext-language_tools';
+import jsonlint from 'jsonlint-mod';
 
-import { isEmpty } from '@/utils';
-import Icon from '@/components/Icon';
 import Copy from '@/components/Copy';
-import styles from './index.less';
+import { JsonEditor } from '@/components/Editor';
+import Icon from '@/components/Icon';
 import { useWindowSize } from '@/hooks';
+import { isEmpty } from '@/utils';
+import styles from './index.less';
 
 const EDITOR_HEIGHT_PADDING = 180;
 
@@ -93,30 +89,7 @@ const JsonParseComponent = (props: any) => {
             <Icon type="icon-shanchu" size={18} onClick={handleClear} />
           </Tooltip>
         </div>
-        <AceEditor
-          placeholder="请输入 json 数据..."
-          mode="json"
-          theme="chrome"
-          name="json"
-          style={{
-            width: '100%',
-            height: editorHeight,
-            border: '1px solid #E9E9E9',
-          }}
-          fontSize={16}
-          showPrintMargin={true}
-          showGutter={true}
-          highlightActiveLine={true}
-          setOptions={{
-            enableBasicAutocompletion: false,
-            enableLiveAutocompletion: false,
-            enableSnippets: false,
-            showLineNumbers: true,
-            tabSize: 4,
-          }}
-          value={value}
-          onChange={setValue}
-        />
+        <JsonEditor style={{ height: editorHeight }} value={value} onChange={setValue} />
       </div>
       {isEmpty(parseError) ? null : <div className={styles['error-panel']}>{parseError}</div>}
     </div>

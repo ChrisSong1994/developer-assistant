@@ -34,12 +34,26 @@
 // json convert
 .json-convert {
   display: flex;
+  padding-top: 12px;
+
+  .json-convert-panel {
+    flex: 1;
+
+    .json-convert-panel-title {
+      display: flex;
+      align-items: center;
+      height: 36px;
+      font-weight: 500;
+      font-size: 18px;
+    }
+  }
+
   .json-convert-actions {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 66px;
+    width: 56px;
     button {
       margin-bottom: 8px;
     }

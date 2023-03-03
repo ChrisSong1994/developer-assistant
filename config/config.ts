@@ -2,7 +2,8 @@ import { defineConfig } from 'umi';
 import electronBuilder from './electronBuilder';
 
 export default defineConfig({
-  fastRefresh: {},
+  fastRefresh: true,
+  plugins: ['umi-plugin-electron-builder'],
   routes: [
     {
       path: '/',

@@ -1,8 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Tabs, Radio } from 'antd';
-
-import JsonParseComponent from './parse';
-import JsonConvertComponent from './convert';
+import JsonConvertComponent from './Convert';
+import JsonParseComponent from './Parse';
 
 import CustomTabs from '@/components/CustomTabs';
 
@@ -15,6 +12,7 @@ const JsonComponent = () => {
           key: '1',
           children: <JsonParseComponent />,
         },
+
         {
           label: `转换`,
           key: '2',

@@ -1,5 +1,5 @@
-import * as color from 'react-color/es/helpers/color';
 import { Col, Row } from 'antd';
+import * as color from 'react-color/es/helpers/color';
 
 import EditableInput from '@/components/EditableInput';
 import styles from './index.less';
@@ -65,9 +65,9 @@ const Fields = (porps: IProps) => {
       values[2] = values[2].replace('%', '');
       values[1] = values[1].replace('%', '');
       values[0] = values[0].replace('°', '');
-      if (hsvValue[1] == 1) {
+      if (hsvValue[1] === 1) {
         hsvValue[1] = 0.01;
-      } else if (hsvValue[2] == 1) {
+      } else if (hsvValue[2] === 1) {
         hsvValue[2] = 0.01;
       }
       onChange(

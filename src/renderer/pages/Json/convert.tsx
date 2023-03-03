@@ -9,23 +9,23 @@
  */
 import { useEffect, useMemo, useState } from 'react';
 // @ts-ignore
-import jsonlint from 'jsonlint-mod';
-import AceEditor from 'react-ace';
-import { Button } from 'antd';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import 'ace-builds/src-noconflict/mode-json';
-import 'ace-builds/src-noconflict/mode-yaml';
-import 'ace-builds/src-noconflict/theme-chrome';
-import 'ace-builds/src-min-noconflict/ext-searchbox';
-import 'ace-builds/src-min-noconflict/ext-language_tools';
+import { Button, Tooltip } from 'antd';
+import jsonlint from 'jsonlint-mod';
+import yaml from 'yaml';
 
-import styles from './index.less';
+import { JsonEditor, YamlEditor } from '@/components/Editor';
 import { useWindowSize } from '@/hooks';
+import { isEmpty } from '@/utils';
+import styles from './index.less';
 
-const EDITOR_HEIGHT_PADDING = 148;
+const EDITOR_HEIGHT_PADDING = 184;
 
 const JsonConvertComponent = () => {
-  const [value, setValue] = useState('');
+  const [jsonValue, setJsonValue] = useState('');
+  const [yamlValue, setYamlValue] = useState('');
+  const [parseJsonError, setParseJsonError] = useState(null);
+  const [parseYamlError, setParseYamlError] = useState(null);
 
   const { height } = useWindowSize();
   const editorHeight = useMemo(() => height - EDITOR_HEIGHT_PADDING, [height]); // 编辑器高度
@@ -33,82 +33,62 @@ const JsonConvertComponent = () => {
   // 保存
 
   // // json 解析
-  // const handleJsonParse = (value: string) => {
-  //   if (!isEmpty(value)) {
-  //     try {
-  //       const data = jsonlint.parse(value);
-  //       setParseJson(data);
-  //       setParseError(null);
-  //     } catch (err: any) {
-  //       setParseError(err.message);
-  //     }
-  //   } else {
-  //     setParseError(null);
-  //   }
-  // };
+  const handleJsonParse = (value: string) => {
+    if (!isEmpty(value)) {
+      try {
+        jsonlint.parse(value);
+        setParseJsonError(null);
+      } catch (err: any) {
+        setParseJsonError(err.message);
+      }
+    } else {
+      setParseJsonError(null);
+    }
+  };
+
+  //  yaml 解析
+  const handleYamlParse = (value: string) => {
+    if (!isEmpty(value)) {
+      try {
+        console.log(yaml.parse(value));
+        setParseYamlError(null);
+      } catch (err: any) {
+        console.log(err.message);
+        setParseYamlError(err.message);
+      }
+    } else {
+      setParseYamlError(null);
+    }
+  };
 
   useEffect(() => {
-    // handleJsonParse(value);
-  }, [value]);
+    handleJsonParse(jsonValue);
+  }, [jsonValue]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    handleYamlParse(yamlValue);
+  }, [yamlValue]);
 
   return (
     <div className={styles['json-convert']}>
-      <AceEditor
-        placeholder="请输入 json 数据..."
-        mode="json"
-        theme="chrome"
-        name="json"
-        style={{
-          flex: 1,
-          height: editorHeight,
-          border: '1px solid #E9E9E9',
-        }}
-        fontSize={16}
-        showPrintMargin={true}
-        showGutter={true}
-        highlightActiveLine={true}
-        setOptions={{
-          enableBasicAutocompletion: false,
-          enableLiveAutocompletion: false,
-          enableSnippets: false,
-          showLineNumbers: true,
-          tabSize: 4,
-        }}
-        value={value}
-        onChange={setValue}
-      />
-
-      <div className={styles['json-convert-actions']}>
-        <Button icon={<LeftOutlined />} />
-        <Button icon={<RightOutlined />} />
+      <div className={styles['json-convert-panel']}>
+        <div className={styles['json-convert-panel-title']}>JSON</div>
+        <JsonEditor style={{ height: editorHeight }} value={jsonValue} onChange={setJsonValue} />
       </div>
 
-      <AceEditor
-        placeholder="请输入 yaml 数据..."
-        mode="yaml"
-        theme="chrome"
-        name="yaml"
-        style={{
-          flex: 1,
-          height: editorHeight,
-          border: '1px solid #E9E9E9',
-        }}
-        fontSize={16}
-        showPrintMargin={true}
-        showGutter={true}
-        highlightActiveLine={true}
-        setOptions={{
-          enableBasicAutocompletion: false,
-          enableLiveAutocompletion: false,
-          enableSnippets: false,
-          showLineNumbers: true,
-          tabSize: 4,
-        }}
-        value={value}
-        onChange={setValue}
-      />
+      <div className={styles['json-convert-actions']}>
+        <Tooltip title="JSON 转 YAML">
+          <Button icon={<RightOutlined />} />
+        </Tooltip>
+        <Tooltip title="YAML 转 JSON">
+          <Button icon={<LeftOutlined />} />
+        </Tooltip>
+      </div>
+
+      <div className={styles['json-convert-panel']}>
+        <div className={styles['json-convert-panel-title']}>YAML</div>
+        <YamlEditor style={{ height: editorHeight }} value={yamlValue} onChange={setYamlValue} />
+      </div>
     </div>
   );
 };
