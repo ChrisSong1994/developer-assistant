@@ -1,5 +1,5 @@
+import { Col, Row } from 'antd';
 import React, { memo } from 'react';
-import { Row, Col } from 'antd';
 
 interface Props {
   children: React.ReactNode;

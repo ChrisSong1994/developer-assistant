@@ -1,5 +1,5 @@
-import os from 'os';
 import _ from 'lodash';
+import os from 'os';
 /**
  * promise 结果转数组
  */

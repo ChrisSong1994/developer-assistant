@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import type { FC } from 'react';
-import { Layout, Tabs } from 'antd';
 import { cx } from '@emotion/css';
+import { Layout, Tabs } from 'antd';
+import type { FC } from 'react';
+import React, { useState } from 'react';
 
-import { minimize, maximize, winclose } from '@/servies';
+import { maximize, minimize, winclose } from '@/servies';
 import logo from '../assets/images/logo.svg';
-import routes from './routes';
 import Icon from '../components/Icon';
 import styles from './index.less';
+import routes from './routes';
 
 const { Header, Content, Sider } = Layout;
 

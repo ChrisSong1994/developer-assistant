@@ -1,10 +1,4 @@
-import 'ace-builds/src-min-noconflict/ext-language_tools';
-import 'ace-builds/src-min-noconflict/ext-searchbox';
-import 'ace-builds/src-noconflict/ace';
-import 'ace-builds/src-noconflict/mode-json';
-import 'ace-builds/src-noconflict/theme-chrome';
-import AceEditor from 'react-ace';
-
+import AceEditor from './AceEditor';
 interface IProps {
   style: Record<string, any>;
   value: string;

@@ -1,4 +1,4 @@
-import { Input, Tooltip, message } from 'antd';
+import { Input, message, Tooltip } from 'antd';
 import type { TextAreaProps } from 'antd/lib/input';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 

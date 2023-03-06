@@ -1,8 +1,8 @@
 import { app, BrowserWindow } from 'electron';
-import installExtension, { REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 
-import { getOrCreateMainWindow } from './modules/windows';
 import eventsRegister from './eventsRegister';
+import { getOrCreateMainWindow } from './modules/windows';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 let mainWindow: BrowserWindow;
