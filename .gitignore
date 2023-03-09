@@ -2,3 +2,4 @@ node_modules
 .umi
 release
 .DS_Store
+.umi-production
