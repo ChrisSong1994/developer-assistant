@@ -1,43 +1,23 @@
 import { createHash } from '@/servies';
-import { Button, Input, Space } from 'antd';
+import { Button, Form, Input, Select } from 'antd';
 import { useState } from 'react';
 
-// import styles from './index.less';
+import { HASH_ARITHMETIC_LIST } from '@/constants';
 
 const TextArea = Input.TextArea;
-
-const HASH_ARITHMETIC_LIST = [
-  {
-    title: 'MD5',
-    value: 'MD5',
-  },
-  {
-    title: '',
-    value: '',
-  },
-  {
-    title: '',
-    value: '',
-  },
-  {
-    title: '',
-    value: '',
-  },
-  {
-    title: '',
-    value: '',
-  },
-];
+const FormItem = Form.Item;
 
 const Hash = () => {
+  const [form] = Form.useForm();
   const [decipherValue, setDecipherValue] = useState<string>('');
 
   const [encipherValue, setEncipherValue] = useState<string>('');
 
-  const handleEncrypt = async () => {
+  const handleEncrypt = async (values: { hash: string; key: string }) => {
     const res = await createHash({
-      hash: 'md5',
+      hash: values.hash,
       content: decipherValue,
+      key: values.key,
     });
     setEncipherValue(res);
   };
@@ -55,21 +35,39 @@ const Hash = () => {
           margin: '16px 0',
         }}
       >
-        <Space>
-          <Button type="primary" onClick={handleEncrypt}>
-            加密
-          </Button>
-          {/* <Button type="primary" onClick={handleDecode}>
-            解码
-          </Button> */}
-        </Space>
+        <Form
+          layout={'inline'}
+          initialValues={{
+            hash: 'MD5',
+          }}
+          form={form}
+          onFinish={handleEncrypt}
+        >
+          <FormItem name="hash" label="算法">
+            <Select style={{ width: 140 }} options={HASH_ARITHMETIC_LIST}></Select>
+          </FormItem>
+          <Form.Item noStyle shouldUpdate={(pre, cur) => pre.hash !== cur.hash}>
+            {({ getFieldValue }) => {
+              const hashValue = getFieldValue('hash');
+              if (hashValue && hashValue.startsWith('Hmac')) {
+                return (
+                  <FormItem name="key" label="密钥">
+                    {form.getFieldValue('hash').startsWith('Hmac') ? <Input style={{ width: 200 }} /> : null}
+                  </FormItem>
+                );
+              }
+              return null;
+            }}
+          </Form.Item>
+
+          <FormItem>
+            <Button type="primary" htmlType="submit">
+              加密
+            </Button>
+          </FormItem>
+        </Form>
       </div>
-      <TextArea
-        rows={10}
-        placeholder="请输入编码内容"
-        value={encipherValue}
-        // onChange={(e) => setEncodeValue(e.target.value)}
-      />
+      <TextArea rows={10} placeholder="请输入编码内容" value={encipherValue} />
     </div>
   );
 };

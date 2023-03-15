@@ -1,7 +1,6 @@
 import { Button, Input, Space } from 'antd';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
-import styles from './index.less';
 const TextArea = Input.TextArea;
 
 const UrlCodingComponent = () => {
@@ -20,7 +19,7 @@ const UrlCodingComponent = () => {
   };
 
   return (
-    <div className={styles['coding-url']}>
+    <Fragment>
       <TextArea
         rows={10}
         placeholder="请输入编码内容"
@@ -48,7 +47,7 @@ const UrlCodingComponent = () => {
         value={encodeValue}
         onChange={(e) => setEncodeValue(e.target.value)}
       />
-    </div>
+    </Fragment>
   );
 };
 

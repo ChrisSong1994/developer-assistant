@@ -1,7 +1,7 @@
 import { app, BrowserWindow, protocol } from 'electron';
 import * as path from 'path';
 import { EWindowSize } from '../../types/global';
-import { createProtocol } from '../../utils';
+import { createProtocol } from '../utils';
 
 export let browserWindows: Array<BrowserWindow | null> = [];
 

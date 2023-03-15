@@ -6,6 +6,7 @@ import Symmetric from './Symmetric';
 const Encryption = () => {
   return (
     <CustomTabs
+      tabStyle={{ marginBottom: 14 }}
       items={[
         {
           label: `hash加密`,

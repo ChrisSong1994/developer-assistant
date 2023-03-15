@@ -5,6 +5,7 @@ import UrlCodingComponent from './Url';
 const JsonComponent = () => {
   return (
     <CustomTabs
+      tabStyle={{ marginBottom: 14 }}
       items={[
         {
           label: `URL编解码`,

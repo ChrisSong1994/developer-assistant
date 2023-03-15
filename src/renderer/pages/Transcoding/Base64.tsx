@@ -1,8 +1,7 @@
 import { Button, Input, Space } from 'antd';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 // @ts-ignore
 import Base64 from 'Base64';
-import styles from './index.less';
 const TextArea = Input.TextArea;
 
 const Base64CodingComponent = () => {
@@ -21,7 +20,7 @@ const Base64CodingComponent = () => {
   };
 
   return (
-    <div className={styles['coding-url']}>
+    <Fragment>
       <TextArea
         rows={10}
         placeholder="请输入编码内容"
@@ -49,7 +48,7 @@ const Base64CodingComponent = () => {
         value={encodeValue}
         onChange={(e) => setEncodeValue(e.target.value)}
       />
-    </div>
+    </Fragment>
   );
 };
 
