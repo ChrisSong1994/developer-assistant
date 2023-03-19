@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import moment from 'moment';
 import os from 'os';
 /**
  * promise 结果转数组
@@ -56,3 +57,9 @@ export const jsonParse = (value: string) => {
     throw new Error(message);
   }
 };
+
+// 生成日期id
+export function generateDateUUID() {
+  const uuid = moment().format('YYYYMMDDHHmmss');
+  return uuid;
+}
