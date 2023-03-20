@@ -15,3 +15,24 @@
 - [ ] diff 文本
 - [ ] 文件压缩
 - [ ] 代码执行 vm
+
+## setup
+
+### install
+
+```sh
+cd developer-assistant
+yarn
+```
+
+### start
+
+```sh
+yarn run dev
+```
+
+### build
+
+```sh
+yarn run electron:build:mac  # for mac
+```
