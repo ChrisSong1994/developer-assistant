@@ -8,7 +8,7 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "jsx": "react-jsx",
-    "lib": ["es2020", "dom", "WebWorker"],
+    "lib": ["ES2022", "dom", "WebWorker"],
     "strict": true,
     "noUnusedLocals": true,
     "noFallthroughCasesInSwitch": true,

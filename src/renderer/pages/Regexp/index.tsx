@@ -8,6 +8,7 @@ import {
 import type { MenuProps } from 'antd';
 import { Button, Checkbox, Divider, Dropdown, Input, Menu, Space, Tooltip } from 'antd';
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
+import _ from 'lodash';
 import { useEffect, useMemo, useState } from 'react';
 
 import styles from './index.less';
@@ -128,22 +129,32 @@ const Regexp = () => {
   const flag = useMemo(() => flags.join(''), [flags]);
   const matchedsContent = useMemo(() => {
     let result = content;
+    const replacedStack = [];
+    // 需要 html转义 以及 分段替换
     if (matcheds) {
       for (const matched of matcheds) {
-        result = result.replace(matched, `<b>${matched}</b>`);
+        const index = result.indexOf(matched);
+        const next = index + matched.length;
+        replacedStack.push(result.slice(0, next).replace(matched, `<b>${_.escape(matched)}</b>`));
+        result = result.slice(next);
       }
     }
-    return result;
+    return replacedStack.join('');
   }, [matcheds]);
 
   useEffect(() => {
-    try {
-      const reg = new RegExp(regexp, flag);
-      console.log(content.match(reg));
-      setMatcheds(content.match(reg));
-      setError(null);
-    } catch (err) {
-      setError(err);
+    if (regexp) {
+      try {
+        const reg = new RegExp(regexp, flag);
+        console.log(content.match(reg));
+        setMatcheds(content.match(reg));
+        setError(null);
+      } catch (err) {
+        setMatcheds(null);
+        setError(err);
+      }
+    } else {
+      setMatcheds(null);
     }
   }, [regexp, content, flag]);
 
@@ -209,8 +220,12 @@ const Regexp = () => {
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />
-      <div className={styles['regexp-match-result']}>
-        {matcheds ? <div dangerouslySetInnerHTML={{ __html: matchedsContent }}></div> : <span>匹配结果...</span>}
+      <div className={styles['regexp-match']}>
+        {matcheds ? (
+          <div className={styles['regexp-match-content']} dangerouslySetInnerHTML={{ __html: matchedsContent }}></div>
+        ) : (
+          <span>匹配结果...</span>
+        )}
       </div>
       <Search
         style={{ marginTop: 20 }}
