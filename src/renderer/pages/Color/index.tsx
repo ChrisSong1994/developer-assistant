@@ -19,7 +19,7 @@ const Color = () => {
     {
       value: '#1D2E54',
       title: '橄榄色',
-      key: '#C816CD',
+      key: '#1D2E54',
     },
   ]);
 

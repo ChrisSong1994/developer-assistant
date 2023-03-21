@@ -138,6 +138,7 @@ const Regexp = () => {
         replacedStack.push(result.slice(0, next).replace(matched, `<b>${_.escape(matched)}</b>`));
         result = result.slice(next);
       }
+      replacedStack.push(result);
     }
     return replacedStack.join('');
   }, [matcheds]);
@@ -215,6 +216,7 @@ const Regexp = () => {
         </Dropdown>
       </div>
       <TextArea
+        spellCheck={false}
         style={{ marginTop: 20, height: 200 }}
         placeholder="在此输入待匹配文本"
         value={content}
@@ -231,12 +233,18 @@ const Regexp = () => {
         style={{ marginTop: 20 }}
         addonBefore="替换文本："
         enterButton="替换"
+        placeholder="在此输入替换文本"
         size="large"
         value={replacer}
         onChange={(e) => setReplacer(e.target.value)}
         onSearch={handleReplace}
       />
-      <TextArea value={replacedContent} style={{ marginTop: 20, height: 200 }} placeholder="替换结果..." />
+      <TextArea
+        spellCheck={false}
+        value={replacedContent}
+        style={{ marginTop: 20, height: 200 }}
+        placeholder="替换结果..."
+      />
     </div>
   );
 };

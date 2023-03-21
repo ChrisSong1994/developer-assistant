@@ -35,7 +35,7 @@ const CustomTextArea = (props: IProps) => {
         </div>
       </div>
       {description ? <div className={styles['custom-textarea-description']}>{description}</div> : null}
-      <TextArea {...originProps} autoSize={{ minRows: 8, maxRows: 12 }} />
+      <TextArea spellCheck={false} {...originProps} autoSize={{ minRows: 8, maxRows: 12 }} />
     </div>
   );
 };

@@ -21,6 +21,7 @@ const UrlCodingComponent = () => {
   return (
     <Fragment>
       <TextArea
+        spellCheck={false}
         rows={10}
         placeholder="请输入编码内容"
         value={decodeValue}
@@ -42,6 +43,7 @@ const UrlCodingComponent = () => {
       </div>
 
       <TextArea
+        spellCheck={false}
         rows={10}
         placeholder="请输入编码内容"
         value={encodeValue}

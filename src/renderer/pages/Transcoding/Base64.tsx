@@ -22,6 +22,7 @@ const Base64CodingComponent = () => {
   return (
     <Fragment>
       <TextArea
+        spellCheck={false}
         rows={10}
         placeholder="请输入编码内容"
         value={decodeValue}
@@ -43,6 +44,7 @@ const Base64CodingComponent = () => {
       </div>
 
       <TextArea
+        spellCheck={false}
         rows={10}
         placeholder="请输入编码内容"
         value={encodeValue}

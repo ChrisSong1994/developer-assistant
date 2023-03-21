@@ -49,7 +49,7 @@ export function createMainWindow(): Electron.BrowserWindow {
   mainWindow = new BrowserWindow(getMainWindowOptions());
 
   if (isDevelopment) {
-    mainWindow.loadURL('http://localhost:8000');
+    mainWindow.loadURL('http://localhost:3001');
   } else {
     createProtocol('app');
     mainWindow.loadURL('app://./index.html');
