@@ -1,0 +1,61 @@
+// json parse
+.json-parse {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .tool-panel {
+    height: 36px;
+    i {
+      margin: 0 3px;
+      cursor: pointer;
+    }
+  }
+  .json-panel {
+    width: 100%;
+  }
+
+  .error-panel {
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    padding: 12px;
+    color: #f5222d;
+    font-size: 20;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+}
+
+// json convert
+.json-convert {
+  display: flex;
+  padding-top: 12px;
+
+  .json-convert-panel {
+    flex: 1;
+
+    .json-convert-panel-title {
+      display: flex;
+      align-items: center;
+      height: 36px;
+      font-weight: 500;
+      font-size: 18px;
+    }
+  }
+
+  .json-convert-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    button {
+      margin-bottom: 8px;
+    }
+  }
+}

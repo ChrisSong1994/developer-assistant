@@ -1,0 +1,113 @@
+@import '../styles/theme.less';
+
+.developer-container {
+  :global {
+    .ant-tabs-nav {
+      display: none !important;
+    }
+  }
+
+  .developer-container-sider {
+    padding: 12px 6px 0;
+    background: @backgroundColor;
+
+    &-menu {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      justify-content: center;
+
+      &-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        margin-bottom: 12px;
+        font-weight: 500;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.1s linear;
+
+        &:hover {
+          background-color: #ededed;
+        }
+      }
+
+      &-item-active {
+        color: #fff;
+        background-color: @primary-color;
+        &:hover {
+          background-color: @primary-color;
+        }
+      }
+    }
+  }
+
+  .developer-container-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+    padding: 0 10px;
+    background-color: @backgroundColor;
+    -webkit-app-region: drag;
+
+    .developer-container-header-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 40px;
+        height: 40px;
+        margin: 0 10px;
+        border-radius: 4px;
+      }
+      div {
+        color: @primary-color;
+        font-weight: 500;
+        font-size: 22px;
+      }
+    }
+
+    .developer-container-header-action {
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      height: 30px;
+      &-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        margin: 0 4px;
+        color: @primary-color;
+        font-size: 22px;
+        border-radius: 2px;
+        cursor: pointer;
+        transition: all 0.1s linear;
+        &:hover {
+          background-color: #ededed;
+        }
+      }
+    }
+  }
+
+  .developer-container-content {
+    margin: 0;
+    padding: 0 16px 16px 4px;
+    overflow: auto;
+    background-color: @backgroundColor;
+
+    .developer-container-content-keep-alive {
+      height: 100%;
+      padding: 16px;
+      overflow: auto;
+      background-color: #fff;
+      border-radius: 12px;
+    }
+  }
+}

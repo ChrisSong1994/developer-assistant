@@ -1,0 +1,33 @@
+.regexp-header {
+  display: flex;
+  align-items: center;
+}
+
+.regexp-match {
+  height: 100px;
+  margin-top: 16px;
+  padding: 6px 10px;
+  background-clip: padding-box;
+  border: 1px solid #d9d9d9;
+  border-radius: 0.25rem;
+
+  & > span {
+    color: #bfbfbf;
+  }
+
+  &-content {
+    b {
+      font-weight: normal;
+      font-style: normal;
+      border-radius: 4px;
+    }
+    b:nth-child(odd) {
+      background: #ffdfff;
+      box-shadow: 0 0 0 1px #df56ad;
+    }
+    b:nth-child(even) {
+      background: #cff5ff;
+      box-shadow: 0 0 0 1px #09f;
+    }
+  }
+}

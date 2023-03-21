@@ -1,0 +1,75 @@
+.color-picker-select {
+  display: flex;
+  margin-bottom: 20px;
+
+  .color-picker-swatch {
+    width: 30%;
+    height: 228px;
+  }
+  .color-picker-saturation {
+    position: relative;
+    width: 70%;
+    height: 228px;
+  }
+}
+
+.color-picker-hue {
+  position: relative;
+  height: 8px;
+}
+
+.color-picker-fields {
+  margin: 24px 0;
+}
+
+.color-record {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.color-record-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 88px;
+  height: 86px;
+  margin: 6px;
+  .color-record-item-remove-btn {
+    position: absolute;
+    top: -6px;
+    right: 6px;
+    z-index: 100;
+    display: none;
+    color: #fff;
+    background-color: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  &:hover {
+    .color-record-item-remove-btn {
+      display: block;
+    }
+  }
+
+  .color-record-item-color {
+    width: 64px;
+    height: 64px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .color-record-item-title {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    text-overflow: ellipsis;
+    outline: none;
+    cursor: text;
+    &:focus-visible {
+      text-overflow: clip;
+    }
+  }
+}
