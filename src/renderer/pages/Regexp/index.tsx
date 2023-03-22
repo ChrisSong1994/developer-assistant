@@ -138,10 +138,10 @@ const Regexp = () => {
         replacedStack.push(result.slice(0, next).replace(matched, `<b>${_.escape(matched)}</b>`));
         result = result.slice(next);
       }
-      replacedStack.push(result);
+      replacedStack.push(_.escape(result));
     }
     return replacedStack.join('');
-  }, [matcheds]);
+  }, [matcheds, content]);
 
   useEffect(() => {
     if (regexp) {
@@ -175,7 +175,7 @@ const Regexp = () => {
     <div>
       <div className={styles['regexp-header']}>
         <Input
-          style={{ width: 'calc( 100% - 380px );' }}
+          style={{ width: 'calc( 100% - 380px )' }}
           size="large"
           value={regexp}
           onChange={(e) => setRegexp(e.target.value)}
@@ -223,8 +223,8 @@ const Regexp = () => {
         onChange={(e) => setContent(e.target.value)}
       />
       <div className={styles['regexp-match']}>
-        {matcheds ? (
-          <div className={styles['regexp-match-content']} dangerouslySetInnerHTML={{ __html: matchedsContent }}></div>
+        {matchedsContent ? (
+          <div className={styles['regexp-match-content']} dangerouslySetInnerHTML={{ __html: matchedsContent }} />
         ) : (
           <span>匹配结果...</span>
         )}
