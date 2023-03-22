@@ -135,7 +135,8 @@ const Regexp = () => {
       for (const matched of matcheds) {
         const index = result.indexOf(matched);
         const next = index + matched.length;
-        replacedStack.push(result.slice(0, next).replace(matched, `<b>${_.escape(matched)}</b>`));
+        replacedStack.push(_.escape(result.slice(0, index)));
+        replacedStack.push(result.slice(index, next).replace(matched, `<b>${_.escape(matched)}</b>`));
         result = result.slice(next);
       }
       replacedStack.push(_.escape(result));
@@ -170,6 +171,8 @@ const Regexp = () => {
       setReplacedContent(result);
     }
   };
+
+  console.log('matchedsContent', matchedsContent);
 
   return (
     <div>
