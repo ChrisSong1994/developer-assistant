@@ -58,14 +58,14 @@ const BaseLayout: FC = () => {
           <img src={logo} /> <div>开发者工具</div>
         </div>
         <div className={styles['developer-container-header-action']}>
-          <div className={styles['developer-container-header-action-btn']}>
-            <Icon className={styles['icon']} type="icon-minus" onClick={minimize} />
+          <div className={styles['developer-container-header-action-btn']} onClick={minimize}>
+            <Icon type="icon-minus" />
           </div>
-          <div className={styles['developer-container-header-action-btn']}>
-            <Icon className={styles['action-item']} type="icon-quanping" onClick={maximize} />
+          <div className={styles['developer-container-header-action-btn']} onClick={maximize}>
+            <Icon type="icon-quanping" />
           </div>
-          <div className={styles['developer-container-header-action-btn']}>
-            <Icon className={styles['action-item']} type="icon-guanbi" onClick={winclose} />
+          <div className={styles['developer-container-header-action-btn']} onClick={winclose}>
+            <Icon type="icon-guanbi" />
           </div>
         </div>
       </Header>

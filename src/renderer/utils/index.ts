@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import moment from 'moment';
-import os from 'os';
+
 /**
  * promise 结果转数组
  */
@@ -11,16 +11,6 @@ export function to(promise: Promise<any[]>) {
       (err) => resolve([null, err]),
     );
   });
-}
-
-// 判断是否是在win中
-export function isInWin() {
-  return os.platform() === 'win32';
-}
-
-// 是否是在mac
-export function isInMac() {
-  return os.platform() === 'darwin';
 }
 
 // 判断一个值是不是空值、undefined、null、空字符串等；
@@ -63,3 +53,12 @@ export function generateDateUUID() {
   const uuid = moment().format('YYYYMMDDHHmmss');
   return uuid;
 }
+
+// 正则匹配
+export const regMatch = (reg: RegExp, str: string) => {
+  const result = reg.exec(str);
+  return {
+    matcheds: result ? Array.from(result) : null,
+    index: result?.index,
+  };
+};

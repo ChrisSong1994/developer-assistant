@@ -52,12 +52,13 @@
     height: 52px;
     padding: 0 10px;
     background-color: @backgroundColor;
-    -webkit-app-region: drag;
 
     .developer-container-header-logo {
       display: flex;
+      flex: 1;
       align-items: center;
-      justify-content: center;
+      justify-content: left;
+      -webkit-app-region: drag;
 
       img {
         width: 40px;
@@ -73,11 +74,10 @@
     }
 
     .developer-container-header-action {
-      z-index: 100;
       display: flex;
       align-items: center;
       height: 30px;
-      &-btn {
+      .developer-container-header-action-btn {
         display: flex;
         align-items: center;
         justify-content: center;

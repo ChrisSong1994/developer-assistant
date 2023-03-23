@@ -11,6 +11,7 @@ import type { CheckboxValueType } from 'antd/es/checkbox/Group';
 import _ from 'lodash';
 import { useEffect, useMemo, useState } from 'react';
 
+import { regMatch } from '@/utils';
 import styles from './index.less';
 
 const TextArea = Input.TextArea;
@@ -124,14 +125,14 @@ const Regexp = () => {
   const [content, setContent] = useState<string>('');
   const [error, setError] = useState<any>(null);
   const [replacer, setReplacer] = useState<string>('');
-  const [matcheds, setMatcheds] = useState<Array<string> | null>(null); // 匹配结果
+  const [matcheds, setMatcheds] = useState<any>(null); // 匹配结果
   const [replacedContent, setReplacedContent] = useState<string>('');
   const flag = useMemo(() => flags.join(''), [flags]);
   const matchedsContent = useMemo(() => {
     let result = content;
     const replacedStack = [];
     // 需要 html转义 以及 分段替换
-    if (matcheds) {
+    if (matcheds && matcheds.matcheds) {
       for (const matched of matcheds) {
         const index = result.indexOf(matched);
         const next = index + matched.length;
@@ -140,16 +141,21 @@ const Regexp = () => {
         result = result.slice(next);
       }
       replacedStack.push(_.escape(result));
+      return replacedStack.join('');
+    } else {
+      return _.escape(result);
     }
-    return replacedStack.join('');
   }, [matcheds, content]);
 
   useEffect(() => {
     if (regexp) {
       try {
         const reg = new RegExp(regexp, flag);
-        console.log(content.match(reg));
-        setMatcheds(content.match(reg));
+        console.log('content.match(reg)', content.match(reg));
+        console.log('reg.exec(content)1', reg.exec(content));
+        console.log('reg.exec(content)2', reg.exec(content));
+        console.log('regMatch(reg,content)', regMatch(reg, content));
+        setMatcheds(regMatch(reg, content));
         setError(null);
       } catch (err) {
         setMatcheds(null);

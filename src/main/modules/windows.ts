@@ -1,18 +1,12 @@
-import { app, BrowserWindow, protocol } from 'electron';
+import { BrowserWindow, protocol } from 'electron';
 import * as path from 'path';
 import { EWindowSize } from '../../types/global';
-import { createProtocol } from '../utils';
+import { createProtocol, isInMac } from '../utils';
+import { ICON_PATH } from '../utils/path';
 
 export let browserWindows: Array<BrowserWindow | null> = [];
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-const RESOURCES_PATH = app.isPackaged
-  ? path.join(process.resourcesPath, 'assets')
-  : path.join(__dirname, '../../assets');
-
-const getAssetPath = (...paths: string[]): string => {
-  return path.join(RESOURCES_PATH, ...paths);
-};
 
 // 协议注册
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }]);
@@ -28,7 +22,7 @@ export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions
     height: EWindowSize.height,
     titleBarStyle: 'hidden',
     resizable: true,
-    icon: getAssetPath('icon.png'),
+    icon: ICON_PATH,
     webPreferences: {
       devTools: isDevelopment,
       nodeIntegration: true,
@@ -63,7 +57,6 @@ export function createMainWindow(): Electron.BrowserWindow {
 
   mainWindow.on('closed', () => {
     browserWindows = browserWindows.filter((bw) => mainWindow !== bw);
-
     mainWindow = null;
   });
 
@@ -73,8 +66,7 @@ export function createMainWindow(): Electron.BrowserWindow {
 }
 
 /**
- * Gets or creates the main window, returning it in both cases.
- *
+ * 创建window
  * @returns {Electron.BrowserWindow}
  */
 export function getOrCreateMainWindow(): Electron.BrowserWindow {
@@ -90,18 +82,21 @@ export const windowMinimize = (mainWindow: any) => () => {
 
 // 窗口放大
 export const windowMaxmize = (mainWindow: any) => () => {
-  if (mainWindow.isMaximized()) {
-    mainWindow.restore();
+  if (mainWindow.isFullScreen()) {
+    mainWindow.setFullScreen(false);
   } else {
-    mainWindow.maximize();
+    mainWindow.setFullScreen(true);
   }
-  mainWindow.setMinimumSize(1200, 800);
   mainWindow.center();
   return;
 };
 
 // 窗口关闭
 export const windowClose = (mainWindow: any) => () => {
-  mainWindow.close();
+  if (isInMac()) {
+    mainWindow.hide();
+  } else {
+    mainWindow.close();
+  }
   return;
 };
