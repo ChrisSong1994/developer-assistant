@@ -39,8 +39,8 @@ export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions
  */
 export function createMainWindow(): Electron.BrowserWindow {
   let mainWindow: BrowserWindow | null;
-
   mainWindow = new BrowserWindow(getMainWindowOptions());
+  mainWindow.setWindowButtonVisibility(false); // 隐藏信号灯
 
   if (isDevelopment) {
     mainWindow.loadURL('http://localhost:3001');
