@@ -1,5 +1,8 @@
 import { CloseOutlined } from '@ant-design/icons';
+
+import ToggleEditText from '@/components/ToggleEditText';
 import styles from './index.less';
+
 export interface IRecord {
   value: string;
   title: string;
@@ -14,11 +17,11 @@ interface IProps {
 const Record = (props: IProps) => {
   const { data, onChange, onSelect } = props;
 
-  const handleTitleChange = (key: string) => (e: any) => {
+  const handleTitleChange = (key: string) => (value: string) => {
     onChange(
       data.map((item) => {
         if (item.key === key) {
-          return { ...item, title: e.target.value };
+          return { ...item, title: value };
         }
         return item;
       }),
@@ -40,14 +43,16 @@ const Record = (props: IProps) => {
               style={{ backgroundColor: item.value }}
               onClick={() => onSelect(item.value)}
             ></div>
-            <div
+
+            <ToggleEditText value={item.title} onChange={handleTitleChange(item.key)} />
+            {/* <div
               className={styles['color-record-item-title']}
               suppressContentEditableWarning={true}
               contentEditable="true"
               onChange={handleTitleChange(item.key)}
             >
               {item.title}
-            </div>
+            </div> */}
           </div>
         );
       })}

@@ -4,7 +4,7 @@ import type { FC } from 'react';
 import React, { useState } from 'react';
 
 import { maximize, minimize, winclose } from '@/servies';
-import logo from '../assets/images/logo.svg';
+import logo from '../../assets/logo.png';
 import Icon from '../components/Icon';
 import styles from './index.less';
 import routes from './routes';
