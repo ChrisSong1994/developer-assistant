@@ -10,13 +10,10 @@
     "electron:build:linux": "cross-env APP_ROOT=src/renderer umi build electron --linux",
     "electron:build:mac": "cross-env APP_ROOT=src/renderer umi build electron --mac",
     "electron:build:win": "cross-env APP_ROOT=src/renderer umi build electron --win",
-    "electron:dev": "cross-env APP_ROOT=src/renderer umi dev electron",
     "electron:init": "umi electron init",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,less,md}\"",
     "rebuild-deps": "electron-builder install-app-deps",
-    "render:build": "cross-env APP_ROOT=src/renderer umi build",
-    "render:dev": "cross-env APP_ROOT=src/renderer umi dev",
-    "start": "yarn electron:dev"
+    "start": "yarn run dev"
   },
   "lint-staged": {
     "*.{js,jsx,less,md,json}": [
