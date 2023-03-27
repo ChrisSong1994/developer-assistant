@@ -24,6 +24,6 @@ export const winclose = () => {
 
 // 加解密
 export const createHash = async (args: PlainObject) => {
-  const res = await ipcRenderer.invoke(IpcEvents.CRYPTO_CREATE_HASH, args);
+  const res = await dispatch(IpcEvents.CRYPTO_CREATE_HASH, args);
   return res;
 };

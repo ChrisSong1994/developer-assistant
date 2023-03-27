@@ -1,0 +1,11 @@
+.text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  text-overflow: ellipsis;
+  outline: none;
+  cursor: text;
+  &:focus-visible {
+    text-overflow: clip;
+  }
+}

@@ -2,13 +2,15 @@ import type { InputRef } from 'antd';
 import { Input } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 
+import styles from './index.less';
 interface IProps {
   value: string;
   onChange: (v: string) => void;
+  style: Record<string, any>;
 }
 
 const ToggleEditText = (props: IProps) => {
-  const { value, onChange } = props;
+  const { value, onChange, style } = props;
   const [editing, setEditing] = useState(false);
   const inputRef = useRef<InputRef>(null);
 
@@ -27,11 +29,19 @@ const ToggleEditText = (props: IProps) => {
   }, [editing]);
 
   return (
-    <div>
+    <div style={{ ...style, width: '100%' }}>
       {editing ? (
-        <Input defaultValue={value} ref={inputRef} bordered={false} onBlur={handleBlur} />
+        <Input
+          style={{ height: '100%', width: '100%', padding: '2px 0px' }}
+          defaultValue={value}
+          ref={inputRef}
+          bordered={false}
+          onBlur={handleBlur}
+        />
       ) : (
-        <div onClick={handleEdit}>{value}</div>
+        <div className={styles['text']} style={{ height: '100%', width: '100%' }} onClick={handleEdit}>
+          {value}
+        </div>
       )}
     </div>
   );
