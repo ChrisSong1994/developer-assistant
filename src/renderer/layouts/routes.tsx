@@ -1,10 +1,12 @@
 import Color from '@/pages/Color';
+import Diff from '@/pages/Diff';
 import Encryption from '@/pages/Encryption';
 import Image from '@/pages/Image';
 import JsonComponent from '@/pages/Json';
 import Regexp from '@/pages/Regexp';
 import Setting from '@/pages/Setting';
 import Transcoding from '@/pages/Transcoding';
+import UrlParse from '@/pages/UrlParse';
 
 const routes = [
   {
@@ -20,6 +22,24 @@ const routes = [
     component: JsonComponent,
   },
   {
+    key: 'UrlParse',
+    title: 'URL解析',
+    icon: 'icon-url',
+    component: UrlParse,
+  },
+  {
+    key: 'Diff',
+    title: 'Diff',
+    icon: 'icon-diff',
+    component: Diff,
+  },
+  {
+    key: 'Regexp',
+    title: '正则',
+    icon: 'icon-regularExpression-o',
+    component: Regexp,
+  },
+  {
     key: 'Transcoding',
     title: '编解码',
     icon: 'icon-bianma',
@@ -31,12 +51,7 @@ const routes = [
     icon: 'icon-31mima',
     component: Encryption,
   },
-  {
-    key: 'Regexp',
-    title: '正则',
-    icon: 'icon-regularExpression-o',
-    component: Regexp,
-  },
+
   {
     key: 'Image',
     title: '图片',

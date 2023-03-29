@@ -82,8 +82,8 @@ const BaseLayout: FC = () => {
                 key={item.key}
                 onClick={() => handleSelect(item.key)}
               >
-                <Icon size={21} type={item.icon} />
-                <span>{item.label}</span>
+                <Icon className={styles['developer-container-sider-menu-item-icon']} size={24} type={item.icon} />
+                <span className={styles['developer-container-sider-menu-item-label']}>{item.label}</span>
               </div>
             ))}
           </div>
