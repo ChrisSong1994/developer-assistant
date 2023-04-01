@@ -1,7 +1,5 @@
 import Color from '@/pages/Color';
-import Diff from '@/pages/Diff';
 import Encryption from '@/pages/Encryption';
-import Image from '@/pages/Image';
 import JsonComponent from '@/pages/Json';
 import Regexp from '@/pages/Regexp';
 import Setting from '@/pages/Setting';
@@ -27,12 +25,12 @@ const routes = [
     icon: 'icon-url',
     component: UrlParse,
   },
-  {
-    key: 'Diff',
-    title: 'Diff',
-    icon: 'icon-diff',
-    component: Diff,
-  },
+  // {
+  //   key: 'Diff',
+  //   title: 'Diff',
+  //   icon: 'icon-diff',
+  //   component: Diff,
+  // },
   {
     key: 'Regexp',
     title: '正则',
@@ -52,12 +50,12 @@ const routes = [
     component: Encryption,
   },
 
-  {
-    key: 'Image',
-    title: '图片',
-    icon: 'icon-tupian_huaban',
-    component: Image,
-  },
+  // {
+  //   key: 'Image',
+  //   title: '图片',
+  //   icon: 'icon-tupian_huaban',
+  //   component: Image,
+  // },
   {
     key: 'Setting',
     title: '设置',
