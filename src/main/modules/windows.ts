@@ -76,14 +76,14 @@ export function getOrCreateMainWindow(): Electron.BrowserWindow {
 }
 
 // 窗口缩小
-export const windowMinimize = (mainWindow: any) => () => {
+export const windowMinimize = (mainWindow: any) => {
   mainWindow.minimize();
   mainWindow.setResizable(true);
   return;
 };
 
 // 窗口放大
-export const windowMaxmize = (mainWindow: any) => () => {
+export const windowMaxmize = (mainWindow: any) => {
   if (mainWindow.isFullScreen()) {
     mainWindow.setFullScreen(false);
   } else {
@@ -94,7 +94,7 @@ export const windowMaxmize = (mainWindow: any) => () => {
 };
 
 // 窗口关闭
-export const windowClose = (mainWindow: any) => () => {
+export const windowClose = (mainWindow: any) => {
   if (isInMac()) {
     mainWindow.hide();
   } else {

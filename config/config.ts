@@ -3,11 +3,11 @@ import electronBuilder from './electronBuilder';
 
 export default defineConfig({
   fastRefresh: true,
-  plugins: ['umi-plugin-electron-builder', '@umijs/plugin-model'],
+  plugins: ['umi-plugin-electron-builder'],
   routes: [
     {
       path: '/',
-      component: '../layouts',
+      component: '@/layouts',
     },
   ],
   lessLoader: {

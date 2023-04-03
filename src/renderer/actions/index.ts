@@ -16,4 +16,6 @@ export const createHash = (args: PlainObject) => dispatch(IpcEvents.CRYPTO_CREAT
 
 // 数据
 export const getLocalData = () => dispatch(IpcEvents.GET_LOCAL_DATA);
-export const setLocalData = (args: PlainObject) => dispatch(IpcEvents.SET_LOCAL_DATA, args);
+export const setLocalData = (args: PlainObject) => {
+  return dispatch(IpcEvents.SET_LOCAL_DATA, args);
+};

@@ -2,7 +2,7 @@ import { getLocalData, setLocalData } from '@/actions';
 import { useEffect, useState } from 'react';
 
 export default function () {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<Record<string, any>>({});
 
   const updateData = async (value: Record<string, any>) => {
@@ -13,7 +13,6 @@ export default function () {
 
   useEffect(() => {
     (async () => {
-      setLoading(true);
       const res = await getLocalData();
       setData(res);
       setLoading(false);

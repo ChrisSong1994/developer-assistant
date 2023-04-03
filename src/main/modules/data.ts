@@ -45,12 +45,10 @@ async function dbInit() {
   }
 
   if (!fs.existsSync(APP_CONFIG_PATH)) {
-    await fs.ensureDir(APP_CONFIG_PATH);
     await fs.writeJSON(APP_CONFIG_PATH, {});
   }
 
   if (!fs.existsSync(APP_DATA_PATH)) {
-    await fs.ensureDir(APP_DATA_PATH);
     await fs.writeJSON(APP_DATA_PATH, DEFAULT_LOCAL_DATA);
   }
 
