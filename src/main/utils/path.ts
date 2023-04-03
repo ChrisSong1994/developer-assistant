@@ -1,5 +1,5 @@
 import { app } from 'electron';
-import * as path from 'path';
+import path from 'path';
 
 export const RESOURCES_PATH = app.isPackaged
   ? path.join(process.resourcesPath, 'assets')

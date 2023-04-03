@@ -1,4 +1,4 @@
-import { createHash } from '@/servies';
+import { createHash } from '@/actions';
 import { Button, Form, Input, Select } from 'antd';
 import { useState } from 'react';
 

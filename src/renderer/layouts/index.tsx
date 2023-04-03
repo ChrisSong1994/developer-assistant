@@ -3,7 +3,7 @@ import { Layout, Tabs } from 'antd';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
-import { maximize, minimize, winclose } from '@/servies';
+import { maximize, minimize, winclose } from '@/actions';
 import logo from '../../assets/logo.png';
 import Icon from '../components/Icon';
 import styles from './index.less';

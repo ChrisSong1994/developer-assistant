@@ -2,6 +2,7 @@ import { FormOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { Fragment, useState } from 'react';
 import * as color from 'react-color/es/helpers/color';
+import { useModel } from 'umi';
 
 import { THEME_COLOR } from '@/constants';
 import { generateDateUUID } from '@/utils';
@@ -9,6 +10,7 @@ import ColorPicker from './Picker';
 import ColorRecord, { IRecord } from './Record';
 
 const Color = () => {
+  const { data: localData, setData } = useModel('localDataModel');
   const [data, setData] = useState(color.toState(THEME_COLOR, 0));
   const [recordData, setRecordData] = useState<Array<IRecord>>([
     {

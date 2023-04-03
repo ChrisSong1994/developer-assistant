@@ -2,6 +2,7 @@ import { app, BrowserWindow } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 
 import eventsRegister from './eventsRegister';
+import { dbInit } from './modules/data';
 import { getOrCreateMainWindow } from './modules/windows';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
@@ -13,6 +14,9 @@ export async function onReady() {
 
   // 事件注册
   eventsRegister(mainWindow);
+
+  // 数据初始化
+  await dbInit();
 
   // 加载开发插件
   if (isDevelopment) {

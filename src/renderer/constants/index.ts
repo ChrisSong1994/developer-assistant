@@ -56,6 +56,7 @@ export const SYMMETRIC_ENCRYPTION_ARITHMETRIC_LIST = [
   },
 ];
 
+// 输出编码格式
 export const OUTPUT_ENCODING_LIST = [
   {
     label: 'base64',
@@ -81,3 +82,41 @@ export const AES_BLOCK_LIST = [
     value: 256,
   },
 ];
+
+// url 参数
+export const URL_PARAMS = [
+  {
+    key: 'protocol',
+    description: '',
+  },
+  {
+    key: 'username',
+    description: '',
+  },
+  {
+    key: 'password',
+    description: '',
+  },
+  {
+    key: 'hostname',
+    description: '',
+  },
+  {
+    key: 'port',
+    description: '',
+  },
+  {
+    key: 'pathname',
+    description: '',
+  },
+  {
+    key: 'hash',
+    description: '',
+  },
+  {
+    key: 'searchParams',
+    description: '',
+  },
+];
+
+export const URL_PARAMS_KEYS = URL_PARAMS.map((v) => v.key);

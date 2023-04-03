@@ -127,13 +127,15 @@ const Regexp = () => {
   const [replacer, setReplacer] = useState<string>('');
   const [matcheds, setMatcheds] = useState<any>(null); // 匹配结果
   const [replacedContent, setReplacedContent] = useState<string>('');
+
   const flag = useMemo(() => flags.join(''), [flags]);
+
   const matchedsContent = useMemo(() => {
     let result = content;
     const replacedStack = [];
     // 需要 html转义 以及 分段替换
     if (matcheds && matcheds.matcheds) {
-      for (const matched of matcheds) {
+      for (const matched of matcheds.matcheds) {
         const index = result.indexOf(matched);
         const next = index + matched.length;
         replacedStack.push(_.escape(result.slice(0, index)));
@@ -151,10 +153,6 @@ const Regexp = () => {
     if (regexp) {
       try {
         const reg = new RegExp(regexp, flag);
-        console.log('content.match(reg)', content.match(reg));
-        console.log('reg.exec(content)1', reg.exec(content));
-        console.log('reg.exec(content)2', reg.exec(content));
-        console.log('regMatch(reg,content)', regMatch(reg, content));
         setMatcheds(regMatch(reg, content));
         setError(null);
       } catch (err) {
@@ -177,8 +175,6 @@ const Regexp = () => {
       setReplacedContent(result);
     }
   };
-
-  console.log('matchedsContent', matchedsContent);
 
   return (
     <div>
@@ -233,7 +229,11 @@ const Regexp = () => {
       />
       <div className={styles['regexp-match']}>
         {matchedsContent ? (
-          <div className={styles['regexp-match-content']} dangerouslySetInnerHTML={{ __html: matchedsContent }} />
+          <div
+            className={styles['regexp-match-content']}
+            // dangerouslySetInnerHTML={{ __html: JSON.stringify(matcheds, null, 2) }}
+            dangerouslySetInnerHTML={{ __html: matchedsContent }}
+          />
         ) : (
           <span>匹配结果...</span>
         )}
