@@ -1,6 +1,6 @@
 import crypto, { BinaryToTextEncoding } from 'node:crypto';
 
-enum EHash {
+export enum EHash {
   MD5 = 'MD5',
   SHA1 = 'SHA1',
   SHA256 = 'SHA256',
@@ -11,10 +11,10 @@ enum EHash {
   HmacSHA512 = 'HmacSHA512',
 }
 
-interface IHashOptions {
+export interface IHashOptions {
   hash: EHash;
   content: string;
-  digest: BinaryToTextEncoding;
+  digest?: BinaryToTextEncoding;
   key?: string;
 }
 

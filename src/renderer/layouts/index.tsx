@@ -3,7 +3,7 @@ import { Layout, Tabs } from 'antd';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
-import { maximize, minimize, winclose } from '@/actions';
+import Events from '@/utils/events';
 import logo from '../../assets/logo.png';
 import Icon from '../components/Icon';
 import styles from './index.less';
@@ -58,13 +58,13 @@ const BaseLayout: FC = () => {
           <img src={logo} /> <div>开发者工具</div>
         </div>
         <div className={styles['developer-container-header-action']}>
-          <div className={styles['developer-container-header-action-btn']} onClick={minimize}>
+          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
             <Icon type="icon-minus" />
           </div>
-          <div className={styles['developer-container-header-action-btn']} onClick={maximize}>
+          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
             <Icon type="icon-quanping" />
           </div>
-          <div className={styles['developer-container-header-action-btn']} onClick={winclose}>
+          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
             <Icon type="icon-guanbi" />
           </div>
         </div>

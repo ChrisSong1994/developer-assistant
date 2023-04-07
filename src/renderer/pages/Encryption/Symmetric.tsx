@@ -1,7 +1,8 @@
-import { createHash } from '@/actions';
 import { AES_BLOCK_LIST, OUTPUT_ENCODING_LIST, SYMMETRIC_ENCRYPTION_ARITHMETRIC_LIST } from '@/constants';
+import Events from '@/utils/events';
 import { Button, Form, Input, Select } from 'antd';
 import { useState } from 'react';
+import { IHashOptions } from '../../../main/modules/crypto';
 
 const TextArea = Input.TextArea;
 const FormItem = Form.Item;
@@ -12,8 +13,8 @@ const Symmetric = () => {
 
   const [encipherValue, setEncipherValue] = useState<string>('');
 
-  const handleEncrypt = async (values: { hash: string; key: string }) => {
-    const res = await createHash({
+  const handleEncrypt = async (values: IHashOptions) => {
+    const res = await Events.createHash({
       hash: values.hash,
       content: decipherValue,
       key: values.key,

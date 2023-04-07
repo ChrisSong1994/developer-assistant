@@ -8,12 +8,12 @@ export default function () {
   const updateData = async (value: Record<string, any>) => {
     const newData = { ...data, ...value };
     setData(newData);
-    await Events.setLocalData(newData);
+    await Events.setConfData(newData);
   };
 
   useEffect(() => {
     (async () => {
-      const res = await Events.getLocalData();
+      const res = await Events.getConfData();
       setData(res);
       setLoading(false);
     })();

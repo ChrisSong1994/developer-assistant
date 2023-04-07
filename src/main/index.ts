@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 
-import eventsRegister from './eventsRegister';
+import eventsMessage from './eventsMessage';
 import { dbInit } from './modules/data';
 import { getOrCreateMainWindow } from './modules/windows';
 
@@ -12,8 +12,8 @@ export async function onReady() {
   // 创建主窗口
   mainWindow = getOrCreateMainWindow();
 
-  // 事件注册
-  eventsRegister(mainWindow);
+  // 事件消息
+  eventsMessage();
 
   // 数据初始化
   await dbInit();

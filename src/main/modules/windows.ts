@@ -64,6 +64,7 @@ export function createMainWindow(): Electron.BrowserWindow {
 
   browserWindows.push(mainWindow);
 
+  globalThis.mainWindow = mainWindow;
   return mainWindow;
 }
 
@@ -76,29 +77,38 @@ export function getOrCreateMainWindow(): Electron.BrowserWindow {
 }
 
 // 窗口缩小
-export const windowMinimize = (mainWindow: any) => {
-  mainWindow.minimize();
-  mainWindow.setResizable(true);
+export const windowMinimize = () => {
+  if (global.mainWindow) {
+    global.mainWindow.minimize();
+    global.mainWindow.setResizable(true);
+  }
+
   return;
 };
 
 // 窗口放大
-export const windowMaxmize = (mainWindow: any) => {
-  if (mainWindow.isFullScreen()) {
-    mainWindow.setFullScreen(false);
-  } else {
-    mainWindow.setFullScreen(true);
+export const windowMaxmize = () => {
+  if (global.mainWindow) {
+    if (global.mainWindow.isFullScreen()) {
+      global.mainWindow.setFullScreen(false);
+    } else {
+      global.mainWindow.setFullScreen(true);
+    }
+    global.mainWindow.center();
   }
-  mainWindow.center();
+
   return;
 };
 
 // 窗口关闭
-export const windowClose = (mainWindow: any) => {
-  if (isInMac()) {
-    mainWindow.hide();
-  } else {
-    mainWindow.close();
+export const windowClose = () => {
+  if (global.mainWindow) {
+    if (isInMac()) {
+      global.mainWindow.hide();
+    } else {
+      global.mainWindow.close();
+    }
   }
+
   return;
 };

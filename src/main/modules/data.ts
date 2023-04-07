@@ -1,3 +1,4 @@
+import { app } from 'electron';
 import fs from 'fs-extra';
 import { Low } from 'lowdb';
 // @ts-ignore
@@ -32,6 +33,16 @@ const DEFAULT_LOCAL_DATA: ILocalData = {
   ],
 };
 
+interface IConfigData {
+  downloadPath: string;
+  openAtLogin: boolean;
+}
+
+const DEFAULT_CONFIG_DATA: IConfigData = {
+  downloadPath: app.getPath('downloads'), //  下载路径
+  openAtLogin: false, // 是否开机重启
+};
+
 export const APP_PATH = path.join(os.homedir(), '.DeveloperAssistant');
 export const APP_CONFIG_PATH = path.join(APP_PATH, 'config.json');
 export const APP_DATA_PATH = path.join(APP_PATH, 'data.json');
@@ -45,7 +56,7 @@ async function dbInit() {
   }
 
   if (!fs.existsSync(APP_CONFIG_PATH)) {
-    await fs.writeJSON(APP_CONFIG_PATH, {});
+    await fs.writeJSON(APP_CONFIG_PATH, DEFAULT_CONFIG_DATA);
   }
 
   if (!fs.existsSync(APP_DATA_PATH)) {
@@ -58,7 +69,7 @@ async function dbInit() {
   await localDB.read();
 }
 
-async function getConfData() {
+async function getConfData(): Promise<any> {
   return confDB.data;
 }
 
@@ -67,7 +78,7 @@ async function setConfData(data: Record<string, any>) {
   await confDB.write();
 }
 
-async function getLocalData() {
+async function getLocalData(): Promise<any> {
   return localDB.data;
 }
 
