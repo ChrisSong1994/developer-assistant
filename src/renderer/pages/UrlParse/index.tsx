@@ -82,10 +82,6 @@ const UrlParse = () => {
           </Descriptions>
         ) : (
           <div className={styles['url-description']}>
-            <img
-              style={{ width: '100%', marginBottom: 20 }}
-              src="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL/mdn-url-all.png"
-            />
             <Descriptions bordered column={1}>
               {URL_PARAMS.map((item) => {
                 return (

@@ -11,6 +11,12 @@ export default function () {
     await Events.setLocalData(newData);
   };
 
+  const clearLocalData = async () => {
+    await Events.clearLocalData();
+    const res = await Events.getLocalData();
+    setData(res);
+  };
+
   useEffect(() => {
     (async () => {
       const res = await Events.getLocalData();
@@ -19,5 +25,5 @@ export default function () {
     })();
   }, []);
 
-  return { data, loading, setData: updateData };
+  return { data, loading, setData: updateData, clearData: clearLocalData };
 }

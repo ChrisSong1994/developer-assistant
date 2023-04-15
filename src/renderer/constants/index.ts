@@ -87,35 +87,35 @@ export const AES_BLOCK_LIST = [
 export const URL_PARAMS = [
   {
     key: 'protocol',
-    description: '',
+    description: '协议',
   },
   {
     key: 'username',
-    description: '',
+    description: '用户名',
   },
   {
     key: 'password',
-    description: '',
+    description: '密码',
   },
   {
     key: 'hostname',
-    description: '',
+    description: '主机',
   },
   {
     key: 'port',
-    description: '',
+    description: '端口',
   },
   {
     key: 'pathname',
-    description: '',
+    description: '路径',
   },
   {
     key: 'hash',
-    description: '',
+    description: '哈希',
   },
   {
     key: 'searchParams',
-    description: '',
+    description: '搜索参数',
   },
 ];
 

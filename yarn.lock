@@ -2325,6 +2325,20 @@
     lodash "^4.17.15"
     tmp-promise "^3.0.2"
 
+"@monaco-editor/loader@^1.3.3":
+  version "1.3.3"
+  resolved "https://registry.npmmirror.com/@monaco-editor/loader/-/loader-1.3.3.tgz#7f1742bd3cc21c0362a46a4056317f6e5215cfca"
+  integrity sha512-6KKF4CTzcJiS8BJwtxtfyYt9shBiEv32ateQ9T4UVogwn4HM/uPo9iJd2Dmbkpz8CM6Y0PDUpjnZzCwC+eYo2Q==
+  dependencies:
+    state-local "^1.0.6"
+
+"@monaco-editor/react@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.npmmirror.com/@monaco-editor/react/-/react-4.5.0.tgz#5a581f1ce5af6597dd127ac2c0d22d15ca3f3928"
+  integrity sha512-VJMkp5Fe1+w8pLEq8tZPHZKu8zDXQIA1FtiDTSNccg1D3wg1YIZaH2es2Qpvop1k62g3c/YySRb3bnGXu2XwYQ==
+  dependencies:
+    "@monaco-editor/loader" "^1.3.3"
+
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"
   resolved "https://registry.npmjs.org/@nicolo-ribaudo/eslint-scope-5-internals/-/eslint-scope-5-internals-5.1.1-v1.tgz#dbf733a965ca47b1973177dc0bb6c889edcfb129"
@@ -2858,9 +2872,9 @@
     csstype "^3.0.2"
 
 "@types/react@^18.1.0":
-  version "18.0.32"
-  resolved "https://registry.npmmirror.com/@types/react/-/react-18.0.32.tgz#5e88b2af6833251d54ec7fe86d393224499f41d5"
-  integrity sha512-gYGXdtPQ9Cj0w2Fwqg5/ak6BcK3Z15YgjSqtyDizWUfx7mQ8drs0NBUzRRsAdoFVTO8kJ8L2TL8Skm7OFPnLUw==
+  version "18.0.35"
+  resolved "https://registry.npmmirror.com/@types/react/-/react-18.0.35.tgz#192061cb1044fe01f2d3a94272cd35dd50502741"
+  integrity sha512-6Laome31HpetaIUGFWl1VQ3mdSImwxtFZ39rh059a1MNnKGqBpC88J6NJ8n/Is3Qx7CefDGLgf/KhN/sYCf7ag==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -3640,6 +3654,13 @@ ace-builds@^1.4.14:
   version "1.15.3"
   resolved "https://registry.npmjs.org/ace-builds/-/ace-builds-1.15.3.tgz#9e35d174acb80297c6f236be2c8bb8574786f719"
   integrity sha512-hq8+4DfQcUYcUyAF3vF7UoGFXwNxXST5A2IdarUOp9/Xg1thWTfxusPI2HAlTvXRTVjLDQOj9O34uPoTehEs0A==
+
+ace-diff@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.npmmirror.com/ace-diff/-/ace-diff-3.0.3.tgz#84f685ff3d0b1910539fc39259ac73d8b6581e28"
+  integrity sha512-CJaV9Oi6BWLWGL2Kj//h5BNXlRCRu1GYHPOT7o+ZSAuJv9PaL9FWr/cCf16IuSVDo7oj6VriO+qgoHR8G9McLA==
+  dependencies:
+    diff-match-patch "^1.0.5"
 
 acorn-globals@^6.0.0:
   version "6.0.0"
@@ -9834,6 +9855,11 @@ moment@^2.24.0, moment@^2.29.1, moment@^2.29.2:
   resolved "https://registry.npmjs.org/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
   integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
 
+monaco-editor@^0.37.1:
+  version "0.37.1"
+  resolved "https://registry.npmmirror.com/monaco-editor/-/monaco-editor-0.37.1.tgz#d6f5ffb593e019e74e19bf8a2bdef5a691876f4e"
+  integrity sha512-jLXEEYSbqMkT/FuJLBZAVWGuhIb4JNwHE9kPTorAVmsdZ4UzHAfgWxLsVtD7pLRFaOwYPhNG9nUCpmFL1t/dIg==
+
 mri@1.1.4:
   version "1.1.4"
   resolved "https://registry.npmjs.org/mri/-/mri-1.1.4.tgz#7cb1dd1b9b40905f1fac053abe25b6720f44744a"
@@ -11947,6 +11973,13 @@ react-merge-refs@^1.1.0:
   resolved "https://registry.npmjs.org/react-merge-refs/-/react-merge-refs-1.1.0.tgz#73d88b892c6c68cbb7a66e0800faa374f4c38b06"
   integrity sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==
 
+react-monaco-editor@^0.52.0:
+  version "0.52.0"
+  resolved "https://registry.npmmirror.com/react-monaco-editor/-/react-monaco-editor-0.52.0.tgz#69a7c450a22830064d2fc1b446674b1b7da0f540"
+  integrity sha512-jhQSekf2JABbcpN45gKZlWfTS0QcBOZAbAWKGyfqy/KEcMXTwJpCOYGcn2Ur11SUUxWJUzhKjE2fx9BGBc5S8g==
+  dependencies:
+    prop-types "^15.8.1"
+
 react-native-swipeout@^2.2.2:
   version "2.3.6"
   resolved "https://registry.npmjs.org/react-native-swipeout/-/react-native-swipeout-2.3.6.tgz#47dac8a835825cf3f2eef9e495574a3d9ab6d3fa"
@@ -13189,6 +13222,11 @@ stat-mode@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/stat-mode/-/stat-mode-1.0.0.tgz#68b55cb61ea639ff57136f36b216a291800d1465"
   integrity sha512-jH9EhtKIjuXZ2cWxmXS8ZP80XyC3iasQxMDV8jzhNJpfDb7VbQLVW4Wvsxz9QZvzV+G4YoSfBUVKDOyxLzi/sg==
+
+state-local@^1.0.6:
+  version "1.0.7"
+  resolved "https://registry.npmmirror.com/state-local/-/state-local-1.0.7.tgz#da50211d07f05748d53009bee46307a37db386d5"
+  integrity sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==
 
 static-extend@^0.1.1:
   version "0.1.2"

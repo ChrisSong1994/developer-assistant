@@ -10,3 +10,8 @@ export const getOpenAtLogin = () => {
   const { openAtLogin } = app.getLoginItemSettings();
   return openAtLogin;
 };
+
+export const setOpenAtLogin = (openAtLogin: boolean) => {
+  app.setLoginItemSettings({ openAtLogin });
+  return openAtLogin;
+};

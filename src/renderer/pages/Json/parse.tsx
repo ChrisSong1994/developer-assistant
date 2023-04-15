@@ -82,9 +82,9 @@ const JsonParseComponent = (props: any) => {
           <Tooltip placement="bottom" title="压缩">
             <Icon type="icon-wenjianyasuo" size={18} onClick={handleCompress} />
           </Tooltip>
-          {/* <Tooltip placement="bottom" title="保存">
+          <Tooltip placement="bottom" title="保存">
             <Icon type="icon-baocun" size={18} />
-          </Tooltip> */}
+          </Tooltip>
           <Tooltip placement="bottom" title="清除">
             <Icon type="icon-shanchu" size={18} onClick={handleClear} />
           </Tooltip>

@@ -1,4 +1,5 @@
 import Color from '@/pages/Color';
+import Diff from '@/pages/Diff';
 import Encryption from '@/pages/Encryption';
 import JsonComponent from '@/pages/Json';
 import Regexp from '@/pages/Regexp';
@@ -25,12 +26,12 @@ const routes = [
     icon: 'icon-url',
     component: UrlParse,
   },
-  // {
-  //   key: 'Diff',
-  //   title: 'Diff',
-  //   icon: 'icon-diff',
-  //   component: Diff,
-  // },
+  {
+    key: 'Diff',
+    title: 'Diff',
+    icon: 'icon-diff',
+    component: Diff,
+  },
   {
     key: 'Regexp',
     title: '正则',

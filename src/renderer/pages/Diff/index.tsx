@@ -1,7 +1,9 @@
+import { DiffEditor } from '@/components/MonacaEditor';
+
 const Signature = (props: any) => {
   return (
     <div>
-      <h1>Signature</h1>
+      <DiffEditor original="111" modified="222" />
     </div>
   );
 };

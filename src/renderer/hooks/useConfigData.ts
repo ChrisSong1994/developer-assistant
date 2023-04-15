@@ -13,8 +13,10 @@ export default function () {
 
   useEffect(() => {
     (async () => {
-      const res = await Events.getConfData();
-      setData(res);
+      const confData = await Events.getConfData();
+      const appVersion = await Events.getAppVersion();
+      const openAtLogin = await Events.getOpenAtLogin();
+      setData({ ...confData, appVersion, openAtLogin });
       setLoading(false);
     })();
   }, []);

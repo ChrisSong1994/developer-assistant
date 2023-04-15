@@ -29,6 +29,7 @@ const JsonEditor = (props: IProps) => {
         enableSnippets: false,
         showLineNumbers: true,
         tabSize: 4,
+        wrap: true,
       }}
       value={value}
       onChange={onChange}

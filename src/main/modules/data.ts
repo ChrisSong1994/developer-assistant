@@ -70,6 +70,7 @@ async function dbInit() {
 }
 
 async function getConfData(): Promise<any> {
+  await localDB.read();
   return confDB.data;
 }
 
@@ -79,6 +80,7 @@ async function setConfData(data: Record<string, any>) {
 }
 
 async function getLocalData(): Promise<any> {
+  await localDB.read();
   return localDB.data;
 }
 
@@ -87,4 +89,9 @@ async function setLocalData(data: Record<string, any>) {
   await localDB.write();
 }
 
-export { localDB, confDB, dbInit, getConfData, setConfData, getLocalData, setLocalData };
+async function clearLocalData() {
+  localDB.data = DEFAULT_LOCAL_DATA;
+  await localDB.write();
+}
+
+export { localDB, confDB, dbInit, getConfData, setConfData, getLocalData, setLocalData, clearLocalData };
