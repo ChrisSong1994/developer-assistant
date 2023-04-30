@@ -1,11 +1,20 @@
-import { DiffEditor } from '@/components/Editor';
+import { useMemo } from 'react';
 
-const Signature = (props: any) => {
+import { DiffEditor } from '@/components/Editor';
+import { useWindowSize } from '@/hooks';
+import styles from './index.less';
+
+const EDITOR_HEIGHT_PADDING = 180;
+
+const Diff = (props: any) => {
+  const { height } = useWindowSize();
+  const editorHeight = useMemo(() => height - EDITOR_HEIGHT_PADDING, [height]); // 编辑器高度
+
   return (
-    <div>
+    <div className={styles['diff']} style={{ height: editorHeight }}>
       <DiffEditor />
     </div>
   );
 };
 
-export default Signature;
+export default Diff;

@@ -14,7 +14,7 @@ const DiffEditor = (props: IProps) => {
 
   useLayoutEffect(() => {
     editorRef.current = new AceDiff({
-      // moge: 'ace/mode/json',
+      moge: 'ace/mode/json',
       element: '#diff',
       left: {
         editable: true,
@@ -29,7 +29,7 @@ const DiffEditor = (props: IProps) => {
     });
   }, []);
 
-  return <div id="diff" ref={elementRef} style={{ width: '100%', height: '100%', border: '1px solid #E9E9E9' }}></div>;
+  return <div id="diff" ref={elementRef} style={{ width: '100%', height: '100%' }}></div>;
 };
 
 export default DiffEditor;
