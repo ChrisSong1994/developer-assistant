@@ -11,6 +11,7 @@ import type { CheckboxValueType } from 'antd/es/checkbox/Group';
 import _ from 'lodash';
 import { useEffect, useMemo, useState } from 'react';
 
+import { regMatch } from '@/utils';
 import styles from './index.less';
 
 const TextArea = Input.TextArea;
@@ -124,31 +125,35 @@ const Regexp = () => {
   const [content, setContent] = useState<string>('');
   const [error, setError] = useState<any>(null);
   const [replacer, setReplacer] = useState<string>('');
-  const [matcheds, setMatcheds] = useState<Array<string> | null>(null); // 匹配结果
+  const [matcheds, setMatcheds] = useState<any>(null); // 匹配结果
   const [replacedContent, setReplacedContent] = useState<string>('');
+
   const flag = useMemo(() => flags.join(''), [flags]);
+
   const matchedsContent = useMemo(() => {
     let result = content;
     const replacedStack = [];
     // 需要 html转义 以及 分段替换
-    if (matcheds) {
-      for (const matched of matcheds) {
+    if (matcheds && matcheds.matcheds) {
+      for (const matched of matcheds.matcheds) {
         const index = result.indexOf(matched);
         const next = index + matched.length;
-        replacedStack.push(result.slice(0, next).replace(matched, `<b>${_.escape(matched)}</b>`));
+        replacedStack.push(_.escape(result.slice(0, index)));
+        replacedStack.push(result.slice(index, next).replace(matched, `<b>${_.escape(matched)}</b>`));
         result = result.slice(next);
       }
-      replacedStack.push(result);
+      replacedStack.push(_.escape(result));
+      return replacedStack.join('');
+    } else {
+      return _.escape(result);
     }
-    return replacedStack.join('');
-  }, [matcheds]);
+  }, [matcheds, content]);
 
   useEffect(() => {
     if (regexp) {
       try {
         const reg = new RegExp(regexp, flag);
-        console.log(content.match(reg));
-        setMatcheds(content.match(reg));
+        setMatcheds(regMatch(reg, content));
         setError(null);
       } catch (err) {
         setMatcheds(null);
@@ -175,7 +180,7 @@ const Regexp = () => {
     <div>
       <div className={styles['regexp-header']}>
         <Input
-          style={{ width: 'calc( 100% - 380px );' }}
+          style={{ width: 'calc( 100% - 380px )' }}
           size="large"
           value={regexp}
           onChange={(e) => setRegexp(e.target.value)}
@@ -223,8 +228,12 @@ const Regexp = () => {
         onChange={(e) => setContent(e.target.value)}
       />
       <div className={styles['regexp-match']}>
-        {matcheds ? (
-          <div className={styles['regexp-match-content']} dangerouslySetInnerHTML={{ __html: matchedsContent }}></div>
+        {matchedsContent ? (
+          <div
+            className={styles['regexp-match-content']}
+            // dangerouslySetInnerHTML={{ __html: JSON.stringify(matcheds, null, 2) }}
+            dangerouslySetInnerHTML={{ __html: matchedsContent }}
+          />
         ) : (
           <span>匹配结果...</span>
         )}

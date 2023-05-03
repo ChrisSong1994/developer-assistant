@@ -1,4 +1,5 @@
 import { css, cx } from '@emotion/css';
+import { Tooltip } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
@@ -34,26 +35,28 @@ const CopyComponent = (props: IProps) => {
   }, []);
 
   return (
-    <CopyToClipboard text={value} onCopy={handleCopy}>
-      <span className={cx(className, css(`cursor:pointer;`))}>
-        {copied ? (
-          <Icon
-            className={css(`
-            color: #52c41a;
-            font-size:${size}px;
-          `)}
-            type="icon-icon_duihao-xian"
-          />
-        ) : (
-          <Icon
-            className={css(`
-          font-size:${size}px;
-        `)}
-            type="icon-kaobei"
-          />
-        )}
-      </span>
-    </CopyToClipboard>
+    <Tooltip placement="bottom" title="复制">
+      <CopyToClipboard text={value} onCopy={handleCopy}>
+        <span className={cx(className, css(`cursor:pointer;`))}>
+          {copied ? (
+            <Icon
+              className={css(`
+              color: #52c41a;
+              font-size:${size}px;
+            `)}
+              type="icon-icon_duihao-xian"
+            />
+          ) : (
+            <Icon
+              className={css(`
+              font-size:${size}px;
+            `)}
+              type="icon-kaobei"
+            />
+          )}
+        </span>
+      </CopyToClipboard>
+    </Tooltip>
   );
 };
 

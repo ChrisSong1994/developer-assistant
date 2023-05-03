@@ -6,7 +6,8 @@
   "author": "ChrisSong",
   "scripts": {
     "build:icon": "electron-icon-builder --input=./resource/images/logo.png --output=./resource/images --flatten ",
-    "dev": "cross-env APP_ROOT=src/renderer umi dev  electron",
+    "dev": "cross-env APP_ROOT=src/renderer umi dev electron",
+    "ui:build": "cross-env APP_ROOT=src/renderer umi build",
     "electron:build:linux": "cross-env APP_ROOT=src/renderer umi build electron --linux",
     "electron:build:mac": "cross-env APP_ROOT=src/renderer umi build electron --mac",
     "electron:build:win": "cross-env APP_ROOT=src/renderer umi build electron --win",
@@ -14,9 +15,7 @@
     "electron:init": "umi electron init",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,less,md}\"",
     "rebuild-deps": "electron-builder install-app-deps",
-    "render:build": "cross-env APP_ROOT=src/renderer umi build",
-    "render:dev": "cross-env APP_ROOT=src/renderer umi dev",
-    "start": "yarn electron:dev"
+    "start": "yarn run dev"
   },
   "lint-staged": {
     "*.{js,jsx,less,md,json}": [
@@ -28,6 +27,7 @@
   },
   "dependencies": {
     "@emotion/css": "^11.10.5",
+    "@monaco-editor/react": "^4.5.0",
     "@types/react-color": "^3.0.6",
     "Base64": "^1.2.0",
     "ajv": "^8.12.0",
@@ -36,8 +36,9 @@
     "fs-extra": "^10.1.0",
     "jsonlint-mod": "^1.7.6",
     "lodash": "^4.17.21",
+    "lowdb": "^5.1.0",
+    "monaco-themes": "^0.4.4",
     "react": "^18.1.0",
-    "react-ace": "^10.1.0",
     "react-color": "^2.19.3",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.1.0",
@@ -62,8 +63,7 @@
     "lint-staged": "^10.0.7",
     "prettier": "^2.2.0",
     "typescript": "^4.1.2",
-    "umi-plugin-electron-builder": "^4.0.3",
-    "yorkie": "^2.0.0"
+    "umi-plugin-electron-builder": "^4.0.3"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

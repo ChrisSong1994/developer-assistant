@@ -1,18 +1,12 @@
-import { app, BrowserWindow, protocol } from 'electron';
+import { BrowserWindow, protocol } from 'electron';
 import * as path from 'path';
 import { EWindowSize } from '../../types/global';
-import { createProtocol } from '../utils';
+import { createProtocol, isInMac } from '../utils';
+import { ICON_PATH } from '../utils/path';
 
 export let browserWindows: Array<BrowserWindow | null> = [];
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-const RESOURCES_PATH = app.isPackaged
-  ? path.join(process.resourcesPath, 'assets')
-  : path.join(__dirname, '../../assets');
-
-const getAssetPath = (...paths: string[]): string => {
-  return path.join(RESOURCES_PATH, ...paths);
-};
 
 // 协议注册
 protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }]);
@@ -28,7 +22,7 @@ export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions
     height: EWindowSize.height,
     titleBarStyle: 'hidden',
     resizable: true,
-    icon: getAssetPath('icon.png'),
+    icon: ICON_PATH,
     webPreferences: {
       devTools: isDevelopment,
       nodeIntegration: true,
@@ -45,8 +39,10 @@ export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions
  */
 export function createMainWindow(): Electron.BrowserWindow {
   let mainWindow: BrowserWindow | null;
-
   mainWindow = new BrowserWindow(getMainWindowOptions());
+  if (isInMac()) {
+    mainWindow.setWindowButtonVisibility(false); // 隐藏信号灯
+  }
 
   if (isDevelopment) {
     mainWindow.loadURL('http://localhost:3001');
@@ -63,18 +59,17 @@ export function createMainWindow(): Electron.BrowserWindow {
 
   mainWindow.on('closed', () => {
     browserWindows = browserWindows.filter((bw) => mainWindow !== bw);
-
     mainWindow = null;
   });
 
   browserWindows.push(mainWindow);
 
+  globalThis.mainWindow = mainWindow;
   return mainWindow;
 }
 
 /**
- * Gets or creates the main window, returning it in both cases.
- *
+ * 创建window
  * @returns {Electron.BrowserWindow}
  */
 export function getOrCreateMainWindow(): Electron.BrowserWindow {
@@ -82,26 +77,38 @@ export function getOrCreateMainWindow(): Electron.BrowserWindow {
 }
 
 // 窗口缩小
-export const windowMinimize = (mainWindow: any) => () => {
-  mainWindow.minimize();
-  mainWindow.setResizable(true);
+export const windowMinimize = () => {
+  if (global.mainWindow) {
+    global.mainWindow.minimize();
+    global.mainWindow.setResizable(true);
+  }
+
   return;
 };
 
 // 窗口放大
-export const windowMaxmize = (mainWindow: any) => () => {
-  if (mainWindow.isMaximized()) {
-    mainWindow.restore();
-  } else {
-    mainWindow.maximize();
+export const windowMaxmize = () => {
+  if (global.mainWindow) {
+    if (global.mainWindow.isFullScreen()) {
+      global.mainWindow.setFullScreen(false);
+    } else {
+      global.mainWindow.setFullScreen(true);
+    }
+    global.mainWindow.center();
   }
-  mainWindow.setMinimumSize(1200, 800);
-  mainWindow.center();
+
   return;
 };
 
 // 窗口关闭
-export const windowClose = (mainWindow: any) => () => {
-  mainWindow.close();
+export const windowClose = () => {
+  if (global.mainWindow) {
+    if (isInMac()) {
+      global.mainWindow.hide();
+    } else {
+      global.mainWindow.close();
+    }
+  }
+
   return;
 };

@@ -19,7 +19,7 @@ import { useWindowSize } from '@/hooks';
 import { isEmpty } from '@/utils';
 import styles from './index.less';
 
-const EDITOR_HEIGHT_PADDING = 184;
+const EDITOR_HEIGHT_PADDING = 164;
 
 const JsonConvertComponent = () => {
   const [jsonValue, setJsonValue] = useState('');
@@ -29,8 +29,6 @@ const JsonConvertComponent = () => {
 
   const { height } = useWindowSize();
   const editorHeight = useMemo(() => height - EDITOR_HEIGHT_PADDING, [height]); // 编辑器高度
-
-  // 保存
 
   // // json 解析
   const handleJsonParse = (value: string) => {
@@ -48,7 +46,7 @@ const JsonConvertComponent = () => {
 
   //  yaml 解析
   const handleYamlParse = (value: string) => {
-    if (!isEmpty(value)) {
+    if (!isEmpty(value) && !parseJsonError) {
       try {
         console.log(yaml.parse(value));
         setParseYamlError(null);
@@ -75,7 +73,6 @@ const JsonConvertComponent = () => {
         <div className={styles['json-convert-panel-title']}>JSON</div>
         <JsonEditor style={{ height: editorHeight }} value={jsonValue} onChange={setJsonValue} />
       </div>
-
       <div className={styles['json-convert-actions']}>
         <Tooltip title="JSON 转 YAML">
           <Button icon={<RightOutlined />} />
@@ -84,7 +81,6 @@ const JsonConvertComponent = () => {
           <Button icon={<LeftOutlined />} />
         </Tooltip>
       </div>
-
       <div className={styles['json-convert-panel']}>
         <div className={styles['json-convert-panel-title']}>YAML</div>
         <YamlEditor style={{ height: editorHeight }} value={yamlValue} onChange={setYamlValue} />

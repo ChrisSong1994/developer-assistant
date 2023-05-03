@@ -1,3 +1,4 @@
+import { css } from '@emotion/css';
 import { memo } from 'react';
 
 interface IProps {
@@ -8,7 +9,15 @@ interface IProps {
 }
 
 const Icon = ({ type, className, size = 18, ...resetProps }: IProps) => {
-  return <i className={`iconfont ${type} ${className}`} style={{ padding: '0 3px', fontSize: size }} {...resetProps} />;
+  return (
+    <i
+      className={`iconfont ${type} ${css(`
+      padding: 0 3px;
+      font-size:${size}px;
+    `)} ${className}`}
+      {...resetProps}
+    />
+  );
 };
 
 export default memo(Icon);

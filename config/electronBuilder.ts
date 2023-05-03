@@ -16,8 +16,8 @@ export default {
       type: 'distribution',
       hardenedRuntime: true,
     },
-    // win: {
-    //   icon: '../assets/icon.png',
-    // },
+    win: {
+      icon: '../assets/icon.png',
+    },
   },
 };

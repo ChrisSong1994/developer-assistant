@@ -1,7 +1,9 @@
+import { EEditorLanguage } from '@/components/Editor';
+
 export const THEME_COLOR = '#1d2e54'; // 主题色
 
 // hash 算法
-export const HASH_ARITHMETIC_LIST = [
+export const HASH_ARITHMETIC_OPTIONS = [
   {
     label: 'MD5',
     value: 'MD5',
@@ -37,7 +39,7 @@ export const HASH_ARITHMETIC_LIST = [
 ];
 
 // 对称加密算法
-export const SYMMETRIC_ENCRYPTION_ARITHMETRIC_LIST = [
+export const SYMMETRIC_ENCRYPTION_ARITHMETRIC_OPTIONS = [
   {
     label: 'AES',
     value: 'AES',
@@ -56,7 +58,8 @@ export const SYMMETRIC_ENCRYPTION_ARITHMETRIC_LIST = [
   },
 ];
 
-export const OUTPUT_ENCODING_LIST = [
+// 输出编码格式
+export const OUTPUT_ENCODING_OPTIONS = [
   {
     label: 'base64',
     value: 'base64',
@@ -67,7 +70,7 @@ export const OUTPUT_ENCODING_LIST = [
   },
 ];
 
-export const AES_BLOCK_LIST = [
+export const AES_BLOCK_OPTIONS = [
   {
     label: '128位',
     value: 128,
@@ -81,3 +84,48 @@ export const AES_BLOCK_LIST = [
     value: 256,
   },
 ];
+
+// url 参数
+export const URL_PARAMS = [
+  {
+    key: 'protocol',
+    description: '协议',
+  },
+  {
+    key: 'username',
+    description: '用户名',
+  },
+  {
+    key: 'password',
+    description: '密码',
+  },
+  {
+    key: 'hostname',
+    description: '主机',
+  },
+  {
+    key: 'port',
+    description: '端口',
+  },
+  {
+    key: 'pathname',
+    description: '路径',
+  },
+  {
+    key: 'hash',
+    description: '哈希',
+  },
+  {
+    key: 'searchParams',
+    description: '搜索参数',
+  },
+];
+
+export const URL_PARAMS_KEYS = URL_PARAMS.map((v) => v.key);
+
+export const EDITOR_LANGUAGE_OPTIONS: Array<{ value: EEditorLanguage; label: string }> = Object.values(
+  EEditorLanguage,
+).map((v) => ({
+  value: v,
+  label: v,
+}));

@@ -4,24 +4,14 @@ import { Fragment, useState } from 'react';
 import * as color from 'react-color/es/helpers/color';
 
 import { THEME_COLOR } from '@/constants';
+import { useLocalData } from '@/hooks';
 import { generateDateUUID } from '@/utils';
 import ColorPicker from './Picker';
 import ColorRecord, { IRecord } from './Record';
 
 const Color = () => {
+  const { loading, data: localData, setData: setLocalData } = useLocalData();
   const [data, setData] = useState(color.toState(THEME_COLOR, 0));
-  const [recordData, setRecordData] = useState<Array<IRecord>>([
-    {
-      value: '#C816CD',
-      title: '橄榄色',
-      key: '#C816CD',
-    },
-    {
-      value: '#1D2E54',
-      title: '橄榄色',
-      key: '#1D2E54',
-    },
-  ]);
 
   const handleColorChange = (data: Record<string, any>) => {
     const colors = color.toState(data, data.h);
@@ -29,18 +19,20 @@ const Color = () => {
   };
 
   const handleColorRecordChange = (data: Array<IRecord>) => {
-    setRecordData(data);
+    setLocalData({ color: data });
   };
 
   const handleRecord = () => {
-    setRecordData([
-      ...recordData,
-      {
-        value: data.hex,
-        title: data.hex,
-        key: generateDateUUID(),
-      },
-    ]);
+    setLocalData({
+      color: [
+        ...localData.color,
+        {
+          value: data.hex,
+          title: data.hex,
+          key: generateDateUUID(),
+        },
+      ],
+    });
   };
 
   const handleSelect = (hex: string) => {
@@ -57,7 +49,9 @@ const Color = () => {
         记录一下
       </Button>
 
-      <ColorRecord data={recordData} onChange={handleColorRecordChange} onSelect={handleSelect} />
+      {loading ? null : (
+        <ColorRecord data={localData.color} onChange={handleColorRecordChange} onSelect={handleSelect} />
+      )}
     </Fragment>
   );
 };

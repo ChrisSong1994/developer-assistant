@@ -1,6 +1,6 @@
+import { URL_PARAMS_KEYS } from '@/constants';
 import _ from 'lodash';
 import moment from 'moment';
-import os from 'os';
 /**
  * promise 结果转数组
  */
@@ -11,16 +11,6 @@ export function to(promise: Promise<any[]>) {
       (err) => resolve([null, err]),
     );
   });
-}
-
-// 判断是否是在win中
-export function isInWin() {
-  return os.platform() === 'win32';
-}
-
-// 是否是在mac
-export function isInMac() {
-  return os.platform() === 'darwin';
 }
 
 // 判断一个值是不是空值、undefined、null、空字符串等；
@@ -63,3 +53,36 @@ export function generateDateUUID() {
   const uuid = moment().format('YYYYMMDDHHmmss');
   return uuid;
 }
+
+// 正则匹配
+export const regMatch = (reg: RegExp, str: string) => {
+  const result = reg.exec(str);
+  return {
+    matcheds: result ? str.match(reg) : null,
+    index: result?.index,
+  };
+};
+
+// 转换 url 实例为对象
+export const urlConverToObject = (url: URL) => {
+  const result: Record<string, any> = {};
+  if (!url) return result;
+  for (let key of URL_PARAMS_KEYS) {
+    // @ts-ignore
+    const value = url[key];
+    if (value) {
+      if (key === 'searchParams') {
+        const params: Record<string, any> = {};
+        value.forEach((v: string, k: string) => {
+          Reflect.set(params, k, v);
+        });
+        Reflect.set(result, key, params);
+      } else if (key === 'protocol') {
+        Reflect.set(result, key, value.slice(0, -1));
+      } else {
+        Reflect.set(result, key, value);
+      }
+    }
+  }
+  return result;
+};

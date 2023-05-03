@@ -3,8 +3,8 @@ import { Layout, Tabs } from 'antd';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
-import { maximize, minimize, winclose } from '@/servies';
-import logo from '../assets/images/logo.svg';
+import Events from '@/utils/events';
+import logo from '../../assets/logo.png';
 import Icon from '../components/Icon';
 import styles from './index.less';
 import routes from './routes';
@@ -58,14 +58,14 @@ const BaseLayout: FC = () => {
           <img src={logo} /> <div>开发者工具</div>
         </div>
         <div className={styles['developer-container-header-action']}>
-          <div className={styles['developer-container-header-action-btn']}>
-            <Icon className={styles['icon']} type="icon-minus" onClick={minimize} />
+          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
+            <Icon type="icon-minus" />
           </div>
-          <div className={styles['developer-container-header-action-btn']}>
-            <Icon className={styles['action-item']} type="icon-quanping" onClick={maximize} />
+          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
+            <Icon type="icon-quanping" />
           </div>
-          <div className={styles['developer-container-header-action-btn']}>
-            <Icon className={styles['action-item']} type="icon-guanbi" onClick={winclose} />
+          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
+            <Icon type="icon-guanbi" />
           </div>
         </div>
       </Header>
@@ -82,8 +82,8 @@ const BaseLayout: FC = () => {
                 key={item.key}
                 onClick={() => handleSelect(item.key)}
               >
-                <Icon size={21} type={item.icon} />
-                <span>{item.label}</span>
+                <Icon className={styles['developer-container-sider-menu-item-icon']} size={24} type={item.icon} />
+                <span className={styles['developer-container-sider-menu-item-label']}>{item.label}</span>
               </div>
             ))}
           </div>
