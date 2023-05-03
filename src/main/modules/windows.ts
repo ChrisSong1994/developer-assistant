@@ -1,8 +1,8 @@
 import { BrowserWindow, protocol } from 'electron';
 import * as path from 'path';
 import { EWindowSize } from '../../types/global';
-import { createProtocol, isInMac } from '../utils';
-import { ICON_PATH } from '../utils/path';
+import { isInMac } from '../utils';
+import { getPublicFilePath, ICON_PATH } from '../utils/path';
 
 export let browserWindows: Array<BrowserWindow | null> = [];
 
@@ -47,8 +47,7 @@ export function createMainWindow(): Electron.BrowserWindow {
   if (isDevelopment) {
     mainWindow.loadURL('http://localhost:3001');
   } else {
-    createProtocol('app');
-    mainWindow.loadURL('app://./index.html');
+    mainWindow.loadURL(getPublicFilePath({ name: 'index.html' }));
   }
 
   mainWindow.webContents.once('dom-ready', () => {

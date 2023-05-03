@@ -1,4 +1,4 @@
-import * as events from './modules/events';
+import * as events from './events';
 
 export type Events = typeof events;
 
