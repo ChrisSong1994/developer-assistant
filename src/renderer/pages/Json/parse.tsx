@@ -13,13 +13,13 @@ import { Tooltip } from 'antd';
 import jsonlint from 'jsonlint-mod';
 
 import Copy from '@/components/Copy';
-import { JsonEditor } from '@/components/Editor';
 import Icon from '@/components/Icon';
+import { JsonEditor } from '@/components/Editor';
 import { useWindowSize } from '@/hooks';
 import { isEmpty } from '@/utils';
 import styles from './index.less';
 
-const EDITOR_HEIGHT_PADDING = 180;
+const EDITOR_HEIGHT_PADDING = 164;
 
 const JsonParseComponent = (props: any) => {
   const [value, setValue] = useState('');

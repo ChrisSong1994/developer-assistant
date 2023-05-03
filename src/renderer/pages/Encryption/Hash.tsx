@@ -2,7 +2,7 @@ import Events from '@/utils/events';
 import { Button, Form, Input, Select } from 'antd';
 import { useState } from 'react';
 
-import { HASH_ARITHMETIC_LIST } from '@/constants';
+import { HASH_ARITHMETIC_OPTIONS } from '@/constants';
 import { IHashOptions } from '../../../main/modules/crypto';
 
 const TextArea = Input.TextArea;
@@ -45,7 +45,7 @@ const Hash = () => {
           onFinish={handleEncrypt}
         >
           <FormItem name="hash" label="算法">
-            <Select style={{ width: 140 }} options={HASH_ARITHMETIC_LIST}></Select>
+            <Select style={{ width: 140 }} options={HASH_ARITHMETIC_OPTIONS}></Select>
           </FormItem>
           <Form.Item noStyle shouldUpdate={(pre, cur) => pre.hash !== cur.hash}>
             {({ getFieldValue }) => {

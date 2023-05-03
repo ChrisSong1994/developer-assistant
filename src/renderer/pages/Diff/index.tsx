@@ -1,41 +1,25 @@
 import { Select } from 'antd';
 import { useMemo, useState } from 'react';
 
-import { DiffEditor } from '@/components/Editor';
+import { BaseDiffEditor, EEditorLanguage } from '@/components/Editor';
+import { EDITOR_LANGUAGE_OPTIONS } from '@/constants';
 import { useWindowSize } from '@/hooks';
 import styles from './index.less';
 
-const EDITOR_HEIGHT_PADDING = 130;
+const EDITOR_HEIGHT_PADDING = 142;
 
 const Diff = (props: any) => {
-  const [language, setLanguage] = useState<string>('text');
+  const [language, setLanguage] = useState<EEditorLanguage>(EEditorLanguage.PLAINTEXT);
   const { height } = useWindowSize();
   const editorHeight = useMemo(() => height - EDITOR_HEIGHT_PADDING, [height]); // 编辑器高度
 
   return (
     <div className={styles['diff']}>
-      <div>
+      <div className={styles['diff-options']}>
         <span>语言：</span>
-        <Select
-          style={{ width: 180 }}
-          value={language}
-          onSelect={setLanguage}
-          options={[
-            {
-              value: 'json',
-              label: 'JSON',
-            },
-            {
-              value: 'text',
-              label: 'TEXT',
-            },
-          ]}
-        />
+        <Select style={{ width: 200 }}  showSearch value={language} onSelect={setLanguage} options={EDITOR_LANGUAGE_OPTIONS} />
       </div>
-
-      <div style={{ height: editorHeight }}>
-        <DiffEditor language={language} />
-      </div>
+      <BaseDiffEditor style={{ height: editorHeight }} language={language} />
     </div>
   );
 };

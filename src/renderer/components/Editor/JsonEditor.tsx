@@ -1,40 +1,16 @@
-import AceEditor from './AceEditor';
+import BaseEditor from './BaseEditor';
+import { EEditorLanguage } from './index';
+
 interface IProps {
-  style: Record<string, any>;
   value: string;
   onChange: (v: any) => void;
+  style?: Record<string, any>;
 }
 
 const JsonEditor = (props: IProps) => {
-  const { style = {}, value, onChange } = props;
+  const { value, onChange, style } = props;
 
-  return (
-    <AceEditor
-      placeholder="请输入 json 数据..."
-      mode="json"
-      theme="chrome"
-      name="json"
-      style={{
-        width: '100%',
-        border: '1px solid #E9E9E9',
-        ...style,
-      }}
-      fontSize={16}
-      showPrintMargin={true}
-      showGutter={true}
-      highlightActiveLine={true}
-      setOptions={{
-        enableBasicAutocompletion: false,
-        enableLiveAutocompletion: false,
-        enableSnippets: false,
-        showLineNumbers: true,
-        tabSize: 4,
-        wrap: true,
-      }}
-      value={value}
-      onChange={onChange}
-    />
-  );
+  return <BaseEditor style={style} language={EEditorLanguage.JSON} value={value} onChange={onChange} />;
 };
 
 export default JsonEditor;

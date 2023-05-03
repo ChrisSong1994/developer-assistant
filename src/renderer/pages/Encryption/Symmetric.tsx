@@ -1,4 +1,4 @@
-import { AES_BLOCK_LIST, OUTPUT_ENCODING_LIST, SYMMETRIC_ENCRYPTION_ARITHMETRIC_LIST } from '@/constants';
+import { AES_BLOCK_OPTIONS, OUTPUT_ENCODING_OPTIONS, SYMMETRIC_ENCRYPTION_ARITHMETRIC_OPTIONS } from '@/constants';
 import Events from '@/utils/events';
 import { Button, Form, Input, Select } from 'antd';
 import { useState } from 'react';
@@ -45,10 +45,10 @@ const Symmetric = () => {
           onFinish={handleEncrypt}
         >
           <FormItem name="algorithm" label="算法">
-            <Select style={{ width: 82 }} options={SYMMETRIC_ENCRYPTION_ARITHMETRIC_LIST}></Select>
+            <Select style={{ width: 82 }} options={SYMMETRIC_ENCRYPTION_ARITHMETRIC_OPTIONS}></Select>
           </FormItem>
           <FormItem name="block" label="数据块">
-            <Select style={{ width: 82 }} options={AES_BLOCK_LIST}></Select>
+            <Select style={{ width: 82 }} options={AES_BLOCK_OPTIONS}></Select>
           </FormItem>
           <FormItem name="key" label="密钥">
             <Input style={{ width: 200 }} />
@@ -57,7 +57,7 @@ const Symmetric = () => {
             <Input style={{ width: 120 }} />
           </FormItem>
           <FormItem name="outputEncoding" label="输出">
-            <Select style={{ width: 100 }} options={OUTPUT_ENCODING_LIST}></Select>
+            <Select style={{ width: 100 }} options={OUTPUT_ENCODING_OPTIONS}></Select>
           </FormItem>
 
           <FormItem>

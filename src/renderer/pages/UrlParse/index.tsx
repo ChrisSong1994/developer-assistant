@@ -85,7 +85,7 @@ const UrlParse = () => {
             <Descriptions bordered column={1}>
               {URL_PARAMS.map((item) => {
                 return (
-                  <Descriptions.Item label={item.key} labelStyle={{ width: 140 }}>
+                  <Descriptions.Item key={item.key} label={item.key} labelStyle={{ width: 140 }}>
                     {item.description}
                   </Descriptions.Item>
                 );

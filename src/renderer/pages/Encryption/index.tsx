@@ -1,5 +1,5 @@
 import CustomTabs from '@/components/CustomTabs';
-import Asymmetric from './Asymmetric';
+// import Asymmetric from './Asymmetric';
 import Hash from './Hash';
 import Symmetric from './Symmetric';
 
@@ -18,11 +18,11 @@ const Encryption = () => {
           key: '2',
           children: <Symmetric />,
         },
-        {
-          label: `非对称加密`,
-          key: '3',
-          children: <Asymmetric />,
-        },
+        // {
+        //   label: `非对称加密`,
+        //   key: '3',
+        //   children: <Asymmetric />,
+        // },
       ]}
     />
   );
