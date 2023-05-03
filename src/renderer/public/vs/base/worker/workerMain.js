@@ -2230,7 +2230,6 @@
           constructor(S) {
               super(S || "An unexpected bug occurred."),
               Object.setPrototypeOf(this, b.prototype);
-              debugger
           }
       }
       n.BugIndicatingError = b
