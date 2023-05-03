@@ -30,8 +30,6 @@ const JsonConvertComponent = () => {
   const { height } = useWindowSize();
   const editorHeight = useMemo(() => height - EDITOR_HEIGHT_PADDING, [height]); // 编辑器高度
 
-  // 保存
-
   // // json 解析
   const handleJsonParse = (value: string) => {
     if (!isEmpty(value)) {
@@ -48,7 +46,7 @@ const JsonConvertComponent = () => {
 
   //  yaml 解析
   const handleYamlParse = (value: string) => {
-    if (!isEmpty(value)) {
+    if (!isEmpty(value) && !parseJsonError) {
       try {
         console.log(yaml.parse(value));
         setParseYamlError(null);

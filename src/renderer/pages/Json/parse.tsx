@@ -13,8 +13,8 @@ import { Tooltip } from 'antd';
 import jsonlint from 'jsonlint-mod';
 
 import Copy from '@/components/Copy';
-import Icon from '@/components/Icon';
 import { JsonEditor } from '@/components/Editor';
+import Icon from '@/components/Icon';
 import { useWindowSize } from '@/hooks';
 import { isEmpty } from '@/utils';
 import styles from './index.less';
@@ -73,9 +73,7 @@ const JsonParseComponent = (props: any) => {
     <div className={styles['json-parse']}>
       <div className={styles['json-panel']}>
         <div className={styles['tool-panel']}>
-          <Tooltip placement="bottom" title="复制">
-            <Copy value={value} size={18} />
-          </Tooltip>
+          <Copy value={value} size={18} />
           <Tooltip placement="bottom" title="美化">
             <Icon type="icon-qingchu" size={18} onClick={handleJsonFormat} />
           </Tooltip>
@@ -84,6 +82,9 @@ const JsonParseComponent = (props: any) => {
           </Tooltip>
           <Tooltip placement="bottom" title="保存">
             <Icon type="icon-baocun" size={18} />
+          </Tooltip>
+          <Tooltip placement="bottom" title="导入">
+            <Icon type="icon-daoru" size={18} />
           </Tooltip>
           <Tooltip placement="bottom" title="清除">
             <Icon type="icon-shanchu" size={18} onClick={handleClear} />
