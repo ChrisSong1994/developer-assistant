@@ -12,3 +12,12 @@ export const RESOURCES_PATH = app.isPackaged
   : path.join(__dirname, '../../../assets');
 
 export const ICON_PATH = path.join(RESOURCES_PATH, 'icon.png');
+
+export const ensureFirstBackSlash = (str: string) => {
+  return str.length > 0 && str.charAt(0) !== '/' ? '/' + str : str;
+};
+
+export const getPublicFilePath = ({ name }: { name: string }) => {
+  const pathName = path.resolve(path.join(__dirname, name)).replace(/\\/g, '/');
+  return encodeURI('file://' + ensureFirstBackSlash(pathName));
+};

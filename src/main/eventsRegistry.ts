@@ -1,5 +1,5 @@
 import { ipcMain } from 'electron';
-import * as events from './modules/events';
+import * as events from './events';
 import { EventData } from './types';
 
 export default () => {

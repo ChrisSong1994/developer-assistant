@@ -3,6 +3,7 @@ import electronBuilder from './electronBuilder';
 
 export default defineConfig({
   fastRefresh: true,
+  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   plugins: ['umi-plugin-electron-builder'],
   routes: [
     {

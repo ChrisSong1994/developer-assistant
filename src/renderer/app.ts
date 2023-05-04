@@ -1,3 +1,7 @@
+import Events from '@/utils/events';
 import { loader } from '@monaco-editor/react';
 
-loader.config({ paths: { vs: '/vs' } });
+(async () => {
+  const vsPath = await Events.getPublicFilePath({ name: 'vs' });
+  loader.config({ paths: { vs: process.env.NODE_ENV === 'development' ? '/vs' : vsPath } });
+})();
