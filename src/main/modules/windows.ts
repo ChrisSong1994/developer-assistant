@@ -18,6 +18,10 @@ export function getLaunchWindowOptions(): BrowserWindowConstructorOptions {
     height: EWindowSize.height,
     titleBarStyle: 'hidden',
     icon: ICON_PATH,
+    resizable: false,
+    webPreferences: {
+      devTools: isDevelopment,
+    },
   };
 }
 
@@ -54,6 +58,7 @@ export function createMainWindow() {
   mainWindow = new BrowserWindow(getMainWindowOptions());
   if (isInMac()) {
     mainWindow.setWindowButtonVisibility(false); // 隐藏信号灯
+    launchWindow.setWindowButtonVisibility(false);
   }
 
   if (isDevelopment) {
