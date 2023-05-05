@@ -1,8 +1,8 @@
 import { cx } from '@emotion/css';
 import { Layout, Tabs } from 'antd';
-import type { FC } from 'react';
-import React, { useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 
+import EventBus, { EEventBusName } from '@/utils/eventBus';
 import Events from '@/utils/events';
 import logo from '../../assets/logo.png';
 import Icon from '../components/Icon';
@@ -32,23 +32,24 @@ const pages = routes.reduce((pre: any[], cur: any) => {
 }, []);
 
 const BaseLayout: FC = () => {
-  const defaultOpenKey = routes[0].key;
   const defaultSelectKey = pages[0].key;
-  const defaultTitle = pages[0].title;
+  const keyRef = useRef<number>(new Date().getTime());
   const [activeKey, setActiveKey] = useState<string>(defaultSelectKey);
-  const [activeTitle, setActiveTitle] = useState<string>(defaultTitle);
 
-  // 选择
-  const handleSelect = (key: string) => {
-    const page = pages.filter((item) => item.key === key)[0];
-    setActiveKey(key);
-    setActiveTitle(page.title);
-  };
+  // 页面刷新
+  const handleUpdate = () => (keyRef.current = new Date().getTime());
+
+  useEffect(() => {
+    EventBus.on(EEventBusName.CLEAR_LOCAL_DATA, handleUpdate);
+    return () => {
+      EventBus.off(EEventBusName.CLEAR_LOCAL_DATA, handleUpdate);
+    };
+  }, []);
 
   const tabItems = pages.map((page: any) => ({
     label: '',
     key: page.key,
-    children: React.createElement(page.component),
+    children: React.createElement(page.component, { key: page.key === 'Setting' ? page.key : keyRef.current }), // 除了设置页其他页面强刷
   }));
 
   return (
@@ -80,7 +81,7 @@ const BaseLayout: FC = () => {
                   activeKey === item.key ? styles['developer-container-sider-menu-item-active'] : '',
                 ])}
                 key={item.key}
-                onClick={() => handleSelect(item.key)}
+                onClick={() => setActiveKey(item.key)}
               >
                 <Icon className={styles['developer-container-sider-menu-item-icon']} size={24} type={item.icon} />
                 <span className={styles['developer-container-sider-menu-item-label']}>{item.label}</span>
