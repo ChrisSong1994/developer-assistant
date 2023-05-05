@@ -6,10 +6,21 @@ interface IProps {
   value?: string;
   onChange?: (v: any) => void;
   style?: Record<string, any>;
+  options?: Record<string, any>;
+  onMount?: (editor: any, monaco: any) => void;
+  beforeMount?: (monaco: any) => void;
 }
 
 const BaseEditor = (props: IProps) => {
-  const { language = EEditorLanguage.PLAINTEXT, value = '', onChange = () => {}, style = {} } = props;
+  const {
+    language = EEditorLanguage.PLAINTEXT,
+    value = '',
+    onChange = () => {},
+    style = {},
+    options = {},
+    onMount = () => {},
+    beforeMount = () => {},
+  } = props;
 
   return (
     <div
@@ -27,9 +38,12 @@ const BaseEditor = (props: IProps) => {
         height="100%"
         options={{
           ...DEFAULT_OPTIONS,
+          ...options,
         }}
         value={value}
         onChange={onChange}
+        onMount={onMount}
+        beforeMount={beforeMount}
       />
     </div>
   );
