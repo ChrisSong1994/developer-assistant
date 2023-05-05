@@ -5,8 +5,8 @@
 ## 截图
 
 <p align="center">
- <img src="./screenshots/color.jpg" alt="color" width="460"  >
-<img src="./screenshots/json.jpg" alt="json" width="460" >
+ <img src="./screenshots/color.jpg" alt="color" width="840"  >
+<img src="./screenshots/json.jpg" alt="json" width="840" >
 </p>
 
 ## 功能列表
