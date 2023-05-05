@@ -29,7 +29,11 @@ export const DEFAULT_OPTIONS = {
   scrollBeyondLastLine: false, // 设置编辑器是否可以滚动到最后一行之后
   minimap: { enabled: false },
   folding: true, // 是否启用代码折叠
-  wordWrap: 'off',
+  wordWrap: 'on', // 默认自动换行
+  maxTokenizationLineLength:5000,
+  unicodeHighlight: {
+    ambiguousCharacters: false,  // 关闭字符串内特殊字符高亮，为了性能
+  },
 };
 
 export { default as BaseDiffEditor } from './BaseDiffEditor';
