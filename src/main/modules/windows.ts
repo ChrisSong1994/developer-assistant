@@ -1,4 +1,4 @@
-import { BrowserWindow, protocol } from 'electron';
+import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
 import * as path from 'path';
 import { EWindowSize } from '../../types/global';
 import { isInMac } from '../utils';
@@ -8,21 +8,32 @@ export let browserWindows: Array<BrowserWindow | null> = [];
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-// 协议注册
-protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: true, standard: true } }]);
-
 /**
- * Gets default options for the main window
- *
- * @returns {Electron.BrowserWindowConstructorOptions}
+ * launch window
+ * @returns {BrowserWindowConstructorOptions}
  */
-export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions {
+export function getLaunchWindowOptions(): BrowserWindowConstructorOptions {
   return {
     width: EWindowSize.width,
     height: EWindowSize.height,
     titleBarStyle: 'hidden',
     resizable: true,
     icon: ICON_PATH,
+  };
+}
+
+/**
+ * 主进程 window
+ * @returns {BrowserWindowConstructorOptions}
+ */
+export function getMainWindowOptions(): BrowserWindowConstructorOptions {
+  return {
+    width: EWindowSize.width,
+    height: EWindowSize.height,
+    titleBarStyle: 'hidden',
+    resizable: true,
+    icon: ICON_PATH,
+    show: false,
     webPreferences: {
       devTools: isDevelopment,
       nodeIntegration: true,
@@ -37,16 +48,20 @@ export function getMainWindowOptions(): Electron.BrowserWindowConstructorOptions
  * @export
  * @returns {Electron.BrowserWindow}
  */
-export function createMainWindow(): Electron.BrowserWindow {
+export function createMainWindow() {
+  let launchWindow: BrowserWindow | null;
   let mainWindow: BrowserWindow | null;
+  launchWindow = new BrowserWindow(getLaunchWindowOptions());
   mainWindow = new BrowserWindow(getMainWindowOptions());
   if (isInMac()) {
     mainWindow.setWindowButtonVisibility(false); // 隐藏信号灯
   }
 
   if (isDevelopment) {
+    launchWindow.loadURL('http://localhost:3001/launchPage/index.html');
     mainWindow.loadURL('http://localhost:3001');
   } else {
+    launchWindow.loadURL(getPublicFilePath({ name: 'public/launchPage/index.html' }));
     mainWindow.loadURL(getPublicFilePath({ name: 'index.html' }));
   }
 
@@ -63,17 +78,22 @@ export function createMainWindow(): Electron.BrowserWindow {
 
   browserWindows.push(mainWindow);
 
+  globalThis.launchWindow = launchWindow;
   globalThis.mainWindow = mainWindow;
-  return mainWindow;
 }
 
 /**
  * 创建window
  * @returns {Electron.BrowserWindow}
  */
-export function getOrCreateMainWindow(): Electron.BrowserWindow {
-  return BrowserWindow.getFocusedWindow() || browserWindows[0] || createMainWindow();
+export function windowInit() {
+  BrowserWindow.getFocusedWindow() || createMainWindow();
 }
+
+export const windowRenderReady = () => {
+  mainWindow.show();
+  launchWindow.hide();
+};
 
 // 窗口缩小
 export const windowMinimize = () => {

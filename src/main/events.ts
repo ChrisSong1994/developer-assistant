@@ -8,5 +8,5 @@ export {
   getSingleFilePath,
   saveFileToLocal,
 } from './modules/dialog';
-export { windowClose, windowMaxmize, windowMinimize } from './modules/windows';
+export { windowClose, windowMaxmize, windowMinimize, windowRenderReady } from './modules/windows';
 export { getPublicFilePath } from './utils/path';
