@@ -7,12 +7,10 @@
  * 6、支持 json5
  * 7、支持转成json
  */
-import { useEffect, useMemo, useState } from 'react';
-// @ts-ignore
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
-import jsonlint from 'jsonlint-mod';
-import yaml from 'yaml';
+import { useEffect, useMemo, useState } from 'react';
+import YAML from 'yaml';
 
 import { JsonEditor, YamlEditor } from '@/components/Editor';
 import { useWindowSize } from '@/hooks';
@@ -22,8 +20,8 @@ import styles from './index.less';
 const EDITOR_HEIGHT_PADDING = 164;
 
 const JsonConvertComponent = () => {
-  const [jsonValue, setJsonValue] = useState('');
-  const [yamlValue, setYamlValue] = useState('');
+  const [jsonText, setJsonText] = useState('');
+  const [yamlText, setYamlText] = useState('');
   const [parseJsonError, setParseJsonError] = useState(null);
   const [parseYamlError, setParseYamlError] = useState(null);
 
@@ -34,7 +32,7 @@ const JsonConvertComponent = () => {
   const handleJsonParse = (value: string) => {
     if (!isEmpty(value)) {
       try {
-        jsonlint.parse(value);
+        JSON.parse(value);
         setParseJsonError(null);
       } catch (err: any) {
         setParseJsonError(err.message);
@@ -48,10 +46,9 @@ const JsonConvertComponent = () => {
   const handleYamlParse = (value: string) => {
     if (!isEmpty(value) && !parseJsonError) {
       try {
-        console.log(yaml.parse(value));
+        YAML.parse(value);
         setParseYamlError(null);
       } catch (err: any) {
-        console.log(err.message);
         setParseYamlError(err.message);
       }
     } else {
@@ -59,31 +56,45 @@ const JsonConvertComponent = () => {
     }
   };
 
-  useEffect(() => {
-    handleJsonParse(jsonValue);
-  }, [jsonValue]);
+  const handleCovertYamlTOJson = () => {
+    if (!parseYamlError && yamlText) {
+      const res = YAML.parse(yamlText);
+      setJsonText(JSON.stringify(res, null, 2));
+    }
+  };
+
+  const handleConvertJsonTOYaml = () => {
+    if (!parseJsonError) {
+      const res = YAML.stringify(JSON.parse(jsonText));
+      setYamlText(res);
+    }
+  };
 
   useEffect(() => {
-    handleYamlParse(yamlValue);
-  }, [yamlValue]);
+    handleJsonParse(jsonText);
+  }, [jsonText]);
+
+  useEffect(() => {
+    handleYamlParse(yamlText);
+  }, [yamlText]);
 
   return (
     <div className={styles['json-convert']}>
       <div className={styles['json-convert-panel']}>
         <div className={styles['json-convert-panel-title']}>JSON</div>
-        <JsonEditor style={{ height: editorHeight }} value={jsonValue} onChange={setJsonValue} />
+        <JsonEditor style={{ height: editorHeight }} value={jsonText} onChange={setJsonText} />
       </div>
       <div className={styles['json-convert-actions']}>
         <Tooltip title="JSON 转 YAML">
-          <Button icon={<RightOutlined />} />
+          <Button icon={<RightOutlined />} onClick={handleConvertJsonTOYaml} />
         </Tooltip>
         <Tooltip title="YAML 转 JSON">
-          <Button icon={<LeftOutlined />} />
+          <Button icon={<LeftOutlined />} onClick={handleCovertYamlTOJson} />
         </Tooltip>
       </div>
       <div className={styles['json-convert-panel']}>
         <div className={styles['json-convert-panel-title']}>YAML</div>
-        <YamlEditor style={{ height: editorHeight }} value={yamlValue} onChange={setYamlValue} />
+        <YamlEditor style={{ height: editorHeight }} value={yamlText} onChange={setYamlText} />
       </div>
     </div>
   );

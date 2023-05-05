@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        background-image: linear-gradient(#1d2e54, #f8f8f8);
+      }
+      section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      section > img {
+        width: 112px;
+        height: 112px;
+        animation: loading 12s ease-in-out infinite;
+      }
+
+      section > h2 {
+        color: #1d2e54;
+      }
+
+      @keyframes loading {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        16.666% {
+          transform: rotate(60deg);
+        }
+
+        33.333% {
+          transform: rotate(120deg);
+        }
+
+        50% {
+          transform: rotate(180deg);
+        }
+
+        66.666% {
+          transform: rotate(240deg);
+        }
+
+        83.333% {
+          transform: rotate(300deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <img src="./logo.png" alt="log" />
+      <h2>Developer Assistant</h2>
+    </section>
+  </body>
+</html>

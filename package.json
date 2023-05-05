@@ -35,7 +35,6 @@
     "eventemitter3": "^5.0.1",
     "execa": "^6.1.0",
     "fs-extra": "^10.1.0",
-    "jsonlint-mod": "^1.7.6",
     "lodash": "^4.17.21",
     "lowdb": "^5.1.0",
     "monaco-themes": "^0.4.4",
@@ -43,9 +42,8 @@
     "react-color": "^2.19.3",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.1.0",
-    "react-json-view": "^1.21.3",
     "umi": "^4.0.55",
-    "yaml": "^2.2.1"
+    "yaml": "^2.2.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",

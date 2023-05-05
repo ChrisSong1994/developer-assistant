@@ -9,4 +9,5 @@ export interface EventData {
 
 declare global {
   var mainWindow: any;
+  var launchWindow :any;
 }

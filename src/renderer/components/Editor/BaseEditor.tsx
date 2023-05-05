@@ -1,7 +1,11 @@
+import { MedicineBoxOutlined } from '@ant-design/icons';
 import MonacoEditor from '@monaco-editor/react';
-import { DEFAULT_OPTIONS, EEditorLanguage } from './index';
 
-interface IProps {
+import { isEmpty } from '@/utils';
+import Events from '@/utils/events';
+import { DEFAULT_OPTIONS, EEditorLanguage } from './index';
+import styles from './index.less';
+export interface IBaseEditorProps {
   language?: EEditorLanguage;
   value?: string;
   onChange?: (v: any) => void;
@@ -9,9 +13,11 @@ interface IProps {
   options?: Record<string, any>;
   onMount?: (editor: any, monaco: any) => void;
   beforeMount?: (monaco: any) => void;
+  onImport?: () => Promise<string | null>;
+  tipShow?: boolean;
 }
 
-const BaseEditor = (props: IProps) => {
+const BaseEditor = (props: IBaseEditorProps) => {
   const {
     language = EEditorLanguage.PLAINTEXT,
     value = '',
@@ -20,18 +26,29 @@ const BaseEditor = (props: IProps) => {
     options = {},
     onMount = () => {},
     beforeMount = () => {},
+    onImport,
+    tipShow = false,
   } = props;
 
+  // 导入文件
+  const handleImport = async () => {
+    let fileValue: string | null = null;
+    if (onImport) {
+      fileValue = await onImport();
+    } else {
+      fileValue = await Events.getFileFromLocalPath();
+    }
+    if (fileValue) onChange(fileValue);
+  };
+
   return (
-    <div
-      style={{
-        overflow: 'hidden',
-        border: '1px solid #dadce0',
-        borderRadius: 4,
-        height: '100%',
-        ...style,
-      }}
-    >
+    <div className={styles['editor-wrap']} style={style}>
+      {isEmpty(value) && tipShow ? (
+        <div className={styles['editor-empty-tip']} onClick={handleImport}>
+          <MedicineBoxOutlined className={styles['add-file']} />
+          <span>请输入文本信息或点击图标导入文本文件</span>
+        </div>
+      ) : null}
       <MonacoEditor
         theme="light"
         language={language}

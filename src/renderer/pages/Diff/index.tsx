@@ -17,7 +17,7 @@ const Diff = (props: any) => {
     <div className={styles['diff']}>
       <div className={styles['diff-options']}>
         <span>语言：</span>
-        <Select style={{ width: 200 }}  showSearch value={language} onSelect={setLanguage} options={EDITOR_LANGUAGE_OPTIONS} />
+        <Select style={{ width: 180 }}  showSearch value={language} onSelect={setLanguage} options={EDITOR_LANGUAGE_OPTIONS} />
       </div>
       <BaseDiffEditor style={{ height: editorHeight }} language={language} />
     </div>

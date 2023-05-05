@@ -6,6 +6,7 @@ interface IProps {
   className?: string;
   onClick?: () => void;
   size?: number;
+  [k: string]: any;
 }
 
 const Icon = ({ type, className, size = 18, ...resetProps }: IProps) => {
@@ -14,6 +15,7 @@ const Icon = ({ type, className, size = 18, ...resetProps }: IProps) => {
       className={`iconfont ${type} ${css(`
       padding: 0 3px;
       font-size:${size}px;
+      cursor:pointer;
     `)} ${className}`}
       {...resetProps}
     />

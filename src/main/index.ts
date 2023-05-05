@@ -1,16 +1,15 @@
-import { app, BrowserWindow } from 'electron';
+import { app } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
 
 import eventsRegistry from './eventsRegistry';
 import { dbInit } from './modules/data';
-import { getOrCreateMainWindow } from './modules/windows';
+import { windowInit } from './modules/windows';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-let mainWindow: BrowserWindow;
 
 export async function onReady() {
   // 创建主窗口
-  mainWindow = getOrCreateMainWindow();
+  windowInit();
 
   // 事件消息
   eventsRegistry();
@@ -35,8 +34,9 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
   if (mainWindow === null) {
-    getOrCreateMainWindow();
+    windowInit();
   } else {
-    mainWindow.show();
+    globalThis.launchWindow.hide();
+    globalThis.mainWindow.show();
   }
 });

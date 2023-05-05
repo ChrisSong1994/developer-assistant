@@ -1,3 +1,4 @@
+import Events from '@/utils/events';
 import BaseEditor from './BaseEditor';
 import { EEditorLanguage } from './index';
 
@@ -10,11 +11,9 @@ interface IProps {
 const JsonEditor = (props: IProps) => {
   const { value, onChange, style } = props;
 
-  const handleEditorMount = (monaco: any) => {
-    // 关闭json 自带语法校验 ？？？
-    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-      validate: false,
-    });
+  const handleImport = async () => {
+    const fileValue = await Events.getFileFromLocalPath({ filters: [{ name: 'json文件', extensions: ['*.json'] }] });
+    return fileValue;
   };
 
   return (
@@ -22,8 +21,10 @@ const JsonEditor = (props: IProps) => {
       style={style}
       language={EEditorLanguage.JSON}
       value={value}
+      tipShow={true}
+      onImport={handleImport}
       onChange={onChange}
-      beforeMount={handleEditorMount}
+      options={{ maxTokenizationLineLength: 5000, stopRenderingLineAfter: 5000 }} // 好像不生效？？
     />
   );
 };
