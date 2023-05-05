@@ -1,6 +1,15 @@
 # developer-assistant
 
-开发者助手
+开发者助手是一个开发工具集客户端，包含了常用的 json 解析处理、颜色拾取转换、编码、文本 diff 等操作
+
+## 截图
+
+<p align="center">
+ <img src="./screenshots/color.jpg" alt="color" width="460"  >
+<img src="./screenshots/json.jpg" alt="json" width="460" >
+</p>
+
+## 功能列表
 
 - [x] 颜色拾取和转换
 - [x] json 处理（需要增加颜色记录功能）
