@@ -27,7 +27,7 @@ const JsonParseComponent = (props: any) => {
   const [parseError, setParseError] = useState(null);
   const { height } = useWindowSize();
   const editorHeight = useMemo(() => height - EDITOR_HEIGHT_PADDING, [height]); // 编辑器高度
-
+  const parseErrorShow = useMemo(() => isEmpty(parseError), [parseError]);
   // json 格式化
   const handleJsonFormat = () => {
     if (isEmpty(parseError)) {
@@ -48,7 +48,7 @@ const JsonParseComponent = (props: any) => {
 
   // 保存
   const handleSave = () => {
-    Events.saveFileToLocal({ fileName: 'test.json', payload: value });
+    Events.saveFileToLocal({ fileName: 'Untitled.json', payload: value });
   };
 
   // 导入文件
@@ -99,7 +99,12 @@ const JsonParseComponent = (props: any) => {
         </div>
         <JsonEditor style={{ height: editorHeight }} value={value} onChange={setValue} />
       </div>
-      {isEmpty(parseError) ? null : <div className={styles['error-panel']}>{parseError}</div>}
+      {parseErrorShow ? null : (
+        <div className={styles['error-panel']}>
+          <div className={styles['text']}> {parseError}</div>
+          <Icon className={styles['close']} type="icon-guanbi" onClick={() => setParseError(null)} />
+        </div>
+      )}
     </div>
   );
 };

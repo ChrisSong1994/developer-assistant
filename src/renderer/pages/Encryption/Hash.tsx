@@ -27,7 +27,7 @@ const Hash = () => {
     <div>
       <TextArea
         rows={10}
-        placeholder="请输入需加密内容"
+        placeholder="请输入需待加密内容"
         value={decipherValue}
         onChange={(e) => setDecipherValue(e.target.value)}
       />
@@ -68,7 +68,7 @@ const Hash = () => {
           </FormItem>
         </Form>
       </div>
-      <TextArea spellCheck={false} rows={10} placeholder="请输入编码内容" value={encipherValue} />
+      <TextArea spellCheck={false} rows={10} placeholder="请输入待解密内容" value={encipherValue} />
     </div>
   );
 };

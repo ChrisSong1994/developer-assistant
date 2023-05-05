@@ -24,7 +24,7 @@ const Base64CodingComponent = () => {
       <TextArea
         spellCheck={false}
         rows={10}
-        placeholder="请输入编码内容"
+        placeholder="请输入待编码内容"
         value={decodeValue}
         onChange={(e) => setDecodeValue(e.target.value)}
       />
@@ -46,7 +46,7 @@ const Base64CodingComponent = () => {
       <TextArea
         spellCheck={false}
         rows={10}
-        placeholder="请输入编码内容"
+        placeholder="请输入待解码内容"
         value={encodeValue}
         onChange={(e) => setEncodeValue(e.target.value)}
       />

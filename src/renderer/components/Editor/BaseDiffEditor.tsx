@@ -1,6 +1,7 @@
 import { DiffEditor } from '@monaco-editor/react';
-import { DEFAULT_OPTIONS, EEditorLanguage } from './index';
 
+import { DEFAULT_OPTIONS, EEditorLanguage } from './index';
+import styles from './index.less';
 interface IProps {
   language?: EEditorLanguage;
   original?: string;
@@ -23,21 +24,15 @@ const BaseDiffEditor = (props: IProps) => {
   } = props;
 
   return (
-    <div
-      style={{
-        overflow: 'hidden',
-        border: '1px solid #dadce0',
-        borderRadius: 4,
-        height: '100%',
-        ...style,
-      }}
-    >
+    <div className={styles['editor-wrap']} style={style}>
+      <div className=""> </div>
       <DiffEditor
         theme="light"
         language={language}
         height={'100%'}
         options={{
           originalEditable: true,
+          enableSplitViewResizing: false,
           ...DEFAULT_OPTIONS,
           ...options,
         }}
