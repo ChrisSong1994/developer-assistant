@@ -17,7 +17,6 @@ export function getLaunchWindowOptions(): BrowserWindowConstructorOptions {
     width: EWindowSize.width,
     height: EWindowSize.height,
     titleBarStyle: 'hidden',
-    resizable: true,
     icon: ICON_PATH,
   };
 }
@@ -58,10 +57,10 @@ export function createMainWindow() {
   }
 
   if (isDevelopment) {
-    launchWindow.loadURL('http://localhost:3001/launchPage/index.html');
+    launchWindow.loadURL('http://localhost:3001/launch/index.html');
     mainWindow.loadURL('http://localhost:3001');
   } else {
-    launchWindow.loadURL(getPublicFilePath({ name: 'public/launchPage/index.html' }));
+    launchWindow.loadURL(getPublicFilePath({ name: 'launch/index.html' }));
     mainWindow.loadURL(getPublicFilePath({ name: 'index.html' }));
   }
 

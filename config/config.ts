@@ -5,6 +5,7 @@ export default defineConfig({
   fastRefresh: true,
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   plugins: ['umi-plugin-electron-builder'],
+  ignoreMomentLocale: true,
   routes: [
     {
       path: '/',
