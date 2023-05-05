@@ -25,5 +25,7 @@ export default function () {
     })();
   }, []);
 
-  return { data, loading, setData: updateData, clearData: clearLocalData };
+  const result = { data, loading, setData: updateData, clearData: clearLocalData };
+
+  return { ...result };
 }
