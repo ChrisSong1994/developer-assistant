@@ -5,7 +5,7 @@ import { isEmpty } from '@/utils';
 import Events from '@/utils/events';
 import { DEFAULT_OPTIONS, EEditorLanguage } from './index';
 import styles from './index.less';
-interface IProps {
+export interface IBaseEditorProps {
   language?: EEditorLanguage;
   value?: string;
   onChange?: (v: any) => void;
@@ -13,10 +13,11 @@ interface IProps {
   options?: Record<string, any>;
   onMount?: (editor: any, monaco: any) => void;
   beforeMount?: (monaco: any) => void;
+  onImport?: () => Promise<string | null>;
   tipShow?: boolean;
 }
 
-const BaseEditor = (props: IProps) => {
+const BaseEditor = (props: IBaseEditorProps) => {
   const {
     language = EEditorLanguage.PLAINTEXT,
     value = '',
@@ -25,12 +26,18 @@ const BaseEditor = (props: IProps) => {
     options = {},
     onMount = () => {},
     beforeMount = () => {},
+    onImport,
     tipShow = false,
   } = props;
 
   // 导入文件
   const handleImport = async () => {
-    const fileValue = await Events.getFileFromLocalPath({ filters: [{ name: 'json文件', extensions: ['*.json'] }] });
+    let fileValue: string | null = null;
+    if (onImport) {
+      fileValue = await onImport();
+    } else {
+      fileValue = await Events.getFileFromLocalPath();
+    }
     if (fileValue) onChange(fileValue);
   };
 

@@ -48,7 +48,7 @@ const JsonParseComponent = (props: any) => {
 
   // 保存
   const handleSave = () => {
-    Events.saveFileToLocal({ fileName: 'Untitled.json', payload: value });
+    Events.saveFileToLocal({ fileName: 'ntitled.json', payload: value });
   };
 
   // 导入文件
