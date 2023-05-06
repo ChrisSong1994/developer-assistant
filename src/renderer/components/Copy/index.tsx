@@ -1,4 +1,4 @@
-import { css, cx } from '@emotion/css';
+import { css } from '@emotion/css';
 import { Tooltip } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -7,12 +7,11 @@ import Icon from '@/components/Icon';
 
 interface IProps {
   value: string;
-  className?: string;
   size?: number;
 }
 
 const CopyComponent = (props: IProps) => {
-  const { value, className, size = 20 } = props;
+  const { value, size = 20 } = props;
   const timer = useRef<any>(null);
   const [copied, setCopied] = useState<boolean>(false);
 
@@ -35,28 +34,28 @@ const CopyComponent = (props: IProps) => {
   }, []);
 
   return (
-    <Tooltip placement="bottom" title="复制">
-      <CopyToClipboard text={value} onCopy={handleCopy}>
-        <span className={cx(className, css(`cursor:pointer;`))}>
-          {copied ? (
-            <Icon
-              className={css(`
-              color: #52c41a;
+    <CopyToClipboard text={value} onCopy={handleCopy}>
+      <Tooltip placement="bottom" title="复制">
+        {copied ? (
+          <Icon
+            className={css(`
               font-size:${size}px;
+              cursor:pointer;
             `)}
-              type="icon-icon_duihao-xian"
-            />
-          ) : (
-            <Icon
-              className={css(`
+            style={{ color: '#52c41a' }}
+            type="icon-icon_duihao-xian"
+          />
+        ) : (
+          <Icon
+            className={css(`
               font-size:${size}px;
+              cursor:pointer;
             `)}
-              type="icon-kaobei"
-            />
-          )}
-        </span>
-      </CopyToClipboard>
-    </Tooltip>
+            type="icon-kaobei"
+          />
+        )}
+      </Tooltip>
+    </CopyToClipboard>
   );
 };
 
