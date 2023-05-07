@@ -6,7 +6,7 @@ import { EDITOR_LANGUAGE_OPTIONS } from '@/constants';
 import { useWindowSize } from '@/hooks';
 import styles from './index.less';
 
-const EDITOR_HEIGHT_PADDING = 142;
+const EDITOR_HEIGHT_PADDING = 126;
 
 const Diff = (props: any) => {
   const [language, setLanguage] = useState<EEditorLanguage>(EEditorLanguage.PLAINTEXT);
@@ -17,9 +17,15 @@ const Diff = (props: any) => {
     <div className={styles['diff']}>
       <div className={styles['diff-options']}>
         <span>语言：</span>
-        <Select style={{ width: 180 }}  showSearch value={language} onSelect={setLanguage} options={EDITOR_LANGUAGE_OPTIONS} />
+        <Select
+          style={{ width: 180 }}
+          showSearch
+          value={language}
+          onSelect={setLanguage}
+          options={EDITOR_LANGUAGE_OPTIONS}
+        />
       </div>
-      <BaseDiffEditor style={{ height: editorHeight }} language={language} />
+      <BaseDiffEditor tipShow={true} style={{ height: editorHeight }} language={language} />
     </div>
   );
 };

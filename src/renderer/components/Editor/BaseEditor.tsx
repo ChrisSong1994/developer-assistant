@@ -1,5 +1,7 @@
 import { MedicineBoxOutlined } from '@ant-design/icons';
+import { cx } from '@emotion/css';
 import MonacoEditor from '@monaco-editor/react';
+import _ from 'lodash';
 
 import { isEmpty } from '@/utils';
 import Events from '@/utils/events';
@@ -31,7 +33,7 @@ const BaseEditor = (props: IBaseEditorProps) => {
   } = props;
 
   // 导入文件
-  const handleImport = async () => {
+  const handleFileImport = async () => {
     let fileValue: string | null = null;
     if (onImport) {
       fileValue = await onImport();
@@ -41,10 +43,19 @@ const BaseEditor = (props: IBaseEditorProps) => {
     if (fileValue) onChange(fileValue);
   };
 
+  const handleFileDrop = async (event: any) => {
+    event.stopPropagation();
+    const file = _.get(event, 'dataTransfer.files[0');
+    if (file?.path) {
+      const fileValue = await Events.getFileFromPath({ filePath: file.path });
+      if (fileValue) onChange(fileValue);
+    }
+  };
+
   return (
-    <div className={styles['editor-wrap']} style={style}>
+    <div className={styles['editor-wrap']} style={style} onDrop={handleFileDrop}>
       {isEmpty(value) && tipShow ? (
-        <div className={styles['editor-empty-tip']} onClick={handleImport}>
+        <div className={cx(styles['editor-empty'], styles['editor-empty-tip'])} onClick={handleFileImport}>
           <MedicineBoxOutlined className={styles['add-file']} />
           <span>请输入文本信息或点击图标导入文本文件</span>
         </div>
@@ -53,6 +64,7 @@ const BaseEditor = (props: IBaseEditorProps) => {
         theme="light"
         language={language}
         height="100%"
+        loading={null}
         options={{
           ...DEFAULT_OPTIONS,
           ...options,

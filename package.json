@@ -35,6 +35,7 @@
     "eventemitter3": "^5.0.1",
     "execa": "^6.1.0",
     "fs-extra": "^10.1.0",
+    "jsonlint-mod": "^1.7.6",
     "lodash": "^4.17.21",
     "lowdb": "^5.1.0",
     "monaco-themes": "^0.4.4",
@@ -60,6 +61,7 @@
     "electron-devtools-installer": "^3.2.0",
     "electron-icon-builder": "^2.0.1",
     "lint-staged": "^10.0.7",
+    "monaco-editor": "^0.38.0",
     "prettier": "^2.2.0",
     "typescript": "^4.1.2",
     "umi-plugin-electron-builder": "^4.0.3"

@@ -7,7 +7,9 @@
   width: 100%;
 
   .tool-panel {
-    height: 36px;
+    display: flex;
+    align-items: center;
+    height: 32px;
     i {
       margin: 0 3px;
       color: @primary-color;
@@ -23,34 +25,6 @@
     border: 1px solid #e9e9e9;
     border-radius: 4px;
   }
-
-  .error-panel {
-    position: absolute;
-    bottom: -12px;
-    left: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 12px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: 100ms linear;
-
-    .text {
-      width: calc(100% - 20px);
-      color: #f5222d;
-      font-size: 20;
-    }
-    .close {
-      color: rgba(29, 46, 84, 0.5);
-      font-size: 16px;
-      &:hover {
-        color: rgba(29, 46, 84);
-      }
-    }
-  }
 }
 
 // json convert
@@ -58,13 +32,12 @@
   display: flex;
   .json-convert-panel {
     flex: 1;
-
     .json-convert-panel-title {
       display: flex;
       align-items: center;
-      height: 36px;
+      height: 32px;
       font-weight: 500;
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 

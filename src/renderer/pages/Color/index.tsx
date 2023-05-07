@@ -3,9 +3,11 @@ import { Button } from 'antd';
 import { Fragment, useState } from 'react';
 import * as color from 'react-color/es/helpers/color';
 
+import Empty from '@/components/Empty';
 import { THEME_COLOR } from '@/constants';
 import { useLocalData } from '@/hooks';
-import { generateDateUUID } from '@/utils';
+import { generateDateUUID, isEmpty } from '@/utils';
+
 import ColorPicker from './Picker';
 import ColorRecord, { IRecord } from './Record';
 
@@ -49,7 +51,9 @@ const Color = () => {
         记录一下
       </Button>
 
-      {loading ? null : (
+      {loading || isEmpty(localData.color) ? (
+        <Empty description={'暂无记录数据'} />
+      ) : (
         <ColorRecord data={localData.color} onChange={handleColorRecordChange} onSelect={handleSelect} />
       )}
     </Fragment>

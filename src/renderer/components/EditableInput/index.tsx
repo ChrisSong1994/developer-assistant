@@ -2,7 +2,6 @@ import { css, cx } from '@emotion/css';
 import { useEffect, useRef, useState } from 'react';
 
 import Copy from '@/components/Copy';
-
 import styles from './index.less';
 
 let idCounter = 1;
@@ -64,7 +63,10 @@ const EditableInput = (porps: IProps) => {
           {label}
         </label>
       ) : null}
-      <Copy className={css(`position:absolute;right:10px;top:10px;`)} value={currentValue} />
+
+      <div className={css(`position:absolute;right:10px;top:10px;`)}>
+        <Copy value={currentValue} />
+      </div>
     </div>
   );
 };

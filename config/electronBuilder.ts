@@ -6,7 +6,7 @@ export default {
   builderOptions: {
     productName: 'Developer Assistant',
     appId: 'developer.assistant.app',
-    // asar: true,
+    asar: true,
     mac: {
       icon: '../assets/icon.png',
       target: {

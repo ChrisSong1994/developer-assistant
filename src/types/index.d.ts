@@ -22,3 +22,7 @@ declare module 'react-color/es/components/common/Hue';
 declare module 'react-color/es/components/common/ColorWrap';
 declare module 'react-color/es/components/google/GooglePointerCircle';
 declare module 'react-color/es/components/google/GooglePointer';
+
+interface DragEvent<T = Element> extends MouseEvent<T, NativeDragEvent> {
+  dataTransfer: DataTransfer;
+}
