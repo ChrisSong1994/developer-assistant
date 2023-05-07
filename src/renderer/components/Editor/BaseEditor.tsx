@@ -1,4 +1,5 @@
 import { MedicineBoxOutlined } from '@ant-design/icons';
+import { cx } from '@emotion/css';
 import MonacoEditor from '@monaco-editor/react';
 
 import { isEmpty } from '@/utils';
@@ -44,7 +45,7 @@ const BaseEditor = (props: IBaseEditorProps) => {
   return (
     <div className={styles['editor-wrap']} style={style}>
       {isEmpty(value) && tipShow ? (
-        <div className={styles['editor-empty-tip']} onClick={handleImport}>
+        <div className={cx(styles['editor-empty'], styles['editor-empty-tip'])} onClick={handleImport}>
           <MedicineBoxOutlined className={styles['add-file']} />
           <span>请输入文本信息或点击图标导入文本文件</span>
         </div>

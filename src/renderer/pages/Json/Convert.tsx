@@ -17,7 +17,7 @@ import { useWindowSize } from '@/hooks';
 import { isEmpty } from '@/utils';
 import styles from './index.less';
 
-const EDITOR_HEIGHT_PADDING = 164;
+const EDITOR_HEIGHT_PADDING = 148;
 
 const JsonConvertComponent = () => {
   const [jsonText, setJsonText] = useState('');
