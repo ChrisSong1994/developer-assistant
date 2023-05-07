@@ -1,6 +1,7 @@
 import { MedicineBoxOutlined } from '@ant-design/icons';
 import { cx } from '@emotion/css';
 import { DiffEditor, Monaco } from '@monaco-editor/react';
+import _ from 'lodash';
 
 import { useUpdate } from '@/hooks';
 import { isEmpty } from '@/utils';
@@ -65,16 +66,39 @@ const BaseDiffEditor = (props: IDiffEditorProps) => {
     }
   };
 
+  const handleFileDrop = async (event: any) => {
+    event.stopPropagation();
+    const file = _.get(event, 'dataTransfer.files[0');
+    if (file?.path) {
+      const originalElement = document.querySelector('.editor.original');
+      const modifiedElement = document.querySelector('.editor.modified');
+      const fileValue = await Events.getFileFromPath({ filePath: file.path });
+      if (originalElement?.contains(event.target)) {
+        originalValueRef.current = fileValue;
+      }
+      if (modifiedElement?.contains(event.target)) {
+        modifiedValueRef.current = fileValue;
+      }
+      update();
+    }
+  };
+
   return (
-    <div className={styles['editor-wrap']} style={style}>
+    <div className={styles['editor-wrap']} style={style} onDrop={handleFileDrop}>
       {isEmpty(originalValueRef.current) && tipShow ? (
-        <div className={cx(styles['editor-empty-tip'], styles['editor-empty-left'])} onClick={handleOriginalImport}>
+        <div
+          className={cx('diff-editor-left', styles['editor-empty-tip'], styles['editor-empty-left'])}
+          onClick={handleOriginalImport}
+        >
           <MedicineBoxOutlined className={styles['add-file']} />
           <span>请输入文本信息或点击图标导入文本文件</span>
         </div>
       ) : null}
       {isEmpty(modifiedValueRef.current) && tipShow ? (
-        <div className={cx(styles['editor-empty-tip'], styles['editor-empty-right'])} onClick={handleModifiedImport}>
+        <div
+          className={cx('diff-editor-right', styles['editor-empty-tip'], styles['editor-empty-right'])}
+          onClick={handleModifiedImport}
+        >
           <MedicineBoxOutlined className={styles['add-file']} />
           <span>请输入文本信息或点击图标导入文本文件</span>
         </div>

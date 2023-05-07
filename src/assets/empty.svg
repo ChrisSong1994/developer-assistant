@@ -6,15 +6,15 @@
     </linearGradient>
     <linearGradient x1="44.79%" y1="100%" x2="44.79%" y2="0%" id="b">
       <stop stop-color="#FFF" stop-opacity="0" offset="0%" />
-      <stop stop-color="#96A1C5" stop-opacity=".373" offset="100%" />
+      <stop stop-color="#cdd2e2" stop-opacity=".373" offset="100%" />
     </linearGradient>
     <linearGradient x1="50%" y1="100%" x2="50%" y2="-19.675%" id="c">
       <stop stop-color="#FFF" stop-opacity="0" offset="0%" />
       <stop stop-color="#919191" stop-opacity=".15" offset="100%" />
     </linearGradient>
     <linearGradient x1="50%" y1="0%" x2="50%" y2="44.95%" id="d">
-      <stop stop-color="#697ca5" offset="0%" />
-      <stop stop-color="#4d669d" offset="100%" />
+      <stop stop-color="#bdccec" offset="0%" />
+      <stop stop-color="#6a80b0" offset="100%" />
     </linearGradient>
     <linearGradient x1="63.345%" y1="100%" x2="63.345%" y2="-5.316%" id="e">
       <stop stop-color="#DCE9FF" offset="0%" />

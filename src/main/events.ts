@@ -9,4 +9,5 @@ export {
   saveFileToLocal,
 } from './modules/dialog';
 export { windowClose, windowMaxmize, windowMinimize, windowRenderReady } from './modules/windows';
+export { getFileFromPath } from './utils/file';
 export { getPublicFilePath } from './utils/path';

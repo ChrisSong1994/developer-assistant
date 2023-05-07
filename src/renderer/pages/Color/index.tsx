@@ -1,12 +1,13 @@
 import { FormOutlined } from '@ant-design/icons';
-import { Button, Empty } from 'antd';
+import { Button } from 'antd';
 import { Fragment, useState } from 'react';
 import * as color from 'react-color/es/helpers/color';
 
+import Empty from '@/components/Empty';
 import { THEME_COLOR } from '@/constants';
 import { useLocalData } from '@/hooks';
 import { generateDateUUID, isEmpty } from '@/utils';
-import empty from '../../../assets/empty.svg';
+
 import ColorPicker from './Picker';
 import ColorRecord, { IRecord } from './Record';
 
@@ -51,11 +52,7 @@ const Color = () => {
       </Button>
 
       {loading || isEmpty(localData.color) ? (
-        <Empty
-          image={empty}
-          imageStyle={{ height: 60 }}
-          description={<span style={{ color: '#dadce0' }}>暂无记录数据</span>}
-        />
+        <Empty description={'暂无记录数据'} />
       ) : (
         <ColorRecord data={localData.color} onChange={handleColorRecordChange} onSelect={handleSelect} />
       )}
