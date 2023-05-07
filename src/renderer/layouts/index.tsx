@@ -63,10 +63,10 @@ const BaseLayout: FC = () => {
           <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
             <Icon type="icon-minus" />
           </div>
-          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
+          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMaxmize()}>
             <Icon type="icon-quanping" />
           </div>
-          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
+          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowClose()}>
             <Icon type="icon-guanbi" />
           </div>
         </div>
