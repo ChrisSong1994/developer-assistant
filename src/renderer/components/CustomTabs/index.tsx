@@ -1,5 +1,5 @@
 import { Radio, Tabs } from 'antd';
-import React, { memo, useState } from 'react';
+import React, { Fragment, memo, useState } from 'react';
 
 export interface ICustomTabItem {
   label: string;
@@ -19,7 +19,7 @@ const JsonComponent = (props: IProps) => {
   const [activeKey, setActiveKey] = useState(items[0].key);
 
   return (
-    <div>
+    <Fragment>
       <div style={{ textAlign: 'center', ...tabStyle }}>
         <Radio.Group buttonStyle="solid" value={activeKey} onChange={(e) => setActiveKey(e.target.value)}>
           {items.map((item) => (
@@ -30,7 +30,7 @@ const JsonComponent = (props: IProps) => {
         </Radio.Group>
       </div>
       <Tabs activeKey={activeKey} items={items} />
-    </div>
+    </Fragment>
   );
 };
 
