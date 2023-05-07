@@ -84,6 +84,7 @@ const BaseDiffEditor = (props: IDiffEditorProps) => {
         theme="light"
         language={language}
         height={'100%'}
+        loading={null}
         options={{
           originalEditable: true,
           enableSplitViewResizing: false,

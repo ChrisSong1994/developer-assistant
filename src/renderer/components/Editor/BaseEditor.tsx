@@ -54,6 +54,7 @@ const BaseEditor = (props: IBaseEditorProps) => {
         theme="light"
         language={language}
         height="100%"
+        loading={null}
         options={{
           ...DEFAULT_OPTIONS,
           ...options,
