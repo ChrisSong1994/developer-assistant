@@ -1,6 +1,6 @@
 @import '@/styles/theme.less';
 
-.editor-wrap{
+.editor-wrap {
   position: relative;
   height: 100%;
   overflow: hidden;
@@ -46,5 +46,33 @@
     cursor: pointer;
     user-select: auto;
     pointer-events: all;
+  }
+}
+
+.error-panel {
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: 100ms linear;
+
+  .text {
+    width: calc(100% - 20px);
+    color: #f5222d;
+    font-size: 20;
+  }
+  .close {
+    color: rgba(29, 46, 84, 0.5);
+    font-size: 16px;
+    &:hover {
+      color: rgba(29, 46, 84);
+    }
   }
 }

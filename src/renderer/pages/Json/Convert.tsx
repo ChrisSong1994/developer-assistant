@@ -9,6 +9,7 @@
  */
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
+import jsonlint from 'jsonlint-mod';
 import { useEffect, useMemo, useState } from 'react';
 import YAML from 'yaml';
 
@@ -22,49 +23,55 @@ const EDITOR_HEIGHT_PADDING = 148;
 const JsonConvertComponent = () => {
   const [jsonText, setJsonText] = useState('');
   const [yamlText, setYamlText] = useState('');
-  const [parseJsonError, setParseJsonError] = useState(null);
-  const [parseYamlError, setParseYamlError] = useState(null);
+  const [parseJsonError, setParseJsonError] = useState<any>(null);
+  const [parseYamlError, setParseYamlError] = useState<any>(null);
 
   const { height } = useWindowSize();
   const editorHeight = useMemo(() => height - EDITOR_HEIGHT_PADDING, [height]); // 编辑器高度
 
   // // json 解析
-  const handleJsonParse = (value: string) => {
+  const handleJsonParse = (value: string): boolean => {
     if (!isEmpty(value)) {
       try {
-        JSON.parse(value);
+        jsonlint.parse(value);
         setParseJsonError(null);
+        return true;
       } catch (err: any) {
         setParseJsonError(err.message);
+        return false;
       }
     } else {
       setParseJsonError(null);
+      return false;
     }
   };
 
   //  yaml 解析
-  const handleYamlParse = (value: string) => {
+  const handleYamlParse = (value: string): boolean => {
     if (!isEmpty(value) && !parseJsonError) {
       try {
         YAML.parse(value);
         setParseYamlError(null);
+        return true;
       } catch (err: any) {
         setParseYamlError(err.message);
+        return false;
       }
     } else {
       setParseYamlError(null);
+      return false;
     }
   };
 
   const handleCovertYamlTOJson = () => {
-    if (!parseYamlError && yamlText) {
+    if (yamlText && handleYamlParse(yamlText)) {
       const res = YAML.parse(yamlText);
       setJsonText(JSON.stringify(res, null, 2));
     }
   };
 
   const handleConvertJsonTOYaml = () => {
-    if (!parseJsonError) {
+    if (jsonText && handleJsonParse(jsonText)) {
       const res = YAML.stringify(JSON.parse(jsonText));
       setYamlText(res);
     }
@@ -82,7 +89,13 @@ const JsonConvertComponent = () => {
     <div className={styles['json-convert']}>
       <div className={styles['json-convert-panel']}>
         <div className={styles['json-convert-panel-title']}>JSON</div>
-        <JsonEditor style={{ height: editorHeight }} value={jsonText} onChange={setJsonText} />
+        <JsonEditor
+          style={{ height: editorHeight }}
+          error={parseJsonError}
+          onErrorClose={() => setParseJsonError(null)}
+          value={jsonText}
+          onChange={setJsonText}
+        />
       </div>
       <div className={styles['json-convert-actions']}>
         <Tooltip title="JSON 转 YAML">
@@ -94,7 +107,13 @@ const JsonConvertComponent = () => {
       </div>
       <div className={styles['json-convert-panel']}>
         <div className={styles['json-convert-panel-title']}>YAML</div>
-        <YamlEditor style={{ height: editorHeight }} value={yamlText} onChange={setYamlText} />
+        <YamlEditor
+          style={{ height: editorHeight }}
+          error={parseYamlError}
+          onErrorClose={() => setParseYamlError(null)}
+          value={yamlText}
+          onChange={setYamlText}
+        />
       </div>
     </div>
   );

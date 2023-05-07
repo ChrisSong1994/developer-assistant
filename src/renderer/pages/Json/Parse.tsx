@@ -24,10 +24,10 @@ const EDITOR_HEIGHT_PADDING = 148;
 const JsonParseComponent = (props: any) => {
   const [value, setValue] = useState('');
   const [parseJson, setParseJson] = useState({});
-  const [parseError, setParseError] = useState(null);
+  const [parseError, setParseError] = useState<string | null>(null);
   const { height } = useWindowSize();
   const editorHeight = useMemo(() => height - EDITOR_HEIGHT_PADDING, [height]); // 编辑器高度
-  const parseErrorShow = useMemo(() => isEmpty(parseError), [parseError]);
+
   // json 格式化
   const handleJsonFormat = () => {
     if (isEmpty(parseError)) {
@@ -97,14 +97,14 @@ const JsonParseComponent = (props: any) => {
             <Icon type="icon-shanchu" size={18} onClick={handleClear} />
           </Tooltip>
         </div>
-        <JsonEditor style={{ height: editorHeight }} value={value} onChange={setValue} />
+        <JsonEditor
+          error={parseError}
+          onErrorClose={() => setParseError(null)}
+          style={{ height: editorHeight }}
+          value={value}
+          onChange={setValue}
+        />
       </div>
-      {parseErrorShow ? null : (
-        <div className={styles['error-panel']}>
-          <div className={styles['text']}> {parseError}</div>
-          <Icon className={styles['close']} type="icon-guanbi" onClick={() => setParseError(null)} />
-        </div>
-      )}
     </div>
   );
 };

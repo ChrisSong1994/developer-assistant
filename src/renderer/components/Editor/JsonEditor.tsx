@@ -1,15 +1,21 @@
+import Icon from '@/components/Icon';
+import { isEmpty } from '@/utils';
 import Events from '@/utils/events';
+import { memo, useMemo } from 'react';
 import BaseEditor from './BaseEditor';
 import { EEditorLanguage } from './index';
-
+import styles from './index.less';
 interface IProps {
   value: string;
   onChange: (v: any) => void;
   style?: Record<string, any>;
+  error?: string | null;
+  onErrorClose?: () => void;
 }
 
 const JsonEditor = (props: IProps) => {
-  const { value, onChange, style } = props;
+  const { value, onChange, style, error, onErrorClose } = props;
+  const errorShow = useMemo(() => !isEmpty(error), [error]);
 
   const handleImport = async () => {
     const fileValue = await Events.getFileFromLocalPath({ filters: [{ name: 'json文件', extensions: ['*.json'] }] });
@@ -17,16 +23,24 @@ const JsonEditor = (props: IProps) => {
   };
 
   return (
-    <BaseEditor
-      style={style}
-      language={EEditorLanguage.JSON}
-      value={value}
-      tipShow={true}
-      onImport={handleImport}
-      onChange={onChange}
-      options={{ maxTokenizationLineLength: 5000, stopRenderingLineAfter: 5000 }} // 好像不生效？？
-    />
+    <div style={{ position: 'relative' }}>
+      <BaseEditor
+        style={style}
+        language={EEditorLanguage.JSON}
+        value={value}
+        tipShow={true}
+        onImport={handleImport}
+        onChange={onChange}
+        options={{ maxTokenizationLineLength: 5000, stopRenderingLineAfter: 5000 }} // 好像不生效？？
+      />
+      {errorShow ? (
+        <div className={styles['error-panel']}>
+          <div className={styles['text']}> {error}</div>
+          <Icon className={styles['close']} type="icon-guanbi" onClick={onErrorClose} />
+        </div>
+      ) : null}
+    </div>
   );
 };
 
-export default JsonEditor;
+export default memo(JsonEditor);

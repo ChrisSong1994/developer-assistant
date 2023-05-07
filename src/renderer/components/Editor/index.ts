@@ -1,3 +1,4 @@
+import { editor } from 'monaco-editor/esm/vs/editor/editor.api';
 export enum EEditorLanguage {
   PLAINTEXT = 'plaintext',
   JSON = 'json',
@@ -29,12 +30,12 @@ export const DEFAULT_OPTIONS = {
   scrollBeyondLastLine: false, // 设置编辑器是否可以滚动到最后一行之后
   minimap: { enabled: false },
   folding: true, // 是否启用代码折叠
-  // wordWrap: 'on', // 默认自动换行
-  maxTokenizationLineLength:5000,
+  wordWrap: 'on', // 默认自动换行
+  maxTokenizationLineLength: 5000,
   unicodeHighlight: {
-    ambiguousCharacters: false,  // 关闭字符串内特殊字符高亮，为了性能
+    ambiguousCharacters: false, // 关闭字符串内特殊字符高亮，为了性能
   },
-};
+} as Partial<editor.IEditorOptions>;
 
 export { default as BaseDiffEditor } from './BaseDiffEditor';
 export { default as BaseEditor } from './BaseEditor';
