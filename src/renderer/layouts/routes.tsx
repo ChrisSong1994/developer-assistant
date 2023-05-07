@@ -1,7 +1,9 @@
 import Color from '@/pages/Color';
 import Diff from '@/pages/Diff';
 import Encryption from '@/pages/Encryption';
+import Image from '@/pages/Image';
 import JsonComponent from '@/pages/Json';
+import QrCode from '@/pages/QrCode';
 import Regexp from '@/pages/Regexp';
 import Setting from '@/pages/Setting';
 import Transcoding from '@/pages/Transcoding';
@@ -19,6 +21,12 @@ const routes = [
     title: 'JSON',
     icon: 'icon-json',
     component: JsonComponent,
+  },
+  {
+    key: 'Image',
+    title: '图片',
+    icon: 'icon-tupian_huaban',
+    component: Image,
   },
   {
     key: 'UrlParse',
@@ -39,6 +47,12 @@ const routes = [
     component: Regexp,
   },
   {
+    key: 'QrCode',
+    title: '二维码',
+    icon: 'icon-qrcode',
+    component: QrCode,
+  },
+  {
     key: 'Transcoding',
     title: '编解码',
     icon: 'icon-bianma',
@@ -51,12 +65,6 @@ const routes = [
     component: Encryption,
   },
 
-  // {
-  //   key: 'Image',
-  //   title: '图片',
-  //   icon: 'icon-tupian_huaban',
-  //   component: Image,
-  // },
   {
     key: 'Setting',
     title: '设置',

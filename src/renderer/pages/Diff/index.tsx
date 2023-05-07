@@ -8,7 +8,7 @@ import styles from './index.less';
 
 const EDITOR_HEIGHT_PADDING = 116;
 
-const Diff = (props: any) => {
+const Diff = () => {
   const [language, setLanguage] = useState<EEditorLanguage>(EEditorLanguage.PLAINTEXT);
   const { height } = useWindowSize();
   const editorHeight = useMemo(() => height - EDITOR_HEIGHT_PADDING, [height]); // 编辑器高度

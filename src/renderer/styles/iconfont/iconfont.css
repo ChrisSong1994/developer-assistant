@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3449774 */
-  src: url('iconfont.woff2?t=1683095153128') format('woff2'),
-       url('iconfont.woff?t=1683095153128') format('woff'),
-       url('iconfont.ttf?t=1683095153128') format('truetype');
+  src: url('iconfont.woff2?t=1683477169622') format('woff2'),
+       url('iconfont.woff?t=1683477169622') format('woff'),
+       url('iconfont.ttf?t=1683477169622') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-qrcode:before {
+  content: "\e6b0";
 }
 
 .icon-daoru:before {
