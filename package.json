@@ -5,6 +5,7 @@
   "description": "前端开发助手",
   "author": "ChrisSong",
   "scripts": {
+    "build": "npm run electron:build:mac",
     "build:icon": "electron-icon-builder --input=./resource/images/logo.png --output=./resource/images --flatten ",
     "dev": "cross-env APP_ROOT=src/renderer umi dev electron",
     "electron:build:linux": "cross-env APP_ROOT=src/renderer umi build electron --linux",
