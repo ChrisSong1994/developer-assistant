@@ -35,7 +35,16 @@ const BaseDiffEditor = (props: IDiffEditorProps) => {
       const newOriginalValue = originalEditor.getValue();
       if (isEmpty(originalValueRef.current) || isEmpty(newOriginalValue)) {
         originalValueRef.current = newOriginalValue;
+        const position = originalEditor.getPosition();
         update();
+        // hack 方式： 为了解决render后光标错位问题
+        setTimeout(() => {
+          originalEditor.setPosition({
+            lineNumber: position.lineNumber,
+            column: position.column + newOriginalValue.length,
+          });
+          originalEditor.focus();
+        });
       }
     });
   }
