@@ -17,9 +17,8 @@ import { JsonEditor } from '@/components/Editor';
 import Icon from '@/components/Icon';
 import { useWindowSize } from '@/hooks';
 import { isEmpty } from '@/utils';
+import { EDITOR_HEIGHT_PADDING } from './index';
 import styles from './index.less';
-
-const EDITOR_HEIGHT_PADDING = 148;
 
 const JsonParseComponent = (props: any) => {
   const [value, setValue] = useState('');

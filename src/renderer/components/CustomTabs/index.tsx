@@ -23,7 +23,7 @@ const JsonComponent = (props: IProps) => {
       <div style={{ textAlign: 'center', ...tabStyle }}>
         <Radio.Group buttonStyle="solid" value={activeKey} onChange={(e) => setActiveKey(e.target.value)}>
           {items.map((item) => (
-            <Radio.Button key={item.key} value={item.key}>
+            <Radio.Button style={{ height: '28px', lineHeight: '26px' }} key={item.key} value={item.key}>
               {item.label}
             </Radio.Button>
           ))}

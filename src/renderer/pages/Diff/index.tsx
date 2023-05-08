@@ -6,7 +6,7 @@ import { EDITOR_LANGUAGE_OPTIONS } from '@/constants';
 import { useWindowSize } from '@/hooks';
 import styles from './index.less';
 
-const EDITOR_HEIGHT_PADDING = 116;
+const EDITOR_HEIGHT_PADDING = 108;
 
 const Diff = () => {
   const [language, setLanguage] = useState<EEditorLanguage>(EEditorLanguage.PLAINTEXT);

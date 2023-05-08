@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "include": [".", "../types"],
+  "include": [".", "../types", "../common/i18n"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

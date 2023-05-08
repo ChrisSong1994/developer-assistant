@@ -2,6 +2,7 @@ import { cx } from '@emotion/css';
 import { Layout, Tabs } from 'antd';
 import React, { FC, useEffect, useRef, useState } from 'react';
 
+import ConfigMenu from '@/components/ConfigMenu';
 import EventBus, { EEventBusName } from '@/utils/eventBus';
 import Events from '@/utils/events';
 import logo from '../../assets/logo.png';
@@ -57,9 +58,14 @@ const BaseLayout: FC = () => {
     <Layout className={styles['developer-container']}>
       <Header className={styles['developer-container-header']}>
         <div className={styles['developer-container-header-logo']}>
-          <img src={logo} /> <div>开发者工具</div>
+          <img src={logo} /> <div>开发者助手</div>
         </div>
         <div className={styles['developer-container-header-action']}>
+          <ConfigMenu>
+            <div className={styles['developer-container-header-action-btn']}>
+              <Icon type="icon-gengduo" />
+            </div>
+          </ConfigMenu>
           <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
             <Icon type="icon-minus" />
           </div>
@@ -73,7 +79,7 @@ const BaseLayout: FC = () => {
       </Header>
 
       <Layout>
-        <Sider width={75} theme="light" className={styles['developer-container-sider']}>
+        <Sider width={72} theme="light" className={styles['developer-container-sider']}>
           <div className={styles['developer-container-sider-menu']}>
             {MenuItems.map((item) => (
               <div

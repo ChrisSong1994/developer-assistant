@@ -3,6 +3,8 @@ import JsonParseComponent from './Parse';
 
 import CustomTabs from '@/components/CustomTabs';
 
+export const EDITOR_HEIGHT_PADDING = 130;
+
 const JsonComponent = () => {
   return (
     <CustomTabs
