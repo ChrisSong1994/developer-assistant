@@ -4,7 +4,6 @@ import { Fragment, useMemo, useState } from 'react';
 import { BaseDiffEditor, EEditorLanguage } from '@/components/Editor';
 import { EDITOR_LANGUAGE_OPTIONS } from '@/constants';
 import { useWindowSize } from '@/hooks';
-import styles from './index.less';
 
 const EDITOR_HEIGHT_PADDING = 108;
 
@@ -15,8 +14,8 @@ const Diff = () => {
 
   return (
     <Fragment>
-      <div className={styles['diff-options']}>
-        <span>语言：</span>
+     <div style={{ height: 32 }}>
+        <span style={{ fontWeight: 500, fontSize: 14 }}>语言：</span>
         <Select
           style={{ width: 140, padding: '2px 0' }}
           size="small"

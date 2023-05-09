@@ -7,11 +7,12 @@
  * 6、支持 json5
  * 7、支持转成json
  */
-import Events from '@/utils/events';
 import { Tooltip } from 'antd';
 import jsonlint from 'jsonlint-mod';
 import { useEffect, useMemo, useState } from 'react';
 
+import Events from '@/utils/events';
+import ActionsBarWrap from '@/components/ActionsBarWrap';
 import Copy from '@/components/Copy';
 import { JsonEditor } from '@/components/Editor';
 import Icon from '@/components/Icon';
@@ -73,12 +74,13 @@ const JsonParseComponent = (props: any) => {
 
   useEffect(() => {
     handleJsonParse(value);
+    console.log(1);
   }, [value]);
 
   return (
     <div className={styles['json-parse']}>
       <div className={styles['json-panel']}>
-        <div className={styles['tool-panel']}>
+        <ActionsBarWrap>
           <Copy value={value} size={18} />
           <Tooltip placement="bottom" title="美化">
             <Icon type="icon-qingchu" size={18} onClick={handleJsonFormat} />
@@ -95,7 +97,8 @@ const JsonParseComponent = (props: any) => {
           <Tooltip placement="bottom" title="清除">
             <Icon type="icon-shanchu" size={18} onClick={handleClear} />
           </Tooltip>
-        </div>
+        </ActionsBarWrap>
+
         <JsonEditor
           error={parseError}
           onErrorClose={() => setParseError(null)}

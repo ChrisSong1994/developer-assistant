@@ -2,6 +2,7 @@ import { MedicineBoxOutlined } from '@ant-design/icons';
 import { cx } from '@emotion/css';
 import MonacoEditor from '@monaco-editor/react';
 import _ from 'lodash';
+import { memo } from 'react';
 
 import { isEmpty } from '@/utils';
 import Events from '@/utils/events';
@@ -70,7 +71,7 @@ const BaseEditor = (props: IBaseEditorProps) => {
           ...options,
         }}
         value={value}
-        onChange={onChange}
+        onChange={_.debounce(onChange, 300)}
         onMount={onMount}
         beforeMount={beforeMount}
       />
@@ -78,4 +79,4 @@ const BaseEditor = (props: IBaseEditorProps) => {
   );
 };
 
-export default BaseEditor;
+export default memo(BaseEditor);

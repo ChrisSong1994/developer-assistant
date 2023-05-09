@@ -5,9 +5,9 @@ import Image from '@/pages/Image';
 import JsonComponent from '@/pages/Json';
 import QrCode from '@/pages/QrCode';
 import Regexp from '@/pages/Regexp';
-import Setting from '@/pages/Setting';
 import Transcoding from '@/pages/Transcoding';
 import UrlParse from '@/pages/UrlParse';
+// import Transform from '@/pages/Transform';
 
 const routes = [
   {
@@ -28,6 +28,12 @@ const routes = [
     icon: 'icon-tupian_huaban',
     component: Image,
   },
+  // {
+  //   key: 'Transform',
+  //   title: '转换',
+  //   icon: 'icon-zhuanhuan',
+  //   component: Transform,
+  // },
   {
     key: 'UrlParse',
     title: 'URL解析',
@@ -63,13 +69,6 @@ const routes = [
     title: '加解密',
     icon: 'icon-31mima',
     component: Encryption,
-  },
-
-  {
-    key: 'Setting',
-    title: '设置',
-    icon: 'icon-shezhi1',
-    component: Setting,
   },
 ];
 

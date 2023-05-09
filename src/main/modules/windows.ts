@@ -33,6 +33,8 @@ export function getMainWindowOptions(): BrowserWindowConstructorOptions {
   return {
     width: EWindowSize.width,
     height: EWindowSize.height,
+    minHeight:810,
+    minWidth:1180,
     titleBarStyle: 'hidden',
     resizable: true,
     icon: ICON_PATH,

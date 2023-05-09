@@ -70,6 +70,18 @@ export const OUTPUT_ENCODING_OPTIONS = [
   },
 ];
 
+
+export const BASE64_INPUT_CONTENT_TYPE_OPTIONS=[
+  {
+    label: '文本',
+    value: 'plaintext',
+  },
+  {
+    label: '图片',
+    value: 'image',
+  },
+]
+
 export const AES_BLOCK_OPTIONS = [
   {
     label: '128位',

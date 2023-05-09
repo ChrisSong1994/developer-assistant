@@ -2,6 +2,7 @@ import { MedicineBoxOutlined } from '@ant-design/icons';
 import { cx } from '@emotion/css';
 import { DiffEditor, Monaco } from '@monaco-editor/react';
 import _ from 'lodash';
+import { memo} from 'react'
 
 import { useUpdate } from '@/hooks';
 import { isEmpty } from '@/utils';
@@ -123,4 +124,4 @@ const BaseDiffEditor = (props: IDiffEditorProps) => {
   );
 };
 
-export default BaseDiffEditor;
+export default memo(BaseDiffEditor) ;

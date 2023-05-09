@@ -1,4 +1,4 @@
-const QrCode = (props: any) => {
+const QrCode = () => {
   return (
     <div>
       <h1>QrCode</h1>
