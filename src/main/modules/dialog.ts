@@ -2,6 +2,7 @@ import { dialog, OpenDialogOptions } from 'electron';
 import fs from 'fs-extra';
 import _ from 'lodash';
 
+import { getFileFromPath } from '../utils/file';
 import { getConfData } from './data';
 
 export const getFilePath = async (options: OpenDialogOptions = {}) => {
@@ -53,11 +54,11 @@ export const saveFileToLocal = async (options: OpenDialogOptions & { fileName: s
   }
 };
 
-export const getFileFromLocalPath = async (options: OpenDialogOptions = {}) => {
+export const getFileFromLocalPath = async (options: OpenDialogOptions & { encoding?: BufferEncoding } = {}) => {
   const filePath = await getSingleFilePath(options);
   if (filePath) {
-    const buff = await fs.readFile(filePath);
-    return buff.toString();
+    const res = await getFileFromPath({ filePath, encoding: options.encoding });
+    return res;
   }
   return null;
 };
