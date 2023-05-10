@@ -31,7 +31,6 @@ const JsonEditor = (props: IProps) => {
         tipShow={true}
         onImport={handleImport}
         onChange={onChange}
-        options={{ maxTokenizationLineLength: 5000, stopRenderingLineAfter: 5000 }} // 好像不生效？？
       />
       {errorShow ? (
         <div className={styles['error-panel']}>
