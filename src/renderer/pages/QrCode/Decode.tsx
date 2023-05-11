@@ -26,6 +26,8 @@ const Decode = () => {
         if (!err) setDecodeValue(res.result);
       };
       qr.decode(base64Url);
+    } else {
+      setDecodeValue('');
     }
   }, [base64Url]);
 
