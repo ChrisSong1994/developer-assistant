@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import { getFileFromPath } from '../utils/file';
 import { getConfData } from './data';
+import { convertBase64ToImageBuffer } from './image';
 
 export const getFilePath = async (options: OpenDialogOptions = {}) => {
   const { downloadPath } = await getConfData();
@@ -57,7 +58,9 @@ export const saveFileToLocal = async (options: OpenDialogOptions & { fileName: s
 /**
  * payload: base64 string
  */
-export const saveBase64ImageToLocal = async (options: OpenDialogOptions & { fileName: string; payload: string }) => {
+export const saveBase64ImageToLocal = async (
+  options: OpenDialogOptions & { fileName: string; payload: string; format: 'png' | 'jpg' | 'jpeg' | 'webp' },
+) => {
   const { downloadPath } = await getConfData();
   const result = await dialog.showSaveDialog(global.mainWindow, {
     ..._.omit(options, ['defaultPath', 'fileName']),
@@ -65,7 +68,11 @@ export const saveBase64ImageToLocal = async (options: OpenDialogOptions & { file
     properties: ['createDirectory', 'showOverwriteConfirmation'],
   });
   if (!result.canceled && result.filePath) {
-    const buffer = Buffer.from(options.payload, 'base64');
+    let buffer = Buffer.from(options.payload, 'base64');
+    // if (options.format === 'webp') {
+    //   buffer = await convertBase64ToImageBuffer({ payload: options.payload, format: options.format });
+    // }
+
     await fs.writeFile(result.filePath, buffer);
   }
 };

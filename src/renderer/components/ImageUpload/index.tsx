@@ -19,7 +19,7 @@ const ImageUpload = (props: IImageUploadProps) => {
 
   const handleUploadImage = async () => {
     const { fileValue, filePath } = await Events.getFileFromLocalPath({
-      filters: [{ name: '图片文件', extensions: ['*.png', '*.jpeg'] }],
+      filters: [{ name: '图片文件', extensions: ['*.png', '*.jpeg','*.jpg','*.webp'] }],
       encoding: 'base64',
     });
     if (fileValue) {

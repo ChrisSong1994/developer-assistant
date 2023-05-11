@@ -38,8 +38,9 @@ const Generate = () => {
     if (canvas) {
       const url = canvas.toDataURL();
       await Events.saveBase64ImageToLocal({
-        fileName: 'QRCode.png',
+        fileName: 'Untitled.png',
         payload: url.replace('data:image/png;base64,', ''),
+        format: 'png',
       });
     }
   };
