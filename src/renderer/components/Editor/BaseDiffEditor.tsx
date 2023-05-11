@@ -2,7 +2,7 @@ import { MedicineBoxOutlined } from '@ant-design/icons';
 import { cx } from '@emotion/css';
 import { DiffEditor, Monaco } from '@monaco-editor/react';
 import _ from 'lodash';
-import { memo} from 'react'
+import { memo } from 'react';
 
 import { useUpdate } from '@/hooks';
 import { isEmpty } from '@/utils';
@@ -52,7 +52,7 @@ const BaseDiffEditor = (props: IDiffEditorProps) => {
   }
 
   const handleOriginalImport = async () => {
-    const fileValue = await Events.getFileFromLocalPath();
+    const { fileValue } = await Events.getFileFromLocalPath();
     if (fileValue) {
       originalValueRef.current = fileValue;
       update();
@@ -60,7 +60,7 @@ const BaseDiffEditor = (props: IDiffEditorProps) => {
   };
 
   const handleModifiedImport = async () => {
-    const fileValue = await Events.getFileFromLocalPath();
+    const { fileValue } = await Events.getFileFromLocalPath();
     if (fileValue) {
       modifiedValueRef.current = fileValue;
       update();
@@ -124,4 +124,4 @@ const BaseDiffEditor = (props: IDiffEditorProps) => {
   );
 };
 
-export default memo(BaseDiffEditor) ;
+export default memo(BaseDiffEditor);

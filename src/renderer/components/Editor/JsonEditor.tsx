@@ -18,7 +18,9 @@ const JsonEditor = (props: IProps) => {
   const errorShow = useMemo(() => !isEmpty(error), [error]);
 
   const handleImport = async () => {
-    const fileValue = await Events.getFileFromLocalPath({ filters: [{ name: 'json文件', extensions: ['*.json'] }] });
+    const { fileValue } = await Events.getFileFromLocalPath({
+      filters: [{ name: 'json文件', extensions: ['*.json'] }],
+    });
     return fileValue;
   };
 

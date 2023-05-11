@@ -54,11 +54,27 @@ export const saveFileToLocal = async (options: OpenDialogOptions & { fileName: s
   }
 };
 
+/**
+ * payload: base64 string
+ */
+export const saveBase64ImageToLocal = async (options: OpenDialogOptions & { fileName: string; payload: string }) => {
+  const { downloadPath } = await getConfData();
+  const result = await dialog.showSaveDialog(global.mainWindow, {
+    ..._.omit(options, ['defaultPath', 'fileName']),
+    defaultPath: options.defaultPath || `${downloadPath}/${options.fileName}`,
+    properties: ['createDirectory', 'showOverwriteConfirmation'],
+  });
+  if (!result.canceled && result.filePath) {
+    const buffer = Buffer.from(options.payload, 'base64');
+    await fs.writeFile(result.filePath, buffer);
+  }
+};
+
 export const getFileFromLocalPath = async (options: OpenDialogOptions & { encoding?: BufferEncoding } = {}) => {
   const filePath = await getSingleFilePath(options);
   if (filePath) {
-    const res = await getFileFromPath({ filePath, encoding: options.encoding });
-    return res;
+    const fileValue = await getFileFromPath({ filePath, encoding: options.encoding });
+    return { fileValue, filePath };
   }
-  return null;
+  return { fileValue: null, filePath };
 };

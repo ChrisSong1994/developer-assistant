@@ -6,6 +6,7 @@ export {
   getFilePath,
   getSingleDirPath,
   getSingleFilePath,
+  saveBase64ImageToLocal,
   saveFileToLocal,
 } from './modules/dialog';
 export { windowClose, windowMaxmize, windowMinimize, windowRenderReady } from './modules/windows';

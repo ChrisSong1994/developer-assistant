@@ -87,3 +87,10 @@ export const urlConverToObject = (url: URL) => {
   }
   return result;
 };
+
+// 获取文件扩展名
+export const getFilePathExt = (filePath: string) => {
+  const splits = filePath.split('.');
+  const ext = splits.pop();
+  return ext;
+};

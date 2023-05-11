@@ -39,7 +39,8 @@ const BaseEditor = (props: IBaseEditorProps) => {
     if (onImport) {
       fileValue = await onImport();
     } else {
-      fileValue = await Events.getFileFromLocalPath();
+      const res = await Events.getFileFromLocalPath();
+      fileValue = res.fileValue;
     }
     if (fileValue) onChange(fileValue);
   };
