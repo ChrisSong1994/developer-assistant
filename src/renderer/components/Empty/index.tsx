@@ -1,20 +1,23 @@
 import { Empty as BaseEmpty } from 'antd';
-import { memo } from 'react';
+import React, { CSSProperties, memo } from 'react';
 import empty from '../../../assets/empty.svg';
 
 export interface IEmptyProps {
-  description: string;
+  description: React.ReactNode;
+  style: CSSProperties;
 }
 
 const Empty = (props: IEmptyProps) => {
-  const { description } = props;
+  const { description, style = {} } = props;
 
   return (
-    <BaseEmpty
-      image={empty}
-      imageStyle={{ height: 72 }}
-      description={<span style={{ color: '#dadce0' }}>{description}</span>}
-    />
+    <div style={{ ...style }}>
+      <BaseEmpty
+        image={empty}
+        imageStyle={{ height: 72 }}
+        description={<span style={{ color: '#dadce0' }}>{description}</span>}
+      />
+    </div>
   );
 };
 

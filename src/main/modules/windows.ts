@@ -1,12 +1,10 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
-import * as path from 'path';
+import path from 'path';
 import { EWindowSize } from '../../types/global';
-import { isInMac } from '../utils';
+import { isDevelopment, isInMac } from '../utils';
 import { getPublicFilePath, ICON_PATH } from '../utils/path';
 
 export let browserWindows: Array<BrowserWindow | null> = [];
-
-const isDevelopment = process.env.NODE_ENV === 'development';
 
 /**
  * launch window
@@ -33,8 +31,8 @@ export function getMainWindowOptions(): BrowserWindowConstructorOptions {
   return {
     width: EWindowSize.width,
     height: EWindowSize.height,
-    minHeight:810,
-    minWidth:1180,
+    minHeight: 810,
+    minWidth: 1180,
     titleBarStyle: 'hidden',
     resizable: true,
     icon: ICON_PATH,

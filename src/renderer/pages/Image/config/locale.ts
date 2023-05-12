@@ -1,7 +1,7 @@
 export default {
   Crop: '剪切',
   Resize: '缩放',
-  Filp: '翻转',
+  Flip: '翻转',
   Rotate: '转向',
   Draw: '绘画',
   Shape: '形状',

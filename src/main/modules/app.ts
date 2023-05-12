@@ -1,4 +1,4 @@
-import { app, shell } from 'electron';
+import { app } from 'electron';
 import fs from 'fs-extra';
 import { PACKAGE_PATH } from '../utils/path';
 
@@ -18,5 +18,3 @@ export const setOpenAtLogin = (openAtLogin: boolean) => {
 };
 
 export const quit = () => app.quit();
-
-export const openUrl = ({ url }: { url: string }) => shell.openExternal(url);

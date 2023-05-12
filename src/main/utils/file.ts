@@ -10,3 +10,4 @@ export const getFileFromPath = async ({
   const buff = await fs.readFile(filePath);
   return buff.toString(encoding);
 };
+

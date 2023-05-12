@@ -94,3 +94,15 @@ export const getFilePathExt = (filePath: string) => {
   const ext = splits.pop();
   return ext;
 };
+
+// 数组对象去重
+export const arrayObjDeWightByKey = (data: Array<Record<string, any>>, key: string) => {
+  if (!data.length) return data;
+  const map = new Map();
+  for (let item of data) {
+    if (!map.has(item[key])) {
+      map.set(item[key], item);
+    }
+  }
+  return Array.from(map.values());
+};
