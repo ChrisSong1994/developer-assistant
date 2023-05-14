@@ -31,6 +31,9 @@ export const DEFAULT_OPTIONS = {
   minimap: { enabled: false },
   folding: true, // 是否启用代码折叠
   wordWrap: 'on', // 默认自动换行
+  quickSuggestions: false,
+  renderValidationDecorations: "off",
+  codeLens: false,
   maxTokenizationLineLength: 5000,
   unicodeHighlight: {
     ambiguousCharacters: false, // 关闭字符串内特殊字符高亮，为了性能

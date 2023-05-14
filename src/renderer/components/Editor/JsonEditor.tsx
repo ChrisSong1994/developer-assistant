@@ -18,7 +18,9 @@ const JsonEditor = (props: IProps) => {
   const errorShow = useMemo(() => !isEmpty(error), [error]);
 
   const handleImport = async () => {
-    const fileValue = await Events.getFileFromLocalPath({ filters: [{ name: 'json文件', extensions: ['*.json'] }] });
+    const { fileValue } = await Events.getFileFromLocalPath({
+      filters: [{ name: 'json文件', extensions: ['*.json'] }],
+    });
     return fileValue;
   };
 
@@ -31,7 +33,6 @@ const JsonEditor = (props: IProps) => {
         tipShow={true}
         onImport={handleImport}
         onChange={onChange}
-        options={{ maxTokenizationLineLength: 5000, stopRenderingLineAfter: 5000 }} // 好像不生效？？
       />
       {errorShow ? (
         <div className={styles['error-panel']}>

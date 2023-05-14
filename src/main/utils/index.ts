@@ -3,6 +3,8 @@ import os from 'os';
 import * as path from 'path';
 import { URL } from 'url';
 
+export const isDevelopment = process.env.NODE_ENV === 'development';
+
 export const createProtocol = (scheme: string) => {
   protocol.registerFileProtocol(scheme, (request, respond) => {
     let pathName = new URL(request.url).pathname;

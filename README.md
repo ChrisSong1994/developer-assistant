@@ -6,23 +6,23 @@
 
 <p align="center">
  <img src="./screenshots/color.jpg" alt="color" width="840"  >
-<img src="./screenshots/json.jpg" alt="json" width="840" >
+ <img src="./screenshots/json.jpg" alt="json" width="840" >
 </p>
 
 ## 功能列表
 
 - [x] 颜色拾取和转换
-- [x] json 处理（需要增加颜色记录功能）
+- [x] json 处理
 - [x] 正则工具
 - [ ] 密钥生成
-  - [ ] 对称加解密
+  - [x] 对称加解密
   - [ ] 非对称加解密
   - [x] hash 加密
-- [x] 编码转换
-- [ ] 图片处理
-- [ ] 简单接口请求
+- [x] 编码转换:url、base64
 - [x] diff 文本
-- [ ] 文件压缩
+- [x] 图片压缩、编辑、转码
+- [x] 二维码生成、解码
+- [ ] 简单接口请求
 - [ ] 代码执行 vm
 
 ## setup

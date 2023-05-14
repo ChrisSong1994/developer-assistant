@@ -57,8 +57,8 @@ export const saveFileToLocal = async (options: OpenDialogOptions & { fileName: s
 export const getFileFromLocalPath = async (options: OpenDialogOptions & { encoding?: BufferEncoding } = {}) => {
   const filePath = await getSingleFilePath(options);
   if (filePath) {
-    const res = await getFileFromPath({ filePath, encoding: options.encoding });
-    return res;
+    const fileValue = await getFileFromPath({ filePath, encoding: options.encoding });
+    return { fileValue, filePath };
   }
-  return null;
+  return { fileValue: null, filePath };
 };

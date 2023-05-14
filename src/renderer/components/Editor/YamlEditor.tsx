@@ -19,7 +19,7 @@ const YamlEditor = (props: IProps) => {
   const errorShow = useMemo(() => !isEmpty(error), [error]);
 
   const handleImport = async () => {
-    const fileValue = await Events.getFileFromLocalPath({
+    const { fileValue } = await Events.getFileFromLocalPath({
       filters: [{ name: 'yaml文件', extensions: ['*.yaml', '*.yml'] }],
     });
     return fileValue;

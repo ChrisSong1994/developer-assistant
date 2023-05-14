@@ -62,7 +62,9 @@ const Base64CodingComponent = () => {
         ) : null}
       </div>
 
-      {contentType === EContentType.IMAGE ? <ImageUpload onChange={setEncodeValue} value={encodeValue} /> : null}
+      {contentType === EContentType.IMAGE ? (
+        <ImageUpload imageStyle={{ height: 300 }} style={{ marginBottom: 8 }} onChange={setEncodeValue} value={encodeValue} />
+      ) : null}
       {contentType === EContentType.PLAINTEXT ? (
         <TextArea
           spellCheck={false}
@@ -74,14 +76,18 @@ const Base64CodingComponent = () => {
       ) : null}
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
-        <Space style={{ margin: '12px 0' }}>
-          <Button type="primary" onClick={handleEncode}>
-            编码
-          </Button>
-          <Button type="primary" onClick={handleDecode}>
-            解码
-          </Button>
-        </Space>
+        {contentType === EContentType.PLAINTEXT ? (
+          <Space style={{ margin: '12px 0' }}>
+            <Button type="primary" onClick={handleEncode}>
+              编码
+            </Button>
+            <Button type="primary" onClick={handleDecode}>
+              解码
+            </Button>
+          </Space>
+        ) : (
+          <span />
+        )}
         <ActionsBarWrap palcement="right">
           <Copy value={encodeValue} size={18} />
           <Tooltip placement="bottom" title="保存">

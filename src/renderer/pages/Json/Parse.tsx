@@ -11,13 +11,13 @@ import { Tooltip } from 'antd';
 import jsonlint from 'jsonlint-mod';
 import { useEffect, useMemo, useState } from 'react';
 
-import Events from '@/utils/events';
 import ActionsBarWrap from '@/components/ActionsBarWrap';
 import Copy from '@/components/Copy';
 import { JsonEditor } from '@/components/Editor';
 import Icon from '@/components/Icon';
 import { useWindowSize } from '@/hooks';
 import { isEmpty } from '@/utils';
+import Events from '@/utils/events';
 import { EDITOR_HEIGHT_PADDING } from './index';
 import styles from './index.less';
 
@@ -53,7 +53,9 @@ const JsonParseComponent = (props: any) => {
 
   // 导入文件
   const handleImport = async () => {
-    const fileValue = await Events.getFileFromLocalPath({ filters: [{ name: 'json文件', extensions: ['*.json'] }] });
+    const { fileValue } = await Events.getFileFromLocalPath({
+      filters: [{ name: 'json文件', extensions: ['*.json'] }],
+    });
     if (fileValue) setValue(fileValue);
   };
 

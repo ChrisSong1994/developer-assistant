@@ -37,7 +37,7 @@ const ConfigMenu = (props: IConfigMenuProps) => {
         </div>
       ),
       key: 'feedback',
-      icon: <Icon type="icon-feedback" />,
+      icon: <Icon type="icon-fankui" />,
     },
     {
       type: 'divider',

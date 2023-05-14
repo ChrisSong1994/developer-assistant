@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "include": [".", "../types"],
+  "exclude": ["./lib"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
