@@ -31,7 +31,7 @@ const QRCode: React.FC<IQRCodeProps> = (props) => {
   const {
     value,
     icon = '',
-    size = 160,
+    size = 200,
     iconSize = 40,
     color = '#000',
     bgColor = '#fff',

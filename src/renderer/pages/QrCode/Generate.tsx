@@ -11,14 +11,14 @@ import styles from './index.less';
 const TextArea = Input.TextArea;
 const FormItem = Form.Item;
 
-const SIZE_LIMIT = { low: 80, high: 360 };
+const SIZE_LIMIT = { low: 180, high: 420 };
 const ERROR_LEVEL = ['L', 'M', 'Q', 'H'];
 
 type TImageFormat = 'png' | 'jpg' | 'jpeg' | 'webp';
 
 const Generate = () => {
   const [value, setValue] = useState<string>('');
-  const [size, setSize] = useState<number>(200);
+  const [size, setSize] = useState<number>(320);
   const [errorLevel, setErrorLevel] = useState<IQRCodeProps['errorLevel']>('M');
   const [color, setColor] = useState<string>('#000000');
   const [bgColor, setBgColor] = useState<string>('#ffffff');
