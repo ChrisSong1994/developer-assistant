@@ -1,5 +1,5 @@
-import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Form, Input, InputNumber, Segmented } from 'antd';
+import { DownloadOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Dropdown, Form, Input, InputNumber, Segmented } from 'antd';
 import { useState } from 'react';
 
 import ColorPicker from '@/components/ColorPicker';
@@ -13,6 +13,8 @@ const FormItem = Form.Item;
 
 const SIZE_LIMIT = { low: 80, high: 360 };
 const ERROR_LEVEL = ['L', 'M', 'Q', 'H'];
+
+type TImageFormat = 'png' | 'jpg' | 'jpeg' | 'webp';
 
 const Generate = () => {
   const [value, setValue] = useState<string>('');
@@ -33,14 +35,14 @@ const Generate = () => {
     setValue(e.target.value);
   };
 
-  const downloadQRCode = async () => {
+  const handleDownloadQRCode = async (format: TImageFormat) => {
     const canvas = document.getElementById('qrcode')?.querySelector<HTMLCanvasElement>('canvas');
     if (canvas) {
-      const url = canvas.toDataURL();
+      const url = canvas.toDataURL(`image/${format}`, 1);
       await Events.saveBase64ImageToLocal({
-        fileName: 'Untitled.png',
-        payload: url.replace('data:image/png;base64,', ''),
-        format: 'png',
+        fileName: `QRCode.${format}`,
+        payload: url.replace(`data:image/${format};base64,`, ''),
+        format,
       });
     }
   };
@@ -115,9 +117,35 @@ const Generate = () => {
               sm: { span: 16, offset: 8 },
             }}
           >
-            <Button type="primary" onClick={downloadQRCode}>
-              保存图片
-            </Button>
+            <Dropdown
+              trigger={['click']}
+              menu={{
+                items: [
+                  {
+                    label: 'png',
+                    key: 'png',
+                  },
+                  {
+                    label: 'jpg',
+                    key: 'jpg',
+                  },
+                  {
+                    label: 'jpeg',
+                    key: 'jpeg',
+                  },
+                  {
+                    label: 'webp',
+                    key: 'webp',
+                  },
+                ],
+                // @ts-ignore
+                onClick: ({ key }) => handleDownloadQRCode(key as TImageFormat),
+              }}
+            >
+              <Button type="primary" icon={<DownloadOutlined />}>
+                下载图片
+              </Button>
+            </Dropdown>
           </Form.Item>
         </Form>
       </div>
