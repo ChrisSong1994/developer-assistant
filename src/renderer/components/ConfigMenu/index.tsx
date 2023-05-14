@@ -3,6 +3,7 @@ import React, { Fragment, useState } from 'react';
 
 import Icon from '@/components/Icon';
 import Events from '@/utils/events';
+import About from './About';
 import Setting from './Setting';
 
 interface IConfigMenuProps {
@@ -16,12 +17,13 @@ const menuStyle = {
 const ConfigMenu = (props: IConfigMenuProps) => {
   const { children } = props;
   const [settingOpen, setSettingOpen] = useState<boolean>(false);
+  const [aboutOpen, setAboutOpen] = useState<boolean>(false);
 
   const handleCheckUpdate = () => {};
 
   const menuItems: MenuProps['items'] = [
     {
-      label: <div>关于</div>,
+      label: <div onClick={() => setAboutOpen(true)}>关于</div>,
       key: 'about',
       icon: <Icon type="icon-guanyu" />,
     },
@@ -59,10 +61,11 @@ const ConfigMenu = (props: IConfigMenuProps) => {
 
   return (
     <Fragment>
-      <Dropdown trigger={['click']} placement="bottom" menu={{ items: menuItems, style: menuStyle }}  >
+      <Dropdown trigger={['click']} placement="bottom" menu={{ items: menuItems, style: menuStyle }}>
         {children}
       </Dropdown>
       <Setting open={settingOpen} onClose={() => setSettingOpen(false)} />
+      <About open={aboutOpen} onClose={() => setAboutOpen(false)} />
     </Fragment>
   );
 };
