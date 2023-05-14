@@ -106,3 +106,11 @@ export const arrayObjDeWightByKey = (data: Array<Record<string, any>>, key: stri
   }
   return Array.from(map.values());
 };
+
+// 文件大小单位
+export function formatFileSize(size: number) {
+  const units = new Array('Bytes', 'KB', 'MB', 'GB');
+  const unit = Math.floor(Math.log(size) / Math.log(1000));
+  const output = `${(size / Math.pow(1000, unit)).toFixed(2)} ${units[unit]}`;
+  return output;
+}

@@ -5,6 +5,7 @@ import { Low } from 'lowdb';
 import { JSONFile } from 'lowdb/node';
 import os from 'os';
 import path from 'path';
+import { IImageCompressInfo } from './image';
 
 interface IColorItem {
   value: string;
@@ -12,25 +13,20 @@ interface IColorItem {
   key: string;
 }
 
-type TColor = Array<IColorItem>;
-
 interface ILocalData {
-  color: TColor;
+  color: Array<IColorItem>;
+  images_compress: Array<IImageCompressInfo>;
 }
 
 const DEFAULT_LOCAL_DATA: ILocalData = {
   color: [
     {
-      value: '#C816CD',
-      title: '橄榄色',
-      key: '#C816CD',
-    },
-    {
       value: '#1D2E54',
-      title: '橄榄色',
+      title: '主题色',
       key: '#1D2E54',
     },
   ],
+  images_compress: [],
 };
 
 interface IConfigData {
@@ -89,8 +85,9 @@ async function setLocalData(data: Record<string, any>) {
   await localDB.write();
 }
 
-async function clearLocalData() {
-  localDB.data = DEFAULT_LOCAL_DATA;
+async function clearLocalData(key?:string) {
+
+  localDB.data =  DEFAULT_LOCAL_DATA;
   await localDB.write();
 }
 

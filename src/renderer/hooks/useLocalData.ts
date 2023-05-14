@@ -1,4 +1,5 @@
 import Events from '@/utils/events';
+import _ from 'lodash';
 import { useEffect, useState } from 'react';
 
 export default function () {
@@ -7,6 +8,12 @@ export default function () {
 
   const updateData = async (value: Record<string, any>) => {
     const newData = { ...data, ...value };
+    setData(newData);
+    await Events.setLocalData(newData);
+  };
+
+  const removeDataByKey = async (keys: string[] = []) => {
+    const newData = _.omit({ ...data }, keys);
     setData(newData);
     await Events.setLocalData(newData);
   };

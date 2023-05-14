@@ -4,7 +4,7 @@ import empty from '../../../assets/empty.svg';
 
 export interface IEmptyProps {
   description: React.ReactNode;
-  style: CSSProperties;
+  style?: CSSProperties;
 }
 
 const Empty = (props: IEmptyProps) => {

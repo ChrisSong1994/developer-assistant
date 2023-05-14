@@ -7,7 +7,7 @@ import QrCode from '@/pages/QrCode';
 import Regexp from '@/pages/Regexp';
 import Transcoding from '@/pages/Transcoding';
 import UrlParse from '@/pages/UrlParse';
-import Transform from '@/pages/Transform';
+// import Transform from '@/pages/Transform';
 
 const routes = [
   {
@@ -28,12 +28,12 @@ const routes = [
     icon: 'icon-tupian_huaban',
     component: Image,
   },
-  {
-    key: 'Transform',
-    title: '转换',
-    icon: 'icon-zhuanhuan',
-    component: Transform,
-  },
+  // {
+  //   key: 'Transform',
+  //   title: '转换',
+  //   icon: 'icon-zhuanhuan',
+  //   component: Transform,
+  // },
   {
     key: 'UrlParse',
     title: 'URL解析',

@@ -1,21 +1,23 @@
-import { FileAddOutlined, FolderAddOutlined } from '@ant-design/icons';
+import { ClearOutlined, CompressOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, ConfigProvider, Segmented, Space, Table } from 'antd';
 import { useMemo, useState } from 'react';
 
 import Empty from '@/components/Empty';
 import Icon from '@/components/Icon';
-import { useWindowSize } from '@/hooks';
-import { arrayObjDeWightByKey } from '@/utils';
+import { useLocalData, useWindowSize } from '@/hooks';
+import { arrayObjDeWightByKey, formatFileSize } from '@/utils';
 import Events from '@/utils/events';
 import { IImageCompressInfo } from '../../../main/modules/image';
 
 import styles from './index.less';
 
 const IMAGES_DATA_KEY = 'originalFilePath';
-const TABLE_HEIGHT_PADDING = 230;
+const IMAGES_COMPRESS_KEY = 'images_compress';
+const TABLE_HEIGHT_PADDING = 220;
 
 const Compress = () => {
-  const [images, setImages] = useState<Array<IImageCompressInfo>>([]);
+  const { data: localData, setData: setLocalData } = useLocalData();
+  const images = localData[IMAGES_COMPRESS_KEY] || [];
   const [compressLoading, setCompressLoading] = useState<boolean>(false);
   const [quality, setQuality] = useState<number>(80);
   const { height } = useWindowSize();
@@ -27,7 +29,7 @@ const Compress = () => {
     });
     if (result) {
       const newImages = arrayObjDeWightByKey([...images, ...result], IMAGES_DATA_KEY); // 基于 originalFilePath 去重
-      setImages(newImages);
+      setLocalData({ [IMAGES_COMPRESS_KEY]: newImages });
     }
   };
 
@@ -38,7 +40,7 @@ const Compress = () => {
       quality: quality,
     });
     // @ts-ignore
-    if (result) setImages(result);
+    if (result) setLocalData({ [IMAGES_COMPRESS_KEY]: result });
     setCompressLoading(false);
   };
 
@@ -47,12 +49,14 @@ const Compress = () => {
   };
 
   const handleClearImage = (originalFilePath: string) => {
-    setImages(images.filter((v: IImageCompressInfo) => v.originalFilePath !== originalFilePath));
+    setLocalData({
+      [IMAGES_COMPRESS_KEY]: images.filter((v: IImageCompressInfo) => v.originalFilePath !== originalFilePath),
+    });
   };
 
   // 清理列表
   const handleClear = () => {
-    setImages([]);
+    setLocalData({ [IMAGES_COMPRESS_KEY]: [] });
   };
 
   const columns = [
@@ -66,14 +70,17 @@ const Compress = () => {
       dataIndex: 'originalFileSize',
       key: 'originalFileSize',
       width: '12%',
+      render: (value: number) => {
+        return <div>{formatFileSize(value)}</div>;
+      },
     },
     {
       title: '压缩后大小',
       dataIndex: 'compreeedFileSize',
       key: 'compreeedFileSize',
       width: '12%',
-      render: (value: string) => {
-        return <div>{value || '_'}</div>;
+      render: (value: number) => {
+        return <div>{value ? formatFileSize(value) : '_'}</div>;
       },
     },
     {
@@ -81,8 +88,8 @@ const Compress = () => {
       dataIndex: 'compressedRatio',
       key: 'compressedRatio',
       width: '12%',
-      render: (value: string) => {
-        return <div>{value || '_'}</div>;
+      render: (value: number) => {
+        return <div>{value ? `${value}%` : '_'}</div>;
       },
     },
     {
@@ -115,19 +122,19 @@ const Compress = () => {
   return (
     <div className={styles['image-compress']}>
       <Space style={{ paddingBottom: 12 }}>
-        <Button icon={<FileAddOutlined />} onClick={handleUploadImages}>
+        <Button icon={<UploadOutlined />} onClick={handleUploadImages}>
           上传图片
         </Button>
       </Space>
-      {/* Empty 设置高度为了撑开表格  */}
+      {/* Empty 高度为了撑开表格  */}
       <ConfigProvider
-        renderEmpty={() => <Empty style={{ height: tableHeight - 90, paddingTop: 30 }} description="暂无数据" />}
+        renderEmpty={() => <Empty style={{ height: tableHeight - 90, paddingTop: 100 }} description="暂无数据" />}
       >
         <Table
           style={{ height: tableHeight }}
           rowKey={IMAGES_DATA_KEY}
           pagination={false}
-          scroll={{ y: tableHeight }}
+          scroll={{ y: tableHeight - 60 }}
           columns={columns}
           dataSource={images}
         />
@@ -149,10 +156,10 @@ const Compress = () => {
         </Space>
 
         <Space>
-          <Button size="large" type="primary" icon={<FileAddOutlined />} onClick={handleCompress}>
+          <Button size="large" type="primary" icon={<CompressOutlined />} onClick={handleCompress}>
             开始压缩
           </Button>
-          <Button size="large" icon={<FolderAddOutlined />} onClick={handleClear}>
+          <Button size="large" icon={<ClearOutlined />} onClick={handleClear}>
             清理列表
           </Button>
         </Space>

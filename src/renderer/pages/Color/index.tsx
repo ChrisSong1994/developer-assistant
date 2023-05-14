@@ -27,7 +27,7 @@ const Color = () => {
   const handleRecord = () => {
     setLocalData({
       color: [
-        ...localData.color,
+        ...localData.color||[],
         {
           value: data.hex,
           title: data.hex,
