@@ -55,14 +55,6 @@ export function generateDateUUID() {
   return uuid;
 }
 
-// 正则匹配
-export const regMatch = (reg: RegExp, str: string) => {
-  const result = reg.exec(str);
-  return {
-    matcheds: result ? str.match(reg) : null,
-    index: result?.index,
-  };
-};
 
 // 转换 url 实例为对象
 export const urlConverToObject = (url: URL) => {
