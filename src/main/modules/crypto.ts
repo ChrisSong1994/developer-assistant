@@ -1,4 +1,6 @@
-import crypto, { BinaryToTextEncoding } from 'node:crypto';
+import crypto, { BinaryToTextEncoding } from 'crypto';
+import CryptoJS from 'crypto-js';
+import { TAlgorithm } from '../../common/contants/crypto';
 
 export enum EHash {
   MD5 = 'MD5',
@@ -29,16 +31,33 @@ export function createHash({ hash, content, key = '', digest = 'hex' }: IHashOpt
   return crypto.createHash(hash).update(content).digest(digest);
 }
 
-interface ICipherOptions {
-  algorithm: string;
-  block: number;
+export interface ICipherOptions {
+  algorithm: TAlgorithm;
+  content: string;
+  mode: typeof CryptoJS.mode;
   key: string;
   iv: string;
-  content: string;
-  outputEncoding: string;
+  format: string;
+}
+
+export function encrypt(options: ICipherOptions) {
+  const { algorithm } = options;
+  if (algorithm.startsWith('AES')) {
+    return encryptAES(options);
+  }
+  return '';
 }
 
 /**
  *  对称加密
  * */
-export function encryptAES({ algorithm, key, iv, content, outputEncoding }: ICipherOptions) {}
+export function encryptAES({ key, iv, content, format }: ICipherOptions) {
+  var ciphertext = CryptoJS.AES.encrypt(content, CryptoJS.enc.Utf8.parse(key), {
+    iv: CryptoJS.enc.Utf8.parse(iv),
+    mode: CryptoJS.mode.CBC,
+    padding: CryptoJS.pad.Pkcs7,
+    format: CryptoJS.format.Hex,
+  });
+
+  return ciphertext.toString();
+}

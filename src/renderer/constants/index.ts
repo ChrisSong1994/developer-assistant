@@ -38,40 +38,8 @@ export const HASH_ARITHMETIC_OPTIONS = [
   },
 ];
 
-// 对称加密算法
-export const SYMMETRIC_ENCRYPTION_ARITHMETRIC_OPTIONS = [
-  {
-    label: 'AES',
-    value: 'AES',
-  },
-  {
-    label: 'DES',
-    value: 'DES',
-  },
-  {
-    label: '3DES',
-    value: '3DES',
-  },
-  {
-    label: 'RC4',
-    value: 'RC4',
-  },
-];
 
-// 输出编码格式
-export const OUTPUT_ENCODING_OPTIONS = [
-  {
-    label: 'base64',
-    value: 'base64',
-  },
-  {
-    label: 'hex',
-    value: 'hex',
-  },
-];
-
-
-export const BASE64_INPUT_CONTENT_TYPE_OPTIONS=[
+export const BASE64_INPUT_CONTENT_TYPE_OPTIONS = [
   {
     label: '文本',
     value: 'plaintext',
@@ -79,21 +47,6 @@ export const BASE64_INPUT_CONTENT_TYPE_OPTIONS=[
   {
     label: '图片',
     value: 'image',
-  },
-]
-
-export const AES_BLOCK_OPTIONS = [
-  {
-    label: '128位',
-    value: 128,
-  },
-  {
-    label: '192位',
-    value: 192,
-  },
-  {
-    label: '256位',
-    value: 256,
   },
 ];
 
@@ -143,7 +96,7 @@ export const EDITOR_LANGUAGE_OPTIONS: Array<{ value: EEditorLanguage; label: str
 }));
 
 // 正则语法提示
-export const REGEXP_SYNTAX_COMMENTS_OPTIONS=[
+export const REGEXP_SYNTAX_COMMENTS_OPTIONS = [
   {
     key: 0,
     label: '. - 除换行符以外的所有字符。',
@@ -217,3 +170,4 @@ export const REGEXP_SYNTAX_COMMENTS_OPTIONS=[
     label: ' (?!expr) - 负向预查模式 expr。',
   },
 ];
+

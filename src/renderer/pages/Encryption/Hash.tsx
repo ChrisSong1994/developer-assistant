@@ -11,16 +11,15 @@ const FormItem = Form.Item;
 const Hash = () => {
   const [form] = Form.useForm();
   const [decipherValue, setDecipherValue] = useState<string>('');
-
   const [encipherValue, setEncipherValue] = useState<string>('');
 
   const handleEncrypt = async (values: IHashOptions) => {
     const res = await Events.createHash({
       hash: values.hash,
-      content: decipherValue,
+      content: encipherValue,
       key: values.key,
     });
-    setEncipherValue(res);
+    setDecipherValue(res);
   };
 
   return (
@@ -28,8 +27,8 @@ const Hash = () => {
       <TextArea
         rows={12}
         placeholder="请输入需待加密内容"
-        value={decipherValue}
-        onChange={(e) => setDecipherValue(e.target.value)}
+        value={encipherValue}
+        onChange={(e) => setEncipherValue(e.target.value)}
       />
       <div
         style={{
@@ -68,7 +67,7 @@ const Hash = () => {
           </FormItem>
         </Form>
       </div>
-      <TextArea spellCheck={false} rows={12} placeholder="请输入待解密内容" value={encipherValue} />
+      <TextArea spellCheck={false} rows={12} placeholder="请输入待解密内容" value={decipherValue} />
     </div>
   );
 };

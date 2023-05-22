@@ -1,5 +1,5 @@
 export { getAppVersion, getOpenAtLogin, quit, setOpenAtLogin } from './modules/app';
-export { createHash } from './modules/crypto';
+export { createHash, encrypt } from './modules/crypto';
 export { clearLocalData, getConfData, getLocalData, setConfData, setLocalData } from './modules/data';
 export {
   getFileFromLocalPath,
