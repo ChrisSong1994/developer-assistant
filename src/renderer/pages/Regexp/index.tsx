@@ -7,7 +7,6 @@ import {
 } from '@ant-design/icons';
 import { Button, Checkbox, Divider, Dropdown, Input, Menu, Popover, Space, Tooltip } from 'antd';
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
-import _ from 'lodash';
 import { useEffect, useMemo, useState } from 'react';
 
 import { REGEXP_SYNTAX_COMMENTS_OPTIONS } from '@/constants';
@@ -45,7 +44,7 @@ const Regexp = () => {
             content={
               <div className={styles['regexp-matched']}>
                 <div className={styles['match-value']}>
-                  {`Matched ${matched.key} [${index},${next}] : ${matched.value} `}
+                  {`Matched $${matched.key} [${index},${next}] : ${matched.value} `}
                 </div>
                 {matched.groups &&
                   matched.groups.map((group: any) => {
@@ -59,7 +58,7 @@ const Regexp = () => {
         );
         preEnd = next;
       }
-      replacedStack.push(_.escape(result.slice(preEnd)));
+      replacedStack.push(result.slice(preEnd));
       return replacedStack;
     } else {
       return result;
@@ -96,7 +95,10 @@ const Regexp = () => {
           style={{ width: 'calc( 100% - 380px )' }}
           size="large"
           value={regexp}
-          onChange={(e) => setRegexp(e.target.value)}
+          onChange={(e) => {
+            console.log(e.target.value);
+            setRegexp(e.target.value);
+          }}
           addonBefore={
             <span style={{ fontSize: 18, padding: '0 6px', display: 'flex', alignItems: 'center' }}>
               {error ? (

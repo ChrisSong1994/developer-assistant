@@ -55,7 +55,9 @@ const regMatch = (reg: RegExp, str: string) => {
   }
 
   const result = matcheds.filter(Boolean).map((item: any, index: number) => {
-    const matchedGroupsValues: Array<string> = Array.from(item as RegExpMatchArray).slice(1);
+    const matchedGroupsValues: Array<string> = Array.from(item as RegExpMatchArray)
+      .slice(1)
+      .filter((v) => v !== undefined);
     const matched: IRegMatchedData = {
       index: item.index,
       length: item[0].length,
