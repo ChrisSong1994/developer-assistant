@@ -10,49 +10,68 @@ export const OUTPUT_ENCODING_OPTIONS = [
   },
 ];
 
-export const ENCRYPTION_ALGORITHM_OPTIONS_MAP = {
-  'AES-128-CBC': { requireIv: true, requirePadding: true, keySize: 16 },
-  'AES-128-ECB': { requireIv: false, requirePadding: true, keySize: 16 },
-  'AES-128-CFB': { requireIv: true, requirePadding: true, keySize: 16 },
-  'AES-128-CTR': { requireIv: true, requirePadding: true, keySize: 16 },
-  'AES-128-OFB': { requireIv: true, requirePadding: true, keySize: 16 },
-  'AES-192-CBC': { requireIv: true, requirePadding: true, keySize: 24 },
-  'AES-192-ECB': { requireIv: false, requirePadding: true, keySize: 24 },
-  'AES-192-CFB': { requireIv: true, requirePadding: true, keySize: 24 },
-  'AES-192-CTR': { requireIv: true, requirePadding: true, keySize: 24 },
-  'AES-192-OFB': { requireIv: true, requirePadding: true, keySize: 24 },
-  'AES-256-CBC': { requireIv: true, requirePadding: true, keySize: 32 },
-  'AES-256-ECB': { requireIv: false, requirePadding: true, keySize: 32 },
-  'AES-256-CFB': { requireIv: true, requirePadding: true, keySize: 32 },
-  'AES-256-CTR': { requireIv: true, requirePadding: true, keySize: 32 },
-  'AES-256-OFB': { requireIv: true, requirePadding: true, keySize: 32 },
-};
+export const ENCRYPTION_ALGORITHM_OPTIONS = [
+  {
+    value: 'AES',
+    label: 'AES',
+  },
+  {
+    value: 'DES',
+    label: 'DES',
+  },
+  {
+    value: '3DES',
+    label: '3DES',
+  },
+  {
+    value: 'RC4',
+    label: 'RC4',
+  },
+];
 
-export const ENCRYPTION_ALGORITHM_OPTIONS = Object.keys(ENCRYPTION_ALGORITHM_OPTIONS_MAP).map((key) => ({
-  value: key,
-  label: key,
-}));
+export const ENCRYPTION_MODE_OPTIONS = [
+  {
+    value: 'CBC',
+    label: 'CBC',
+  },
+  {
+    value: 'ECB',
+    label: 'ECB',
+  },
+  {
+    value: 'CFB',
+    label: 'CFB',
+  },
+  {
+    value: 'CTR',
+    label: 'CTR',
+  },
+  {
+    value: 'OFB',
+    label: 'OFB',
+  },
+];
 
 export const ENCRYPTION_PADDING_OPTIONS = [
   {
-    label: 'Pkcs7',
+    label: 'ZeroPadding',
+    value: 'ZeroPadding',
+  },
+  {
+    label: 'Pkcs7Padding',
     value: 'Pkcs7',
   },
   {
-    label: 'AnsiX923',
+    label: 'AnsiX923Padding',
     value: 'AnsiX923',
   },
   {
-    label: 'Iso10126',
+    label: 'Iso10126Padding',
     value: 'Iso10126',
   },
   {
-    label: 'Iso97971',
+    label: 'Iso97971Padding',
     value: 'Iso97971',
-  },
-  {
-    label: 'ZeroPadding',
-    value: 'ZeroPadding',
   },
   {
     label: 'NoPadding',
@@ -60,4 +79,4 @@ export const ENCRYPTION_PADDING_OPTIONS = [
   },
 ];
 
-export type TAlgorithm = keyof typeof ENCRYPTION_ALGORITHM_OPTIONS_MAP;
+export type TAlgorithm = 'AES' | 'DES' | '3DES' | 'RC4';
