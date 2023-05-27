@@ -34,12 +34,7 @@ const routes = [
   //   icon: 'icon-zhuanhuan',
   //   component: Transform,
   // },
-  {
-    key: 'UrlParse',
-    title: 'URL解析',
-    icon: 'icon-url',
-    component: UrlParse,
-  },
+
   {
     key: 'Diff',
     title: 'Diff',
@@ -69,6 +64,12 @@ const routes = [
     title: '加解密',
     icon: 'icon-31mima',
     component: Encryption,
+  },
+  {
+    key: 'UrlParse',
+    title: 'URL解析',
+    icon: 'icon-url',
+    component: UrlParse,
   },
 ];
 

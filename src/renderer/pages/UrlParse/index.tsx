@@ -21,7 +21,6 @@ const UrlParse = () => {
         setIsFail(false);
       } catch (err) {
         setIsFail(true);
-        console.log('url 解析失败！', err);
       }
     } else {
       setUrlInstance(null);

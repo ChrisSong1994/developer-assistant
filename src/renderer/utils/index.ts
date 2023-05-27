@@ -5,7 +5,7 @@ import moment from 'moment';
 /**
  * promise 结果转数组
  */
-export function to(promise: Promise<any[]>) {
+export function to(promise: Promise<any[]>): Promise<[any, any]> {
   return new Promise((resolve) => {
     promise.then(
       (res) => resolve([res, null]),
@@ -54,15 +54,6 @@ export function generateDateUUID() {
   const uuid = moment().format('YYYYMMDDHHmmss');
   return uuid;
 }
-
-// 正则匹配
-export const regMatch = (reg: RegExp, str: string) => {
-  const result = reg.exec(str);
-  return {
-    matcheds: result ? str.match(reg) : null,
-    index: result?.index,
-  };
-};
 
 // 转换 url 实例为对象
 export const urlConverToObject = (url: URL) => {

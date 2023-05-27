@@ -76,7 +76,6 @@ const JsonParseComponent = (props: any) => {
 
   useEffect(() => {
     handleJsonParse(value);
-    console.log(1);
   }, [value]);
 
   return (

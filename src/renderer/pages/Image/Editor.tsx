@@ -80,6 +80,7 @@ const Editor = () => {
                   label: 'jpg',
                   key: 'jpg',
                 },
+
                 {
                   label: 'jpeg',
                   key: 'jpeg',
