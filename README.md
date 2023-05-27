@@ -1,12 +1,17 @@
-# developer-assistant
+<p align="center">
+  <a href="./assets/icon.png">
+    <img width="100" src="assets/icon.png">
+  </a>
+</p>
+<h1 align="center">Developer Assistant</h1>
 
-开发者助手是一个开发工具集客户端，包含了常用的 json 解析处理、颜色拾取转换、编码、文本 diff 等操作
+开发者助手是一个开发工具集客户端，包含了常用的 json 解析处理、颜色拾取转换、编码、文本 diff 等操作。
 
 ## 截图
 
 <p align="center">
- <img src="./screenshots/color.jpg" alt="color" width="840"  >
- <img src="./screenshots/json.jpg" alt="json" width="840" >
+ <img src="screenshots/color.jpeg" alt="color" width="740"  >
+ <img src="screenshots/QRcode.jpeg" alt="QRcode" width="740" >
 </p>
 
 ## 功能列表
@@ -22,26 +27,3 @@
 - [x] diff 文本
 - [x] 图片压缩、编辑、转码
 - [x] 二维码生成、解码
-- [ ] 简单接口请求
-- [ ] 代码执行 vm
-
-## setup
-
-### install
-
-```sh
-cd developer-assistant
-yarn
-```
-
-### start
-
-```sh
-yarn run dev
-```
-
-### build
-
-```sh
-yarn run electron:build:mac  # for mac
-```
