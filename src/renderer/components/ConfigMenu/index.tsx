@@ -1,5 +1,6 @@
-import { Dropdown, MenuProps } from 'antd';
+import { Dropdown, MenuProps, Modal } from 'antd';
 import React, { Fragment, useState } from 'react';
+import semver from 'semver';
 
 import Icon from '@/components/Icon';
 import Events from '@/utils/events';
@@ -13,13 +14,27 @@ interface IConfigMenuProps {
 const menuStyle = {
   width: 200,
 };
+const remotePackageUrl = 'https://raw.githubusercontent.com/ChrisSong1994/developer-assistant/main/package.json';
 
 const ConfigMenu = (props: IConfigMenuProps) => {
   const { children } = props;
   const [settingOpen, setSettingOpen] = useState<boolean>(false);
   const [aboutOpen, setAboutOpen] = useState<boolean>(false);
 
-  const handleCheckUpdate = () => {};
+  const handleCheckUpdate = async () => {
+    const localVersion = await Events.getAppVersion();
+    const remotePackage = await fetch(remotePackageUrl).then((res) => res.json());
+    if (semver.gt(remotePackage.version, localVersion)) {
+      Modal.info({
+        maskClosable:true,
+        title: '有新版本发布，是否更新？',
+        okText: '去下载',
+        onOk() {
+          Events.openUrl({ url: 'https://github.com/ChrisSong1994/developer-assistant/releases' });
+        },
+      });
+    }
+  };
 
   const menuItems: MenuProps['items'] = [
     {

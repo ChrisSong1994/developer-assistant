@@ -1,6 +1,6 @@
 {
   "name": "developer-assistant",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "description": "前端开发助手",
   "author": "ChrisSong",
@@ -44,6 +44,7 @@
     "react-color": "^2.19.3",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.1.0",
+    "semver": "^7.5.4",
     "tui-image-editor": "^3.15.3",
     "umi": "^4.0.55",
     "yaml": "^2.2.2"
