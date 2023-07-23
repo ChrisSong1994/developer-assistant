@@ -26,7 +26,7 @@ const ConfigMenu = (props: IConfigMenuProps) => {
 
   const handleCheckUpdate = async () => {
     const localVersion = await Events.getAppVersion();
-    const remotePackage = await fetch(remotePackageUrl).then((res) => res.json());
+    const remotePackage = await fetch(remotePackageUrl, { method: 'get', cache: 'no-cache' }).then((res) => res.json());
     let closeCheckUpdate = false;
     if (semver.gt(remotePackage.version, localVersion)) {
       Modal.confirm({
