@@ -25,6 +25,7 @@ const parseRegMatchedGroups = (
   const calculateGroupValues: Array<IRegMatchedGroupData> = [];
 
   for (const [index, value] of matchedGroupsValues.entries()) {
+    if (value === undefined) continue;
     let groupIndex = matchedValue.indexOf(value);
 
     const calculateGroupValue = _.findLast(calculateGroupValues, (v) => v.value === value);

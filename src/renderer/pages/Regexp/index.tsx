@@ -30,13 +30,14 @@ const Regexp = () => {
 
   const matchedsContents = useMemo(() => {
     let result = content;
+    let preEnd = 0;
     const replacedStack = [];
     // 需要 html转义 以及 分段替换
     if (matcheds && matcheds.length) {
       for (const matched of matcheds) {
         const index = matched.index;
         const next = index + matched.length;
-        replacedStack.push(result.slice(0, index));
+        replacedStack.push(result.slice(preEnd, index));
         replacedStack.push(
           <Popover
             placement="top"
@@ -44,12 +45,11 @@ const Regexp = () => {
             content={
               <div className={styles['regexp-matched']}>
                 <div className={styles['match-value']}>
-                  {' '}
-                  {`Matched $${matched.key} [${index},${next}] : ${matched.value} `}
+                  {`Matched ${matched.key} [${index},${next}] : ${matched.value} `}
                 </div>
                 {matched.groups &&
                   matched.groups.map((group: any) => {
-                    return <div>{`Group $${group.key} : ${group.value} `}</div>;
+                    return <div>{`Group ${group.key} : ${group.value} `}</div>;
                   })}
               </div>
             }
@@ -57,9 +57,9 @@ const Regexp = () => {
             <b>{matched.value}</b>
           </Popover>,
         );
-        result = result.slice(next);
+        preEnd = next;
       }
-      replacedStack.push(_.escape(result));
+      replacedStack.push(_.escape(result.slice(preEnd)));
       return replacedStack;
     } else {
       return result;
