@@ -42,7 +42,7 @@ const BaseLayout: FC = () => {
 
   useEffect(() => {
     EventBus.on(EEventBusName.CLEAR_LOCAL_DATA, handleUpdate);
-    setTimeout(Events.windowRenderReady, 1000);
+    Events.windowRenderReady()
     return () => {
       EventBus.off(EEventBusName.CLEAR_LOCAL_DATA, handleUpdate);
     };
