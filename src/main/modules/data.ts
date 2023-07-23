@@ -29,14 +29,14 @@ const DEFAULT_LOCAL_DATA: ILocalData = {
   images_compress: [],
 };
 
-interface IConfigData {
+export interface IConfigData {
   downloadPath: string;
-  openAtLogin: boolean;
+  checkUpdate: boolean;
 }
 
 const DEFAULT_CONFIG_DATA: IConfigData = {
   downloadPath: app.getPath('downloads'), //  下载路径
-  openAtLogin: false, // 是否开机重启
+  checkUpdate: true, // 检查更新
 };
 
 export const APP_PATH = path.join(os.homedir(), '.DeveloperAssistant');
@@ -85,9 +85,8 @@ async function setLocalData(data: Record<string, any>) {
   await localDB.write();
 }
 
-async function clearLocalData(key?:string) {
-
-  localDB.data =  DEFAULT_LOCAL_DATA;
+async function clearLocalData(key?: string) {
+  localDB.data = DEFAULT_LOCAL_DATA;
   await localDB.write();
 }
 

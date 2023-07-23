@@ -1,24 +1,28 @@
-import Events from '@/utils/events';
+import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
+import configAtom from '@/stores/config';
+import Events from '@/utils/events';
+
 export default function () {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [data, setData] = useState<Record<string, any>>({});
+  const [loading, setLoading] = useState<boolean>(false);
+  const [data, setData] = useAtom(configAtom);
 
   const updateData = async (value: Record<string, any>) => {
     const newData = { ...data, ...value };
-    setData(newData);
     await Events.setConfData(newData);
+    await initData();
+  };
+
+  const initData = async () => {
+    setLoading(true);
+    const confData = await Events.getConfData();
+    setData(confData);
+    setLoading(false);
   };
 
   useEffect(() => {
-    (async () => {
-      const confData = await Events.getConfData();
-      const appVersion = await Events.getAppVersion();
-      const openAtLogin = await Events.getOpenAtLogin();
-      setData({ ...confData, appVersion, openAtLogin });
-      setLoading(false);
-    })();
+    initData();
   }, []);
 
   return { data, loading, setData: updateData };

@@ -1,12 +1,14 @@
-import { Dropdown, MenuProps, Modal } from 'antd';
-import React, { Fragment, useState } from 'react';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Checkbox, Dropdown, MenuProps, Modal } from 'antd';
+import React, { Fragment, useEffect, useState } from 'react';
 import semver from 'semver';
 
 import Icon from '@/components/Icon';
+import { useConfigData } from '@/hooks';
+import { isEmpty } from '@/utils';
 import Events from '@/utils/events';
 import About from './About';
 import Setting from './Setting';
-
 interface IConfigMenuProps {
   children: React.ReactNode;
 }
@@ -20,21 +22,40 @@ const ConfigMenu = (props: IConfigMenuProps) => {
   const { children } = props;
   const [settingOpen, setSettingOpen] = useState<boolean>(false);
   const [aboutOpen, setAboutOpen] = useState<boolean>(false);
+  const { data, setData } = useConfigData();
 
   const handleCheckUpdate = async () => {
     const localVersion = await Events.getAppVersion();
     const remotePackage = await fetch(remotePackageUrl).then((res) => res.json());
+    let closeCheckUpdate = false;
     if (semver.gt(remotePackage.version, localVersion)) {
-      Modal.info({
-        maskClosable:true,
+      Modal.confirm({
         title: '有新版本发布，是否更新？',
+        cancelText: '关闭',
         okText: '去下载',
+        icon: <InfoCircleOutlined />,
+        content: data?.checkUpdate ? (
+          <div style={{ paddingTop: 20 }}>
+            <Checkbox onChange={() => (closeCheckUpdate = !closeCheckUpdate)}>关闭版本更新提示</Checkbox>
+          </div>
+        ) : null,
+        onCancel() {
+          if (closeCheckUpdate) {
+            setData({ checkUpdate: !closeCheckUpdate });
+          }
+        },
         onOk() {
           Events.openUrl({ url: 'https://github.com/ChrisSong1994/developer-assistant/releases' });
         },
       });
     }
   };
+
+  useEffect(() => {
+    if (!isEmpty(data) && data?.checkUpdate) {
+      handleCheckUpdate();
+    }
+  }, [data]);
 
   const menuItems: MenuProps['items'] = [
     {

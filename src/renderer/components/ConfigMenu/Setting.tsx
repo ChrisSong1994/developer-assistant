@@ -19,15 +19,19 @@ const Setting = (props: ISettingProps) => {
   const [openAtLogin, setOpenAtLogin] = useState<boolean>();
 
   const handleSelectDownloadPath = async () => {
-    const result = await Events.getSingleDirPath({ defaultPath: data.downloadPath });
+    const result = await Events.getSingleDirPath({ defaultPath: data?.downloadPath });
     if (result) {
-      setData({ downloadPath: result });
+      await setData({ downloadPath: result });
     }
   };
 
   const handleSetOpenAtLogin = async (bool: boolean) => {
     await Events.setOpenAtLogin(bool);
     setOpenAtLogin(bool);
+  };
+
+  const handleSetCheckUpdate = async (bool: boolean) => {
+    await setData({ checkUpdate: bool });
   };
 
   const handleClearCacheData = async () => {
@@ -54,13 +58,13 @@ const Setting = (props: ISettingProps) => {
     >
       <div className={styles['setting']}>
         <div className={styles['setting-item']}>
-          <span> 默认下载路径：</span> {data.downloadPath}
+          <span> 默认下载路径：</span> {data?.downloadPath}
           <Button type="link" onClick={handleSelectDownloadPath}>
             更改
           </Button>
         </div>
         <div className={styles['setting-item']}>
-          <span> 是否开机启动：</span>
+          <span> 开机启动：</span>
           <Switch
             checkedChildren="开启"
             unCheckedChildren="关闭"
@@ -69,10 +73,13 @@ const Setting = (props: ISettingProps) => {
           />
         </div>
         <div className={styles['setting-item']}>
-          <span> 当前版本：{data.appVersion} </span>
-          <Button type="primary" size="small">
-            检查更新
-          </Button>
+          <span> 开启检查更新： </span>
+          <Switch
+            checkedChildren="开启"
+            unCheckedChildren="关闭"
+            checked={data?.checkUpdate}
+            onChange={handleSetCheckUpdate}
+          />
         </div>
         <div className={styles['setting-item']}>
           <span> 清除本地缓存：</span>
