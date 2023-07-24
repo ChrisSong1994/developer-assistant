@@ -30,7 +30,6 @@ const Fields = (porps: IProps) => {
       );
     } else if (data.rgb && color.isvalidColorString(data.rgb, 'rgb')) {
       const values = data.rgb.split(',');
-
       onChange(
         {
           r: values[0],
@@ -46,11 +45,7 @@ const Fields = (porps: IProps) => {
       values[2] = values[2].replace('%', '');
       values[1] = values[1].replace('%', '');
       values[0] = values[0].replace('°', '');
-      if (values[1] == 1) {
-        values[1] = 0.01;
-      } else if (values[2] == 1) {
-        values[2] = 0.01;
-      }
+
       onChange(
         {
           h: Number(values[0]),
@@ -65,11 +60,6 @@ const Fields = (porps: IProps) => {
       values[2] = values[2].replace('%', '');
       values[1] = values[1].replace('%', '');
       values[0] = values[0].replace('°', '');
-      if (hsvValue[1] === 1) {
-        hsvValue[1] = 0.01;
-      } else if (hsvValue[2] === 1) {
-        hsvValue[2] = 0.01;
-      }
       onChange(
         {
           h: Number(values[0]),
@@ -92,10 +82,10 @@ const Fields = (porps: IProps) => {
           <EditableInput labelPosition="left" label="RGB" value={rgbValue} onChange={handleChange} />
         </Col>
         <Col span={8}>
-          <EditableInput labelPosition="left" label="HSV" value={hslValue} onChange={handleChange} />
+          <EditableInput labelPosition="left" label="HSV" value={hsvValue} onChange={handleChange} />
         </Col>
         <Col span={8}>
-          <EditableInput labelPosition="left" label="HSL" value={hsvValue} onChange={handleChange} />
+          <EditableInput labelPosition="left" label="HSL" value={hslValue} onChange={handleChange} />
         </Col>
       </Row>
     </section>

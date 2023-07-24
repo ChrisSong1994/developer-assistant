@@ -44,7 +44,13 @@ const Record = (props: IProps) => {
               onClick={() => onSelect(item.value)}
             ></div>
 
-            <ToggleEditText style={{ height: 22 }} value={item.title} onChange={handleTitleChange(item.key)} />
+            <ToggleEditText
+              placeholder="未命名"
+              style={{ height: 22 }}
+              defaultValue={item.value}
+              value={item.title}
+              onChange={handleTitleChange(item.key)}
+            />
           </div>
         );
       })}

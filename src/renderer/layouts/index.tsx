@@ -1,6 +1,6 @@
 import { cx } from '@emotion/css';
 import { Layout, Tabs } from 'antd';
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useLayoutEffect, useRef, useState } from 'react';
 
 import ConfigMenu from '@/components/ConfigMenu';
 import EventBus, { EEventBusName } from '@/utils/eventBus';
@@ -40,9 +40,9 @@ const BaseLayout: FC = () => {
   // 页面刷新
   const handleUpdate = () => (keyRef.current = new Date().getTime());
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     EventBus.on(EEventBusName.CLEAR_LOCAL_DATA, handleUpdate);
-    Events.windowRenderReady()
+    setTimeout(Events.windowRenderReady, 1000);
     return () => {
       EventBus.off(EEventBusName.CLEAR_LOCAL_DATA, handleUpdate);
     };
