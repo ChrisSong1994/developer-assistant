@@ -51,10 +51,10 @@ const Color = () => {
         记录一下
       </Button>
 
-      {loading || isEmpty(localData.color) ? (
+      {loading || isEmpty(localData?.color) ? (
         <Empty description={'暂无记录数据'} />
       ) : (
-        <ColorRecord data={localData.color} onChange={handleColorRecordChange} onSelect={handleSelect} />
+        <ColorRecord data={localData?.color} onChange={handleColorRecordChange} onSelect={handleSelect} />
       )}
     </Fragment>
   );
