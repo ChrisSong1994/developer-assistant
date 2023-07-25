@@ -1,6 +1,6 @@
 import { cx } from '@emotion/css';
 import { Layout, Tabs } from 'antd';
-import React, { FC, useState } from 'react';
+import React, { FC, useLayoutEffect, useState } from 'react';
 
 import ConfigMenu from '@/components/ConfigMenu';
 import Events from '@/utils/events';
@@ -40,6 +40,10 @@ const BaseLayout: FC = () => {
     key: page.key,
     children: React.createElement(page.component, { key: page.key }),
   }));
+
+  useLayoutEffect(() => {
+    setTimeout(Events.windowRenderReady, 1000);
+  }, []);
 
   return (
     <Layout className={styles['developer-container']}>
