@@ -2,7 +2,6 @@ import { Button, Drawer, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 
 import { useConfigData, useLocalData } from '@/hooks';
-import EventBus, { EEventBusName } from '@/utils/eventBus';
 import Events from '@/utils/events';
 
 import styles from './index.less';
@@ -36,7 +35,6 @@ const Setting = (props: ISettingProps) => {
 
   const handleClearCacheData = async () => {
     await clearData();
-    EventBus.emit(EEventBusName.CLEAR_LOCAL_DATA);
   };
 
   useEffect(() => {

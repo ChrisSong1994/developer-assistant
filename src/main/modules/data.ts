@@ -13,12 +13,12 @@ interface IColorItem {
   key: string;
 }
 
-interface ILocalData {
+export interface ILocalData {
   color: Array<IColorItem>;
   images_compress: Array<IImageCompressInfo>;
 }
 
-const DEFAULT_LOCAL_DATA: ILocalData = {
+export const DEFAULT_LOCAL_DATA: ILocalData = {
   color: [
     {
       value: '#1D2E54',
@@ -34,7 +34,7 @@ export interface IConfigData {
   checkUpdate: boolean;
 }
 
-const DEFAULT_CONFIG_DATA: IConfigData = {
+export const DEFAULT_CONFIG_DATA: IConfigData = {
   downloadPath: app.getPath('downloads'), //  下载路径
   checkUpdate: true, // 检查更新
 };

@@ -1,9 +1,8 @@
 import { cx } from '@emotion/css';
 import { Layout, Tabs } from 'antd';
-import React, { FC, useLayoutEffect, useRef, useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import ConfigMenu from '@/components/ConfigMenu';
-import EventBus, { EEventBusName } from '@/utils/eventBus';
 import Events from '@/utils/events';
 import logo from '../../assets/logo.png';
 import Icon from '../components/Icon';
@@ -34,24 +33,12 @@ const pages = routes.reduce((pre: any[], cur: any) => {
 
 const BaseLayout: FC = () => {
   const defaultSelectKey = pages[0].key;
-  const keyRef = useRef<number>(new Date().getTime());
   const [activeKey, setActiveKey] = useState<string>(defaultSelectKey);
-
-  // 页面刷新
-  const handleUpdate = () => (keyRef.current = new Date().getTime());
-
-  useLayoutEffect(() => {
-    EventBus.on(EEventBusName.CLEAR_LOCAL_DATA, handleUpdate);
-    setTimeout(Events.windowRenderReady, 1000);
-    return () => {
-      EventBus.off(EEventBusName.CLEAR_LOCAL_DATA, handleUpdate);
-    };
-  }, []);
 
   const tabItems = pages.map((page: any) => ({
     label: '',
     key: page.key,
-    children: React.createElement(page.component, { key: page.key === 'Setting' ? page.key : keyRef.current }), // 除了设置页其他页面强刷
+    children: React.createElement(page.component, { key: page.key }),
   }));
 
   return (
