@@ -22,5 +22,10 @@
     "noEmitOnError": true,
     "typeRoots": ["./node_modules/@types", "./src/types"]
   },
-  "exclude": ["node_modules", "dist", "**/__test__", "test", "docs", "tests"]
+  "exclude": ["node_modules", "dist", "**/__test__", "test", "docs", "tests"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }

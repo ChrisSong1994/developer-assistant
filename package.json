@@ -2,12 +2,12 @@
   "name": "developer-assistant",
   "version": "0.0.2",
   "private": true,
-  "description": "前端开发助手",
+  "description": "前端开发者助手",
   "author": "ChrisSong",
   "scripts": {
     "build": "npm run electron:build:mac",
     "build:icon": "electron-icon-builder --input=./resource/images/logo.png --output=./resource/images --flatten ",
-    "dev": "cross-env APP_ROOT=src/renderer umi dev electron",
+    "dev": "rspack ",
     "electron:build:linux": "cross-env APP_ROOT=src/renderer umi build electron --linux",
     "electron:build:mac": "cross-env APP_ROOT=src/renderer umi build electron --mac",
     "electron:build:win": "cross-env APP_ROOT=src/renderer umi build electron --win",
@@ -47,7 +47,6 @@
     "react-dom": "^18.1.0",
     "semver": "^7.5.4",
     "tui-image-editor": "^3.15.3",
-    "umi": "^4.0.55",
     "yaml": "^2.2.2"
   },
   "devDependencies": {
@@ -56,9 +55,6 @@
     "@types/react": "^18.1.0",
     "@types/react-copy-to-clipboard": "^5.0.2",
     "@types/react-dom": "^17.0.0",
-    "@umijs/fabric": "^2.10.0",
-    "@umijs/preset-react": "1.8.31",
-    "@umijs/test": "^4.0.55",
     "cross-env": "^7.0.3",
     "electron": "^23.1.1",
     "electron-builder": "^23.0.3",
@@ -67,8 +63,7 @@
     "lint-staged": "^10.0.7",
     "monaco-editor": "^0.38.0",
     "prettier": "^2.2.0",
-    "typescript": "^4.1.2",
-    "umi-plugin-electron-builder": "^4.0.3"
+    "typescript": "^4.1.2"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
