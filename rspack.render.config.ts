@@ -6,6 +6,7 @@ import path from 'path';
 const isDev = process.env.NODE_ENV === 'development';
 
 const config: Configuration = {
+  mode: isDev ? 'development' : 'production',
   entry: {
     index: path.resolve(__dirname, './src/renderer/index.tsx'),
   },
@@ -20,7 +21,7 @@ const config: Configuration = {
   },
   devServer: {
     port: 3000,
-    open: true,
+    open: false,
     historyApiFallback: false,
   },
   module: {

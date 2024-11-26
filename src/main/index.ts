@@ -4,8 +4,7 @@ import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electro
 import eventsRegistry from './eventsRegistry';
 import { dbInit } from './modules/data';
 import { windowInit } from './modules/windows';
-
-const isDevelopment = process.env.NODE_ENV === 'development';
+import { isDevelopment } from './utils';
 
 export async function onReady() {
   // 创建主窗口

@@ -5,7 +5,7 @@ import { init } from './init';
 
 import './global.less';
 
-// init();
+init();
 
 const rootEl = document.getElementById('root');
 if (rootEl) {

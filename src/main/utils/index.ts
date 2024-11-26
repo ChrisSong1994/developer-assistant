@@ -2,8 +2,9 @@ import { protocol } from 'electron';
 import os from 'os';
 import * as path from 'path';
 import { URL } from 'url';
+import isDev from 'electron-is-dev';
 
-export const isDevelopment = process.env.NODE_ENV === 'development';
+export const isDevelopment = isDev;
 
 export const createProtocol = (scheme: string) => {
   protocol.registerFileProtocol(scheme, (request, respond) => {
