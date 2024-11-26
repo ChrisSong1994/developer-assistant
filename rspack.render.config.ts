@@ -52,11 +52,6 @@ const config: Configuration = {
         ],
       },
       {
-        test: /\.css$/,
-        // 如果你需要将 '*.module.css' 视为 CSS Modules 那么将 'type' 设置为 'css/auto' 否则设置为 'css'
-        type: 'css/auto',
-      },
-      {
         test: /\.less$/,
         loader: require.resolve('less-loader'),
         options: {
