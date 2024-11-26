@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useConfigData, useLocalData } from '@/hooks';
 import Events from '@/utils/events';
 
-import styles from './index.less';
+import styles from './index.module.less';
 
 interface ISettingProps {
   open: boolean;

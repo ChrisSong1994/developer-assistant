@@ -8,7 +8,7 @@ import Events from '@/utils/events';
 import logo from '../../../assets/icon.png';
 import locale from './config/locale';
 import theme from './config/theme';
-import styles from './index.less';
+import styles from './index.module.less';
 
 type TImageFormat = 'png' | 'jpg' | 'jpeg' | 'webp';
 

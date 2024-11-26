@@ -4,7 +4,7 @@ import Events from '@/utils/events';
 import { memo, useMemo } from 'react';
 import BaseEditor from './BaseEditor';
 import { EEditorLanguage } from './index';
-import styles from './index.less';
+import styles from './index.module.less';
 interface IProps {
   value: string;
   onChange: (v: any) => void;

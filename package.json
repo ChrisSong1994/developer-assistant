@@ -8,6 +8,7 @@
     "start": "cross-env NODE_ENV=development electron ./build/main.js",
     "dev:renderer": "cross-env NODE_ENV=development rspack serve -c rspack.render.config.ts",
     "build:renderer": "cross-env NODE_ENV=production rspack build -c rspack.render.config.ts",
+    "dev:main": "cross-env NODE_ENV=development rspack build -c  rspack.main.config.ts -w",
     "build:main": "cross-env NODE_ENV=production rspack build -c rspack.main.config.ts",
     "build": "npm run electron:build:mac",
     "build:icon": "electron-icon-builder --input=./resource/images/logo.png --output=./resource/images --flatten ",

@@ -10,7 +10,7 @@ import {
   OUTPUT_ENCODING_OPTIONS,
   TAlgorithm,
 } from '../../../common/contants/crypto';
-import styles from './index.less';
+import styles from './index.module.less';
 
 const TextArea = Input.TextArea;
 const FormItem = Form.Item;

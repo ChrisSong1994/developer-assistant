@@ -6,7 +6,7 @@ import ColorPicker from '@/components/ColorPicker';
 import ImageUpload from '@/components/ImageUpload';
 import QRCode, { IQRCodeProps } from '@/components/QRCode';
 import Events from '@/utils/events';
-import styles from './index.less';
+import styles from './index.module.less';
 
 const TextArea = Input.TextArea;
 const FormItem = Form.Item;

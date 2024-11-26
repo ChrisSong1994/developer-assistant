@@ -6,7 +6,7 @@ import ConfigMenu from '@/components/ConfigMenu';
 import Events from '@/utils/events';
 import logo from '../../assets/logo.png';
 import Icon from '../components/Icon';
-import styles from './index.less';
+import styles from './index.module.less';
 import routes from './routes';
 
 const { Header, Content, Sider } = Layout;

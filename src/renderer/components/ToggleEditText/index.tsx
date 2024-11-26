@@ -3,7 +3,7 @@ import { Input } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 
 import { isEmpty } from '@/utils';
-import styles from './index.less';
+import styles from './index.module.less';
 interface IProps {
   value: string;
   defaultValue?: string;

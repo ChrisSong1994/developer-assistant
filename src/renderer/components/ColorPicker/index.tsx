@@ -1,7 +1,7 @@
 import { ChromePicker } from "react-color";
 import { Popover } from "antd";
 
-import styles from "./index.less";
+import styles from "./index.module.less";
 interface IColorCatch {
   value: string;
   onChange: (key: string) => void;
