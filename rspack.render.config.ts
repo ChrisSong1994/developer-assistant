@@ -6,11 +6,12 @@ import path from 'path';
 const isDev = process.env.NODE_ENV === 'development';
 
 const config: Configuration = {
+  target: 'electron-renderer',
   entry: {
-    main: path.resolve(__dirname, './src/renderer/index.tsx'),
+    index: path.resolve(__dirname, './src/renderer/index.tsx'),
   },
   output: {
-    // publicPath: './',
+    path: path.resolve(__dirname, 'build'),
   },
   resolve: {
     extensions: ['...', '.ts', '.tsx', '.jsx'],
@@ -75,6 +76,14 @@ const config: Configuration = {
       template: path.resolve(__dirname, './src/renderer/index.html'),
     }),
     new rspack.ProgressPlugin({}),
+    new rspack.CopyRspackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, './src/renderer/public'),
+          to: path.resolve(__dirname, './build'),
+        },
+      ],
+    }),
     isDev ? new RefreshPlugin() : null,
   ].filter(Boolean),
 

@@ -5,8 +5,10 @@
   "description": "前端开发者助手",
   "author": "ChrisSong",
   "scripts": {
+    "start": "cross-env NODE_ENV=development electron ./build/main.js",
     "dev:renderer": "cross-env NODE_ENV=development rspack serve -c rspack.render.config.ts",
     "build:renderer": "cross-env NODE_ENV=production rspack build -c rspack.render.config.ts",
+    "build:main": "cross-env NODE_ENV=production rspack build -c rspack.main.config.ts",
     "build": "npm run electron:build:mac",
     "build:icon": "electron-icon-builder --input=./resource/images/logo.png --output=./resource/images --flatten ",
     "electron:build:linux": "cross-env APP_ROOT=src/renderer umi build electron --linux",
@@ -16,7 +18,6 @@
     "electron:init": "umi electron init",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,less,md}\"",
     "rebuild-deps": "electron-builder install-app-deps",
-    "start": "yarn run dev",
     "ui:build": "cross-env APP_ROOT=src/renderer umi build"
   },
   "lint-staged": {
@@ -49,6 +50,7 @@
     "react-color": "^2.19.3",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.1.0",
+    "react-refresh": "^0.14.2",
     "semver": "^7.5.4",
     "tui-image-editor": "^3.15.3",
     "yaml": "^2.2.2"
@@ -57,6 +59,7 @@
     "@rspack/cli": "^1.1.3",
     "@rspack/core": "^1.1.3",
     "@rspack/plugin-react-refresh": "^1.0.0",
+    "@types/fs-extra": "^11.0.4",
     "@types/lodash": "^4.14.191",
     "@types/node": "^16.11.26",
     "@types/react": "^18.1.0",

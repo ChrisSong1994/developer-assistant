@@ -3,12 +3,12 @@ import fs from 'fs-extra';
 import path from 'path';
 
 export const PACKAGE_PATH = app.isPackaged
-  ? path.join(__dirname, 'package.json')
-  : path.join(__dirname, '../../../../package.json');
+  ? path.join(__dirname, './package.json')
+  : path.join(__dirname, '../package.json');
 
 export const RESOURCES_PATH = app.isPackaged
   ? path.join(process.resourcesPath, 'assets')
-  : path.join(__dirname, '../../../assets');
+  : path.join(__dirname, '../assets');
 
 export const ICON_PATH = path.join(RESOURCES_PATH, 'icon.png');
 
