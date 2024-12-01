@@ -5,21 +5,16 @@
   "description": "前端开发者助手",
   "author": "ChrisSong",
   "scripts": {
-    "start": "cross-env NODE_ENV=development electron ./build/main.js",
+    "start": "cross-env NODE_ENV=development  electron ./build/main.js",
+    "dev": "npm run clean:build && concurrently \"npm run dev:renderer\"  \"npm run dev:main\"",
+    "clean:build": "rimraf ./build/*",
     "dev:renderer": "cross-env NODE_ENV=development rspack serve -c rspack.render.config.ts",
     "build:renderer": "cross-env NODE_ENV=production rspack build -c rspack.render.config.ts",
     "dev:main": "cross-env NODE_ENV=development rspack build -c  rspack.main.config.ts -w",
     "build:main": "cross-env NODE_ENV=production rspack build -c rspack.main.config.ts",
-    "build": "npm run electron:build:mac",
     "build:icon": "electron-icon-builder --input=./resource/images/logo.png --output=./resource/images --flatten ",
-    "electron:build:linux": "cross-env APP_ROOT=src/renderer umi build electron --linux",
-    "electron:build:mac": "cross-env APP_ROOT=src/renderer umi build electron --mac",
-    "electron:build:win": "cross-env APP_ROOT=src/renderer umi build electron --win",
-    "electron:dev": "cross-env APP_ROOT=src/renderer umi dev electron",
-    "electron:init": "umi electron init",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,less,md}\"",
-    "rebuild-deps": "electron-builder install-app-deps",
-    "ui:build": "cross-env APP_ROOT=src/renderer umi build"
+    "rebuild-deps": "electron-builder install-app-deps"
   },
   "lint-staged": {
     "*.{js,jsx,less,md,json}": [
@@ -67,6 +62,7 @@
     "@types/react": "^18.1.0",
     "@types/react-copy-to-clipboard": "^5.0.2",
     "@types/react-dom": "^17.0.0",
+    "concurrently": "^9.1.0",
     "cross-env": "^7.0.3",
     "electron": "^25.9.8",
     "electron-builder": "^25.1.8",

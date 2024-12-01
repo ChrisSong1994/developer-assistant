@@ -40,6 +40,13 @@ const config: Configuration = {
       },
     ],
   },
-  plugins: [new rspack.ProgressPlugin({})].filter(Boolean),
+  plugins: [new rspack.ProgressPlugin({}),new rspack.CopyRspackPlugin({
+    patterns: [
+      {
+        from: path.resolve(__dirname, './src/main/public'),
+        to: path.resolve(__dirname, 'build'),
+      },
+    ],
+  })].filter(Boolean),
 };
 export = config;
