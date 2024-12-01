@@ -1,9 +1,10 @@
 {
   "name": "developer-assistant",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "description": "前端开发者助手",
-  "author": "ChrisSong",
+  "author": "ChrisSong1994<18557511748@163.com>",
+  "repository": "https://github.com/ChrisSong1994/developer-assistant",
   "scripts": {
     "start": "cross-env NODE_ENV=development  electron ./build/main.js",
     "dev": "npm run clean:build && concurrently \"npm run dev:renderer\"  \"npm run dev:main\"",
@@ -12,7 +13,9 @@
     "build:renderer": "cross-env NODE_ENV=production rspack build -c rspack.render.config.ts",
     "dev:main": "cross-env NODE_ENV=development rspack build -c  rspack.main.config.ts -w",
     "build:main": "cross-env NODE_ENV=production rspack build -c rspack.main.config.ts",
+    "build": "npm run build:renderer && npm run build:main",
     "build:icon": "electron-icon-builder --input=./resource/images/logo.png --output=./resource/images --flatten ",
+    "make": "node scripts/make.js",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,less,md}\"",
     "rebuild-deps": "electron-builder install-app-deps"
   },
