@@ -3,6 +3,7 @@
   "version": "0.0.3",
   "private": true,
   "description": "前端开发者助手",
+  "main": "main.js",
   "author": "ChrisSong1994<18557511748@163.com>",
   "repository": "https://github.com/ChrisSong1994/developer-assistant",
   "scripts": {

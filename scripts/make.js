@@ -19,7 +19,7 @@ const TARGET_PLATFORMS_configs = {
   all: {
     mac: ['dmg:x64', 'dmg:arm64', 'zip:universal'],
     win: ['nsis:ia32', 'nsis:x64', 'nsis:arm64', 'portable:x64', 'zip:x64' /* , 'appx:x64'*/],
-    linux: ['AppImage:x64', 'AppImage:arm64', 'deb:x64', 'deb:arm64'],
+    // linux: ['AppImage:x64', 'AppImage:arm64', 'deb:x64', 'deb:arm64'],
   },
 };
 
@@ -47,6 +47,7 @@ const beforeMake = async () => {
     version: pkg.version,
     description: pkg.description,
     author: pkg.author,
+    main: pkg.main,
   };
 
   fs.writeFileSync(path.join(root_dir, 'build', 'package.json'), JSON.stringify(app_pkg, null, 2), 'utf-8');
@@ -81,16 +82,15 @@ const doMake = async () => {
       ...cfg_common,
       appId: 'developer.assistant.app',
       productName: APP_NAME,
+      asarUnpack: ['**/*.node'],
       mac: {
         icon: '../assets/icon.png',
-        gatekeeperAssess: false,
         target: {
           target: 'default',
           arch: ['arm64', 'x64'],
         },
-        hardenedRuntime: true,
         type: 'distribution',
-        notarize: false,
+        hardenedRuntime: true,
       },
       win: {
         icon: '../assets/icon.png',

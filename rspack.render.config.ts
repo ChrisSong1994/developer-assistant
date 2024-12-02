@@ -12,6 +12,7 @@ const config: Configuration = {
   },
   output: {
     path: path.resolve(__dirname, 'build'),
+    publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   },
   resolve: {
     extensions: ['...', '.ts', '.tsx', '.jsx'],
