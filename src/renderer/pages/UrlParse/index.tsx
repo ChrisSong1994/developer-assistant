@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Icon from '@/components/Icon';
 import { URL_PARAMS } from '@/constants';
 import { isEmpty, urlConverToObject } from '@/utils';
-import styles from './index.less';
+import styles from './index.module.less';
 
 const Search = Input.Search;
 

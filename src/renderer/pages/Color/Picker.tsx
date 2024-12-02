@@ -7,7 +7,7 @@ import GooglePointerCircle from 'react-color/es/components/google/GooglePointerC
 
 import Fields from './Fields';
 
-import styles from './index.less';
+import styles from './index.module.less';
 
 const Color = ({ onChange, rgb, hsl, hsv, hex }: any) => {
   return (

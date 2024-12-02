@@ -7,7 +7,7 @@ import { memo } from 'react';
 import { isEmpty } from '@/utils';
 import Events from '@/utils/events';
 import { DEFAULT_OPTIONS, EEditorLanguage } from './index';
-import styles from './index.less';
+import styles from './index.module.less';
 export interface IBaseEditorProps {
   language?: EEditorLanguage;
   value?: string;

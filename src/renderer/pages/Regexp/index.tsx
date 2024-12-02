@@ -11,7 +11,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { REGEXP_SYNTAX_COMMENTS_OPTIONS } from '@/constants';
 import regMatch from '@/utils/regMatch';
-import styles from './index.less';
+import styles from './index.module.less';
 
 const TextArea = Input.TextArea;
 const Search = Input.Search;

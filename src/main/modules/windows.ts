@@ -62,17 +62,17 @@ export function createMainWindow() {
   }
 
   if (isDevelopment) {
-    launchWindow.loadURL('http://localhost:3001/launch/index.html');
-    mainWindow.loadURL('http://localhost:3001');
+    launchWindow.loadURL('http://localhost:3000/launch/index.html');
+    mainWindow.loadURL('http://localhost:3000');
   } else {
     launchWindow.loadURL(getPublicFilePath({ name: 'launch/index.html' }));
     mainWindow.loadURL(getPublicFilePath({ name: 'index.html' }));
   }
 
   mainWindow.webContents.once('dom-ready', () => {
-    if (isDevelopment) {
+    // if (isDevelopment) {
       mainWindow?.webContents.openDevTools();
-    }
+    // }
   });
 
   mainWindow.on('closed', () => {

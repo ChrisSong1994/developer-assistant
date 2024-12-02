@@ -2,7 +2,7 @@ import { css, cx } from '@emotion/css';
 import { useEffect, useRef, useState } from 'react';
 
 import Copy from '@/components/Copy';
-import styles from './index.less';
+import styles from './index.module.less';
 
 let idCounter = 1;
 

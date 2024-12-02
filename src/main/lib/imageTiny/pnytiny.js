@@ -1,10 +1,8 @@
-var fs = require('fs');
-var path = require('path');
-var pngtiny = {};
+const fs = require('fs');
+const path = require('path');
 
-const isDevelopment = process.env.NODE_ENV === 'development';
-const wasmPath =isDevelopment?path.join(__dirname, '../../public/wasm/pngtiny.wasm'):path.join(__dirname, './wasm/pngtiny.wasm')
-
+const pngtiny = {};
+const wasmPath = path.join(__dirname, './wasm/pngtiny.wasm');
 
 function readWasm() {
   return new Promise((resolve, reject) => {
@@ -41,11 +39,7 @@ var h = Object.assign({}, b),
   fs,
   v,
   w;
-if (
-  'object' == typeof process &&
-  'object' == typeof process.versions &&
-  'string' == typeof process.versions.node
-) {
+if ('object' == typeof process && 'object' == typeof process.versions && 'string' == typeof process.versions.node) {
   (q = p ? require('path').dirname(q) + '/' : __dirname + '/'),
     (w = () => {
       v || ((fs = require('fs')), (v = require('path')));
@@ -148,10 +142,7 @@ function ca(a, c, f) {
         e += String.fromCharCode(((d & 31) << 6) | g);
       } else {
         var l = a[c++] & 63;
-        d =
-          224 == (d & 240)
-            ? ((d & 15) << 12) | (g << 6) | l
-            : ((d & 7) << 18) | (g << 12) | (l << 6) | (a[c++] & 63);
+        d = 224 == (d & 240) ? ((d & 15) << 12) | (g << 6) | l : ((d & 7) << 18) | (g << 12) | (l << 6) | (a[c++] & 63);
         65536 > d
           ? (e += String.fromCharCode(d))
           : ((d -= 65536), (e += String.fromCharCode(55296 | (d >> 10), 56320 | (d & 1023))));
@@ -246,7 +237,7 @@ function pa() {
           function (f) {
             a(new Uint8Array(f));
           },
-          c
+          c,
         );
       });
     }
@@ -282,10 +273,8 @@ function qa() {
         PWD: '/',
         HOME: '/home/web_user',
         LANG:
-          (
-            ('object' == typeof navigator && navigator.languages && navigator.languages[0]) ||
-            'C'
-          ).replace('-', '_') + '.UTF-8',
+          (('object' == typeof navigator && navigator.languages && navigator.languages[0]) || 'C').replace('-', '_') +
+          '.UTF-8',
         _: k || './this.program',
       },
       c;
@@ -304,12 +293,7 @@ var R,
   ra = [null, [], []],
   va = {
     __assert_fail: function (a, c, f, e) {
-      C(
-        'Assertion failed: ' +
-          F(a) +
-          ', at: ' +
-          [c ? F(c) : 'unknown filename', f, e ? F(e) : 'unknown function']
-      );
+      C('Assertion failed: ' + F(a) + ', at: ' + [c ? F(c) : 'unknown filename', f, e ? F(e) : 'unknown function']);
     },
     _emscripten_throw_longjmp: function () {
       throw Infinity;

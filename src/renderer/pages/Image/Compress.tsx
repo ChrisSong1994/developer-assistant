@@ -9,7 +9,7 @@ import { arrayObjDeWightByKey, formatFileSize } from '@/utils';
 import Events from '@/utils/events';
 import { IImageCompressInfo } from '../../../main/modules/image';
 
-import styles from './index.less';
+import styles from './index.module.less';
 
 const IMAGES_DATA_KEY = 'originalFilePath';
 const IMAGES_COMPRESS_KEY = 'images_compress';

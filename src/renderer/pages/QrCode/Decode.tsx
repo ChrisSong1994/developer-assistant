@@ -7,7 +7,7 @@ import Copy from '@/components/Copy';
 import Icon from '@/components/Icon';
 import ImageUpload from '@/components/ImageUpload';
 import Events from '@/utils/events';
-import styles from './index.less';
+import styles from './index.module.less';
 
 const TextArea = Input.TextArea;
 
