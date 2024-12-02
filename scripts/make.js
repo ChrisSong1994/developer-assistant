@@ -4,7 +4,10 @@ const builder = require('electron-builder');
 const homedir = require('os').homedir();
 const pkg = require('../package.json');
 
-const { APP_NAME, root_dir, dist_dir } = require('./vars');
+const root_dir = path.normalize(path.join(__dirname, '..'))
+const dist_dir = path.normalize(path.join(__dirname, '..', 'dist'))
+
+const APP_NAME = 'Developer Assistant'
 
 const TARGET_PLATFORMS_configs = {
   mac: {
