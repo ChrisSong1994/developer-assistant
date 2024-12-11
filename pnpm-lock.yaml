@@ -150,6 +150,9 @@ importers:
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@16.18.119)(typescript@4.9.5)
+      tslib:
+        specifier: ^2.8.1
+        version: 2.8.1
       typescript:
         specifier: ^4.1.2
         version: 4.9.5
@@ -595,21 +598,25 @@ packages:
     resolution: {integrity: sha512-MpOrO1oppxAm8J1ztNz6G5DG/oL9ZLHmIz9vYNV6PKnk+MPhCXqfhFmQ2hZm5VIVKuOobfYEJiDUqKg2MLg8gA==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@rspack/binding-linux-arm64-musl@1.1.3':
     resolution: {integrity: sha512-PnUDC1JxT6a5hJW0hhJ9ubWk3R+nk7eLXyNaORHyQH4k8o89Zm5GYoKnDgO4eRy41NB9/aBJQJRGSRn0iAsZgw==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@rspack/binding-linux-x64-gnu@1.1.3':
     resolution: {integrity: sha512-+6JgyKXOp2QrHzlru95mge70tDkYlaY4NNE9xyrdj6PgTnM9cVPx4sLVhHC9+tWXaTFnccfEe9Tt6LjKnjHGaA==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@rspack/binding-linux-x64-musl@1.1.3':
     resolution: {integrity: sha512-X0TJTVL1Roqq/tvN26QO4u62x2xp5tE0dlhwhbeCHrBdgBzc+PHvcv/8lclRcq6lDPzceAgcnNX/+RbWg0DzKg==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@rspack/binding-win32-arm64-msvc@1.1.3':
     resolution: {integrity: sha512-Lvpp5Q30YiPNkuOFPawp2al2CTWElPeG3X0E9LFIfPdVkLc/e2nkf5a6zSYtnbD2oaskzQIYN/k27fWqWWcVHA==}

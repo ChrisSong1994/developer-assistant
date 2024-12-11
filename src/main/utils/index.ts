@@ -1,6 +1,6 @@
 import { protocol } from 'electron';
 import os from 'os';
-import * as path from 'path';
+import  path from 'path';
 import { URL } from 'url';
 import isDev from 'electron-is-dev';
 
