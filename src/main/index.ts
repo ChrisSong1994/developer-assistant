@@ -1,5 +1,5 @@
 import { app } from 'electron';
-import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
+import { installDevtool } from './utils';
 
 import eventsRegistry from './eventsRegistry';
 import { dbInit } from './modules/data';
@@ -18,7 +18,7 @@ export async function onReady() {
 
   // 加载开发插件
   if (isDevelopment) {
-    await installExtension([REACT_DEVELOPER_TOOLS.id, REDUX_DEVTOOLS.id]);
+    await installDevtool();
   }
 }
 

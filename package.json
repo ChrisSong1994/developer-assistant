@@ -53,6 +53,7 @@
     "react-dom": "^18.1.0",
     "react-refresh": "^0.14.2",
     "semver": "^7.5.4",
+    "tslib": "^2.8.1",
     "tui-image-editor": "^3.15.3",
     "yaml": "^2.2.2"
   },
@@ -70,7 +71,6 @@
     "cross-env": "^7.0.3",
     "electron": "^25.9.8",
     "electron-builder": "^25.1.8",
-    "electron-devtools-installer": "^3.2.0",
     "electron-icon-builder": "^2.0.1",
     "less": "^4.2.0",
     "less-loader": "^12.2.0",
