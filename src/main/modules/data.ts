@@ -16,6 +16,8 @@ interface IColorItem {
 export interface ILocalData {
   color: Array<IColorItem>;
   images_compress: Array<IImageCompressInfo>;
+  sider_menus: Array<string>;
+  more_active_menu_key: string | undefined;
 }
 
 export const DEFAULT_LOCAL_DATA: ILocalData = {
@@ -27,6 +29,8 @@ export const DEFAULT_LOCAL_DATA: ILocalData = {
     },
   ],
   images_compress: [],
+  sider_menus: [],
+  more_active_menu_key: undefined,
 };
 
 export interface IConfigData {

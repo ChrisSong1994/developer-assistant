@@ -70,6 +70,10 @@ const config: Configuration = {
           filename: 'assets/[hash][ext]',
         },
       },
+      {
+        test: /.(md|txt)$/,
+        type: 'asset/source',
+      },
     ],
   },
   plugins: [

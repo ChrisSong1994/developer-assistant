@@ -16,9 +16,9 @@ import YAML from 'yaml';
 import { JsonEditor, YamlEditor } from '@/components/Editor';
 import { useWindowSize } from '@/hooks';
 import { isEmpty } from '@/utils';
-import { EDITOR_HEIGHT_PADDING } from './index';
 import styles from './index.module.less';
 
+const EDITOR_HEIGHT_PADDING = 130;
 const JsonConvertComponent = () => {
   const [jsonText, setJsonText] = useState('');
   const [yamlText, setYamlText] = useState('');

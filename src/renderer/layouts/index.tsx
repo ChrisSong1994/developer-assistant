@@ -1,6 +1,7 @@
 import { cx } from '@emotion/css';
-import { Layout, Tabs } from 'antd';
+import { Layout, Tabs, Divider } from 'antd';
 import React, { FC, useLayoutEffect, useState } from 'react';
+import { AppstoreOutlined } from '@ant-design/icons';
 
 import ConfigMenu from '@/components/ConfigMenu';
 import Events from '@/utils/events';
@@ -85,6 +86,18 @@ const BaseLayout: FC = () => {
                 <span className={styles['developer-container-sider-menu-item-label']}>{item.label}</span>
               </div>
             ))}
+            <Divider style={{margin: "5px 0"}} />
+            <div
+              className={cx([
+                styles['developer-container-sider-menu-item'],
+                activeKey === 'more' ? styles['developer-container-sider-menu-item-active'] : '',
+              ])}
+              onClick={() => setActiveKey('more')}
+            >
+              {/* <Icon className={styles['developer-container-sider-menu-item-icon']} size={24} type={item.icon} /> */}
+              <AppstoreOutlined  style={{fontSize: "24px"}}/>
+              <span className={styles['developer-container-sider-menu-item-label']}>更多</span>
+            </div>
           </div>
         </Sider>
         <Content className={styles['developer-container-content']}>

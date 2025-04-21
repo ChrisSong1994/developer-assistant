@@ -1,19 +1,20 @@
 import Color from '@/pages/Color';
 import Diff from '@/pages/Diff';
 import Encryption from '@/pages/Encryption';
-import Image from '@/pages/Image';
+import ImageEditor from '@/pages/ImageEditor';
 import JsonComponent from '@/pages/Json';
 import QrCode from '@/pages/QrCode';
 import Regexp from '@/pages/Regexp';
 import Transcoding from '@/pages/Transcoding';
 import UrlParse from '@/pages/UrlParse';
-// import Transform from '@/pages/Transform';
+import Transform from '@/pages/Transform';
+import Markdown from '@/pages/Markdown';
 
 const routes = [
   {
     key: 'Color',
     title: '颜色',
-    icon: 'icon-yanse',
+    icon: 'icon-color',
     component: Color,
   },
   {
@@ -25,15 +26,15 @@ const routes = [
   {
     key: 'Image',
     title: '图片',
-    icon: 'icon-tupian_huaban',
-    component: Image,
+    icon: 'icon-picture',
+    component: ImageEditor,
   },
-  // {
-  //   key: 'Transform',
-  //   title: '转换',
-  //   icon: 'icon-zhuanhuan',
-  //   component: Transform,
-  // },
+  {
+    key: 'Transform',
+    title: '转换',
+    icon: 'icon-transform',
+    component: Transform,
+  },
 
   {
     key: 'Diff',
@@ -44,7 +45,7 @@ const routes = [
   {
     key: 'Regexp',
     title: '正则',
-    icon: 'icon-regularExpression-o',
+    icon: 'icon-regexp',
     component: Regexp,
   },
   {
@@ -56,21 +57,27 @@ const routes = [
   {
     key: 'Transcoding',
     title: '编解码',
-    icon: 'icon-bianma',
+    icon: 'icon-code',
     component: Transcoding,
   },
   {
     key: 'Encryption',
     title: '加解密',
-    icon: 'icon-31mima',
+    icon: 'icon-limitOfAuthority',
     component: Encryption,
   },
-  {
-    key: 'UrlParse',
-    title: 'URL解析',
-    icon: 'icon-url',
-    component: UrlParse,
-  },
+  // {
+  //   key: 'UrlParse',
+  //   title: 'URL解析',
+  //   icon: 'icon-url',
+  //   component: UrlParse,
+  // },
+  // {
+  //   key: 'Markdown',
+  //   title: 'Markdown',
+  //   icon: 'icon-markdown',
+  //   component: Markdown,
+  // },
 ];
 
 export default routes;

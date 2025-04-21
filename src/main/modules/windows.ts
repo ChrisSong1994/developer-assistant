@@ -70,9 +70,9 @@ export function createMainWindow() {
   }
 
   mainWindow.webContents.once('dom-ready', () => {
-    // if (isDevelopment) {
+    if (isDevelopment) {
       mainWindow?.webContents.openDevTools();
-    // }
+    }
   });
 
   mainWindow.on('closed', () => {

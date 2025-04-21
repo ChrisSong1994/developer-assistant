@@ -1,5 +1,7 @@
+import JsonToYaml from './JsonToYaml';
+
 const Transform = () => {
-  return <div>转换</div>;
+  return <JsonToYaml />;
 };
 
 export default Transform;
