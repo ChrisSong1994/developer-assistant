@@ -7,6 +7,7 @@ const configAtom = atom<IConfigData>({
   checkUpdate: true,
   downloadPath: '',
 });
+
 configAtom.onMount = (setAtom) => {
   Events.getConfData().then(setAtom);
 };

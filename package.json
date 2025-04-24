@@ -18,7 +18,10 @@
     "build:icon": "electron-icon-builder --input=./resource/images/logo.png --output=./resource/images --flatten ",
     "make": "node scripts/make.js",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,less,md}\"",
-    "rebuild-deps": "electron-builder install-app-deps"
+    "rebuild-deps": "electron-builder install-app-deps",
+    "doc:build": "rspress build -c rspress.website.config.ts",
+    "doc:dev": "rspress dev -c rspress.website.config.ts",
+    "doc:preview": "rspress preview -c rspress.website.config.ts"
   },
   "lint-staged": {
     "*.{js,jsx,less,md,json}": [
@@ -90,6 +93,7 @@
     "lint-staged": "^10.0.7",
     "monaco-editor": "^0.38.0",
     "prettier": "^2.2.0",
+    "rspress": "^1.43.11",
     "ts-node": "^10.9.2",
     "typescript": "^4.1.2"
   },
