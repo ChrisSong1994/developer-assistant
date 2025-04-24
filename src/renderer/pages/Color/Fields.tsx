@@ -94,7 +94,7 @@ const Fields = (porps: IProps) => {
           <div className={styles['color-picker-fields-hex']}>
             <EditableInput style={{ flex: 1 }} labelPosition="center" label="HEX" value={hex} onChange={handleChange} />
             <Tooltip placement="bottom" title="吸取颜色">
-              <Icon style={{ margin: '0 4px' }} type="icon-xiqu" size={22} onClick={handleSystemColorPicker} />
+              <Icon style={{ margin: '0 8px' }} type="icon-xiqu" size={22} onClick={handleSystemColorPicker} />
             </Tooltip>
           </div>
         </Col>

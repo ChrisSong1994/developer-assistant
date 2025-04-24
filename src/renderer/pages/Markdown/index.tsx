@@ -17,7 +17,7 @@ import EDITOR_ZH from 'bytemd/locales/zh_Hans.json';
 import 'github-markdown-css';
 
 import MARKDOWN_TEXT from './text.md';
-import styles from './index.module.less';
+import './index.less';
 
 const plugins = [
   gfm({ locale: GFM_ZH }),
@@ -33,7 +33,7 @@ const plugins = [
 const Markdown = () => {
   const [value, setValue] = useState(MARKDOWN_TEXT);
   return (
-    <section className={styles['markdown-editor']}>
+    <section className="markdown-editor">
       <Editor
         value={value}
         plugins={plugins}

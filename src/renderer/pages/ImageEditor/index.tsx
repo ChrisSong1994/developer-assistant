@@ -26,7 +26,7 @@ const ImageEditor = () => {
         theme: theme,
         locale: locale,
         uiSize: {
-          height: 'calc(100vh - 66px )',
+          height: 'calc(100vh - 68px )',
           width: '100%',
         },
       },

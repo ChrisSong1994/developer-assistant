@@ -17,6 +17,7 @@ export interface ILocalData {
   color: Array<IColorItem>;
   images_compress: Array<IImageCompressInfo>;
   sider_menus: Array<string>;
+  active_menu_key: string | undefined;
   more_active_menu_key: string | undefined;
 }
 
@@ -29,7 +30,8 @@ export const DEFAULT_LOCAL_DATA: ILocalData = {
     },
   ],
   images_compress: [],
-  sider_menus: [],
+  sider_menus: ['Color', 'JSON'],
+  active_menu_key: undefined,
   more_active_menu_key: undefined,
 };
 
