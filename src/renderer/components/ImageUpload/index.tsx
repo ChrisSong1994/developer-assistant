@@ -49,7 +49,7 @@ const ImageUpload = (props: IImageUploadProps) => {
     >
       {value ? (
         <Tooltip placement="bottom" title="清除">
-          <Icon type="icon-shanchu" style={{ position: 'absolute', top: 6, right: 6 }} onClick={handleClear} />
+          <Icon type="icon-delete" style={{ position: 'absolute', top: 6, right: 6 }} onClick={handleClear} />
         </Tooltip>
       ) : null}
 

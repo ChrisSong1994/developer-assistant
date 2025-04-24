@@ -61,7 +61,7 @@ const ConfigMenu = (props: IConfigMenuProps) => {
     {
       label: <div onClick={() => setAboutOpen(true)}>关于</div>,
       key: 'about',
-      icon: <Icon type="icon-guanyu" />,
+      icon: <Icon type="icon-info" />,
     },
     {
       label: <div onClick={handleCheckUpdate}>检查更新</div>,
@@ -75,7 +75,7 @@ const ConfigMenu = (props: IConfigMenuProps) => {
         </div>
       ),
       key: 'feedback',
-      icon: <Icon type="icon-fankui" />,
+      icon: <Icon type="icon-feedback" />,
     },
     {
       type: 'divider',
@@ -83,7 +83,7 @@ const ConfigMenu = (props: IConfigMenuProps) => {
     {
       label: <div onClick={() => setSettingOpen(true)}>设置</div>,
       key: 'setting',
-      icon: <Icon type="icon-shezhi1" />,
+      icon: <Icon type="icon-setting" />,
     },
     {
       type: 'divider',
@@ -91,7 +91,7 @@ const ConfigMenu = (props: IConfigMenuProps) => {
     {
       label: <div onClick={() => Events.quit()}>退出</div>,
       key: 'quit',
-      icon: <Icon type="icon-tuichu" />,
+      icon: <Icon type="icon-exit" />,
     },
   ];
 

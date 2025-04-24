@@ -53,10 +53,10 @@ const Base64CodingComponent = () => {
           <ActionsBarWrap palcement="right">
             <Copy value={decodeValue} size={18} />
             <Tooltip placement="bottom" title="保存">
-              <Icon type="icon-baocun" size={18} onClick={() => handleSave(decodeValue)} />
+              <Icon type="icon-save" size={18} onClick={() => handleSave(decodeValue)} />
             </Tooltip>
             <Tooltip placement="bottom" title="清除">
-              <Icon type="icon-shanchu" size={18} onClick={() => setDecodeValue('')} />
+              <Icon type="icon-delete" size={18} onClick={() => setDecodeValue('')} />
             </Tooltip>
           </ActionsBarWrap>
         ) : null}
@@ -91,10 +91,10 @@ const Base64CodingComponent = () => {
         <ActionsBarWrap palcement="right">
           <Copy value={encodeValue} size={18} />
           <Tooltip placement="bottom" title="保存">
-            <Icon type="icon-baocun" size={18} onClick={() => handleSave(encodeValue)} />
+            <Icon type="icon-save" size={18} onClick={() => handleSave(encodeValue)} />
           </Tooltip>
           <Tooltip placement="bottom" title="清除">
-            <Icon type="icon-shanchu" size={18} onClick={() => setEncodeValue('')} />
+            <Icon type="icon-delete" size={18} onClick={() => setEncodeValue('')} />
           </Tooltip>
         </ActionsBarWrap>
       </div>

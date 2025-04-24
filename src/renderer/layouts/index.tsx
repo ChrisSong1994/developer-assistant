@@ -1,25 +1,17 @@
 import { cx } from '@emotion/css';
 import { Layout, Tabs, Divider } from 'antd';
-import React, { FC, useLayoutEffect, useState } from 'react';
+import React, { FC, useLayoutEffect, useState, useMemo } from 'react';
 import { AppstoreOutlined } from '@ant-design/icons';
 
 import ConfigMenu from '@/components/ConfigMenu';
 import Events from '@/utils/events';
+import Applications from '@/pages/Applications';
 import logo from '../../assets/logo.png';
 import Icon from '../components/Icon';
 import styles from './index.module.less';
 import routes from './routes';
 
 const { Header, Content, Sider } = Layout;
-
-// 菜单栏
-const MenuItems = routes.map((item) => {
-  return {
-    key: item.key,
-    label: item.title,
-    icon: item.icon,
-  };
-});
 
 // 页面
 const pages = routes.reduce((pre: any[], cur: any) => {
@@ -36,11 +28,33 @@ const BaseLayout: FC = () => {
   const defaultSelectKey = pages[0].key;
   const [activeKey, setActiveKey] = useState<string>(defaultSelectKey);
 
-  const tabItems = pages.map((page: any) => ({
-    label: '',
-    key: page.key,
-    children: React.createElement(page.component, { key: page.key }),
-  }));
+  const tabItems = useMemo(() => {
+    const tabs = pages.map((page: any) => ({
+      label: '',
+      key: page.key,
+      children: React.createElement(page.component, { key: page.key }),
+    }));
+    tabs.push({
+      label: '',
+      key: 'more',
+      // @ts-ignore
+      children: <Applications />,
+    });
+    return tabs;
+  }, [pages]);
+
+  // 菜单栏
+  const MenuItems = useMemo(
+    () =>
+      routes.map((item) => {
+        return {
+          key: item.key,
+          label: item.title,
+          icon: item.icon,
+        };
+      }),
+    [routes],
+  );
 
   useLayoutEffect(() => {
     setTimeout(Events.windowRenderReady, 1000);
@@ -55,17 +69,17 @@ const BaseLayout: FC = () => {
         <div className={styles['developer-container-header-action']}>
           <ConfigMenu>
             <div className={styles['developer-container-header-action-btn']}>
-              <Icon type="icon-gengduo" />
+              <Icon type="icon-more" />
             </div>
           </ConfigMenu>
           <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
             <Icon type="icon-minus" />
           </div>
           <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMaxmize()}>
-            <Icon type="icon-quanping" />
+            <Icon type="icon-fullscreen" />
           </div>
           <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowClose()}>
-            <Icon type="icon-guanbi" />
+            <Icon type="icon-close" />
           </div>
         </div>
       </Header>
@@ -86,7 +100,7 @@ const BaseLayout: FC = () => {
                 <span className={styles['developer-container-sider-menu-item-label']}>{item.label}</span>
               </div>
             ))}
-            <Divider style={{margin: "5px 0"}} />
+            <Divider style={{ margin: '5px 0' }} />
             <div
               className={cx([
                 styles['developer-container-sider-menu-item'],
@@ -95,7 +109,7 @@ const BaseLayout: FC = () => {
               onClick={() => setActiveKey('more')}
             >
               {/* <Icon className={styles['developer-container-sider-menu-item-icon']} size={24} type={item.icon} /> */}
-              <AppstoreOutlined  style={{fontSize: "24px"}}/>
+              <AppstoreOutlined style={{ fontSize: '24px' }} />
               <span className={styles['developer-container-sider-menu-item-label']}>更多</span>
             </div>
           </div>

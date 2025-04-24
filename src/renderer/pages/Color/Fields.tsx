@@ -1,7 +1,8 @@
-import { Col, Row } from 'antd';
+import { Col, Row, Tooltip } from 'antd';
 import * as color from 'react-color/es/helpers/color';
 
 import EditableInput from '@/components/EditableInput';
+import Icon from '@/components/Icon';
 import styles from './index.module.less';
 
 interface IProps {
@@ -72,11 +73,30 @@ const Fields = (porps: IProps) => {
     }
   };
 
+  // 颜色吸取
+  const handleSystemColorPicker = () => {
+    // @ts-ignore
+    const eyeDropper = new EyeDropper();
+    eyeDropper
+      .open()
+      .then((result: any) => {
+        handleChange({ hex: result.sRGBHex }, null);
+      })
+      .catch((error: any) => {
+        console.log('handleSystemColorPicker error', error);
+      });
+  };
+
   return (
     <section className={styles['color-picker-fields']}>
       <Row gutter={[16, 16]}>
         <Col span={24}>
-          <EditableInput labelPosition="center" label="HEX" value={hex} onChange={handleChange} />
+          <div className={styles['color-picker-fields-hex']}>
+            <EditableInput style={{ flex: 1 }} labelPosition="center" label="HEX" value={hex} onChange={handleChange} />
+            <Tooltip placement="bottom" title="吸取颜色">
+              <Icon style={{ margin: '0 4px' }} type="icon-xiqu" size={22} onClick={handleSystemColorPicker} />
+            </Tooltip>
+          </div>
         </Col>
         <Col span={8}>
           <EditableInput labelPosition="left" label="RGB" value={rgbValue} onChange={handleChange} />

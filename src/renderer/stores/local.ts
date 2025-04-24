@@ -7,8 +7,9 @@ const localAtom = atom<ILocalData>({
   color: [],
   images_compress: [],
   sider_menus: [], // 侧边栏固定菜单
-
+  more_active_menu_key: undefined,
 });
+
 localAtom.onMount = (setAtom) => {
   Events.getConfData().then(setAtom);
 };

@@ -43,7 +43,7 @@ const CopyComponent = (props: IProps) => {
               cursor:pointer;
             `)}
             style={{ color: '#52c41a' }}
-            type="icon-icon_duihao-xian"
+            type="icon-checkout"
           />
         ) : (
           <Icon
@@ -51,7 +51,7 @@ const CopyComponent = (props: IProps) => {
               font-size:${size}px;
               cursor:pointer;
             `)}
-            type="icon-kaobei"
+            type="icon-copy"
           />
         )}
       </Tooltip>

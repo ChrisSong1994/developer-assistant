@@ -20,8 +20,8 @@ import { isEmpty } from '@/utils';
 import Events from '@/utils/events';
 import styles from './index.module.less';
 
-const EDITOR_HEIGHT_PADDING = 130;
-const JsonParseComponent = (props: any) => {
+const EDITOR_HEIGHT_PADDING = 100;
+const JsonParseComponent = () => {
   const [value, setValue] = useState('');
   const [parseJson, setParseJson] = useState({});
   const [parseError, setParseError] = useState<string | null>(null);
@@ -84,19 +84,19 @@ const JsonParseComponent = (props: any) => {
         <ActionsBarWrap>
           <Copy value={value} size={18} />
           <Tooltip placement="bottom" title="美化">
-            <Icon type="icon-qingchu" size={18} onClick={handleJsonFormat} />
+            <Icon type="icon-clear" size={18} onClick={handleJsonFormat} />
           </Tooltip>
           <Tooltip placement="bottom" title="压缩">
-            <Icon type="icon-wenjianyasuo" size={18} onClick={handleCompress} />
+            <Icon type="icon-compress" size={18} onClick={handleCompress} />
           </Tooltip>
           <Tooltip placement="bottom" title="保存">
-            <Icon type="icon-baocun" size={18} onClick={handleSave} />
+            <Icon type="icon-save" size={18} onClick={handleSave} />
           </Tooltip>
           <Tooltip placement="bottom" title="导入">
-            <Icon type="icon-daoru" size={18} onClick={handleImport} />
+            <Icon type="icon-export" size={18} onClick={handleImport} />
           </Tooltip>
           <Tooltip placement="bottom" title="清除">
-            <Icon type="icon-shanchu" size={18} onClick={handleClear} />
+            <Icon type="icon-delete" size={18} onClick={handleClear} />
           </Tooltip>
         </ActionsBarWrap>
 

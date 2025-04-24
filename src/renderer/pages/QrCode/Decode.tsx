@@ -37,7 +37,7 @@ const Decode = () => {
       <ActionsBarWrap palcement="right">
         <Copy value={decodeValue} size={18} />
         <Tooltip placement="bottom" title="保存">
-          <Icon type="icon-baocun" size={18} onClick={() => handleSave(decodeValue)} />
+          <Icon type="icon-save" size={18} onClick={() => handleSave(decodeValue)} />
         </Tooltip>
       </ActionsBarWrap>
       <TextArea spellCheck={false} rows={14} placeholder="请输入待解码内容" value={decodeValue} />
