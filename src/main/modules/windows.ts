@@ -1,8 +1,8 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
 import path from 'path';
 import { EWindowSize } from '../../types/global';
-import { isDevelopment, isInMac } from '../utils';
-import { getPublicFilePath, ICON_PATH } from '../utils/path';
+import { isDev, getPageUrl, isInMac } from '../utils';
+import {  ICON_PATH } from '../utils/path';
 
 export let browserWindows: Array<BrowserWindow | null> = [];
 
@@ -18,7 +18,7 @@ export function getLaunchWindowOptions(): BrowserWindowConstructorOptions {
     icon: ICON_PATH,
     resizable: false,
     webPreferences: {
-      devTools: isDevelopment,
+      devTools: true,
     },
   };
 }
@@ -38,7 +38,7 @@ export function getMainWindowOptions(): BrowserWindowConstructorOptions {
     icon: ICON_PATH,
     show: false,
     webPreferences: {
-      devTools: isDevelopment,
+      devTools: isDev,
       nodeIntegration: true,
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js'),
@@ -61,16 +61,11 @@ export function createMainWindow() {
     launchWindow.setWindowButtonVisibility(false);
   }
 
-  if (isDevelopment) {
-    launchWindow.loadURL('http://localhost:3000/launch/index.html');
-    mainWindow.loadURL('http://localhost:3000');
-  } else {
-    launchWindow.loadURL(getPublicFilePath({ name: 'launch/index.html' }));
-    mainWindow.loadURL(getPublicFilePath({ name: 'index.html' }));
-  }
+  launchWindow.loadURL(getPageUrl('launch'));
+  mainWindow.loadURL(getPageUrl('index'));
 
   mainWindow.webContents.once('dom-ready', () => {
-    if (isDevelopment) {
+    if (isDev) {
       mainWindow?.webContents.openDevTools();
     }
   });

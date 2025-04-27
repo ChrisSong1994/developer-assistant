@@ -1,6 +1,6 @@
 export {  getAppVersion, getOpenAtLogin, quit, setOpenAtLogin } from './modules/app';
 export { createHash, decrypt, encrypt } from './modules/crypto';
-export { clearLocalData, getConfData, getLocalData, setConfData, setLocalData } from './modules/data';
+export { clearLocalData, getConfData, getLocalData, setConfData, setLocalData } from './db';
 export {
   getFileFromLocalPath,
   getFilePath,

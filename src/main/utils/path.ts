@@ -1,6 +1,9 @@
 import { app } from 'electron';
 import fs from 'fs-extra';
 import path from 'path';
+import { isEmpty, qs } from '@fett/utils';
+
+import { isDev } from './env';
 
 export const PACKAGE_PATH = app.isPackaged
   ? path.join(__dirname, './package.json')
@@ -14,11 +17,6 @@ export const ICON_PATH = path.join(RESOURCES_PATH, 'icon.png');
 
 export const ensureFirstBackSlash = (str: string) => {
   return str.length > 0 && str.charAt(0) !== '/' ? '/' + str : str;
-};
-
-export const getPublicFilePath = ({ name }: { name: string }) => {
-  const pathName = path.resolve(path.join(__dirname, name)).replace(/\\/g, '/');
-  return encodeURI('file://' + ensureFirstBackSlash(pathName));
 };
 
 export const getNotExistFilePath = (filePath: string): string => {
@@ -40,4 +38,41 @@ export const getNotExistFilePath = (filePath: string): string => {
   }
 
   return newFilePath;
+};
+
+export const getPublicFilePath = ({ name }: { name: string }) => {
+  const pathName = path.resolve(path.join(__dirname, name)).replace(/\\/g, '/');
+  return encodeURI('file://' + ensureFirstBackSlash(pathName));
+};
+
+export const getPageUrl = (page: any, query: Record<string, any> = {}) => {
+  let url;
+  if (isDev) {
+    url = `http://localhost:3000/${page}.html`;
+  } else {
+    url = getPublicFilePath({ name: `${page}.html` });
+  }
+  return url + (isEmpty(query) ? '' : `?${qs.stringify(query)}`);
+};
+
+// 应用程序相关路径
+export const getUserDataPath = () => {
+  const userDataPath = app.getPath('userData');
+  return userDataPath;
+};
+
+export const getHomePath = () => {
+  return app.getPath('home');
+};
+
+export const getTempPath = () => {
+  return app.getPath('temp');
+};
+
+export const getDownloadsPath = () => {
+  return app.getPath('downloads');
+};
+
+export const getLogsPath = () => {
+  return app.getPath('logs');
 };

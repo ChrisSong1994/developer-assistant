@@ -2,9 +2,9 @@ import { app } from 'electron';
 import { installDevtool } from './utils';
 
 import eventsRegistry from './eventsRegistry';
-import { dbInit } from './modules/data';
+import { dbRegistory } from './db';
 import { windowInit } from './modules/windows';
-import { isDevelopment } from './utils';
+import { isDev } from './utils';
 
 export async function onReady() {
   // 创建主窗口
@@ -14,10 +14,10 @@ export async function onReady() {
   eventsRegistry();
 
   // 数据初始化
-  await dbInit();
+  await dbRegistory();
 
   // 加载开发插件
-  if (isDevelopment) {
+  if (isDev) {
     await installDevtool();
   }
 }

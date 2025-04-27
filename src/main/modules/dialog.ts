@@ -3,7 +3,7 @@ import fs from 'fs-extra';
 import _ from 'lodash';
 
 import { getFileFromPath } from '../utils/file';
-import { getConfData } from './data';
+import { getConfData } from '../db';
 
 export const getFilePath = async (options: OpenDialogOptions = {}) => {
   const { downloadPath } = await getConfData();
