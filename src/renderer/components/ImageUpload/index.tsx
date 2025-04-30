@@ -14,17 +14,34 @@ interface IImageUploadProps {
   imageStyle?: CSSProperties;
 }
 
+const miniType = {
+  png: 'image/png',
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  webp: 'image/webp',
+  gif: 'image/gif',
+  svg: 'image/svg+xml',
+  bmp: 'image/bmp',
+  tiff: 'image/tiff',
+  tif: 'image/tiff',
+  ico: 'image/x-icon',
+};
+const getMiniType = (fileExt: any) => {
+  return miniType[fileExt as keyof typeof miniType] || 'image/png';
+};
+
 const ImageUpload = (props: IImageUploadProps) => {
   const { value, onChange, style = {}, imageStyle = {} } = props;
 
   const handleUploadImage = async () => {
     const { fileValue, filePath } = await Events.getFileFromLocalPath({
-      filters: [{ name: '图片文件', extensions: ['*.png', '*.jpeg','*.jpg','*.webp'] }],
+      filters: [{ name: '图片文件', extensions: ['*.png', '*.jpeg', '*.jpg', '*.webp', '*.gif', '.svg'] }],
       encoding: 'base64',
     });
     if (fileValue) {
       const fileExt = getFilePathExt(filePath);
-      const base64Url = `data:image/${fileExt};base64,${fileValue}`;
+      const miniType = getMiniType(fileExt);
+      const base64Url = `data:${miniType};base64,${fileValue}`;
       onChange(base64Url);
     }
   };
