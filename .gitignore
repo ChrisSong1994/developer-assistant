@@ -5,3 +5,4 @@ release
 .umi-production
 dist
 build
+doc_build
