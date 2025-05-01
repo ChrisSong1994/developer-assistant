@@ -1,7 +1,7 @@
 import Generate from './Generate';
 import Decode from './Decode';
 
-import CustomTabs from '@/components/CustomTabs';
+import CustomTabs from '@/renderer/components/CustomTabs';
 
 export const EDITOR_HEIGHT_PADDING = 130;
 

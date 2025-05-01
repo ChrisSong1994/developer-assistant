@@ -1,4 +1,4 @@
-import { URL_PARAMS_KEYS } from '@/constants';
+import { URL_PARAMS_KEYS } from '@/renderer/constants';
 import _ from 'lodash';
 import moment from 'moment';
 

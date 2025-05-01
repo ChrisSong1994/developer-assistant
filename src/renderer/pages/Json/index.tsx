@@ -11,13 +11,13 @@ import { Tooltip } from 'antd';
 import jsonlint from 'jsonlint-mod';
 import { useEffect, useMemo, useState } from 'react';
 
-import ActionsBarWrap from '@/components/ActionsBarWrap';
-import Copy from '@/components/Copy';
-import { JsonEditor } from '@/components/Editor';
-import Icon from '@/components/Icon';
-import { useWindowSize } from '@/hooks';
-import { isEmpty } from '@/utils';
-import Events from '@/utils/events';
+import ActionsBarWrap from '@/renderer/components/ActionsBarWrap';
+import Copy from '@/renderer/components/Copy';
+import { JsonEditor } from '@/renderer/components/Editor';
+import Icon from '@/renderer/components/Icon';
+import { useWindowSize } from '@/renderer/hooks';
+import { isEmpty } from '@/renderer/utils';
+import Events from '@/renderer/utils/events';
 import styles from './index.module.less';
 
 const EDITOR_HEIGHT_PADDING = 100;

@@ -1,9 +1,9 @@
 import { Button, Input, Space, Tooltip } from 'antd';
 import { Fragment, useState } from 'react';
 
-import ActionsBarWrap from '@/components/ActionsBarWrap';
-import Copy from '@/components/Copy';
-import Icon from '@/components/Icon';
+import ActionsBarWrap from '@/renderer/components/ActionsBarWrap';
+import Copy from '@/renderer/components/Copy';
+import Icon from '@/renderer/components/Icon';
 
 const TextArea = Input.TextArea;
 

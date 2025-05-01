@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import Events from '@/utils/events';
+import Events from '@/renderer/utils/events';
 
 interface IGlobalData {
   appVersion?: string;

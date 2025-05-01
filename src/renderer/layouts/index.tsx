@@ -3,10 +3,10 @@ import { Layout, Tabs, Divider } from 'antd';
 import React, { FC, useLayoutEffect, useState, useMemo } from 'react';
 import { AppstoreOutlined } from '@ant-design/icons';
 
-import { useLocalData } from '@/hooks';
-import ConfigMenu from '@/components/ConfigMenu';
-import Events from '@/utils/events';
-import Applications from '@/pages/Applications';
+import { useLocalData } from '@/renderer/hooks';
+import ConfigMenu from '@/renderer/components/ConfigMenu';
+import Events from '@/renderer/utils/events';
+import Applications from '@/renderer/pages/Applications';
 import logo from '../../assets/logo.png';
 import Icon from '../components/Icon';
 import styles from './index.module.less';

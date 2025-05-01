@@ -1,6 +1,6 @@
-// import {} from 'react';
-import { CloseOutlined } from '@ant-design/icons';
-import Icon from '@/components/Icon';
+import { HolderOutlined } from '@ant-design/icons';
+
+import Icon from '@/renderer/components/Icon';
 import styles from './index.module.less';
 
 export interface AppItemProps {
@@ -12,11 +12,6 @@ export interface AppItemProps {
 export default function AppItem(props: AppItemProps) {
   const { data, onDelete, canDetele, onClick } = props;
 
-  const handleRemove = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onDelete(data.key);
-  };
-
   const handleActive = () => {
     if (canDetele) return;
     onClick(data.key);
@@ -26,9 +21,9 @@ export default function AppItem(props: AppItemProps) {
     <div className={styles['applications-quick-apps-item']} key={data.key} onClick={handleActive}>
       <Icon className={styles['applications-quick-apps-item-icon']} size={24} type={data.icon} />
       <span className={styles['applications-quick-apps-item-label']}>{data.title}</span>
-      {canDetele ? (
-        <CloseOutlined className={styles['applications-quick-apps-item-remove-btn']} onClick={handleRemove} />
-      ) : null}
+      <div className={styles['applications-quick-apps-item-handle-btn']}>
+        <HolderOutlined />
+      </div>
     </div>
   );
 }

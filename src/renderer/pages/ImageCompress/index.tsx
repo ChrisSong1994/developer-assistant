@@ -2,11 +2,11 @@ import { ClearOutlined, CompressOutlined, UploadOutlined } from '@ant-design/ico
 import { Button, ConfigProvider, Segmented, Space, Table } from 'antd';
 import { useMemo, useState } from 'react';
 
-import Empty from '@/components/Empty';
-import Icon from '@/components/Icon';
-import { useLocalData, useWindowSize } from '@/hooks';
-import { arrayObjDeWightByKey, formatFileSize } from '@/utils';
-import Events from '@/utils/events';
+import Empty from '@/renderer/components/Empty';
+import Icon from '@/renderer/components/Icon';
+import { useLocalData, useWindowSize } from '@/renderer/hooks';
+import { arrayObjDeWightByKey, formatFileSize } from '@/renderer/utils';
+import Events from '@/renderer/utils/events';
 import { IImageCompressInfo } from '../../../main/modules/image';
 
 import styles from './index.module.less';

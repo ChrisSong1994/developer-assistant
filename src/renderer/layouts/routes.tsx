@@ -1,14 +1,14 @@
-import Color from '@/pages/Color';
-import Diff from '@/pages/Diff';
-import Encryption from '@/pages/Encryption';
-import ImageEditor from '@/pages/ImageEditor';
-import JsonComponent from '@/pages/Json';
-import QrCode from '@/pages/QrCode';
-import Regexp from '@/pages/Regexp';
-import Transcoding from '@/pages/Transcoding';
-import UrlParse from '@/pages/UrlParse';
-import Transform from '@/pages/Transform';
-import Markdown from '@/pages/Markdown';
+import Color from '@/renderer/pages/Color';
+import Diff from '@/renderer/pages/Diff';
+import Encryption from '@/renderer/pages/Encryption';
+import ImageEditor from '@/renderer/pages/ImageEditor';
+import JsonComponent from '@/renderer/pages/Json';
+import QrCode from '@/renderer/pages/QrCode';
+import Regexp from '@/renderer/pages/Regexp';
+import Transcoding from '@/renderer/pages/Transcoding';
+import UrlParse from '@/renderer/pages/UrlParse';
+import Transform from '@/renderer/pages/Transform';
+import Markdown from '@/renderer/pages/Markdown';
 
 export enum ToolCategory {
   TEXT = 'TEXT',

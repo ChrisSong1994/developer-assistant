@@ -1,8 +1,8 @@
 import { Button, Drawer, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 
-import { useConfigData, useLocalData } from '@/hooks';
-import Events from '@/utils/events';
+import { useConfigData, useLocalData } from '@/renderer/hooks';
+import Events from '@/renderer/utils/events';
 
 import styles from './index.module.less';
 

@@ -9,8 +9,8 @@ import { Button, Checkbox, Divider, Dropdown, Input, Menu, Popover, Space, Toolt
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
 import { useEffect, useMemo, useState } from 'react';
 
-import { REGEXP_SYNTAX_COMMENTS_OPTIONS } from '@/constants';
-import regMatch from '@/utils/regMatch';
+import { REGEXP_SYNTAX_COMMENTS_OPTIONS } from '@/renderer/constants';
+import regMatch from '@/renderer/utils/regMatch';
 import styles from './index.module.less';
 
 const TextArea = Input.TextArea;

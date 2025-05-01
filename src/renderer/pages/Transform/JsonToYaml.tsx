@@ -13,9 +13,9 @@ import jsonlint from 'jsonlint-mod';
 import { useEffect, useMemo, useState } from 'react';
 import YAML from 'yaml';
 
-import { JsonEditor, YamlEditor } from '@/components/Editor';
-import { useWindowSize } from '@/hooks';
-import { isEmpty } from '@/utils';
+import { JsonEditor, YamlEditor } from '@/renderer/components/Editor';
+import { useWindowSize } from '@/renderer/hooks';
+import { isEmpty } from '@/renderer/utils';
 import styles from './index.module.less';
 
 const EDITOR_HEIGHT_PADDING = 130;

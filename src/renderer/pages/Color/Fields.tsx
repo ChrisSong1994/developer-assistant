@@ -1,8 +1,8 @@
 import { Col, Row, Tooltip } from 'antd';
 import * as color from 'react-color/es/helpers/color';
 
-import EditableInput from '@/components/EditableInput';
-import Icon from '@/components/Icon';
+import EditableInput from '@/renderer/components/EditableInput';
+import Icon from '@/renderer/components/Icon';
 import styles from './index.module.less';
 
 interface IProps {

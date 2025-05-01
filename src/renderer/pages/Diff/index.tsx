@@ -1,9 +1,9 @@
 import { Select } from 'antd';
 import { Fragment, useMemo, useState } from 'react';
 
-import { BaseDiffEditor, EEditorLanguage } from '@/components/Editor';
-import { EDITOR_LANGUAGE_OPTIONS } from '@/constants';
-import { useWindowSize } from '@/hooks';
+import { BaseDiffEditor, EEditorLanguage } from '@/renderer/components/Editor';
+import { EDITOR_LANGUAGE_OPTIONS } from '@/renderer/constants';
+import { useWindowSize } from '@/renderer/hooks';
 
 const EDITOR_HEIGHT_PADDING = 100;
 

@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import { Low } from 'lowdb';
 import { JSONFile } from 'lowdb/node';
 import path from 'path';
-import { getUserDataPath, getDownloadsPath } from '@/utils';
+import { getUserDataPath, getDownloadsPath } from '@/main/utils';
 
 export interface IConfigData {
   downloadPath: string;

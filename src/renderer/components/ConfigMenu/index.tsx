@@ -3,10 +3,10 @@ import { Checkbox, Dropdown, MenuProps, Modal } from 'antd';
 import React, { Fragment, useEffect, useState } from 'react';
 import semver from 'semver';
 
-import Icon from '@/components/Icon';
-import { useConfigData } from '@/hooks';
-import { isEmpty } from '@/utils';
-import Events from '@/utils/events';
+import Icon from '@/renderer/components/Icon';
+import { useConfigData } from '@/renderer/hooks';
+import { isEmpty } from '@/renderer/utils';
+import Events from '@/renderer/utils/events';
 import About from './About';
 import Setting from './Setting';
 interface IConfigMenuProps {

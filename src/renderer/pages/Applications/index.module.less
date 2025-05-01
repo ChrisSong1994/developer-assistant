@@ -1,17 +1,19 @@
 .applications {
   &-quick-apps {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     margin-top: 20px;
 
     &-tip {
       font-weight: 500;
-      font-size: 14px;
+      font-size: 16px;
     }
 
     &-wrap {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
     }
     &-item {
       cursor: pointer;
@@ -37,20 +39,23 @@
         font-size: 12px;
       }
 
-      &-remove-btn {
+      &-handle-btn {
         position: absolute;
-        top: -6px;
-        right: -6px;
+        top: 2px;
+        right: 2px;
+        height: 18px;
+        width: 16px;
         z-index: 100;
-        display: none;
-        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background-color: #ccc;
-        border-radius: 50%;
+        border-radius: 2px;
         cursor: pointer;
       }
 
       &:hover {
-        &-remove-btn {
+        .applications-quick-apps-item-handle-btn {
           display: block;
         }
       }

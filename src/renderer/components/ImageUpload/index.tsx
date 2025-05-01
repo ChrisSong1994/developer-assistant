@@ -2,8 +2,8 @@ import { UploadOutlined } from '@ant-design/icons';
 import { Button, Image, Tooltip } from 'antd';
 import { CSSProperties, memo } from 'react';
 
-import { getFilePathExt } from '@/utils';
-import Events from '@/utils/events';
+import { getFilePathExt } from '@/renderer/utils';
+import Events from '@/renderer/utils/events';
 import Icon from '../Icon';
 import fallbackImg from './fallbackImg';
 

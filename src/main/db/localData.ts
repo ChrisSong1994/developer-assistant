@@ -3,8 +3,8 @@ import { Low } from 'lowdb';
 import { JSONFile } from 'lowdb/node';
 import path from 'path';
 
-import { IImageCompressInfo } from '@/modules/image';
-import { getUserDataPath } from '@/utils';
+import { IImageCompressInfo } from '@/main/modules/image';
+import { getUserDataPath } from '@/main/utils';
 
 interface IColorItem {
   value: string;

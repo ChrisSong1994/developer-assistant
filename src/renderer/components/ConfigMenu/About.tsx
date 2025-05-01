@@ -1,7 +1,7 @@
 import { Button, Modal } from 'antd';
 
-import { useGlobalData } from '@/hooks';
-import Events from '@/utils/events';
+import { useGlobalData } from '@/renderer/hooks';
+import Events from '@/renderer/utils/events';
 import logo from '../../../assets/logo.png';
 
 interface IAboutProps {

@@ -2,11 +2,11 @@ import { Input, Tooltip } from 'antd';
 import QrCodeReader from 'qrcode-reader';
 import { useEffect, useState } from 'react';
 
-import ActionsBarWrap from '@/components/ActionsBarWrap';
-import Copy from '@/components/Copy';
-import Icon from '@/components/Icon';
-import ImageUpload from '@/components/ImageUpload';
-import Events from '@/utils/events';
+import ActionsBarWrap from '@/renderer/components/ActionsBarWrap';
+import Copy from '@/renderer/components/Copy';
+import Icon from '@/renderer/components/Icon';
+import ImageUpload from '@/renderer/components/ImageUpload';
+import Events from '@/renderer/utils/events';
 import styles from './index.module.less';
 
 const TextArea = Input.TextArea;

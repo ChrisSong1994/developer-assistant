@@ -3,10 +3,10 @@ import { Button } from 'antd';
 import { Fragment, useState } from 'react';
 import * as color from 'react-color/es/helpers/color';
 
-import Empty from '@/components/Empty';
-import { THEME_COLOR } from '@/constants';
-import { useLocalData } from '@/hooks';
-import { generateDateUUID, isEmpty } from '@/utils';
+import Empty from '@/renderer/components/Empty';
+import { THEME_COLOR } from '@/renderer/constants';
+import { useLocalData } from '@/renderer/hooks';
+import { generateDateUUID, isEmpty } from '@/renderer/utils';
 
 import ColorPicker from './Picker';
 import ColorRecord, { IRecord } from './Record';

@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { Divider } from 'antd';
 
-import { useLocalData } from '@/hooks';
-import routes from '@/layouts/routes';
+import { useLocalData } from '@/renderer/hooks';
+import routes from '@/renderer/layouts/routes';
 import AppItem from './AppItem';
 import styles from './index.module.less';
 

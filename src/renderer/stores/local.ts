@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
 
-import Events from '@/utils/events';
-import { ILocalData } from '../../main/modules/data';
+import Events from '@/renderer/utils/events';
+import { ILocalData } from '@/main/db';
 
 const localAtom = atom<ILocalData>({
   color: [],
@@ -12,7 +12,7 @@ const localAtom = atom<ILocalData>({
 });
 
 localAtom.onMount = (setAtom) => {
-  Events.getConfData().then(setAtom);
+  Events.getLocalData().then(setAtom);
 };
 
 export default localAtom;

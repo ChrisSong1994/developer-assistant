@@ -1,5 +1,5 @@
 import { loader } from '@monaco-editor/react';
-import Events from '@/utils/events';
+import Events from '@/renderer/utils/events';
 
 export const init = async () => {
   const vsPath = await Events.getPublicFilePath({ name: 'vs' });

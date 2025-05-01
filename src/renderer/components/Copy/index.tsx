@@ -3,7 +3,7 @@ import { Tooltip } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import Icon from '@/components/Icon';
+import Icon from '@/renderer/components/Icon';
 
 interface IProps {
   value: string;
