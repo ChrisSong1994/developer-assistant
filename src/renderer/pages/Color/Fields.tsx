@@ -83,7 +83,7 @@ const Fields = (porps: IProps) => {
         handleChange({ hex: result.sRGBHex }, null);
       })
       .catch((error: any) => {
-        console.log('handleSystemColorPicker error', error);
+        console.warn('handleSystemColorPicker error', error);
       });
   };
 

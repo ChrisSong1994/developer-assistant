@@ -16,6 +16,7 @@ export interface ILocalData {
   color: Array<IColorItem>;
   images_compress: Array<IImageCompressInfo>;
   sider_menus: Array<string>;
+  other_menus: Array<string>;
   active_menu_key: string | undefined;
   more_active_menu_key: string | undefined;
 }
@@ -30,20 +31,27 @@ export const DEFAULT_LOCAL_DATA: ILocalData = {
   ],
   images_compress: [],
   sider_menus: ['Color', 'JSON'],
+  other_menus: ['Image', 'Transform', 'Diff', 'Regexp', 'QrCode', 'Transcoding', 'Encryption', 'UrlParse', 'Markdown'],
   active_menu_key: undefined,
   more_active_menu_key: undefined,
 };
 
 const APP_CONFIG_PATH = path.join(getUserDataPath(), 'local.json');
 
+console.log('APP_CONFIG_PATH', APP_CONFIG_PATH);
+
 let db: Low<ILocalData>;
 
 export async function LocalDBRegistory() {
   if (!fs.existsSync(APP_CONFIG_PATH)) {
-      await fs.ensureFile(APP_CONFIG_PATH)
+    await fs.ensureFile(APP_CONFIG_PATH);
     await fs.writeJSON(APP_CONFIG_PATH, DEFAULT_LOCAL_DATA);
   }
   db = new Low(new JSONFile(APP_CONFIG_PATH), DEFAULT_LOCAL_DATA);
+  await db.update((data) => {
+    return { ...DEFAULT_LOCAL_DATA, ...data };
+  });
+
   await db.read();
 }
 

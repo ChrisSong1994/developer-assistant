@@ -96,7 +96,6 @@ const Regexp = () => {
           size="large"
           value={regexp}
           onChange={(e) => {
-            console.log(e.target.value);
             setRegexp(e.target.value);
           }}
           addonBefore={

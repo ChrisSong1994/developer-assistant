@@ -1,6 +1,6 @@
 import { cx } from '@emotion/css';
 import { Layout, Tabs, Divider } from 'antd';
-import React, { FC, useLayoutEffect, useState, useMemo } from 'react';
+import React, { FC, useLayoutEffect, useMemo } from 'react';
 import { AppstoreOutlined } from '@ant-design/icons';
 
 import { useLocalData } from '@/renderer/hooks';
@@ -13,20 +13,7 @@ import styles from './index.module.less';
 import routes from './routes';
 
 const { Header, Content, Sider } = Layout;
-
-// 页面
-// const pages = routes.reduce((pre: any[], cur: any) => {
-//   if (cur.component) {
-//     return [...pre, { ...cur }];
-//   }
-//   if (cur.children) {
-//     return [...pre, ...cur.children];
-//   }
-//   return pre;
-// }, []);
-
 const BaseLayout: FC = () => {
-  // const [activeKey, setActiveKey] = useState<string>(defaultSelectKey);
   const { data: localData, setData: setLocalData } = useLocalData();
 
   const activeKey = useMemo(() => {
@@ -49,25 +36,25 @@ const BaseLayout: FC = () => {
       children: <Applications />,
     });
     return tabs;
-  }, [routes, localData.active_menu_key]);
+  }, [routes, localData]);
 
   // 菜单栏
-  const MenuItems = useMemo(() => {
+  const menuItems = useMemo(() => {
     if (localData.sider_menus?.length) {
-      return routes
-        .filter((item) => localData.sider_menus.includes(item.key))
-        .map((item) => {
-          return {
-            key: item.key,
-            label: item.title,
-            icon: item.icon,
-          };
-        });
+      return localData.sider_menus.map((key) => {
+        const route: any = routes.find((item) => item.key === key);
+        return {
+          key: route.key,
+          label: route.title,
+          icon: route.icon,
+        };
+      });
     } else {
       return [];
     }
-  }, [routes, localData.sider_menus]);
+  }, [routes, localData]);
 
+  // 激活tab
   const moreActiveTab = useMemo(() => {
     if (localData.sider_menus && localData.more_active_menu_key) {
       return routes.find((item: any) => {
@@ -115,7 +102,7 @@ const BaseLayout: FC = () => {
       <Layout>
         <Sider width={72} theme="light" className={styles['developer-container-sider']}>
           <div className={styles['developer-container-sider-menu']}>
-            {MenuItems.map((item) => (
+            {menuItems.map((item) => (
               <div
                 className={cx([
                   styles['developer-container-sider-menu-item'],
