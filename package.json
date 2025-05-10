@@ -1,6 +1,6 @@
 {
   "name": "developer-assistant",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "description": "前端开发者助手",
   "main": "main.js",

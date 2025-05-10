@@ -21,7 +21,7 @@ const BaseLayout: FC = () => {
       return localData.active_menu_key;
     }
     return localData.sider_menus?.[0] || '';
-  }, [localData.active_menu_key]);
+  }, [localData]);
 
   const tabItems = useMemo(() => {
     const tabs = routes.map((page: any) => ({

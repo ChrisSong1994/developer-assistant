@@ -48,10 +48,6 @@ export async function LocalDBRegistory() {
     await fs.writeJSON(APP_CONFIG_PATH, DEFAULT_LOCAL_DATA);
   }
   db = new Low(new JSONFile(APP_CONFIG_PATH), DEFAULT_LOCAL_DATA);
-  await db.update((data) => {
-    return { ...DEFAULT_LOCAL_DATA, ...data };
-  });
-
   await db.read();
 }
 
