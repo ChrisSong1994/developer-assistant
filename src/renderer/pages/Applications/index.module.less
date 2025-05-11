@@ -1,0 +1,64 @@
+.applications {
+  &-quick-apps {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 20px;
+
+    &-tip {
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    &-wrap {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    &-item {
+      cursor: pointer;
+      position: relative;
+      margin-right: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: #ededed;
+
+      &-icon {
+        margin-bottom: -4px; // 调整间距
+      }
+
+      &-label {
+        font-size: 12px;
+      }
+
+      &-handle-btn {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        height: 18px;
+        width: 16px;
+        z-index: 100;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background-color: #dadada;
+        border-radius: 2px;
+        cursor: grab;
+      }
+
+      &:hover {
+        .applications-quick-apps-item-handle-btn {
+          display: flex;
+        }
+      }
+    }
+  }
+}

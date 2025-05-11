@@ -1,4 +1,4 @@
-import { EEditorLanguage } from '@/components/Editor';
+import { EEditorLanguage } from '@/renderer/components/Editor';
 
 export const THEME_COLOR = '#1d2e54'; // 主题色
 

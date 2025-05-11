@@ -1,4 +1,4 @@
-import CustomTabs from '@/components/CustomTabs';
+import CustomTabs from '@/renderer/components/CustomTabs';
 import Base64CodingComponent from './Base64';
 import UrlCodingComponent from './Url';
 

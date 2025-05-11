@@ -1,8 +1,8 @@
 import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
-import localAtom from '@/stores/local';
-import Events from '@/utils/events';
+import localAtom from '@/renderer/stores/local';
+import Events from '@/renderer/utils/events';
 
 export default function () {
   const [loading, setLoading] = useState<boolean>(true);

@@ -1,7 +1,7 @@
 import { css, cx } from '@emotion/css';
 import { useEffect, useRef, useState } from 'react';
 
-import Copy from '@/components/Copy';
+import Copy from '@/renderer/components/Copy';
 import styles from './index.module.less';
 
 let idCounter = 1;
@@ -11,10 +11,11 @@ interface IProps {
   labelPosition?: 'left' | 'center' | 'right';
   value: any;
   onChange: (val: any, e: any) => void;
+  style?: Record<string, any>;
 }
 
 const EditableInput = (porps: IProps) => {
-  const { value, label, labelPosition = 'center', onChange } = porps;
+  const { value, label, labelPosition = 'center', onChange, style = {} } = porps;
   const inputRef = useRef(null);
   const [blurValue, setBlurValue] = useState<any>(String(value).toUpperCase());
   const [currentValue, setCurrentValue] = useState(String(value).toUpperCase());
@@ -48,7 +49,7 @@ const EditableInput = (porps: IProps) => {
   }, [value]);
 
   return (
-    <div className={styles['wrap']}>
+    <div className={styles['wrap']} style={{ ...style }}>
       <input
         className={styles['input']}
         ref={inputRef}

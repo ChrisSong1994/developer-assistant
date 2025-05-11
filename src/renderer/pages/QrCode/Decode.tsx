@@ -2,11 +2,11 @@ import { Input, Tooltip } from 'antd';
 import QrCodeReader from 'qrcode-reader';
 import { useEffect, useState } from 'react';
 
-import ActionsBarWrap from '@/components/ActionsBarWrap';
-import Copy from '@/components/Copy';
-import Icon from '@/components/Icon';
-import ImageUpload from '@/components/ImageUpload';
-import Events from '@/utils/events';
+import ActionsBarWrap from '@/renderer/components/ActionsBarWrap';
+import Copy from '@/renderer/components/Copy';
+import Icon from '@/renderer/components/Icon';
+import ImageUpload from '@/renderer/components/ImageUpload';
+import Events from '@/renderer/utils/events';
 import styles from './index.module.less';
 
 const TextArea = Input.TextArea;
@@ -37,7 +37,7 @@ const Decode = () => {
       <ActionsBarWrap palcement="right">
         <Copy value={decodeValue} size={18} />
         <Tooltip placement="bottom" title="保存">
-          <Icon type="icon-baocun" size={18} onClick={() => handleSave(decodeValue)} />
+          <Icon type="icon-save" size={18} onClick={() => handleSave(decodeValue)} />
         </Tooltip>
       </ActionsBarWrap>
       <TextArea spellCheck={false} rows={14} placeholder="请输入待解码内容" value={decodeValue} />

@@ -17,7 +17,7 @@ const config: Configuration = {
   resolve: {
     extensions: ['...', '.ts', '.tsx', '.jsx'],
     alias: {
-      '@': path.resolve(__dirname, 'src', 'renderer'),
+      '@': path.resolve(__dirname, 'src'),
     },
   },
   devServer: {
@@ -70,6 +70,10 @@ const config: Configuration = {
           filename: 'assets/[hash][ext]',
         },
       },
+      {
+        test: /.(md|txt)$/,
+        type: 'asset/source',
+      },
     ],
   },
   plugins: [
@@ -92,4 +96,4 @@ const config: Configuration = {
     css: true,
   },
 };
-export = config;
+export default config;

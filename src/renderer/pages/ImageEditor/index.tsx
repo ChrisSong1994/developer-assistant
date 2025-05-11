@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef } from 'react';
 import TuiImageEditor from 'tui-image-editor';
 import 'tui-image-editor/dist/tui-image-editor.css';
 
-import Events from '@/utils/events';
+import Events from '@/renderer/utils/events';
 import logo from '../../../assets/icon.png';
 import locale from './config/locale';
 import theme from './config/theme';
@@ -12,7 +12,7 @@ import styles from './index.module.less';
 
 type TImageFormat = 'png' | 'jpg' | 'jpeg' | 'webp';
 
-const Editor = () => {
+const ImageEditor = () => {
   const imageEditor = useRef<any>(null);
   const imageEditorInstance = useRef<any>(null);
 
@@ -26,7 +26,7 @@ const Editor = () => {
         theme: theme,
         locale: locale,
         uiSize: {
-          height: 'calc(100vh - 120px )',
+          height: 'calc(100vh - 68px )',
           width: '100%',
         },
       },
@@ -106,4 +106,4 @@ const Editor = () => {
   );
 };
 
-export default Editor;
+export default ImageEditor;

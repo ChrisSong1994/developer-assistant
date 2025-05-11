@@ -4,9 +4,9 @@ import { DiffEditor, Monaco } from '@monaco-editor/react';
 import _ from 'lodash';
 import { memo ,useRef} from 'react';
 
-import { useUpdate } from '@/hooks';
-import { isEmpty } from '@/utils';
-import Events from '@/utils/events';
+import { useUpdate } from '@/renderer/hooks';
+import { isEmpty } from '@/renderer/utils';
+import Events from '@/renderer/utils/events';
 import { DEFAULT_OPTIONS, EEditorLanguage } from './index';
 import styles from './index.module.less';
 interface IDiffEditorProps {

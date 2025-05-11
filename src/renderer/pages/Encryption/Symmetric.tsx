@@ -1,8 +1,8 @@
 import { Button, Form, Input, Select, Space } from 'antd';
 import { Fragment, useMemo, useState } from 'react';
 
-import { to } from '@/utils';
-import Events from '@/utils/events';
+import { to } from '@/renderer/utils';
+import Events from '@/renderer/utils/events';
 import {
   ENCRYPTION_ALGORITHM_OPTIONS,
   ENCRYPTION_MODE_OPTIONS,

@@ -1,4 +1,4 @@
-@import '@/styles/theme.less';
+@import '@/renderer/styles/theme.less';
 
 .json-parse {
   position: relative;
@@ -17,29 +17,3 @@
   }
 }
 
-// json convert
-.json-convert {
-  display: flex;
-  .json-convert-panel {
-    flex: 1;
-    width: calc(50% - 26px);
-    .json-convert-panel-title {
-      display: flex;
-      align-items: center;
-      height: 32px;
-      font-weight: 500;
-      font-size: 16px;
-    }
-  }
-
-  .json-convert-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 52px;
-    button {
-      margin-bottom: 8px;
-    }
-  }
-}

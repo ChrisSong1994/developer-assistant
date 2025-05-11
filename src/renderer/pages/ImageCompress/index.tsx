@@ -2,20 +2,20 @@ import { ClearOutlined, CompressOutlined, UploadOutlined } from '@ant-design/ico
 import { Button, ConfigProvider, Segmented, Space, Table } from 'antd';
 import { useMemo, useState } from 'react';
 
-import Empty from '@/components/Empty';
-import Icon from '@/components/Icon';
-import { useLocalData, useWindowSize } from '@/hooks';
-import { arrayObjDeWightByKey, formatFileSize } from '@/utils';
-import Events from '@/utils/events';
+import Empty from '@/renderer/components/Empty';
+import Icon from '@/renderer/components/Icon';
+import { useLocalData, useWindowSize } from '@/renderer/hooks';
+import { arrayObjDeWightByKey, formatFileSize } from '@/renderer/utils';
+import Events from '@/renderer/utils/events';
 import { IImageCompressInfo } from '../../../main/modules/image';
 
 import styles from './index.module.less';
 
 const IMAGES_DATA_KEY = 'originalFilePath';
 const IMAGES_COMPRESS_KEY = 'images_compress';
-const TABLE_HEIGHT_PADDING = 220;
+const TABLE_HEIGHT_PADDING = 170;
 
-const Compress = () => {
+const ImageCompress = () => {
   const { data: localData, setData: setLocalData } = useLocalData();
   const images = localData[IMAGES_COMPRESS_KEY] || [];
   const [compressLoading, setCompressLoading] = useState<boolean>(false);
@@ -128,13 +128,13 @@ const Compress = () => {
       </Space>
       {/* Empty 高度为了撑开表格  */}
       <ConfigProvider
-        renderEmpty={() => <Empty style={{ height: tableHeight - 90, paddingTop: 100 }} description="暂无数据" />}
+        renderEmpty={() => <Empty style={{ height: tableHeight - 100, paddingTop: 100 }} description="暂无数据" />}
       >
         <Table
           style={{ height: tableHeight }}
           rowKey={IMAGES_DATA_KEY}
           pagination={false}
-          scroll={{ y: tableHeight - 60 }}
+          scroll={{ y: tableHeight -60 }}
           columns={columns}
           dataSource={images}
         />
@@ -168,4 +168,4 @@ const Compress = () => {
   );
 };
 
-export default Compress;
+export default ImageCompress;

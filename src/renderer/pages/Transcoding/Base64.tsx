@@ -3,12 +3,12 @@ import { Fragment, useState } from 'react';
 // @ts-ignore
 import Base64 from 'Base64';
 
-import ActionsBarWrap from '@/components/ActionsBarWrap';
-import Copy from '@/components/Copy';
-import Icon from '@/components/Icon';
-import ImageUpload from '@/components/ImageUpload';
-import { BASE64_INPUT_CONTENT_TYPE_OPTIONS } from '@/constants';
-import Events from '@/utils/events';
+import ActionsBarWrap from '@/renderer/components/ActionsBarWrap';
+import Copy from '@/renderer/components/Copy';
+import Icon from '@/renderer/components/Icon';
+import ImageUpload from '@/renderer/components/ImageUpload';
+import { BASE64_INPUT_CONTENT_TYPE_OPTIONS } from '@/renderer/constants';
+import Events from '@/renderer/utils/events';
 
 const TextArea = Input.TextArea;
 
@@ -53,22 +53,27 @@ const Base64CodingComponent = () => {
           <ActionsBarWrap palcement="right">
             <Copy value={decodeValue} size={18} />
             <Tooltip placement="bottom" title="保存">
-              <Icon type="icon-baocun" size={18} onClick={() => handleSave(decodeValue)} />
+              <Icon type="icon-save" size={18} onClick={() => handleSave(decodeValue)} />
             </Tooltip>
             <Tooltip placement="bottom" title="清除">
-              <Icon type="icon-shanchu" size={18} onClick={() => setDecodeValue('')} />
+              <Icon type="icon-delete" size={18} onClick={() => setDecodeValue('')} />
             </Tooltip>
           </ActionsBarWrap>
         ) : null}
       </div>
 
       {contentType === EContentType.IMAGE ? (
-        <ImageUpload imageStyle={{ height: 300 }} style={{ marginBottom: 8 }} onChange={setEncodeValue} value={encodeValue} />
+        <ImageUpload
+          imageStyle={{ height: 240 }}
+          style={{ marginBottom: 8 }}
+          onChange={setEncodeValue}
+          value={encodeValue}
+        />
       ) : null}
       {contentType === EContentType.PLAINTEXT ? (
         <TextArea
           spellCheck={false}
-          rows={14}
+          rows={12}
           placeholder="请输入待编码内容"
           value={decodeValue}
           onChange={(e) => setDecodeValue(e.target.value)}
@@ -91,17 +96,17 @@ const Base64CodingComponent = () => {
         <ActionsBarWrap palcement="right">
           <Copy value={encodeValue} size={18} />
           <Tooltip placement="bottom" title="保存">
-            <Icon type="icon-baocun" size={18} onClick={() => handleSave(encodeValue)} />
+            <Icon type="icon-save" size={18} onClick={() => handleSave(encodeValue)} />
           </Tooltip>
           <Tooltip placement="bottom" title="清除">
-            <Icon type="icon-shanchu" size={18} onClick={() => setEncodeValue('')} />
+            <Icon type="icon-delete" size={18} onClick={() => setEncodeValue('')} />
           </Tooltip>
         </ActionsBarWrap>
       </div>
 
       <TextArea
         spellCheck={false}
-        rows={14}
+        rows={12}
         placeholder="请输入待解码内容"
         value={encodeValue}
         onChange={(e) => setEncodeValue(e.target.value)}

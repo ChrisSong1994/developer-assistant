@@ -1,8 +1,10 @@
 declare module '*.css';
 declare module '*.less';
+declare module '*.md';
+declare module '*.txt';
 declare module '*.png';
 declare module 'jsonlint-mod';
-declare module 'qrcode-reader'
+declare module 'qrcode-reader';
 declare module '*.svg' {
   export function ReactComponent(props: React.SVGProps<SVGSVGElement>): React.ReactElement;
   const url: string;

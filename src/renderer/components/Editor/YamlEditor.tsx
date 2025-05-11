@@ -1,6 +1,6 @@
-import Icon from '@/components/Icon';
-import { isEmpty } from '@/utils';
-import Events from '@/utils/events';
+import Icon from '@/renderer/components/Icon';
+import { isEmpty } from '@/renderer/utils';
+import Events from '@/renderer/utils/events';
 import { memo, useMemo } from 'react';
 import BaseEditor from './BaseEditor';
 import { EEditorLanguage } from './index';

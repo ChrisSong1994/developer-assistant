@@ -4,8 +4,8 @@ import MonacoEditor from '@monaco-editor/react';
 import _ from 'lodash';
 import { memo } from 'react';
 
-import { isEmpty } from '@/utils';
-import Events from '@/utils/events';
+import { isEmpty } from '@/renderer/utils';
+import Events from '@/renderer/utils/events';
 import { DEFAULT_OPTIONS, EEditorLanguage } from './index';
 import styles from './index.module.less';
 export interface IBaseEditorProps {

@@ -2,10 +2,10 @@ import { DownloadOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons
 import { Button, Dropdown, Form, Input, InputNumber, Segmented } from 'antd';
 import { useState } from 'react';
 
-import ColorPicker from '@/components/ColorPicker';
-import ImageUpload from '@/components/ImageUpload';
-import QRCode, { IQRCodeProps } from '@/components/QRCode';
-import Events from '@/utils/events';
+import ColorPicker from '@/renderer/components/ColorPicker';
+import ImageUpload from '@/renderer/components/ImageUpload';
+import QRCode, { IQRCodeProps } from '@/renderer/components/QRCode';
+import Events from '@/renderer/utils/events';
 import styles from './index.module.less';
 
 const TextArea = Input.TextArea;

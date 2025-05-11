@@ -5,8 +5,8 @@ import path from 'path';
 
 // @ts-ignore
 import imageTiny from '../lib/imageTiny';
-import { getNotExistFilePath } from '../utils/path';
-import { getConfData } from './data';
+import { getNotExistFilePath } from '../utils';
+import { getConfData } from '../db';
 
 export enum EImageStatus {
   PENDING = 'pending',
@@ -70,7 +70,7 @@ export const saveBase64ImageToLocal = async (
 export const uploadImages = async (options: OpenDialogOptions = {}) => {
   const { downloadPath } = await getConfData();
   const result = await dialog.showOpenDialog(global.mainWindow, {
-    properties: ['openFile', 'openDirectory', 'createDirectory','multiSelections'],
+    properties: ['openFile', 'openDirectory', 'createDirectory', 'multiSelections'],
     defaultPath: downloadPath,
     ...options,
   });

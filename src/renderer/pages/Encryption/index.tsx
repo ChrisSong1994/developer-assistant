@@ -1,4 +1,4 @@
-import CustomTabs from '@/components/CustomTabs';
+import CustomTabs from '@/renderer/components/CustomTabs';
 // import Asymmetric from './Asymmetric';
 import Hash from './Hash';
 import Symmetric from './Symmetric';

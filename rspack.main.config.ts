@@ -19,7 +19,7 @@ const config: Configuration = {
   resolve: {
     extensions: ['...', '.ts', '.js'],
     alias: {
-      '@': path.resolve(__dirname, 'src', 'main'),
+      '@': path.resolve(__dirname, 'src'),
     },
   },
   devtool: isDev ? 'source-map' : false,
@@ -54,4 +54,4 @@ const config: Configuration = {
     }),
   ].filter(Boolean),
 };
-export = config;
+export default config;
