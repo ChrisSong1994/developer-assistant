@@ -9,6 +9,7 @@ import Transcoding from '@/renderer/pages/Transcoding';
 import UrlParse from '@/renderer/pages/UrlParse';
 import Transform from '@/renderer/pages/Transform';
 import Markdown from '@/renderer/pages/Markdown';
+import ImageCompress from '@/renderer/pages/ImageCompress';
 
 export enum ToolCategory {
   TEXT = 'TEXT',
@@ -40,13 +41,19 @@ const routes = [
     component: ImageEditor,
   },
   {
+    key: 'ImageCompress',
+    title: '图片压缩',
+    icon: 'icon-picture',
+    category: ToolCategory.IMAGE,
+    component: ImageCompress,
+  },
+  {
     key: 'Transform',
     title: '转换',
     icon: 'icon-transform',
     category: ToolCategory.TEXT,
     component: Transform,
   },
-
   {
     key: 'Diff',
     title: 'Diff',
@@ -97,5 +104,7 @@ const routes = [
     component: Markdown,
   },
 ];
+
+export const MenuKeys = routes.map((item) => item.key);
 
 export default routes;

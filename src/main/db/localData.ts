@@ -30,8 +30,8 @@ export const DEFAULT_LOCAL_DATA: ILocalData = {
     },
   ],
   images_compress: [],
-  sider_menus: ['Color', 'JSON'],
-  other_menus: ['Image', 'Transform', 'Diff', 'Regexp', 'QrCode', 'Transcoding', 'Encryption', 'UrlParse', 'Markdown'],
+  sider_menus: ['Color', 'JSON', 'Regexp', 'Image', 'Diff', 'UrlParse', 'QrCode'],
+  other_menus: ['Transform', 'Transcoding', 'Encryption', 'Markdown'],
   active_menu_key: undefined,
   more_active_menu_key: undefined,
 };

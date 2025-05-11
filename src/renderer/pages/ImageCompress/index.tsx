@@ -13,7 +13,7 @@ import styles from './index.module.less';
 
 const IMAGES_DATA_KEY = 'originalFilePath';
 const IMAGES_COMPRESS_KEY = 'images_compress';
-const TABLE_HEIGHT_PADDING = 220;
+const TABLE_HEIGHT_PADDING = 170;
 
 const ImageCompress = () => {
   const { data: localData, setData: setLocalData } = useLocalData();
@@ -128,13 +128,13 @@ const ImageCompress = () => {
       </Space>
       {/* Empty 高度为了撑开表格  */}
       <ConfigProvider
-        renderEmpty={() => <Empty style={{ height: tableHeight - 90, paddingTop: 100 }} description="暂无数据" />}
+        renderEmpty={() => <Empty style={{ height: tableHeight - 100, paddingTop: 100 }} description="暂无数据" />}
       >
         <Table
           style={{ height: tableHeight }}
           rowKey={IMAGES_DATA_KEY}
           pagination={false}
-          scroll={{ y: tableHeight - 60 }}
+          scroll={{ y: tableHeight -60 }}
           columns={columns}
           dataSource={images}
         />

@@ -58,6 +58,10 @@ export const getPageUrl = (page: any, query: Record<string, any> = {}) => {
 // 应用程序相关路径
 export const getUserDataPath = () => {
   const userDataPath = app.getPath('userData');
+  if (isDev) {
+    const devDataPath = path.join(__dirname, '../.userdata');
+    return devDataPath;
+  }
   return userDataPath;
 };
 

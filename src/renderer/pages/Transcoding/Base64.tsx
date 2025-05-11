@@ -63,12 +63,17 @@ const Base64CodingComponent = () => {
       </div>
 
       {contentType === EContentType.IMAGE ? (
-        <ImageUpload imageStyle={{ height: 300 }} style={{ marginBottom: 8 }} onChange={setEncodeValue} value={encodeValue} />
+        <ImageUpload
+          imageStyle={{ height: 240 }}
+          style={{ marginBottom: 8 }}
+          onChange={setEncodeValue}
+          value={encodeValue}
+        />
       ) : null}
       {contentType === EContentType.PLAINTEXT ? (
         <TextArea
           spellCheck={false}
-          rows={14}
+          rows={12}
           placeholder="请输入待编码内容"
           value={decodeValue}
           onChange={(e) => setDecodeValue(e.target.value)}
@@ -101,7 +106,7 @@ const Base64CodingComponent = () => {
 
       <TextArea
         spellCheck={false}
-        rows={14}
+        rows={12}
         placeholder="请输入待解码内容"
         value={encodeValue}
         onChange={(e) => setEncodeValue(e.target.value)}
