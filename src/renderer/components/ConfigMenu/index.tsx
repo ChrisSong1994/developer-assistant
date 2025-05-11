@@ -1,11 +1,10 @@
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Checkbox, Dropdown, MenuProps, Modal } from 'antd';
 import React, { Fragment, useEffect, useState } from 'react';
-import semver from 'semver';
 
+import { GITHUB_RELEASE_URL, GITHUB_ISSUE_URL } from '@/common/contants';
 import Icon from '@/renderer/components/Icon';
 import { useConfigData } from '@/renderer/hooks';
-import { isEmpty } from '@/renderer/utils';
 import Events from '@/renderer/utils/events';
 import About from './About';
 import Setting from './Setting';
@@ -16,7 +15,6 @@ interface IConfigMenuProps {
 const menuStyle = {
   width: 200,
 };
-const remotePackageUrl = 'https://raw.githubusercontent.com/ChrisSong1994/developer-assistant/main/package.json';
 
 const ConfigMenu = (props: IConfigMenuProps) => {
   const { children } = props;
@@ -25,10 +23,9 @@ const ConfigMenu = (props: IConfigMenuProps) => {
   const { data, setData } = useConfigData();
 
   const handleCheckUpdate = async () => {
-    const localVersion = await Events.getAppVersion();
-    const remotePackage = await fetch(remotePackageUrl, { method: 'get', cache: 'no-cache' }).then((res) => res.json());
-    let closeCheckUpdate = false;
-    if (semver.gt(remotePackage.version, localVersion)) {
+    const result = await Events.checkUpdate();
+    if (result.isNeedUpdate) {
+      let closeCheckUpdate = false;
       Modal.confirm({
         title: '有新版本发布，是否更新？',
         cancelText: '关闭',
@@ -45,17 +42,17 @@ const ConfigMenu = (props: IConfigMenuProps) => {
           }
         },
         onOk() {
-          Events.openUrl({ url: 'https://github.com/ChrisSong1994/developer-assistant/releases' });
+          Events.openUrl({ url: GITHUB_RELEASE_URL });
         },
       });
     }
   };
 
   useEffect(() => {
-    if (!isEmpty(data) && data?.checkUpdate) {
+    if (data?.checkUpdate) {
       handleCheckUpdate();
     }
-  }, [data]);
+  }, [data?.checkUpdate]);
 
   const menuItems: MenuProps['items'] = [
     {
@@ -69,11 +66,7 @@ const ConfigMenu = (props: IConfigMenuProps) => {
       icon: <Icon type="icon-update" />,
     },
     {
-      label: (
-        <div onClick={() => Events.openUrl({ url: 'https://github.com/ChrisSong1994/developer-assistant/issues' })}>
-          意见反馈
-        </div>
-      ),
+      label: <div onClick={() => Events.openUrl({ url: GITHUB_ISSUE_URL })}>意见反馈</div>,
       key: 'feedback',
       icon: <Icon type="icon-feedback" />,
     },
