@@ -4,7 +4,10 @@ import path from 'path';
 
 const isDev = process.env.NODE_ENV === 'development';
 
+console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+
 const config: Configuration = {
+  name: 'main',
   target: 'electron-main',
   entry: {
     main: path.resolve(__dirname, './src/main/index.ts'),
@@ -12,8 +15,9 @@ const config: Configuration = {
   },
   output: {
     path: path.resolve(__dirname, 'build'),
+    filename: '[name].js',
     library: {
-      type: 'commonjs',
+      type: 'commonjs2',
     },
   },
   resolve: {
@@ -53,5 +57,10 @@ const config: Configuration = {
       ],
     }),
   ].filter(Boolean),
+  optimization: {
+    minimize: !isDev,
+    mangleExports: !isDev,
+    concatenateModules: !isDev, // 禁止模块合并
+  },
 };
 export default config;
