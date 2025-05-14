@@ -172,7 +172,7 @@ const Regexp = () => {
         onChange={(e) => setContent(e.target.value)}
       />
       <div className={styles['regexp-match']}>
-        {matchedsContents && matchedsContents.length ? (
+        {matchedsContents && matchedsContents?.length ? (
           <div className={styles['regexp-match-content']}>{matchedsContents}</div>
         ) : (
           <span>匹配结果...</span>

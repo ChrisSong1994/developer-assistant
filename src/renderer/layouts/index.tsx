@@ -13,6 +13,13 @@ import styles from './index.module.less';
 import routes from './routes';
 
 const { Header, Content, Sider } = Layout;
+
+interface TabItem {
+  label: string;
+  key: string;
+  children: React.ReactNode;
+}
+
 const BaseLayout: FC = () => {
   const { data: localData, setData: setLocalData } = useLocalData();
 
@@ -24,7 +31,7 @@ const BaseLayout: FC = () => {
   }, [localData]);
 
   const tabItems = useMemo(() => {
-    const tabs = routes.map((page: any) => ({
+    const tabs: TabItem[] = routes.map((page: any) => ({
       label: '',
       key: page.key,
       children: React.createElement(page.component, { key: page.key }),
@@ -32,7 +39,6 @@ const BaseLayout: FC = () => {
     tabs.push({
       label: '',
       key: 'more',
-      // @ts-ignore
       children: <Applications />,
     });
     return tabs;
