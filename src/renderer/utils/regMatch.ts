@@ -51,7 +51,7 @@ const regMatch = (reg: RegExp, str: string) => {
   if (reg.global) {
     matcheds.push(...str.matchAll(reg));
   } else {
-    matcheds.push(str.match);
+    matcheds.push(str.match(reg));
   }
 
   const result = matcheds.filter(Boolean).map((item: any, index: number) => {
