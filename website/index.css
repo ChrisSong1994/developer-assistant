@@ -1,0 +1,40 @@
+.logo {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .img {
+    width: 56px;
+    height: 56px;
+    margin-right: 12px;
+  }
+
+  .title {
+    font-size: 32px;
+    font-weight: 600;
+  }
+}
+
+.tip {
+  font-size: 16px;
+  color: #999;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.download {
+  text-align: center;
+
+  a {
+    display: inline-block;
+    margin: 0 10px;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 4px;
+    background: #1d2e54;
+    color: #fff;
+    cursor: pointer;
+  }
+}
