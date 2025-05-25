@@ -5,7 +5,7 @@
 </p>
 <h1 align="center">Developer Assistant</h1>
 
-开发者助手是一个开发工具集客户端，包含了常用的 Json 解析处理、颜色拾取转换、编码、文本 Diff 等操作。
+开发者助手是一个开发工具集客户端，包含了常用的 Json 解析处理、颜色拾取转换、编码、文本 Diff 等工具。
 
 <p align="center">
  <img src="screenshots/color.png" alt="color" width="740"  >
@@ -23,5 +23,5 @@
 - [x] 二维码生成、解码
 - [x] Url 解析
 - [x] Markdown 编辑器
-- [ ] 文本转换
+- [x] 文本转换
 - [ ] 密钥工具
