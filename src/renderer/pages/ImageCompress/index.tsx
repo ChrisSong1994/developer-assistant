@@ -17,7 +17,7 @@ const TABLE_HEIGHT_PADDING = 170;
 
 const ImageCompress = () => {
   const { data: localData, setData: setLocalData } = useLocalData();
-  const images = localData[IMAGES_COMPRESS_KEY] || [];
+  const images = localData?.[IMAGES_COMPRESS_KEY] || [];
   const [compressLoading, setCompressLoading] = useState<boolean>(false);
   const [quality, setQuality] = useState<number>(80);
   const { height } = useWindowSize();
@@ -134,7 +134,7 @@ const ImageCompress = () => {
           style={{ height: tableHeight }}
           rowKey={IMAGES_DATA_KEY}
           pagination={false}
-          scroll={{ y: tableHeight -60 }}
+          scroll={{ y: tableHeight - 60 }}
           columns={columns}
           dataSource={images}
         />

@@ -10,19 +10,19 @@ export default function () {
 
   const updateData = async (value: Record<string, any>) => {
     const newData = { ...data, ...value };
-    await Events.setLocalData(newData);
+    await Events.setUserData(newData);
     await initData();
   };
 
   const initData = async () => {
     setLoading(true);
-    const confData = await Events.getLocalData();
+    const confData = await Events.getUserData();
     setData(confData);
     setLoading(false);
   };
 
   const clearLocalData = async () => {
-    await Events.clearLocalData();
+    await Events.clearUserData();
     await initData();
   };
 

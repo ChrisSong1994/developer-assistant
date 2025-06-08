@@ -12,7 +12,7 @@ import {
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
 import { MenuKeys } from '@/renderer/layouts/routes';
-import { useLocalData } from '@/renderer/hooks';
+import { useConfigData } from '@/renderer/hooks';
 import AppItem from './AppItem';
 import styles from './index.module.less';
 
@@ -32,19 +32,19 @@ export type TMenus = {
 };
 
 const Applications = () => {
-  const { data: localData, setData: setLocalData } = useLocalData();
+  const { data: configData, setData: setConfigData } = useConfigData();
   const newMenus = MenuKeys.filter(
-    (key) => !localData.sider_menus.includes(key) && !localData.other_menus.includes(key),
+    (key) => !configData?.sider_menus.includes(key) && !configData?.other_menus.includes(key),
   );
   const [menus, setMenus] = useState<TMenus>({
-    sider: localData.sider_menus,
-    other: [...localData.other_menus, ...newMenus],
+    sider: configData?.sider_menus || [],
+    other: [...(configData?.other_menus || []), ...newMenus],
   });
 
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const handleActive = (key: string) => {
-    setLocalData({
-      ...localData,
+    setConfigData({
+      ...configData,
       active_menu_key: key,
       more_active_menu_key: key,
     });
@@ -61,8 +61,8 @@ const Applications = () => {
   };
 
   const handleMenusSwitch = (menus: TMenus) => {
-    setLocalData({
-      ...localData,
+    setConfigData({
+      ...configData,
       sider_menus: menus.sider,
       other_menus: menus.other,
     });

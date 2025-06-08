@@ -1,19 +1,12 @@
 import { atom } from 'jotai';
 
 import Events from '@/renderer/utils/events';
-import { ILocalData } from '@/main/db';
+import { IUserData } from '@/main/store';
 
-const localAtom = atom<ILocalData>({
-  color: [],
-  images_compress: [],
-  sider_menus: [], // 侧边栏固定菜单
-  other_menus: [],
-  active_menu_key: undefined,
-  more_active_menu_key: undefined,
-});
+const localAtom = atom<IUserData>();
 
 localAtom.onMount = (setAtom) => {
-  Events.getLocalData().then(setAtom);
+  Events.getUserData().then(setAtom);
 };
 
 export default localAtom;

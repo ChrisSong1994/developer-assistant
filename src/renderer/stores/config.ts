@@ -1,12 +1,9 @@
 import { atom } from 'jotai';
 
 import Events from '@/renderer/utils/events';
-import { IConfigData } from '@/main/db';
+import { IConfigData } from '@/main/store';
 
-const configAtom = atom<IConfigData>({
-  checkUpdate: false,
-  downloadPath: '',
-}); 
+const configAtom = atom<IConfigData>();
 
 configAtom.onMount = (setAtom) => {
   Events.getConfData().then(setAtom);

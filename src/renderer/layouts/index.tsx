@@ -3,7 +3,7 @@ import { Layout, Tabs, Divider } from 'antd';
 import React, { FC, useLayoutEffect, useMemo } from 'react';
 import { AppstoreOutlined } from '@ant-design/icons';
 
-import { useLocalData } from '@/renderer/hooks';
+import { useConfigData } from '@/renderer/hooks';
 import ConfigMenu from '@/renderer/components/ConfigMenu';
 import Events from '@/renderer/utils/events';
 import Applications from '@/renderer/pages/Applications';
@@ -21,14 +21,14 @@ interface TabItem {
 }
 
 const BaseLayout: FC = () => {
-  const { data: localData, setData: setLocalData } = useLocalData();
+  const { data: configData, setData: setConfigData } = useConfigData();
 
   const activeKey = useMemo(() => {
-    if (localData.active_menu_key) {
-      return localData.active_menu_key;
+    if (configData?.active_menu_key) {
+      return configData.active_menu_key;
     }
-    return localData.sider_menus?.[0] || '';
-  }, [localData]);
+    return configData?.sider_menus?.[0] || '';
+  }, [configData]);
 
   const tabItems = useMemo(() => {
     const tabs: TabItem[] = routes.map((page: any) => ({
@@ -42,12 +42,12 @@ const BaseLayout: FC = () => {
       children: <Applications />,
     });
     return tabs;
-  }, [routes, localData]);
+  }, [routes, configData]);
 
   // 菜单栏
   const menuItems = useMemo(() => {
-    if (localData.sider_menus?.length) {
-      return localData.sider_menus.map((key) => {
+    if (configData?.sider_menus?.length) {
+      return configData?.sider_menus.map((key) => {
         const route: any = routes.find((item) => item.key === key);
         return {
           key: route.key,
@@ -58,21 +58,21 @@ const BaseLayout: FC = () => {
     } else {
       return [];
     }
-  }, [routes, localData]);
+  }, [routes, configData]);
 
   // 激活tab
   const moreActiveTab = useMemo(() => {
-    if (localData.sider_menus && localData.more_active_menu_key) {
+    if (configData?.sider_menus && configData?.more_active_menu_key) {
       return routes.find((item: any) => {
-        return !localData.sider_menus.includes(item.key) && item.key === localData.more_active_menu_key;
+        return !configData.sider_menus.includes(item.key) && item.key === configData.more_active_menu_key;
       });
     }
     return undefined;
-  }, [localData.sider_menus, localData.more_active_menu_key]);
+  }, [configData?.sider_menus, configData?.more_active_menu_key]);
 
   const handleActive = (key: string) => {
-    setLocalData({
-      ...localData,
+    setConfigData({
+      ...configData,
       active_menu_key: key,
     });
   };

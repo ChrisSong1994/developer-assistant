@@ -2,7 +2,6 @@ import { app } from 'electron';
 import { installDevtool } from './utils';
 
 import eventsRegistry from './eventsRegistry';
-import { dbRegistory } from './db';
 import { windowInit } from './modules/windows';
 import { isDev } from './utils';
 
@@ -12,9 +11,6 @@ export async function onReady() {
 
   // 事件消息
   eventsRegistry();
-
-  // 数据初始化
-  await dbRegistory();
 
   // 加载开发插件
   if (isDev) {

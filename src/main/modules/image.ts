@@ -6,7 +6,7 @@ import path from 'path';
 // @ts-ignore
 import imageTiny from '../lib/imageTiny';
 import { getNotExistFilePath } from '../utils';
-import { getConfData } from '../db';
+import { getConfData } from '../store';
 
 export enum EImageStatus {
   PENDING = 'pending',
