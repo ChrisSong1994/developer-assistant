@@ -8,9 +8,15 @@ interface IColorItem {
   key: string;
 }
 
+interface JsonHistoryItem {
+  name: string;
+  file: string;
+  updatedAt: string;
+}
 export interface IUserData {
   color: Array<IColorItem>;
   images_compress: Array<IImageCompressInfo>;
+  json_hsitory: Array<JsonHistoryItem>;
 }
 
 export const userStore = new Store<IUserData>({
@@ -25,6 +31,7 @@ export const userStore = new Store<IUserData>({
       },
     ],
     images_compress: [],
+    json_history: [],
   },
 });
 

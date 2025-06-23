@@ -74,6 +74,8 @@ const JsonParseComponent = () => {
     }
   };
 
+  const handleJsonFileHistory = () => {};
+
   useEffect(() => {
     handleJsonParse(value);
   }, [value]);
@@ -97,6 +99,9 @@ const JsonParseComponent = () => {
           </Tooltip>
           <Tooltip placement="bottom" title="清除">
             <Icon type="icon-delete" size={18} onClick={handleClear} />
+          </Tooltip>
+          <Tooltip placement="bottom" title="历史记录">
+            <Icon type="icon-history" size={18} onClick={handleJsonFileHistory} />
           </Tooltip>
         </ActionsBarWrap>
 
