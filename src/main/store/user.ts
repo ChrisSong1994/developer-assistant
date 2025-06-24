@@ -11,12 +11,12 @@ interface IColorItem {
 interface JsonHistoryItem {
   name: string;
   file: string;
-  updatedAt: string;
+  update_at: string;
 }
 export interface IUserData {
   color: Array<IColorItem>;
   images_compress: Array<IImageCompressInfo>;
-  json_hsitory: Array<JsonHistoryItem>;
+  json_history: Array<JsonHistoryItem>;
 }
 
 export const userStore = new Store<IUserData>({

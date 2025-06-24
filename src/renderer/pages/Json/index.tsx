@@ -10,6 +10,8 @@
 import { Tooltip } from 'antd';
 import jsonlint from 'jsonlint-mod';
 import { useEffect, useMemo, useState } from 'react';
+import { Popover, Space } from 'antd';
+import { useAtom } from 'jotai';
 
 import ActionsBarWrap from '@/renderer/components/ActionsBarWrap';
 import Copy from '@/renderer/components/Copy';
@@ -18,6 +20,7 @@ import Icon from '@/renderer/components/Icon';
 import { useWindowSize } from '@/renderer/hooks';
 import { isEmpty } from '@/renderer/utils';
 import Events from '@/renderer/utils/events';
+import localAtom from '@/renderer/stores/local';
 import styles from './index.module.less';
 
 const EDITOR_HEIGHT_PADDING = 100;
@@ -26,8 +29,27 @@ const JsonParseComponent = () => {
   const [parseJson, setParseJson] = useState({});
   const [parseError, setParseError] = useState<string | null>(null);
   const { height } = useWindowSize();
+  const [localData, setLocalData] = useAtom(localAtom);
   const editorHeight = useMemo(() => height - EDITOR_HEIGHT_PADDING, [height]); // 编辑器高度
 
+  const historyMenus = useMemo(() => {
+    return (
+      <div>
+        {(localData?.json_history || []).map((item) => {
+          return (
+            <div key={item.file} onClick={() => handleImportHistoryJsonFile(item.file)}>
+              <Space>
+                <div>{item.name}</div> <span>{item.update_at}</span>
+              </Space>
+              <div>{item.file}</div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }, [localData]);
+
+  const handleImportHistoryJsonFile = (file: string) => {};
   // json 格式化
   const handleJsonFormat = () => {
     if (isEmpty(parseError)) {
@@ -74,8 +96,6 @@ const JsonParseComponent = () => {
     }
   };
 
-  const handleJsonFileHistory = () => {};
-
   useEffect(() => {
     handleJsonParse(value);
   }, [value]);
@@ -86,23 +106,31 @@ const JsonParseComponent = () => {
         <ActionsBarWrap>
           <Copy value={value} size={18} />
           <Tooltip placement="bottom" title="美化">
-            <Icon type="icon-clear" size={18} onClick={handleJsonFormat} />
+            <Icon type="icon-clear" withHoverBg size={18} onClick={handleJsonFormat} />
           </Tooltip>
           <Tooltip placement="bottom" title="压缩">
-            <Icon type="icon-compress" size={18} onClick={handleCompress} />
+            <Icon type="icon-compress" withHoverBg size={18} onClick={handleCompress} />
           </Tooltip>
           <Tooltip placement="bottom" title="保存">
-            <Icon type="icon-save" size={18} onClick={handleSave} />
+            <Icon type="icon-save" withHoverBg size={18} onClick={handleSave} />
           </Tooltip>
           <Tooltip placement="bottom" title="导入">
-            <Icon type="icon-export" size={18} onClick={handleImport} />
+            <Icon type="icon-export" withHoverBg size={18} onClick={handleImport} />
           </Tooltip>
           <Tooltip placement="bottom" title="清除">
-            <Icon type="icon-delete" size={18} onClick={handleClear} />
+            <Icon type="icon-delete" withHoverBg size={18} onClick={handleClear} />
           </Tooltip>
-          <Tooltip placement="bottom" title="历史记录">
-            <Icon type="icon-history" size={18} onClick={handleJsonFileHistory} />
-          </Tooltip>
+          {localData?.json_history?.length ? (
+            <Tooltip placement="bottom" title="历史记录">
+              <Popover placement="bottomLeft" title="" trigger="click" content={historyMenus}>
+                <Icon type="icon-history" withHoverBg size={18} />
+              </Popover>
+            </Tooltip>
+          ) : (
+            <Tooltip placement="bottom" title="历史记录">
+              <Icon type="icon-history" withHoverBg size={18} />
+            </Tooltip>
+          )}
         </ActionsBarWrap>
 
         <JsonEditor
