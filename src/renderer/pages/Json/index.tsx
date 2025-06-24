@@ -10,7 +10,7 @@
 import { Tooltip } from 'antd';
 import jsonlint from 'jsonlint-mod';
 import { useEffect, useMemo, useState } from 'react';
-import { Popover, Space } from 'antd';
+import { Popover, Space, message } from 'antd';
 import { useAtom } from 'jotai';
 
 import ActionsBarWrap from '@/renderer/components/ActionsBarWrap';
@@ -34,14 +34,19 @@ const JsonParseComponent = () => {
 
   const historyMenus = useMemo(() => {
     return (
-      <div>
+      <div className={styles['json-history']}>
         {(localData?.json_history || []).map((item) => {
           return (
-            <div key={item.file} onClick={() => handleImportHistoryJsonFile(item.file)}>
+            <div
+              className={styles['json-history-item']}
+              key={item.filepath}
+              onClick={() => handleImportHistoryJsonFile(item.filepath)}
+            >
               <Space>
-                <div>{item.name}</div> <span>{item.update_at}</span>
+                <div className={styles['json-history-item-name']}>{item.name}</div>
+                <span className={styles['json-history-item-date']}>{item.update_at}</span>
               </Space>
-              <div>{item.file}</div>
+              <div className={styles['json-history-item-filepath']}>{item.filepath}</div>
             </div>
           );
         })}
@@ -49,7 +54,16 @@ const JsonParseComponent = () => {
     );
   }, [localData]);
 
-  const handleImportHistoryJsonFile = (file: string) => {};
+  const handleImportHistoryJsonFile = async (filePath: string) => {
+    try {
+      const fileValue = await Events.getFileFromPath({ filePath });
+      setValue(fileValue);
+    } catch (err: any) {
+      message.error(err.message);
+      // 解析失败删除历史记录
+      handleDeleteJsonHistory(filePath);
+    }
+  };
   // json 格式化
   const handleJsonFormat = () => {
     if (isEmpty(parseError)) {
@@ -69,8 +83,11 @@ const JsonParseComponent = () => {
   };
 
   // 保存
-  const handleSave = () => {
-    Events.saveFileToLocal({ fileName: 'Untitled.json', payload: value });
+  const handleSave = async () => {
+    const res = await Events.saveFileToLocal({ fileName: 'Untitled.json', payload: value });
+    if (res) {
+      handleAddJsonHistory(res.filePath, res.fileName);
+    }
   };
 
   // 导入文件
@@ -94,6 +111,26 @@ const JsonParseComponent = () => {
     } else {
       setParseError(null);
     }
+  };
+
+  const handleDeleteJsonHistory = (filepath: string) => {
+    const newJsonHistory = localData?.json_history.filter((item: any) => item.filepath !== filepath);
+    // @ts-ignore
+    setLocalData({ json_history: newJsonHistory });
+  };
+
+  const handleAddJsonHistory = (filepath: string, name: string) => {
+    const newJsonHistory = [
+      {
+        filepath,
+        name: name,
+        time: Date.now(),
+      },
+      // @ts-ignore
+      ...localData?.json_history.filter((item: any) => item.filepath !== filepath),
+    ];
+    // @ts-ignore
+    setLocalData({ json_history: newJsonHistory });
   };
 
   useEffect(() => {
