@@ -10,8 +10,9 @@
 import { Tooltip } from 'antd';
 import jsonlint from 'jsonlint-mod';
 import { useEffect, useMemo, useState } from 'react';
-import { Popover, Space, message } from 'antd';
+import { Popover, message } from 'antd';
 import { useAtom } from 'jotai';
+import { dayjs } from '@fett/utils';
 
 import ActionsBarWrap from '@/renderer/components/ActionsBarWrap';
 import Copy from '@/renderer/components/Copy';
@@ -28,13 +29,18 @@ const JsonParseComponent = () => {
   const [value, setValue] = useState('');
   const [parseJson, setParseJson] = useState({});
   const [parseError, setParseError] = useState<string | null>(null);
+  const [historyOpen, setHistoryOpen] = useState(false);
   const { height } = useWindowSize();
   const [localData, setLocalData] = useAtom(localAtom);
+  // 待定
+  const [currentJsonFile, setCurrentJsonFile] = useState<string | null>(null);
+
   const editorHeight = useMemo(() => height - EDITOR_HEIGHT_PADDING, [height]); // 编辑器高度
 
   const historyMenus = useMemo(() => {
     return (
       <div className={styles['json-history']}>
+        <div className={styles['json-history-title']}>历史记录</div>
         {(localData?.json_history || []).map((item) => {
           return (
             <div
@@ -42,11 +48,11 @@ const JsonParseComponent = () => {
               key={item.filepath}
               onClick={() => handleImportHistoryJsonFile(item.filepath)}
             >
-              <Space>
-                <div className={styles['json-history-item-name']}>{item.name}</div>
-                <span className={styles['json-history-item-date']}>{item.update_at}</span>
-              </Space>
-              <div className={styles['json-history-item-filepath']}>{item.filepath}</div>
+              <div className={styles['info']}>
+                <div className={styles['name']}>{item.name}</div>
+                <span className={styles['date']}>{dayjs(item.update_at).format('YYYY-MM-DD HH:mm')}</span>
+              </div>
+              <div className={styles['filepath']}>{item.filepath}</div>
             </div>
           );
         })}
@@ -58,6 +64,8 @@ const JsonParseComponent = () => {
     try {
       const fileValue = await Events.getFileFromPath({ filePath });
       setValue(fileValue);
+      setHistoryOpen(false);
+      setCurrentJsonFile(filePath);
     } catch (err: any) {
       message.error(err.message);
       // 解析失败删除历史记录
@@ -80,11 +88,18 @@ const JsonParseComponent = () => {
   // 清除
   const handleClear = () => {
     setValue('');
+    setCurrentJsonFile(null);
   };
 
   // 保存
   const handleSave = async () => {
-    const res = await Events.saveFileToLocal({ fileName: 'Untitled.json', payload: value });
+    const params = {
+      defaultPath: currentJsonFile ?? undefined,
+      fileName: 'Untitled.json',
+      payload: value,
+    };
+
+    const res = await Events.saveFileToLocal(params);
     if (res) {
       handleAddJsonHistory(res.filePath, res.fileName);
     }
@@ -92,10 +107,13 @@ const JsonParseComponent = () => {
 
   // 导入文件
   const handleImport = async () => {
-    const { fileValue } = await Events.getFileFromLocalPath({
-      filters: [{ name: 'json文件', extensions: ['*.json'] }],
+    const { fileValue, filePath } = await Events.getFileFromLocalPath({
+      filters: [{ name: 'json 文件', extensions: ['*.json'] }],
     });
-    if (fileValue) setValue(fileValue);
+    if (fileValue && filePath) {
+      setValue(fileValue);
+      setCurrentJsonFile(filePath);
+    }
   };
 
   // json 解析
@@ -128,7 +146,7 @@ const JsonParseComponent = () => {
       },
       // @ts-ignore
       ...localData?.json_history.filter((item: any) => item.filepath !== filepath),
-    ];
+    ].slice(0, 10);
     // @ts-ignore
     setLocalData({ json_history: newJsonHistory });
   };
@@ -159,7 +177,14 @@ const JsonParseComponent = () => {
           </Tooltip>
           {localData?.json_history?.length ? (
             <Tooltip placement="bottom" title="历史记录">
-              <Popover placement="bottomLeft" title="" trigger="click" content={historyMenus}>
+              <Popover
+                placement="bottomLeft"
+                title=""
+                open={historyOpen}
+                trigger="click"
+                onOpenChange={setHistoryOpen}
+                content={historyMenus}
+              >
                 <Icon type="icon-history" withHoverBg size={18} />
               </Popover>
             </Tooltip>
