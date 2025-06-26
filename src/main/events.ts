@@ -1,6 +1,5 @@
 export { getAppVersion, checkUpdate, getOpenAtLogin, quit, setOpenAtLogin } from './modules/app';
 export { createHash, decrypt, encrypt } from './modules/crypto';
-// export { clearLocalData, getConfData, getLocalData, setConfData, setLocalData } from './db';
 export { getConfData, setConfData, getUserData, setUserData, clearUserData } from './store';
 export {
   getFileFromLocalPath,

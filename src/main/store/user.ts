@@ -1,4 +1,5 @@
 import Store from 'electron-store';
+import path from 'path';
 import { getUserDataPath } from '@/main/utils';
 import { IImageCompressInfo } from '@/main/modules/image';
 
@@ -8,9 +9,15 @@ interface IColorItem {
   key: string;
 }
 
+interface JsonHistoryItem {
+  name: string;
+  filepath: string;
+  update_at: string;
+}
 export interface IUserData {
   color: Array<IColorItem>;
   images_compress: Array<IImageCompressInfo>;
+  json_history: Array<JsonHistoryItem>;
 }
 
 export const userStore = new Store<IUserData>({
@@ -25,6 +32,7 @@ export const userStore = new Store<IUserData>({
       },
     ],
     images_compress: [],
+    json_history: [],
   },
 });
 

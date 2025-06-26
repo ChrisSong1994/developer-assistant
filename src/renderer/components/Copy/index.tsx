@@ -38,6 +38,7 @@ const CopyComponent = (props: IProps) => {
       <Tooltip placement="bottom" title="复制">
         {copied ? (
           <Icon
+            withHoverBg
             className={css(`
               font-size:${size}px;
               cursor:pointer;
@@ -47,6 +48,7 @@ const CopyComponent = (props: IProps) => {
           />
         ) : (
           <Icon
+            withHoverBg
             className={css(`
               font-size:${size}px;
               cursor:pointer;
