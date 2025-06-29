@@ -21,6 +21,11 @@ if (rootEl) {
             // Seed Token，影响范围大
             colorPrimary: THEME_COLOR,
           },
+          components: {
+            Select: {
+              optionSelectedBg: '#f5f5f5',
+            },
+          },
         }}
       >
         <BaseLayout />

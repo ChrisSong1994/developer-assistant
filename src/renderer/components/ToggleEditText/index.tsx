@@ -45,7 +45,7 @@ const ToggleEditText = (props: IProps) => {
           placeholder={placeholder}
           defaultValue={value}
           ref={inputRef}
-          bordered={false}
+          variant="borderless"
           onBlur={handleBlur}
           onPressEnter={handleBlur}
         />

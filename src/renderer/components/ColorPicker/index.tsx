@@ -20,7 +20,6 @@ const ColorPicker = (props: IColorCatch) => {
       title={null}
       placement="bottomLeft"
       trigger="click"
-      overlayStyle={{ padding: 6 }}
       content={
         <ChromePicker
           className={styles["color-picker"]}

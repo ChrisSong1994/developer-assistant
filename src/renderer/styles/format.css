@@ -51,6 +51,10 @@ a {
   }
 }
 
+.ant-dropdown-menu-item-icon{
+  font-size: 18px;
+}
+
 .ant-btn-primary {
   box-shadow: none !important;
 }

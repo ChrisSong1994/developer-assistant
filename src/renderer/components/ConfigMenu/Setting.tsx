@@ -48,7 +48,11 @@ const Setting = (props: ISettingProps) => {
     <Drawer
       title="设置"
       placement="right"
-      headerStyle={{ height: 48 }}
+      styles={{
+        header: {
+          height: 48,
+        },
+      }}
       width={480}
       closable={false}
       onClose={onClose}
