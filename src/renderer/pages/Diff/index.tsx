@@ -14,11 +14,10 @@ const Diff = () => {
 
   return (
     <Fragment>
-     <div style={{ height: 32 }}>
+     <div style={{ height: 36 }}>
         <span style={{ fontWeight: 500, fontSize: 14 }}>语言：</span>
         <Select
           style={{ width: 140, padding: '2px 0' }}
-          size="small"
           showSearch
           value={language}
           onSelect={setLanguage}

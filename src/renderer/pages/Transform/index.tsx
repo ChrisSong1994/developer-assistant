@@ -24,19 +24,10 @@ const Transform = () => {
           showSearch
           value={activeKey}
           style={{ width: 140, padding: '2px 0' }}
-          size="small"
           onChange={setActiveKey}
           options={TransformOptions}
         />
       </div>
-      {/* <div className="transform-options">
-        <Select
-          defaultValue="jsonToYaml"
-          style={{ width: 120 }}
-          onChange={setActiveKey}
-          options={TransformOptions}
-        />
-      </div> */}
       {component && React.createElement(component)}
     </Fragment>
   );

@@ -1,6 +1,6 @@
 :root {
   --container-bg-color: #ffffff;
-  @backgroundColor: #f6f8fa;
+  --bg-color: #f6f8fa;
   --primary-color: #1d2e54;
   --border-bolor: #dadce0;
   --icon-hover-color: #eef1f4;
