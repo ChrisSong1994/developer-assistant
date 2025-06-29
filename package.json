@@ -33,7 +33,7 @@
     ]
   },
   "dependencies": {
-    "@ant-design/icons": "4",
+    "@ant-design/icons": "^6.0.0",
     "@bytemd/plugin-breaks": "^1.22.0",
     "@bytemd/plugin-frontmatter": "^1.22.0",
     "@bytemd/plugin-gemoji": "^1.22.0",
@@ -52,7 +52,7 @@
     "@types/crypto-js": "^4.1.1",
     "@types/react-color": "^3.0.6",
     "Base64": "^1.2.0",
-    "antd": "4",
+    "antd": "^5.26.2",
     "bytemd": "^1.22.0",
     "classnames": "^2.5.1",
     "crypto-js": "^4.1.1",

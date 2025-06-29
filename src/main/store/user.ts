@@ -1,5 +1,4 @@
 import Store from 'electron-store';
-import path from 'path';
 import { getUserDataPath } from '@/main/utils';
 import { IImageCompressInfo } from '@/main/modules/image';
 

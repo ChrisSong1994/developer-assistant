@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { ConfigProvider } from 'antd';
 import BaseLayout from './layouts';
 import { init } from './init';
+import { THEME_COLOR } from './constants';
 
-import './global.less';
+import './styles/index.css';
 
 init();
 
@@ -12,7 +14,17 @@ if (rootEl) {
   const root = ReactDOM.createRoot(rootEl);
   root.render(
     <React.StrictMode>
-      <BaseLayout />
+      <ConfigProvider
+        theme={{
+          cssVar: true,
+          token: {
+            // Seed Token，影响范围大
+            colorPrimary: THEME_COLOR,
+          },
+        }}
+      >
+        <BaseLayout />
+      </ConfigProvider>
     </React.StrictMode>,
   );
 }
