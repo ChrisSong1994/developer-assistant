@@ -1,5 +1,4 @@
 import Store from 'electron-store';
-import path from 'path';
 import { getUserDataPath } from '@/main/utils';
 import { IImageCompressInfo } from '@/main/modules/image';
 
@@ -12,7 +11,7 @@ interface IColorItem {
 interface JsonHistoryItem {
   name: string;
   filepath: string;
-  update_at: string;
+  time: string;
 }
 export interface IUserData {
   color: Array<IColorItem>;

@@ -9,13 +9,13 @@ export interface IRecord {
   key: string;
 }
 interface IProps {
-  data: Array<IRecord>;
+  data: Array<IRecord> | undefined;
   onChange: (data: Array<IRecord>) => void;
   onSelect: (color: string) => void;
 }
 
 const Record = (props: IProps) => {
-  const { data, onChange, onSelect } = props;
+  const { data=[], onChange, onSelect } = props;
 
   const handleTitleChange = (key: string) => (value: string) => {
     onChange(

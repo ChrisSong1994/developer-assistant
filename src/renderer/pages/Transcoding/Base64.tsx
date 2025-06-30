@@ -43,7 +43,6 @@ const Base64CodingComponent = () => {
           <span style={{ fontWeight: 500, fontSize: 14 }}>内容：</span>
           <Select
             style={{ width: 140, padding: '2px 0' }}
-            size="small"
             value={contentType}
             onSelect={setContentType}
             options={BASE64_INPUT_CONTENT_TYPE_OPTIONS}
