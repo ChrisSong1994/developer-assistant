@@ -1,7 +1,7 @@
 import { css } from '@emotion/css';
 import { memo } from 'react';
 
-import "./index.less";
+import './index.less';
 
 interface IProps {
   type: string;
@@ -20,10 +20,10 @@ const Icon = ({ type, withHoverBg = false, className = '', size = 18, ...resetPr
       ${type} 
       ${css(`
       padding: 0 3px;
-      font-size:${size}px;
       cursor:pointer;
     `)} 
     ${className}`}
+      style={{ fontSize: size }}
       {...resetProps}
     />
   );
