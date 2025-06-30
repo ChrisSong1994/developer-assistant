@@ -49,7 +49,7 @@ const JsonParseComponent = () => {
             >
               <div className={styles['info']}>
                 <div className={styles['name']}>{item.name}</div>
-                <span className={styles['date']}>{dayjs(item.update_at).format('YYYY-MM-DD HH:mm')}</span>
+                <span className={styles['date']}>{dayjs(item.time).format('YYYY-MM-DD HH:mm')}</span>
               </div>
               <div className={styles['filepath']}>{item.filepath}</div>
             </div>

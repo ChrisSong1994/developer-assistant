@@ -11,7 +11,7 @@ interface IColorItem {
 interface JsonHistoryItem {
   name: string;
   filepath: string;
-  update_at: string;
+  time: string;
 }
 export interface IUserData {
   color: Array<IColorItem>;
