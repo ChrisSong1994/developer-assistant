@@ -10,18 +10,16 @@
 import { Tooltip } from 'antd';
 import jsonlint from 'jsonlint-mod';
 import { useEffect, useMemo, useState } from 'react';
-import { Popover, message } from 'antd';
-import { useAtom } from 'jotai';
+import { Popover, message } from 'antd'
 import { dayjs } from '@fett/utils';
 
 import ActionsBarWrap from '@/renderer/components/ActionsBarWrap';
 import Copy from '@/renderer/components/Copy';
 import { JsonEditor } from '@/renderer/components/Editor';
 import Icon from '@/renderer/components/Icon';
-import { useWindowSize } from '@/renderer/hooks';
+import {useLocalData, useWindowSize } from '@/renderer/hooks';
 import { isEmpty } from '@/renderer/utils';
 import Events from '@/renderer/utils/events';
-import localAtom from '@/renderer/stores/local';
 import styles from './index.module.less';
 
 const EDITOR_HEIGHT_PADDING = 100;
@@ -31,7 +29,8 @@ const JsonParseComponent = () => {
   const [parseError, setParseError] = useState<string | null>(null);
   const [historyOpen, setHistoryOpen] = useState(false);
   const { height } = useWindowSize();
-  const [localData, setLocalData] = useAtom(localAtom);
+  const { data: localData, setData: setLocalData} = useLocalData();
+
   // 待定
   const [currentJsonFile, setCurrentJsonFile] = useState<string | null>(null);
 
