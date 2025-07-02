@@ -21,6 +21,7 @@ const Icon = ({ type, withHoverBg = false, className = '', size = 18, ...resetPr
       ${css(`
       padding: 0 3px;
       cursor:pointer;
+      line-height: normal;
     `)} 
     ${className}`}
       style={{ fontSize: size }}
