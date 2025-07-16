@@ -1,6 +1,6 @@
 {
   "name": "developer-assistant",
-  "version": "0.0.11",
+  "version": "0.1.0",
   "private": true,
   "description": "前端开发者助手",
   "main": "main.js",
@@ -47,7 +47,7 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@emotion/css": "^11.10.5",
-    "@fett/utils": "^0.0.6",
+    "@fett/utils": "^0.0.8",
     "@monaco-editor/react": "^4.5.0",
     "@types/crypto-js": "^4.1.1",
     "@types/react-color": "^3.0.6",

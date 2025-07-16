@@ -3,7 +3,7 @@ import { installDevtool } from './utils';
 
 import eventsRegistry from './eventsRegistry';
 import { windowInit } from './modules/windows';
-import { isDev } from './utils';
+import { isDev, isInMac } from './utils';
 
 export async function onReady() {
   // 创建主窗口
@@ -27,6 +27,7 @@ app.on('window-all-closed', () => {
   }
 });
 
+app.on('before-quit', () => (global.is_will_quit = true))
 app.on('activate', () => {
   if (mainWindow === null) {
     windowInit();

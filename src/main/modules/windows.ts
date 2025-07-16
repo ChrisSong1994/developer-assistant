@@ -1,10 +1,8 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
 import path from 'path';
-import { EWindowSize } from '../../types/global';
+import { EWindowSize } from '@/common/constants';
 import { isDev, getPageUrl, isInMac } from '../utils';
-import {  ICON_PATH } from '../utils/path';
-
-export let browserWindows: Array<BrowserWindow | null> = [];
+import { ICON_PATH } from '../utils/path';
 
 /**
  * launch window
@@ -33,7 +31,12 @@ export function getMainWindowOptions(): BrowserWindowConstructorOptions {
     height: EWindowSize.height,
     minHeight: 810,
     minWidth: 1180,
-    titleBarStyle: 'hidden',
+    frame: false,
+    titleBarStyle: 'hiddenInset',
+    trafficLightPosition: {
+      y: 16,
+      x: 10,
+    },
     resizable: true,
     icon: ICON_PATH,
     show: false,
@@ -57,7 +60,6 @@ export function createMainWindow() {
   launchWindow = new BrowserWindow(getLaunchWindowOptions());
   mainWindow = new BrowserWindow(getMainWindowOptions());
   if (isInMac()) {
-    mainWindow.setWindowButtonVisibility(false); // 隐藏信号灯
     launchWindow.setWindowButtonVisibility(false);
   }
 
@@ -70,12 +72,19 @@ export function createMainWindow() {
     }
   });
 
-  mainWindow.on('closed', () => {
-    browserWindows = browserWindows.filter((bw) => mainWindow !== bw);
-    mainWindow = null;
+  // 仅在 macOS 下生效
+  mainWindow.on('close', (event: any) => {
+    if (global.is_will_quit) {
+      mainWindow = null;
+    } else {
+      event.preventDefault();
+      mainWindow?.hide();
+    }
   });
 
-  browserWindows.push(mainWindow);
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
 
   globalThis.launchWindow = launchWindow;
   globalThis.mainWindow = mainWindow;

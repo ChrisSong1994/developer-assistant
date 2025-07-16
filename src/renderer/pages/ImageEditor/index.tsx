@@ -5,7 +5,7 @@ import TuiImageEditor from 'tui-image-editor';
 import 'tui-image-editor/dist/tui-image-editor.css';
 
 import Events from '@/renderer/utils/events';
-import logo from '../../../assets/icon.png';
+import logo from '@/assets/icon.png';
 import locale from './config/locale';
 import theme from './config/theme';
 import styles from './index.module.less';

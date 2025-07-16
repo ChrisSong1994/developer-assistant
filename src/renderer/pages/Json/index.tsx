@@ -18,7 +18,7 @@ import Copy from '@/renderer/components/Copy';
 import { JsonEditor } from '@/renderer/components/Editor';
 import Icon from '@/renderer/components/Icon';
 import {useLocalData, useWindowSize } from '@/renderer/hooks';
-import { isEmpty } from '@/renderer/utils';
+import { isEmpty } from '@fett/utils';
 import Events from '@/renderer/utils/events';
 import styles from './index.module.less';
 
@@ -145,7 +145,7 @@ const JsonParseComponent = () => {
       },
       // @ts-ignore
       ...localData?.json_history.filter((item: any) => item.filepath !== filepath),
-    ].slice(0, 10);
+    ].slice(0, 20);
     // @ts-ignore
     setLocalData({ json_history: newJsonHistory });
   };

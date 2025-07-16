@@ -2,10 +2,10 @@ import { MedicineBoxOutlined } from '@ant-design/icons';
 import { cx } from '@emotion/css';
 import { DiffEditor, Monaco } from '@monaco-editor/react';
 import _ from 'lodash';
-import { memo ,useRef} from 'react';
+import { memo, useRef } from 'react';
+import { isEmpty } from '@fett/utils';
 
 import { useUpdate } from '@/renderer/hooks';
-import { isEmpty } from '@/renderer/utils';
 import Events from '@/renderer/utils/events';
 import { DEFAULT_OPTIONS, EEditorLanguage } from './index';
 import styles from './index.module.less';

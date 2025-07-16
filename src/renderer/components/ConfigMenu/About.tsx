@@ -1,6 +1,6 @@
 import { Button, Modal } from 'antd';
 
-import { GITHUB_ISSUE_URL } from '@/common/contants';
+import { GITHUB_ISSUE_URL } from '@/common/constants';
 import { useGlobalData } from '@/renderer/hooks';
 import Events from '@/renderer/utils/events';
 import logo from '../../../assets/logo.png';

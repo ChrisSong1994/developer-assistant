@@ -15,7 +15,7 @@ import YAML from 'yaml';
 
 import { JsonEditor, YamlEditor } from '@/renderer/components/Editor';
 import { useWindowSize } from '@/renderer/hooks';
-import { isEmpty } from '@/renderer/utils';
+import { isEmpty } from '@fett/utils';
 import styles from './index.module.less';
 
 const EDITOR_HEIGHT_PADDING = 130;
@@ -96,14 +96,14 @@ const JsonConvertComponent = () => {
           onChange={setJsonText}
         />
       </div>
-      <div className={styles['json-convert-actions']}>
+      {/* <div className={styles['json-convert-actions']}>
         <Tooltip title="JSON 转 YAML">
           <Button icon={<RightOutlined />} onClick={handleConvertJsonTOYaml} />
         </Tooltip>
         <Tooltip title="YAML 转 JSON">
           <Button icon={<LeftOutlined />} onClick={handleCovertYamlTOJson} />
         </Tooltip>
-      </div>
+      </div> */}
       <div className={styles['json-convert-panel']}>
         <div className={styles['json-convert-panel-title']}>YAML</div>
         <YamlEditor

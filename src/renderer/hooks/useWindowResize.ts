@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
-import { EWindowSize } from '../../types/global';
+import { EWindowSize } from '@/common/constants';
 
 // Hook
 export default function useWindowSize() {

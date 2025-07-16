@@ -4,7 +4,7 @@ import MonacoEditor from '@monaco-editor/react';
 import _ from 'lodash';
 import { memo } from 'react';
 
-import { isEmpty } from '@/renderer/utils';
+import { isEmpty } from '@fett/utils';
 import Events from '@/renderer/utils/events';
 import { DEFAULT_OPTIONS, EEditorLanguage } from './index';
 import styles from './index.module.less';

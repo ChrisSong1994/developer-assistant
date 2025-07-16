@@ -51,8 +51,8 @@ importers:
         specifier: ^11.10.5
         version: 11.13.5
       '@fett/utils':
-        specifier: ^0.0.6
-        version: 0.0.6
+        specifier: ^0.0.8
+        version: 0.0.8
       '@monaco-editor/react':
         specifier: ^4.5.0
         version: 4.6.0(monaco-editor@0.38.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -471,8 +471,8 @@ packages:
   '@emotion/weak-memoize@0.4.0':
     resolution: {integrity: sha512-snKqtPW01tN0ui7yu9rGv69aJXr/a/Ywvl11sUjNtEcRc+ng/mQriFL0wLXMef74iHa/EkftbDzU9F8iFbH+zg==}
 
-  '@fett/utils@0.0.6':
-    resolution: {integrity: sha512-cSuu/jpsLlziLShjdsXZb6WjRONXww9OHf0B67mAHLvEguh6Gu/llmqQEYCsW0RU8I+nqvlN9CYo3VkgzoA6uA==}
+  '@fett/utils@0.0.8':
+    resolution: {integrity: sha512-/TtFGeELVwQdTQpdvPmVxieEbYpapWC0QhoECiiOZgTzOg8yo5WiKJzrPUM9sDCJm165RrWv8NICmoDuhj1p3w==}
 
   '@gar/promisify@1.1.3':
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
@@ -5802,7 +5802,7 @@ snapshots:
 
   '@emotion/weak-memoize@0.4.0': {}
 
-  '@fett/utils@0.0.6':
+  '@fett/utils@0.0.8':
     dependencies:
       dayjs: 1.11.13
 
