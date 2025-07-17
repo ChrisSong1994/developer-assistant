@@ -10,14 +10,14 @@
 import { Tooltip } from 'antd';
 import jsonlint from 'jsonlint-mod';
 import { useEffect, useMemo, useState } from 'react';
-import { Popover, message } from 'antd'
+import { Popover, message } from 'antd';
 import { dayjs } from '@fett/utils';
 
 import ActionsBarWrap from '@/renderer/components/ActionsBarWrap';
 import Copy from '@/renderer/components/Copy';
 import { JsonEditor } from '@/renderer/components/Editor';
 import Icon from '@/renderer/components/Icon';
-import {useLocalData, useWindowSize } from '@/renderer/hooks';
+import { useLocalData } from '@/renderer/hooks';
 import { isEmpty } from '@fett/utils';
 import Events from '@/renderer/utils/events';
 import styles from './index.module.less';
@@ -28,13 +28,10 @@ const JsonParseComponent = () => {
   const [parseJson, setParseJson] = useState({});
   const [parseError, setParseError] = useState<string | null>(null);
   const [historyOpen, setHistoryOpen] = useState(false);
-  const { height } = useWindowSize();
-  const { data: localData, setData: setLocalData} = useLocalData();
+  const { data: localData, setData: setLocalData } = useLocalData();
 
   // 待定
   const [currentJsonFile, setCurrentJsonFile] = useState<string | null>(null);
-
-  const editorHeight = useMemo(() => height - EDITOR_HEIGHT_PADDING, [height]); // 编辑器高度
 
   const historyMenus = useMemo(() => {
     return (
@@ -197,7 +194,7 @@ const JsonParseComponent = () => {
         <JsonEditor
           error={parseError}
           onErrorClose={() => setParseError(null)}
-          style={{ height: editorHeight }}
+          style={{ height: `calc(100vh - ${EDITOR_HEIGHT_PADDING}px)` }}
           value={value}
           onChange={setValue}
         />

@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BaseEditor, EEditorLanguage } from '@/renderer/components/Editor';
-import { useWindowSize } from '@/renderer/hooks';
 
 import styles from './index.module.less';
 
-const EDITOR_HEIGHT_PADDING = 101;
+const EDITOR_HEIGHT_PADDING = 100;
 
 export type TransformPanelProps = {
   defaultValue: string;
@@ -14,9 +13,6 @@ export type TransformPanelProps = {
 };
 const TransformPanel = (props: TransformPanelProps) => {
   const { defaultValue, sourceLang, targetLang, transformer } = props;
-
-  const { height } = useWindowSize();
-  const editorHeight = useMemo(() => height - EDITOR_HEIGHT_PADDING, [height]); // 编辑器高度
 
   const [value, setValue] = useState(defaultValue);
   const [result, setResult] = useState('');
@@ -35,13 +31,17 @@ const TransformPanel = (props: TransformPanelProps) => {
       <div className={styles['panel']}>
         <BaseEditor
           language={sourceLang}
-          style={{ height: editorHeight, border: 'none' }}
+          style={{ height: `calc(100vh - ${EDITOR_HEIGHT_PADDING}px)`, border: 'none' }}
           value={value}
           onChange={setValue}
         />
       </div>
       <div className={styles['panel']}>
-        <BaseEditor language={targetLang} style={{ height: editorHeight, border: 'none' }} value={result} />
+        <BaseEditor
+          language={targetLang}
+          style={{ height: `calc(100vh - ${EDITOR_HEIGHT_PADDING}px)`, border: 'none' }}
+          value={result}
+        />
       </div>
     </div>
   );
