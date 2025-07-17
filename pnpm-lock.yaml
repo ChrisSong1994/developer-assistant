@@ -95,12 +95,21 @@ importers:
       github-markdown-css:
         specifier: ^5.8.1
         version: 5.8.1
+      gofmt.js:
+        specifier: ^0.0.2
+        version: 0.0.2
       highlight.js:
         specifier: ^11.11.1
         version: 11.11.1
       jotai:
         specifier: ^2.2.2
         version: 2.10.3(@types/react@18.3.12)(react@18.3.1)
+      json-to-go:
+        specifier: ^1.0.1
+        version: 1.0.1
+      json_typegen_wasm:
+        specifier: ^0.7.0
+        version: 0.7.0
       jsonlint-mod:
         specifier: ^1.7.6
         version: 1.7.6
@@ -2666,6 +2675,9 @@ packages:
     resolution: {integrity: sha512-jhIXaOzy1sb8IyocaruWSn1TjmnBVs8Ayhcy83rmxNJ8q2uWKCAj3CnJY+KpGSXCueAPc0i05kVvVKtP1t9S3g==}
     engines: {node: '>=10'}
 
+  gofmt.js@0.0.2:
+    resolution: {integrity: sha512-79B7Ja5UBfWfEFutuvrQtJp2nVdiyrskFjH/66rdun2y74DENfxrfdzXTQS2QFgeSHGWOrgR9eJGrsszu8RWXA==}
+
   gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
 
@@ -3153,6 +3165,9 @@ packages:
   json-stringify-safe@5.0.1:
     resolution: {integrity: sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==}
 
+  json-to-go@1.0.1:
+    resolution: {integrity: sha512-Pdh6535mSv0jNu4MUtARLmi+fQhzB5+zGyg7tZADW5eLkqEAc0+xiNw4LGTyfUUzyQZxIB0p32lC9VlzI56ZEg==}
+
   json2mq@0.2.0:
     resolution: {integrity: sha512-SzoRg7ux5DWTII9J2qkrZrqV1gt+rTaoufMxEzXbS26Uid0NwaJd123HcoB80TgubEppxxIGdNxCx50fEoEWQA==}
 
@@ -3160,6 +3175,9 @@ packages:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
+
+  json_typegen_wasm@0.7.0:
+    resolution: {integrity: sha512-xTDD7jlMpXB8S/6lD00aqOmHPuVszG4vtrJTaED8Mb6ziryGtXmtkREWpuvJbWWj45aVFGO3O/WjwxRBLw8dUQ==}
 
   jsonfile@2.4.0:
     resolution: {integrity: sha512-PKllAqbgLgxHaj8TElYymKCAgrASebJrWpTnEkOaTowt23VKXXN0sUeriJ+eh7y6ufb/CC5ap11pz71/cM0hUw==}
@@ -8603,6 +8621,8 @@ snapshots:
       merge2: 1.4.1
       slash: 3.0.0
 
+  gofmt.js@0.0.2: {}
+
   gopd@1.0.1:
     dependencies:
       get-intrinsic: 1.2.4
@@ -9112,11 +9132,15 @@ snapshots:
 
   json-stringify-safe@5.0.1: {}
 
+  json-to-go@1.0.1: {}
+
   json2mq@0.2.0:
     dependencies:
       string-convert: 0.2.1
 
   json5@2.2.3: {}
+
+  json_typegen_wasm@0.7.0: {}
 
   jsonfile@2.4.0:
     optionalDependencies:

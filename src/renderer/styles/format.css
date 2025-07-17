@@ -50,6 +50,9 @@ a {
     color: #fff !important;
   }
 }
+.ant-select-selector{
+  box-shadow: none;
+}
 
 .ant-btn-primary {
   box-shadow: none !important;

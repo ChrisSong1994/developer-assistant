@@ -94,6 +94,7 @@ const config: Configuration = {
 
   experiments: {
     css: true,
+    asyncWebAssembly: true,
   },
 };
 export default config;

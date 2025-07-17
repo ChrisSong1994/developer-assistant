@@ -1,10 +1,7 @@
 import { useCallback } from 'react';
-import jsonlint from 'jsonlint-mod';
-import YAML from 'yaml';
 
 import TransformPanel from '@/renderer/components/TransformPanel';
 import { EEditorLanguage } from '@/renderer/components/Editor';
-import { isEmpty } from '@fett/utils';
 
 const DEFAULT_VALUE = `{
   "name": "fett",
@@ -20,27 +17,16 @@ const DEFAULT_VALUE = `{
     "country": "China"
   }
 }`;
-const JsonToYaml = () => {
-  // // json 解析
-  const handleJsonParse = (value: string): boolean => {
-    if (!isEmpty(value)) {
-      try {
-        jsonlint.parse(value);
-        return true;
-      } catch (err: any) {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  };
-
+const JsonToTypescript = () => {
   const transformer = useCallback(async (value: string) => {
-    if (value && handleJsonParse(value)) {
-      const res = YAML.stringify(JSON.parse(value));
-      return res;
-    }
-    return '';
+    const { run } = await import('json_typegen_wasm');
+    return run(
+      'Root',
+      value,
+      JSON.stringify({
+        output_mode: 'typescript/typealias', //"typescript"
+      }),
+    );
   }, []);
 
   return (
@@ -48,9 +34,9 @@ const JsonToYaml = () => {
       defaultValue={DEFAULT_VALUE}
       transformer={transformer}
       sourceLang={EEditorLanguage.JSON}
-      targetLang={EEditorLanguage.YAML}
+      targetLang={EEditorLanguage.TYPESCRIPT}
     />
   );
 };
 
-export default JsonToYaml;
+export default JsonToTypescript;
