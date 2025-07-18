@@ -3,7 +3,7 @@ import { BaseEditor, EEditorLanguage } from '@/renderer/components/Editor';
 
 import styles from './index.module.less';
 
-const EDITOR_HEIGHT_PADDING = 100;
+const EDITOR_HEIGHT_PADDING = 101;
 
 export type TransformPanelProps = {
   defaultValue: string;

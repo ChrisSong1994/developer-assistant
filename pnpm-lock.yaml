@@ -92,6 +92,9 @@ importers:
       fs-extra:
         specifier: ^10.1.0
         version: 10.1.0
+      generate-schema:
+        specifier: ^2.6.0
+        version: 2.6.0
       github-markdown-css:
         specifier: ^5.8.1
         version: 5.8.1
@@ -104,9 +107,6 @@ importers:
       jotai:
         specifier: ^2.2.2
         version: 2.10.3(@types/react@18.3.12)(react@18.3.1)
-      json-to-go:
-        specifier: ^1.0.1
-        version: 1.0.1
       json_typegen_wasm:
         specifier: ^0.7.0
         version: 0.7.0
@@ -2596,6 +2596,10 @@ packages:
   gemoji@7.1.0:
     resolution: {integrity: sha512-wI0YWDIfQraQMDs0yXAVQiVBZeMm/rIYssf8LZlMDdssKF19YqJKOHkv4zvwtVQTBJ0LNmErv1S+DqlVUudz8g==}
 
+  generate-schema@2.6.0:
+    resolution: {integrity: sha512-EUBKfJNzT8f91xUk5X5gKtnbdejZeE065UAJ3BCzE8VEbvwKI9Pm5jaWmqVeK1MYc1g5weAVFDTSJzN7ymtTqA==}
+    hasBin: true
+
   get-caller-file@1.0.3:
     resolution: {integrity: sha512-3t6rVToeoZfYSGd8YoLFR2DJkiQrIiUrGcjvFX2mDw3bn6k2OtwHN0TNCLbBO+w8qTvimhDkv+LSscbJY1vE6w==}
 
@@ -3164,9 +3168,6 @@ packages:
 
   json-stringify-safe@5.0.1:
     resolution: {integrity: sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==}
-
-  json-to-go@1.0.1:
-    resolution: {integrity: sha512-Pdh6535mSv0jNu4MUtARLmi+fQhzB5+zGyg7tZADW5eLkqEAc0+xiNw4LGTyfUUzyQZxIB0p32lC9VlzI56ZEg==}
 
   json2mq@0.2.0:
     resolution: {integrity: sha512-SzoRg7ux5DWTII9J2qkrZrqV1gt+rTaoufMxEzXbS26Uid0NwaJd123HcoB80TgubEppxxIGdNxCx50fEoEWQA==}
@@ -5048,6 +5049,10 @@ packages:
   type-is@1.6.18:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
     engines: {node: '>= 0.6'}
+
+  type-of-is@3.5.1:
+    resolution: {integrity: sha512-SOnx8xygcAh8lvDU2exnK2bomASfNjzB3Qz71s2tw9QnX8fkAo7aC+D0H7FV0HjRKj94CKV2Hi71kVkkO6nOxg==}
+    engines: {node: '>=0.10.5'}
 
   typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
@@ -7473,8 +7478,7 @@ snapshots:
 
   comma-separated-tokens@2.0.3: {}
 
-  commander@2.20.3:
-    optional: true
+  commander@2.20.3: {}
 
   commander@5.1.0: {}
 
@@ -8507,6 +8511,11 @@ snapshots:
 
   gemoji@7.1.0: {}
 
+  generate-schema@2.6.0:
+    dependencies:
+      commander: 2.20.3
+      type-of-is: 3.5.1
+
   get-caller-file@1.0.3: {}
 
   get-caller-file@2.0.5: {}
@@ -9131,8 +9140,6 @@ snapshots:
   json-schema@0.4.0: {}
 
   json-stringify-safe@5.0.1: {}
-
-  json-to-go@1.0.1: {}
 
   json2mq@0.2.0:
     dependencies:
@@ -11445,6 +11452,8 @@ snapshots:
     dependencies:
       media-typer: 0.3.0
       mime-types: 2.1.35
+
+  type-of-is@3.5.1: {}
 
   typedarray@0.0.6: {}
 

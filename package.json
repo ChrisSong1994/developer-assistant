@@ -61,6 +61,7 @@
     "electron-store": "^10.0.1",
     "eventemitter3": "^5.0.1",
     "fs-extra": "^10.1.0",
+    "generate-schema": "^2.6.0",
     "github-markdown-css": "^5.8.1",
     "gofmt.js": "^0.0.2",
     "highlight.js": "^11.11.1",
