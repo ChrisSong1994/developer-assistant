@@ -1,16 +1,17 @@
 import { cx } from '@emotion/css';
 import { Layout, Tabs, Divider } from 'antd';
-import React, { FC, useLayoutEffect, useMemo } from 'react';
+import React, { FC, Fragment, useLayoutEffect, useMemo } from 'react';
 import { AppstoreOutlined } from '@ant-design/icons';
 
+import { isInMac } from '@/renderer/utils';
 import { useConfigData } from '@/renderer/hooks';
 import ConfigMenu from '@/renderer/components/ConfigMenu';
 import Events from '@/renderer/utils/events';
 import Applications from '@/renderer/pages/Applications';
-import logo from '../../assets/logo.png';
+import logo from '@/assets/logo.png';
 import Icon from '../components/Icon';
-import styles from './index.module.less';
 import routes from './routes';
+import styles from './index.module.less';
 
 const { Header, Content, Sider } = Layout;
 
@@ -22,6 +23,10 @@ interface TabItem {
 
 const BaseLayout: FC = () => {
   const { data: configData, setData: setConfigData } = useConfigData();
+
+  const isMacPlatform = useMemo(() => {
+    return isInMac();
+  }, []);
 
   const activeKey = useMemo(() => {
     if (configData?.active_menu_key) {
@@ -83,25 +88,30 @@ const BaseLayout: FC = () => {
 
   return (
     <Layout className={styles['developer-container']}>
-      <Header className={styles['developer-container-header']}>
+      <Header className={`${styles['developer-container-header']} ${isMacPlatform ? styles['is-mac'] : ''}`}>
         <div className={styles['developer-container-header-logo']}>
           <img src={logo} /> <div>Developer Assistant</div>
         </div>
+
         <div className={styles['developer-container-header-action']}>
-          <ConfigMenu>
+          <ConfigMenu isMacPlatform={isMacPlatform}>
             <div className={styles['developer-container-header-action-btn']}>
               <Icon type="icon-more" />
             </div>
           </ConfigMenu>
-          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
-            <Icon type="icon-minus" />
-          </div>
-          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMaxmize()}>
-            <Icon type="icon-fullscreen" />
-          </div>
-          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowClose()}>
-            <Icon type="icon-close" />
-          </div>
+          {isMacPlatform ? null : (
+            <Fragment>
+              <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
+                <Icon type="icon-minus" />
+              </div>
+              <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMaxmize()}>
+                <Icon type="icon-fullscreen" />
+              </div>
+              <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowClose()}>
+                <Icon type="icon-close" />
+              </div>
+            </Fragment>
+          )}
         </div>
       </Header>
 

@@ -1,5 +1,5 @@
 import { DownloadOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Dropdown, Form, Input, InputNumber, Segmented } from 'antd';
+import { Button, Dropdown, Form, Input, InputNumber, Segmented ,Space} from 'antd';
 import { useState } from 'react';
 
 import ColorPicker from '@/renderer/components/ColorPicker';
@@ -68,7 +68,7 @@ const Generate = () => {
       <div className={styles['config']}>
         <Form labelCol={{ span: 6 }} wrapperCol={{ span: 18 }}>
           <FormItem label="尺寸">
-            <Button.Group style={{ marginBottom: 16 }}>
+            <Space.Compact style={{ marginBottom: 16 }}>
               <Button
                 onClick={() => handleSizeChange(size - 10)}
                 disabled={size <= SIZE_LIMIT.low}
@@ -83,7 +83,7 @@ const Generate = () => {
               >
                 增加
               </Button>
-            </Button.Group>
+            </Space.Compact>
           </FormItem>
           <FormItem label="容错率" tooltip="容错率设置越高，二维码生成的码点密度越高，可在遮挡越多的情况下被扫描出来。">
             <Segmented

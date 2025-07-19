@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
-import gs from 'generate-schema';
 
 import TransformPanel from '@/renderer/components/TransformPanel';
 import { EEditorLanguage } from '@/renderer/components/Editor';
+import { run } from 'json_typegen_wasm';
 
 const DEFAULT_VALUE = `{
   "name": "fett",
@@ -18,9 +18,20 @@ const DEFAULT_VALUE = `{
     "country": "China"
   }
 }`;
-const JsonToMysql = () => {
+const JsonToTypescript = () => {
   const transformer = useCallback(async (value: string) => {
-    return gs.mysql(JSON.parse(value));
+    try {
+      const result = run(
+        'Root',
+        value,
+        JSON.stringify({
+          output_mode: 'typescript/typealias', //"typescript"
+        }),
+      );
+      return result;
+    } catch (e) {
+      return '';
+    }
   }, []);
 
   return (
@@ -28,9 +39,9 @@ const JsonToMysql = () => {
       defaultValue={DEFAULT_VALUE}
       transformer={transformer}
       sourceLang={EEditorLanguage.JSON}
-      targetLang={EEditorLanguage.SQL}
+      targetLang={EEditorLanguage.TYPESCRIPT}
     />
   );
 };
 
-export default JsonToMysql;
+export default JsonToTypescript;

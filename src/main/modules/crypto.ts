@@ -1,7 +1,7 @@
 import crypto, { BinaryToTextEncoding } from 'crypto';
 import CryptoJS from 'crypto-js';
 
-import { TAlgorithm } from '../../common/contants/crypto';
+import { TAlgorithm } from '../../common/constants/crypto';
 import { Base64ToHex, hexToBase64 } from '../utils';
 
 export enum EHash {

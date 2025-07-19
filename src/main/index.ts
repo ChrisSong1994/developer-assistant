@@ -27,6 +27,7 @@ app.on('window-all-closed', () => {
   }
 });
 
+app.on('before-quit', () => (global.is_will_quit = true))
 app.on('activate', () => {
   if (mainWindow === null) {
     windowInit();

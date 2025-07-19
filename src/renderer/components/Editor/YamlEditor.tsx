@@ -1,5 +1,5 @@
 import Icon from '@/renderer/components/Icon';
-import { isEmpty } from '@/renderer/utils';
+import { isEmpty } from '@fett/utils';
 import Events from '@/renderer/utils/events';
 import { memo, useMemo } from 'react';
 import BaseEditor from './BaseEditor';

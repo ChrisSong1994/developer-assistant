@@ -13,3 +13,5 @@
  <img src="screenshots/apps.png" alt="QRcode" width="740" >
 </p>
 
+
+## MIT License
