@@ -1,8 +1,8 @@
 import type { InputRef } from 'antd';
 import { Input } from 'antd';
 import { useEffect, useRef, useState } from 'react';
+import { isEmpty } from '@fett/utils';
 
-import { isEmpty } from '@/renderer/utils';
 import styles from './index.module.less';
 interface IProps {
   value: string;

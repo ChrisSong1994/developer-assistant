@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
-import gs from 'generate-schema';
+import gofmt from 'gofmt.js';
 
+import { jsonToGo } from './utils';
 import TransformPanel from '@/renderer/components/TransformPanel';
 import { EEditorLanguage } from '@/renderer/components/Editor';
 
@@ -18,9 +19,9 @@ const DEFAULT_VALUE = `{
     "country": "China"
   }
 }`;
-const JsonToMysql = () => {
+const JsonToGo = () => {
   const transformer = useCallback(async (value: string) => {
-    return gs.mysql(JSON.parse(value));
+    return gofmt(jsonToGo(value).go);
   }, []);
 
   return (
@@ -28,9 +29,9 @@ const JsonToMysql = () => {
       defaultValue={DEFAULT_VALUE}
       transformer={transformer}
       sourceLang={EEditorLanguage.JSON}
-      targetLang={EEditorLanguage.SQL}
+      targetLang={EEditorLanguage.GO}
     />
   );
 };
 
-export default JsonToMysql;
+export default JsonToGo;

@@ -9,10 +9,11 @@ interface IProps {
   onClick?: () => void;
   size?: number;
   withHoverBg?: boolean;
+  styles?: Record<string, any>;
   [k: string]: any;
 }
 
-const Icon = ({ type, withHoverBg = false, className = '', size = 18, ...resetProps }: IProps) => {
+const Icon = ({ type, withHoverBg = false, className = '', size = 18, styles = {}, ...resetProps }: IProps) => {
   return (
     <i
       className={`iconfont
@@ -24,7 +25,7 @@ const Icon = ({ type, withHoverBg = false, className = '', size = 18, ...resetPr
       line-height: normal;
     `)} 
     ${className}`}
-      style={{ fontSize: size }}
+      style={{ ...styles, fontSize: size }}
       {...resetProps}
     />
   );

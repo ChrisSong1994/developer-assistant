@@ -2,11 +2,11 @@ import { FormOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { Fragment, useState } from 'react';
 import * as color from 'react-color/es/helpers/color';
+import { isEmpty, genTimeBasedId } from '@fett/utils';
 
 import Empty from '@/renderer/components/Empty';
 import { THEME_COLOR } from '@/renderer/constants';
 import { useLocalData } from '@/renderer/hooks';
-import { generateDateUUID, isEmpty } from '@/renderer/utils';
 
 import ColorPicker from './Picker';
 import ColorRecord, { IRecord } from './Record';
@@ -31,7 +31,7 @@ const Color = () => {
         {
           value: data.hex,
           title: data.hex,
-          key: generateDateUUID(),
+          key: genTimeBasedId(),
         },
       ],
     });

@@ -5,7 +5,7 @@ import fetch from 'node-fetch';
 import { to } from '@fett/utils';
 
 import { PACKAGE_PATH } from '../utils/path';
-import { GITHUB_PACKAGE_URL } from '@/common/contants';
+import { GITHUB_PACKAGE_URL } from '@/common/constants';
 
 export const packages = fs.readJSONSync(PACKAGE_PATH);
 

@@ -2,7 +2,7 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import { Checkbox, Dropdown, MenuProps, Modal } from 'antd';
 import React, { Fragment, useEffect, useState } from 'react';
 
-import { GITHUB_RELEASE_URL, GITHUB_ISSUE_URL } from '@/common/contants';
+import { GITHUB_RELEASE_URL, GITHUB_ISSUE_URL } from '@/common/constants';
 import Icon from '@/renderer/components/Icon';
 import { useConfigData } from '@/renderer/hooks';
 import Events from '@/renderer/utils/events';
@@ -10,6 +10,7 @@ import About from './About';
 import Setting from './Setting';
 interface IConfigMenuProps {
   children: React.ReactNode;
+  isMacPlatform?: boolean;
 }
 
 const menuStyle = {
@@ -17,7 +18,7 @@ const menuStyle = {
 };
 
 const ConfigMenu = (props: IConfigMenuProps) => {
-  const { children } = props;
+  const { children, isMacPlatform } = props;
   const [settingOpen, setSettingOpen] = useState<boolean>(false);
   const [aboutOpen, setAboutOpen] = useState<boolean>(false);
   const { data, setData } = useConfigData();
@@ -90,7 +91,11 @@ const ConfigMenu = (props: IConfigMenuProps) => {
 
   return (
     <Fragment>
-      <Dropdown trigger={['click']} placement="bottom" menu={{ items: menuItems, style: menuStyle }}>
+      <Dropdown
+        trigger={['click']}
+        placement={isMacPlatform ? 'bottomLeft' : 'bottom'}
+        menu={{ items: menuItems, style: menuStyle }}
+      >
         {children}
       </Dropdown>
       <Setting open={settingOpen} onClose={() => setSettingOpen(false)} />
