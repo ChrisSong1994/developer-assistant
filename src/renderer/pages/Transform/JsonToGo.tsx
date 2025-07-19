@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
-import gofmt from 'gofmt.js';
+import init, { format } from '@wasm-fmt/gofmt';
 
-import { jsonToGo } from './utils';
+import { jsonToGoStruct } from './utils';
 import TransformPanel from '@/renderer/components/TransformPanel';
 import { EEditorLanguage } from '@/renderer/components/Editor';
 
@@ -21,7 +21,8 @@ const DEFAULT_VALUE = `{
 }`;
 const JsonToGo = () => {
   const transformer = useCallback(async (value: string) => {
-    return gofmt(jsonToGo(value).go);
+    await init();
+    return format(jsonToGoStruct(value));
   }, []);
 
   return (

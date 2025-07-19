@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-
+import { run } from 'json_typegen_wasm';
 import TransformPanel from '@/renderer/components/TransformPanel';
 import { EEditorLanguage } from '@/renderer/components/Editor';
 
@@ -19,7 +19,6 @@ const DEFAULT_VALUE = `{
 }`;
 const JsonToJsonSchema = () => {
   const transformer = useCallback(async (value: string) => {
-    const { run } = await import('json_typegen_wasm');
     return run(
       'Root',
       value,

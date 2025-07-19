@@ -1,7 +1,5 @@
 import { useCallback } from 'react';
-import gofmt from 'gofmt.js';
 
-import { jsonToGo } from './utils';
 import TransformPanel from '@/renderer/components/TransformPanel';
 import { EEditorLanguage } from '@/renderer/components/Editor';
 

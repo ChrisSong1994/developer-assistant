@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import TransformPanel from '@/renderer/components/TransformPanel';
 import { EEditorLanguage } from '@/renderer/components/Editor';
+import { run } from 'json_typegen_wasm';
 
 const DEFAULT_VALUE = `{
   "name": "fett",
@@ -19,14 +20,18 @@ const DEFAULT_VALUE = `{
 }`;
 const JsonToTypescript = () => {
   const transformer = useCallback(async (value: string) => {
-    const { run } = await import('json_typegen_wasm');
-    return run(
-      'Root',
-      value,
-      JSON.stringify({
-        output_mode: 'typescript/typealias', //"typescript"
-      }),
-    );
+    try {
+      const result = run(
+        'Root',
+        value,
+        JSON.stringify({
+          output_mode: 'typescript/typealias', //"typescript"
+        }),
+      );
+      return result;
+    } catch (e) {
+      return '';
+    }
   }, []);
 
   return (
