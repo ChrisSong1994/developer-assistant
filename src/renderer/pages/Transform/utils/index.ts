@@ -1,1 +1,1 @@
-export { default as jsonToGo } from './json-to-go';
+export * from './jsonToGoStruct';

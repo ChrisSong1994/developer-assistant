@@ -3,7 +3,7 @@ import { installDevtool } from './utils';
 
 import eventsRegistry from './eventsRegistry';
 import { windowInit } from './modules/windows';
-import { isDev, isInMac } from './utils';
+import { isDev } from './utils';
 
 export async function onReady() {
   // 创建主窗口

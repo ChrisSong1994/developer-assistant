@@ -3,6 +3,7 @@ import { cx } from '@emotion/css';
 import MonacoEditor from '@monaco-editor/react';
 import _ from 'lodash';
 import { memo } from 'react';
+import { Spin } from 'antd';
 
 import { isEmpty } from '@fett/utils';
 import Events from '@/renderer/utils/events';
@@ -18,6 +19,7 @@ export interface IBaseEditorProps {
   beforeMount?: (monaco: any) => void;
   onImport?: () => Promise<string | null>;
   tipShow?: boolean;
+  editable?: boolean;
 }
 
 const BaseEditor = (props: IBaseEditorProps) => {
@@ -31,6 +33,7 @@ const BaseEditor = (props: IBaseEditorProps) => {
     beforeMount = () => {},
     onImport,
     tipShow = false,
+    editable = true,
   } = props;
 
   // 导入文件
@@ -66,10 +69,11 @@ const BaseEditor = (props: IBaseEditorProps) => {
         theme="light"
         language={language}
         height="100%"
-        loading={null}
+        loading={<Spin />}
         options={{
           ...DEFAULT_OPTIONS,
           ...options,
+          readOnly: !editable,
         }}
         value={value}
         onChange={_.debounce(onChange, 300)}
