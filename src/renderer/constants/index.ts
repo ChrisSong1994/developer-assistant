@@ -53,6 +53,10 @@ export const BASE64_INPUT_CONTENT_TYPE_OPTIONS = [
 // url 参数
 export const URL_PARAMS = [
   {
+    key: 'size',
+    description: '长度',
+  },
+  {
     key: 'protocol',
     description: '协议',
   },

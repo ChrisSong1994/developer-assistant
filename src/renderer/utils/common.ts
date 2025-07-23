@@ -7,8 +7,8 @@ export const urlConverToObject = (url: URL) => {
   if (!url) return result;
   for (let key of URL_PARAMS_KEYS) {
     // @ts-ignore
-    const value = url[key];
-    if (value) {
+    const value = url?.[key];
+    if (value !== undefined) {
       if (key === 'searchParams') {
         const params: Record<string, any> = {};
         value.forEach((v: string, k: string) => {
@@ -20,6 +20,9 @@ export const urlConverToObject = (url: URL) => {
       } else {
         Reflect.set(result, key, value);
       }
+    }
+    if (key === 'size') {
+      Reflect.set(result, key, `${url.toString().length} 个字符` );
     }
   }
   return result;
