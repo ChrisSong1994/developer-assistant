@@ -1,7 +1,8 @@
 import { cx } from '@emotion/css';
 import { Layout, Tabs, Divider } from 'antd';
-import React, { FC, Fragment, useLayoutEffect, useMemo } from 'react';
+import React, { FC, Fragment, useLayoutEffect, useMemo, useState } from 'react';
 import { AppstoreOutlined } from '@ant-design/icons';
+import { debounce } from 'lodash';
 
 import { isInMac } from '@/renderer/utils';
 import { useConfigData } from '@/renderer/hooks';
@@ -23,6 +24,8 @@ interface TabItem {
 
 const BaseLayout: FC = () => {
   const { data: configData, setData: setConfigData } = useConfigData();
+
+  const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
 
   const isMacPlatform = useMemo(() => {
     return isInMac();
@@ -82,13 +85,24 @@ const BaseLayout: FC = () => {
     });
   };
 
+  const handleWindowSize = debounce(async () => {
+    const isFS = await Events.isFullScreen();
+    setIsFullScreen(isFS);
+  }, 100);
+
   useLayoutEffect(() => {
     setTimeout(Events.windowRenderReady, 1000);
+    window.addEventListener('resize', handleWindowSize);
+    return () => {
+      window.removeEventListener('resize', handleWindowSize);
+    };
   }, []);
 
   return (
     <Layout className={styles['developer-container']}>
-      <Header className={`${styles['developer-container-header']} ${isMacPlatform ? styles['is-mac'] : ''}`}>
+      <Header
+        className={`${styles['developer-container-header']} ${isMacPlatform && !isFullScreen ? styles['is-mac'] : ''}`}
+      >
         <div className={styles['developer-container-header-logo']}>
           <img src={logo} /> <div>Developer Assistant</div>
         </div>
