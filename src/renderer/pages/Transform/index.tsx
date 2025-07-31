@@ -9,6 +9,7 @@ import JsonToMysql from './JsonToMysql';
 import JsonToJsonSchema from './JsonToJsonSchema';
 import JsObjectToJson from './JsObjectToJson';
 import JsonToKotlin from './JsonToKotlin';
+import JsObjectToTypescript from './JsObjectToTypescript';
 
 const TransformOptions = [
   {
@@ -52,6 +53,12 @@ const TransformOptions = [
     component: JsObjectToJson,
   },
   {
+    value: 'JsObjectToTypescript',
+    label: 'Javascript Object 转 Typescript',
+    component: JsObjectToTypescript,
+  },
+
+  {
     value: 'yamlToJson',
     label: 'YAML 转 JSON',
     component: YamlToJson,
@@ -71,7 +78,7 @@ const Transform = () => {
         <span style={{ fontWeight: 500, fontSize: 14 }}>语言：</span>
         <Select
           value={activeKey}
-          style={{ width: 220, padding: '2px 0' }}
+          style={{ minWidth: 220, padding: '2px 0' }}
           onChange={setActiveKey}
           options={TransformOptions}
         />
