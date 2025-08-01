@@ -18,6 +18,14 @@ export enum EEditorLanguage {
   PYTHON = 'python',
   YAML = 'yaml',
   XML = 'xml',
+  KOTLIN='kotlin',
+  DART='dart',
+  SWIFT='swift',
+  OBJECTIVEC='objective-c',
+  TOMLL='toml',
+  JSON5='json5',
+  MARKDOWN='markdown',
+  LUA='lua'
 }
 
 export const DEFAULT_OPTIONS = {

@@ -72,13 +72,13 @@ const UrlParse = () => {
                   );
                 }
               } else {
-                return (
+                return !isEmpty(value) ? (
                   <Descriptions.Item key={key} label={key} styles={{ label: { width: 140 } }}>
                     {value}
                   </Descriptions.Item>
-                );
+                ) : null;
               }
-            })}
+            }).filter(Boolean)}
           </Descriptions>
         ) : (
           <div className={styles['url-description']}>

@@ -139,3 +139,8 @@ export const windowClose = () => {
 
   return;
 };
+
+
+export const isFullScreen = () => { 
+  return global.mainWindow?.isFullScreen();
+};

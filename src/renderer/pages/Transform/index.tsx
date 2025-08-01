@@ -3,10 +3,13 @@ import { Select } from 'antd';
 import JsonToYaml from './JsonToYaml';
 import YamlToJson from './YamlToJson';
 import JsonToGo from './JsonToGo';
+import JsonToJava from './JsonToJava';
 import JsonToTypescript from './JsonToTypescript';
 import JsonToMysql from './JsonToMysql';
 import JsonToJsonSchema from './JsonToJsonSchema';
 import JsObjectToJson from './JsObjectToJson';
+import JsonToKotlin from './JsonToKotlin';
+import JsObjectToTypescript from './JsObjectToTypescript';
 
 const TransformOptions = [
   {
@@ -15,14 +18,24 @@ const TransformOptions = [
     component: JsonToYaml,
   },
   {
+    value: 'jsonToTypescript',
+    label: 'JSON 转 Typescript',
+    component: JsonToTypescript,
+  },
+  {
     value: 'jsonToGo',
     label: 'JSON 转 Go Struct',
     component: JsonToGo,
   },
   {
-    value: 'jsonToTypescript',
-    label: 'JSON 转 Typescript',
-    component: JsonToTypescript,
+    value: 'jsonToJava',
+    label: 'JSON 转 Java',
+    component: JsonToJava,
+  },
+  {
+    value: 'jsonToKotlin',
+    label: 'JSON 转 Kotlin',
+    component: JsonToKotlin,
   },
   {
     value: 'jsonToMysql',
@@ -39,6 +52,12 @@ const TransformOptions = [
     label: 'Javascript Object 转 JSON',
     component: JsObjectToJson,
   },
+  {
+    value: 'JsObjectToTypescript',
+    label: 'Javascript Object 转 Typescript',
+    component: JsObjectToTypescript,
+  },
+
   {
     value: 'yamlToJson',
     label: 'YAML 转 JSON',
@@ -59,7 +78,7 @@ const Transform = () => {
         <span style={{ fontWeight: 500, fontSize: 14 }}>语言：</span>
         <Select
           value={activeKey}
-          style={{ width: 220, padding: '2px 0' }}
+          style={{ minWidth: 220, padding: '2px 0' }}
           onChange={setActiveKey}
           options={TransformOptions}
         />
