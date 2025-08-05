@@ -12,6 +12,7 @@ import jsonlint from 'jsonlint-mod';
 import { useEffect, useMemo, useState } from 'react';
 import { Popover, message } from 'antd';
 import { dayjs } from '@fett/utils';
+import { jsonrepair } from 'jsonrepair';
 
 import ActionsBarWrap from '@/renderer/components/ActionsBarWrap';
 import Copy from '@/renderer/components/Copy';
@@ -127,6 +128,14 @@ const JsonParseComponent = () => {
     }
   };
 
+  const handleRepair = () => {
+    try {
+      setValue(jsonrepair(value));
+    } catch (err) {
+      message.error('修复失败！');
+    }
+  };
+
   const handleDeleteJsonHistory = (filepath: string) => {
     const newJsonHistory = localData?.json_history.filter((item: any) => item.filepath !== filepath);
     // @ts-ignore
@@ -156,21 +165,22 @@ const JsonParseComponent = () => {
       <div className={styles['json-panel']}>
         <ActionsBarWrap>
           <Copy value={value} size={18} />
+          <Tooltip placement="bottom" title="导入">
+            <Icon type="icon-export" withHoverBg size={18} onClick={handleImport} />
+          </Tooltip>
+          <Tooltip placement="bottom" title="保存">
+            <Icon type="icon-save" withHoverBg size={18} onClick={handleSave} />
+          </Tooltip>
           <Tooltip placement="bottom" title="美化">
             <Icon type="icon-clear" withHoverBg size={18} onClick={handleJsonFormat} />
           </Tooltip>
           <Tooltip placement="bottom" title="压缩">
             <Icon type="icon-compress" withHoverBg size={18} onClick={handleCompress} />
           </Tooltip>
-          <Tooltip placement="bottom" title="保存">
-            <Icon type="icon-save" withHoverBg size={18} onClick={handleSave} />
+          <Tooltip placement="bottom" title="修复">
+            <Icon type="icon-repair" withHoverBg size={18} onClick={handleRepair} />
           </Tooltip>
-          <Tooltip placement="bottom" title="导入">
-            <Icon type="icon-export" withHoverBg size={18} onClick={handleImport} />
-          </Tooltip>
-          <Tooltip placement="bottom" title="清除">
-            <Icon type="icon-delete" withHoverBg size={18} onClick={handleClear} />
-          </Tooltip>
+
           {localData?.json_history?.length ? (
             <Tooltip placement="bottom" title="历史记录">
               <Popover
@@ -189,10 +199,14 @@ const JsonParseComponent = () => {
               <Icon type="icon-history" withHoverBg size={18} />
             </Tooltip>
           )}
+          <Tooltip placement="bottom" title="清除">
+            <Icon type="icon-delete" withHoverBg size={18} onClick={handleClear} />
+          </Tooltip>
         </ActionsBarWrap>
 
         <JsonEditor
           error={parseError}
+          onRepair={handleRepair}
           onErrorClose={() => setParseError(null)}
           style={{ height: `calc(100vh - ${EDITOR_HEIGHT_PADDING}px)` }}
           value={value}

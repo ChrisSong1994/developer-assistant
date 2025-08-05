@@ -113,6 +113,9 @@ importers:
       jsonlint-mod:
         specifier: ^1.7.6
         version: 1.7.6
+      jsonrepair:
+        specifier: ^3.13.0
+        version: 3.13.0
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -3193,6 +3196,10 @@ packages:
   jsonlint-mod@1.7.6:
     resolution: {integrity: sha512-oGuk6E1ehmIpw0w9ttgb2KsDQQgGXBzZczREW8OfxEm9eCQYL9/LCexSnh++0z3AiYGcXpBgqDSx9AAgzl/Bvg==}
     engines: {node: '>= 0.6'}
+    hasBin: true
+
+  jsonrepair@3.13.0:
+    resolution: {integrity: sha512-5YRzlAQ7tuzV1nAJu3LvDlrKtBFIALHN2+a+I1MGJCt3ldRDBF/bZuvIPzae8Epot6KBXd0awRZZcuoeAsZ/mw==}
     hasBin: true
 
   jsprim@1.4.2:
@@ -9169,6 +9176,8 @@ snapshots:
       JSV: 4.0.2
       chalk: 2.4.2
       underscore: 1.13.7
+
+  jsonrepair@3.13.0: {}
 
   jsprim@1.4.2:
     dependencies:
