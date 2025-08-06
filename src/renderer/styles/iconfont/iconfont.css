@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3449774 */
-  src: url('iconfont.woff2?t=1754377404841') format('woff2'),
-       url('iconfont.woff?t=1754377404841') format('woff'),
-       url('iconfont.ttf?t=1754377404841') format('truetype');
+  src: url('iconfont.woff2?t=1754449509954') format('woff2'),
+       url('iconfont.woff?t=1754449509954') format('woff'),
+       url('iconfont.ttf?t=1754449509954') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,14 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-graph:before {
+  content: "\e61c";
+}
+
+.icon-language-json-svgrepo-com:before {
+  content: "\e61b";
 }
 
 .icon-repair:before {
@@ -29,7 +37,7 @@
   content: "\e720";
 }
 
-.icon-JsonPath:before {
+.icon-jsonpath:before {
   content: "\e6b6";
 }
 

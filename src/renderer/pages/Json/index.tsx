@@ -10,7 +10,7 @@
 import { Tooltip } from 'antd';
 import jsonlint from 'jsonlint-mod';
 import { useEffect, useMemo, useState } from 'react';
-import { Popover, message } from 'antd';
+import { Popover, message, Splitter } from 'antd';
 import { dayjs } from '@fett/utils';
 import { jsonrepair } from 'jsonrepair';
 
@@ -22,6 +22,7 @@ import { useLocalData } from '@/renderer/hooks';
 import { isEmpty } from '@fett/utils';
 import Events from '@/renderer/utils/events';
 import styles from './index.module.less';
+import { GraphView } from './GraphView';
 
 const EDITOR_HEIGHT_PADDING = 100;
 const JsonParseComponent = () => {
@@ -29,6 +30,8 @@ const JsonParseComponent = () => {
   const [parseJson, setParseJson] = useState({});
   const [parseError, setParseError] = useState<string | null>(null);
   const [historyOpen, setHistoryOpen] = useState(false);
+  const [jsonPathOpen, setJsonPathOpen] = useState(false);
+  const [jsonGraphOpen, setJsonGraphOpen] = useState(false);
   const { data: localData, setData: setLocalData } = useLocalData();
 
   // 待定
@@ -156,6 +159,16 @@ const JsonParseComponent = () => {
     setLocalData({ json_history: newJsonHistory });
   };
 
+  const handleToogleJsonPath = () => {
+    setJsonPathOpen(!jsonPathOpen);
+    setJsonGraphOpen(false);
+  };
+
+  const handleToogleJsonGraph = () => {
+    setJsonGraphOpen(!jsonGraphOpen);
+    setJsonPathOpen(false);
+  };
+
   useEffect(() => {
     handleJsonParse(value);
   }, [value]);
@@ -199,19 +212,35 @@ const JsonParseComponent = () => {
               <Icon type="icon-history" withHoverBg size={18} />
             </Tooltip>
           )}
+          {/* <Tooltip placement="bottom" title="JSON Path">
+            <Icon type="icon-jsonpath" withHoverBg size={18} onClick={handleToogleJsonPath} />
+          </Tooltip> */}
+          <Tooltip placement="bottom" title="JSON Graph">
+            <Icon type="icon-graph" withHoverBg size={18} onClick={handleToogleJsonGraph} />
+          </Tooltip>
           <Tooltip placement="bottom" title="清除">
             <Icon type="icon-delete" withHoverBg size={18} onClick={handleClear} />
           </Tooltip>
         </ActionsBarWrap>
+        <Splitter style={{ height: `calc(100vh - ${EDITOR_HEIGHT_PADDING}px)` }}>
+          <Splitter.Panel defaultSize="50%" min="30%" max="80%">
+            <JsonEditor
+              error={parseError}
+              onRepair={handleRepair}
+              onErrorClose={() => setParseError(null)}
+              style={{ height: `calc(100vh - ${EDITOR_HEIGHT_PADDING}px)` }}
+              value={value}
+              onChange={setValue}
+            />
+          </Splitter.Panel>
+          {jsonGraphOpen ? (
+            <Splitter.Panel>
+              <GraphView value={value} />
+            </Splitter.Panel>
+          ) : null}
 
-        <JsonEditor
-          error={parseError}
-          onRepair={handleRepair}
-          onErrorClose={() => setParseError(null)}
-          style={{ height: `calc(100vh - ${EDITOR_HEIGHT_PADDING}px)` }}
-          value={value}
-          onChange={setValue}
-        />
+          {jsonPathOpen ? <Splitter.Panel>json path</Splitter.Panel> : null}
+        </Splitter>
       </div>
     </div>
   );

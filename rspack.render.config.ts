@@ -15,9 +15,10 @@ const config: Configuration = {
     publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   },
   resolve: {
-    extensions: ['...', '.ts', '.tsx', '.jsx'],
+    extensions: ['.js', '.ts', '.tsx', '.jsx', '.mjs'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      'elkjs/lib/elk-api': 'elkjs/lib/elk-api.js',   // for reaflow type module 
     },
   },
   devServer: {
