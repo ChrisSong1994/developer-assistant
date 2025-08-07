@@ -7,7 +7,7 @@ import { BaseEditor, EEditorLanguage } from '@/renderer/components/Editor';
 import CheatSheet from './CheatSheet';
 import './index.css';
 
-const JsonPath = (props: { jsonData: Record<string, any> }) => {
+const JsonPath = (props: { value: Record<string, any> }) => {
   const [jsonpath, setJsonpath] = useState('$');
   const [result, setResult] = useState('');
   const [error, setError] = useState('');
@@ -15,7 +15,7 @@ const JsonPath = (props: { jsonData: Record<string, any> }) => {
   const handleJsonPath = (jsonpath: string) => {
     try {
       const query = new JSONPathJS(jsonpath);
-      const result = query.find(props.jsonData ?? {});
+      const result = query.find(props.value ?? {});
       setResult(JSON.stringify(result, null, 2));
       setError('');
     } catch (e: any) {
@@ -25,7 +25,7 @@ const JsonPath = (props: { jsonData: Record<string, any> }) => {
 
   useEffect(() => {
     handleJsonPath(jsonpath);
-  }, [jsonpath]);
+  }, [jsonpath, props.value]);
 
   return (
     <div className="json-path-container">

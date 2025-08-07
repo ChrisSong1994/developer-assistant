@@ -126,7 +126,6 @@ const GraphCanvas = (props: { value: string }) => {
 export const GraphView = (props: { value: string }) => {
   const setViewPort = useGraph((state) => state.setViewPort);
   const viewPort = useGraph((state) => state.viewPort);
-  const aboveSupportedLimit = useGraph((state) => state.aboveSupportedLimit);
   const loading = useGraph((state) => state.loading);
   const gesturesEnabled = true;
   const [debouncedLoading] = useDebouncedValue(loading, 300);
@@ -155,7 +154,6 @@ export const GraphView = (props: { value: string }) => {
   return (
     <MantineProvider>
       <Box pos="relative" h="calc(100vh - 100px)" w="100%">
-        {/* {aboveSupportedLimit && <NotSupported />} */}
         <LoadingOverlay visible={debouncedLoading} />
         <ZoomControl />
         <StyledEditorWrapper

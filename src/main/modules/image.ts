@@ -53,7 +53,7 @@ export const getImagesInfoFromPath = async (filePath: string | Array<string>): P
  * payload: base64 string
  */
 export const saveBase64ImageToLocal = async (
-  options: OpenDialogOptions & { fileName: string; payload: string; format: 'png' | 'jpg' | 'jpeg' | 'webp' },
+  options: OpenDialogOptions & { fileName: string; payload: string; format: 'png' | 'jpg' | 'jpeg' | 'webp' | 'svg' },
 ) => {
   const { downloadPath } = await getConfData();
   const result = await dialog.showSaveDialog(global.mainWindow, {

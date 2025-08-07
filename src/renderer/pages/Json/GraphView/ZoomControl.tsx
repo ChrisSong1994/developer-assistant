@@ -1,14 +1,36 @@
-import { ActionIcon, Flex, Tooltip, Text } from '@mantine/core';
 import { useHotkeys } from '@mantine/hooks';
-import { LuFocus, LuMaximize, LuMinus, LuPlus } from 'react-icons/lu';
-import { SearchInput } from './SearchInput';
+import { Button, Input, Flex, Dropdown } from 'antd';
+import { getHotkeyHandler } from '@mantine/hooks';
+import { LuFocus, LuMaximize, LuMinus, LuPlus, LuDownload } from 'react-icons/lu';
+import { toJpeg, toPng, toSvg } from 'html-to-image';
+
+import Events from '@/renderer/utils/events';
 import useGraph from './stores/useGraph';
+import { useFocusNode } from './hooks/useFocusNode';
+
+enum Extensions {
+  SVG = 'svg',
+  PNG = 'png',
+  JPEG = 'jpeg',
+}
+
+const getDownloadFormat = (format: Extensions) => {
+  switch (format) {
+    case Extensions.SVG:
+      return toSvg;
+    case Extensions.PNG:
+      return toPng;
+    case Extensions.JPEG:
+      return toJpeg;
+  }
+};
 
 export const ZoomControl = () => {
   const zoomIn = useGraph((state) => state.zoomIn);
   const zoomOut = useGraph((state) => state.zoomOut);
   const centerView = useGraph((state) => state.centerView);
   const focusFirstNode = useGraph((state) => state.focusFirstNode);
+  const [searchValue, setValue, skip, nodeCount, currentNode] = useFocusNode();
 
   useHotkeys(
     [
@@ -20,10 +42,24 @@ export const ZoomControl = () => {
     [],
   );
 
+  const handleDownload = async (format: Extensions) => {
+    const imageElement = document.querySelector("svg[id*='ref']") as HTMLElement;
+    const dataURI = await getDownloadFormat(format)(imageElement, {
+      quality: 1,
+      backgroundColor: '#ffffff',
+      pixelRatio: window.devicePixelRatio, // 匹配屏幕像素比
+    });
+
+    await Events.saveBase64ImageToLocal({
+      fileName: `未命名.${format}`,
+      payload: dataURI.replace(`data:image/${format};base64,`, ''),
+      format,
+    });
+  };
+
   return (
     <Flex
-      align="center"
-      gap="xs"
+      gap="small"
       style={{
         position: 'absolute',
         bottom: '10px',
@@ -32,73 +68,44 @@ export const ZoomControl = () => {
         zIndex: 100,
       }}
     >
-      <ActionIcon.Group borderWidth={0}>
-        <Tooltip
-          label={
-            <Flex fz="xs" gap="md">
-              <Text fz="xs">Center first item</Text>
-              <Text fz="xs" c="dimmed">
-                ⇧ 2
-              </Text>
-            </Flex>
-          }
-          withArrow
-        >
-          <ActionIcon
-            size="lg"
-            variant="light"
-            color="gray"
-            onClick={() => {
-              focusFirstNode();
-            }}
-          >
-            <LuFocus />
-          </ActionIcon>
-        </Tooltip>
-        <Tooltip
-          label={
-            <Flex fz="xs" gap="md">
-              <Text fz="xs">Fit to center</Text>
-              <Text fz="xs" c="dimmed">
-                ⇧ 1
-              </Text>
-            </Flex>
-          }
-          withArrow
-        >
-          <ActionIcon
-            size="lg"
-            variant="light"
-            color="gray"
-            onClick={() => {
-              centerView();
-            }}
-          >
-            <LuMaximize />
-          </ActionIcon>
-        </Tooltip>
-        <ActionIcon
-          size="lg"
-          variant="light"
-          color="gray"
-          onClick={() => {
-            zoomOut();
+      <Flex gap="small" align="center">
+        <Button icon={<LuFocus />} onClick={focusFirstNode} />
+        <Button icon={<LuMaximize />} onClick={centerView} />
+        <Button icon={<LuMinus />} onClick={zoomOut} />
+        <Button icon={<LuPlus />} onClick={zoomIn} />
+        {/* <Dropdown
+          trigger={['click']}
+          menu={{
+            items: [
+              {
+                label: 'png',
+                key: 'png',
+              },
+
+              {
+                label: 'jpeg',
+                key: 'jpeg',
+              },
+              {
+                label: 'svg',
+                key: 'svg',
+              },
+            ],
+            onClick: ({ key }: any) => handleDownload(key),
           }}
         >
-          <LuMinus />
-        </ActionIcon>
-        <ActionIcon
-          size="lg"
-          variant="light"
-          color="gray"
-          onClick={() => {
-            zoomIn();
-          }}
-        >
-          <LuPlus />
-        </ActionIcon>
-      </ActionIcon.Group>
-      <SearchInput />
+          <Button icon={<LuDownload />} />
+        </Dropdown> */}
+      </Flex>
+
+      <Input
+        placeholder="Search Node"
+        variant="underlined"
+        value={searchValue}
+        onChange={(e) => setValue(e.currentTarget.value)}
+        onKeyDown={getHotkeyHandler([['Enter', skip]])}
+        suffix={searchValue && `${nodeCount}/${nodeCount > 0 ? currentNode + 1 : '0'}`}
+      />
     </Flex>
   );
 };

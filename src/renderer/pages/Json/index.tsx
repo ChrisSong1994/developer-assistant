@@ -242,7 +242,7 @@ const JsonParseComponent = () => {
 
           {jsonPathOpen ? (
             <Splitter.Panel>
-              <JsonPath jsonData={parseJson} />
+              <JsonPath value={parseJson} />
             </Splitter.Panel>
           ) : null}
         </Splitter>

@@ -42,6 +42,7 @@ export function getMainWindowOptions(): BrowserWindowConstructorOptions {
     show: false,
     webPreferences: {
       devTools: isDev,
+      webSecurity: false,
       nodeIntegration: true,
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js'),
