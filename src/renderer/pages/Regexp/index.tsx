@@ -6,7 +6,6 @@ import {
   LinkOutlined,
 } from '@ant-design/icons';
 import { Button, Checkbox, Divider, Dropdown, Input, Menu, Popover, Space, Tooltip } from 'antd';
-import type { CheckboxValueType } from 'antd/es/checkbox/Group';
 import { useEffect, useMemo, useState } from 'react';
 
 import { REGEXP_SYNTAX_COMMENTS_OPTIONS } from '@/renderer/constants';
@@ -17,7 +16,7 @@ const TextArea = Input.TextArea;
 const Search = Input.Search;
 
 const Regexp = () => {
-  const [flags, setFlags] = useState<CheckboxValueType[]>(['g']);
+  const [flags, setFlags] = useState<string[]>(['g']);
   const [regexp, setRegexp] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [error, setError] = useState<any>(null);
@@ -92,7 +91,6 @@ const Regexp = () => {
     <div>
       <div className={styles['regexp-header']}>
         <Input
-          style={{ width: 'calc( 100% - 380px )' }}
           size="large"
           value={regexp}
           onChange={(e) => {
@@ -112,7 +110,7 @@ const Regexp = () => {
         />
         <Dropdown
           trigger={['click']}
-          dropdownRender={() => (
+          popupRender={() => (
             <Checkbox.Group value={flags} onChange={setFlags}>
               <Menu
                 items={[
@@ -148,7 +146,7 @@ const Regexp = () => {
             </Checkbox.Group>
           )}
         >
-          <Button style={{ width: 140, marginLeft: 20 }} type="primary" size="large">
+          <Button style={{ width: 140, marginLeft: 14 }} type="primary" size="large">
             <Space>
               <FlagOutlined /> 修饰符
               <CaretDownOutlined />
@@ -156,7 +154,7 @@ const Regexp = () => {
           </Button>
         </Dropdown>
         <Dropdown trigger={['click']} menu={{ items: REGEXP_SYNTAX_COMMENTS_OPTIONS }}>
-          <Button style={{ width: 140, marginLeft: 16 }} type="primary" size="large">
+          <Button style={{ width: 140, marginLeft: 12 }} type="primary" size="large">
             <Space>
               <FileSearchOutlined /> 语法参考
               <CaretDownOutlined />

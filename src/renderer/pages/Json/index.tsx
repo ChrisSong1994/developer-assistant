@@ -23,6 +23,7 @@ import { isEmpty } from '@fett/utils';
 import Events from '@/renderer/utils/events';
 import styles from './index.module.less';
 import { GraphView } from './GraphView';
+import JsonPath from './JsonPath';
 
 const EDITOR_HEIGHT_PADDING = 100;
 const JsonParseComponent = () => {
@@ -212,9 +213,9 @@ const JsonParseComponent = () => {
               <Icon type="icon-history" withHoverBg size={18} />
             </Tooltip>
           )}
-          {/* <Tooltip placement="bottom" title="JSON Path">
+          <Tooltip placement="bottom" title="JSON Path">
             <Icon type="icon-jsonpath" withHoverBg size={18} onClick={handleToogleJsonPath} />
-          </Tooltip> */}
+          </Tooltip>
           <Tooltip placement="bottom" title="JSON Graph">
             <Icon type="icon-graph" withHoverBg size={18} onClick={handleToogleJsonGraph} />
           </Tooltip>
@@ -239,7 +240,11 @@ const JsonParseComponent = () => {
             </Splitter.Panel>
           ) : null}
 
-          {jsonPathOpen ? <Splitter.Panel>json path</Splitter.Panel> : null}
+          {jsonPathOpen ? (
+            <Splitter.Panel>
+              <JsonPath jsonData={parseJson} />
+            </Splitter.Panel>
+          ) : null}
         </Splitter>
       </div>
     </div>

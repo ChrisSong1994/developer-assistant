@@ -122,6 +122,9 @@ importers:
       jsonlint-mod:
         specifier: ^1.7.6
         version: 1.7.6
+      jsonpath-js:
+        specifier: ^0.2.0
+        version: 0.2.0
       jsonrepair:
         specifier: ^3.13.0
         version: 3.13.0
@@ -3574,6 +3577,10 @@ packages:
     resolution: {integrity: sha512-oGuk6E1ehmIpw0w9ttgb2KsDQQgGXBzZczREW8OfxEm9eCQYL9/LCexSnh++0z3AiYGcXpBgqDSx9AAgzl/Bvg==}
     engines: {node: '>= 0.6'}
     hasBin: true
+
+  jsonpath-js@0.2.0:
+    resolution: {integrity: sha512-CtiMM/lKxja0AS85qD03/hVh1y2mwphXsqoWVDghkXls7Q9se0KXfyx45oGaKJuGbdUf2G0JOQPacR+AW7KDkw==}
+    engines: {node: '>=18'}
 
   jsonrepair@3.13.0:
     resolution: {integrity: sha512-5YRzlAQ7tuzV1nAJu3LvDlrKtBFIALHN2+a+I1MGJCt3ldRDBF/bZuvIPzae8Epot6KBXd0awRZZcuoeAsZ/mw==}
@@ -10350,6 +10357,8 @@ snapshots:
       JSV: 4.0.2
       chalk: 2.4.2
       underscore: 1.13.7
+
+  jsonpath-js@0.2.0: {}
 
   jsonrepair@3.13.0: {}
 
