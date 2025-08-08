@@ -1,0 +1,24 @@
+.json-path-container {
+  padding-left: 6px;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .text {
+    display: flex;
+    height: 34px;
+    align-items: center;
+    font-size: 14px;
+
+    .error {
+      color: red;
+    }
+
+    .tip {
+      color: #7d7d7d;
+    }
+  }
+}
