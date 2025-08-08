@@ -10,6 +10,7 @@ import UrlParse from '@/renderer/pages/UrlParse';
 import Transform from '@/renderer/pages/Transform';
 import Markdown from '@/renderer/pages/Markdown';
 import ImageCompress from '@/renderer/pages/ImageCompress';
+import DecimalConversion from '@/renderer/pages/DecimalConversion';
 
 export enum ToolCategory {
   TEXT = 'TEXT',
@@ -95,6 +96,13 @@ const routes = [
     icon: 'icon-url',
     category: ToolCategory.CODING,
     component: UrlParse,
+  },
+  {
+    key: 'DecimalConversion',
+    title: '进制转换',
+    icon: 'icon-binary',
+    category: ToolCategory.CODING,
+    component: DecimalConversion,
   },
   {
     key: 'Markdown',
