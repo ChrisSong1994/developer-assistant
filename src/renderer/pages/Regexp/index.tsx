@@ -8,7 +8,7 @@ import {
 import { Button, Checkbox, Divider, Dropdown, Input, Menu, Popover, Space, Tooltip } from 'antd';
 import { useEffect, useMemo, useState } from 'react';
 
-import { REGEXP_SYNTAX_COMMENTS_OPTIONS } from '@/renderer/constants';
+import CheatSheet from './CheatSheet';
 import regMatch from '@/renderer/utils/regMatch';
 import styles from './index.module.less';
 
@@ -153,7 +153,7 @@ const Regexp = () => {
             </Space>
           </Button>
         </Dropdown>
-        <Dropdown trigger={['click']} menu={{ items: REGEXP_SYNTAX_COMMENTS_OPTIONS }}>
+        <Dropdown trigger={['click']} popupRender={() => <CheatSheet />}>
           <Button style={{ width: 140, marginLeft: 12 }} type="primary" size="large">
             <Space>
               <FileSearchOutlined /> 语法参考
