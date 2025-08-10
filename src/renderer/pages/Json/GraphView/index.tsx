@@ -11,6 +11,7 @@ import { useLongPress } from 'use-long-press';
 import { CustomEdge } from './CustomEdge';
 import { CustomNode } from './CustomNode';
 import { ZoomControl } from './ZoomControl';
+import ScreenAction from './ScreenAction';
 import useGraph from './stores/useGraph';
 
 const StyledEditorWrapper = styled.div`
@@ -29,10 +30,6 @@ const StyledEditorWrapper = styled.div`
     linear-gradient(90deg, var(--line-color-2) 1px, transparent 1px);
   background-position: -1.5px -1.5px, -1.5px -1.5px, -1px -1px, -1px -1px;
   background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-
-  .jsoncrack-space {
-    cursor: url('/assets/cursor.svg'), auto;
-  }
 
   :active {
     cursor: move;
@@ -153,9 +150,10 @@ export const GraphView = (props: { value: string }) => {
 
   return (
     <MantineProvider>
-      <Box pos="relative" h="calc(100vh - 100px)" w="100%">
+      <Box id="jsongraph" className="jsongraph" pos="relative" h="calc(100vh - 100px)" w="100%">
         <LoadingOverlay visible={debouncedLoading} />
         <ZoomControl />
+        <ScreenAction />
         <StyledEditorWrapper
           onContextMenu={(e) => e.preventDefault()}
           onClick={blurOnClick}
@@ -168,7 +166,6 @@ export const GraphView = (props: { value: string }) => {
             onContextMenu={(e) => e.preventDefault()}
             treatTwoFingerTrackPadGesturesLikeTouch={gesturesEnabled}
             pollForElementResizing
-            className="jsoncrack-space"
           >
             <GraphCanvas value={props.value} />
           </Space>

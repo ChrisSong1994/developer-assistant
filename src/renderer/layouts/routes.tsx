@@ -10,6 +10,8 @@ import UrlParse from '@/renderer/pages/UrlParse';
 import Transform from '@/renderer/pages/Transform';
 import Markdown from '@/renderer/pages/Markdown';
 import ImageCompress from '@/renderer/pages/ImageCompress';
+import DecimalConversion from '@/renderer/pages/DecimalConversion';
+import CronParser from '@/renderer/pages/CronParser';
 
 export enum ToolCategory {
   TEXT = 'TEXT',
@@ -97,11 +99,25 @@ const routes = [
     component: UrlParse,
   },
   {
+    key: 'DecimalConversion',
+    title: '进制转换',
+    icon: 'icon-binary',
+    category: ToolCategory.CODING,
+    component: DecimalConversion,
+  },
+  {
     key: 'Markdown',
     title: 'Markdown',
     icon: 'icon-markdown',
     category: ToolCategory.TEXT,
     component: Markdown,
+  },
+  {
+    key: 'CronParser',
+    title: 'Cron 解析',
+    icon: 'icon-cron',
+    category: ToolCategory.TEXT,
+    component: CronParser,
   },
 ];
 

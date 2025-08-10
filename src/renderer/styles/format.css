@@ -66,6 +66,10 @@ a {
   }
 }
 
+.ant-input-outlined:focus,.ant-input-outlined:focus-within{
+  box-shadow: none !important;
+}
+
 /* monaco editor 样式覆盖 */
 
 .margin-view-overlays {

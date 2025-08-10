@@ -103,43 +103,39 @@ export const DATASOURCE = [
 const EXAMPLE_DATASOURCE = [
   {
     description: '正整数',
-    syntax: '^[1 - 9]d*$',
+    syntax: '^d+',
   },
   {
     description: '英文和数字',
-    syntax: '^[a - zA - Z0 - 9]+$',
+    syntax: '^[a-zA-Z0-9]+$',
   },
   {
-    description: '数字、英文字母或者下划线组成的字符串',
-    syntax: '^w+$',
+    description: '日期（YYYY-MM-dd）',
+    syntax: '/([12]d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]d|3[01]))/',
   },
   {
-    description: '日期（弱校验）',
-    syntax: '^d{1,4}-(?:1[0 - 2]	0?[1 - 9])-(?:0?[1 - 9]	(1 - 2)d	30	31)$',
+    description: '手机号',
+    syntax: '^(?:0|86|＋?86)?1[3-9]d{9}$',
   },
   {
-    description: '12 小时制时间',
-    syntax: '^(?:1[0 - 2]	0?[1 - 9]):[0 - 5]d:[0 - 5]d$',
-  },
-  {
-    description: '24 小时制时间',
-    syntax: '^(?:[01]d	2[0 - 3]):[0 - 5]d:[0 - 5]d$',
-  },
-  {
-    description: '手机号（弱匹配）',
-    syntax: '^1[3 - 9]d{9}$',
+    description: '邮政编码',
+    syntax: '/^[0-9]{6}$/',
   },
   {
     description: '身份证号码（2 代）',
-    syntax: '^[1 - 9]d{5}(?:18	19	20)d{2}(?:0[1 - 9]	10	11	12)(?:0[1 - 9]	(1 - 2)d	30	31)d{3}(0 - 9Xx)$',
+    syntax: '^[1-9]d{5}(18|19|20)d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)d{3}[0-9Xx]$',
   },
   {
     description: '电子邮箱',
-    syntax: '^w+((-.)w+)*@w+((-.)w+)*.w+((-.)w+)*$',
+    syntax: '^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,6})*$',
   },
   {
     description: 'URL',
-    syntax: '^https?://((da - z.-)+).((a - z.){2,6})(/[w.-]*)*/?$',
+    syntax: '^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#()?&//=]*)$',
+  },
+  {
+    description: 'HTML Tags',
+    syntax: '</?[ws]*>|<.+[W]>',
   },
 ];
 
