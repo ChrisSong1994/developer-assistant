@@ -366,7 +366,7 @@ const CronParser: React.FC = () => {
   ];
 
   return (
-    <div style={{ padding: '6px 0' }}>
+    <div>
       <Form layout="vertical">
         <Text style={{ whiteSpace: 'nowrap', fontWeight: 'bold', fontSize: 16, margin: '12px 0' }}>Cron表达式</Text>
         <Form.Item>
