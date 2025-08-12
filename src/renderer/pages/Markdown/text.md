@@ -1,10 +1,3 @@
----
-# frontmatter: https://jekyllrb.com/docs/front-matter/
-layout: post
-title: 像大佬一样写博客
-description: 这是一个简单的 markdown 语法介绍文档。
----
-
 ## Markdown 基础语法
 
 我就是喜欢**粗体文本**。斜体文本真是*太棒了*。在命令提示符下，输入 `nano`。
