@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ConfigProvider } from 'antd';
 import BaseLayout from './layouts';
@@ -13,23 +12,21 @@ const rootEl = document.getElementById('root');
 if (rootEl) {
   const root = ReactDOM.createRoot(rootEl);
   root.render(
-    <React.StrictMode>
-      <ConfigProvider
-        theme={{
-          cssVar: true,
-          token: {
-            // Seed Token，影响范围大
-            colorPrimary: THEME_COLOR,
+    <ConfigProvider
+      theme={{
+        cssVar: true,
+        token: {
+          // Seed Token，影响范围大
+          colorPrimary: THEME_COLOR,
+        },
+        components: {
+          Select: {
+            optionSelectedBg: '#f5f5f5',
           },
-          components: {
-            Select: {
-              optionSelectedBg: '#f5f5f5',
-            },
-          },
-        }}
-      >
-        <BaseLayout />
-      </ConfigProvider>
-    </React.StrictMode>,
+        },
+      }}
+    >
+      <BaseLayout />
+    </ConfigProvider>,
   );
 }
