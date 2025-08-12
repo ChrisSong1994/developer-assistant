@@ -1,5 +1,6 @@
 'use client';
 
+// power by bytemd https://github.com/pd4d10/bytemd
 import { useState } from 'react';
 import breaks from '@bytemd/plugin-breaks';
 import frontmatter from '@bytemd/plugin-frontmatter';
@@ -14,7 +15,7 @@ import GFM_ZH from '@bytemd/plugin-gfm/locales/zh_Hans.json';
 import MATH_ZH from '@bytemd/plugin-math/locales/zh_Hans.json';
 import MERMAID_ZH from '@bytemd/plugin-mermaid/locales/zh_Hans.json';
 import EDITOR_ZH from 'bytemd/locales/zh_Hans.json';
-import 'github-markdown-css';
+import 'github-markdown-css/github-markdown-light.css';
 
 import MARKDOWN_TEXT from './text.md';
 import './index.less';
