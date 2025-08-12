@@ -1,4 +1,3 @@
-
 // interface DragEvent<T = Element> extends MouseEvent<T, NativeDragEvent> {
 //   dataTransfer: DataTransfer;
 // }
@@ -8,7 +7,8 @@ declare global {
     electronBridge?: {
       platform: string;
     };
+    fullScreen: boolean;
   }
 }
 
-export {}
+export {};

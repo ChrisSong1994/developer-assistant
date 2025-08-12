@@ -8,10 +8,10 @@ const { Option } = Select;
 
 // 进制选项配置
 const BASE_OPTIONS = [
-  { value: 2, label: '二进制 (Binary) ob', placeholder: '输入二进制数字 (0-1)' },
-  { value: 8, label: '八进制 (Octal)', placeholder: '输入八进制数字 (0-7)' },
+  { value: 2, label: '二进制 (Binary) 0b', placeholder: '输入二进制数字 (0-1)' },
+  { value: 8, label: '八进制 (Octal) 0o', placeholder: '输入八进制数字 (0-7)' },
   { value: 10, label: '十进制 (Decimal)', placeholder: '输入十进制数字 (0-9)' },
-  { value: 16, label: '十六进制 (Hexadecimal)', placeholder: '输入十六进制数字 (0-9, A-F/a-f)' },
+  { value: 16, label: '十六进制 (Hexadecimal) 0x', placeholder: '输入十六进制数字 (0-9, A-F/a-f)' },
 ];
 
 const BaseConverter = () => {
@@ -109,7 +109,7 @@ const BaseConverter = () => {
   }, [inputValue, inputBase, outputBases]);
 
   // 处理输入变化
-  const handleInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
     setInputValue(value);
   };
@@ -124,9 +124,9 @@ const BaseConverter = () => {
   };
 
   return (
-    <div style={{ maxWidth: '90%', margin: '0 auto', padding: '20px' }}>
+    <div>
       <Form form={form} layout="vertical">
-        <Text style={{ whiteSpace: 'nowrap', fontWeight: 'bold', fontSize: 16, margin: '10px 0' }}>输入值</Text>
+        <Text style={{ whiteSpace: 'nowrap', fontWeight: 'bold', fontSize: 16, margin: '12px 0' }}>输入值</Text>
         <Form.Item>
           <Space.Compact style={{ width: '100%' }}>
             <Input

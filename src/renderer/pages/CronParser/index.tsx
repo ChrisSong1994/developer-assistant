@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Divider, Card, Input, Form, Typography, Table, Tag, Alert, Space, Tooltip } from 'antd';
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { Input, Form, Typography, Table, Tag, Dropdown, Alert, Space, List, Tooltip, Button, Flex } from 'antd';
+import { CheckOutlined, CloseOutlined, FileSearchOutlined, CaretDownOutlined } from '@ant-design/icons';
+import { CronExpressionParser } from 'cron-parser';
+import { dayjs } from '@fett/utils';
 
-const { Title, Text, Paragraph } = Typography;
+import CheatSheet from './CheatSheet';
+import { cronFields, CronField } from './constants';
 
-// Cron字段模型
-interface CronField {
-  name: string;
-  description: string;
-  value: string;
-  parsed: string;
-  valid: boolean;
-  error?: string;
-}
+const { Text } = Typography;
 
 // Cron解析结果模型
 interface CronParseResult {
@@ -29,18 +24,9 @@ const CronParser: React.FC = () => {
     fields: [],
     humanReadable: '',
   });
+  const [nextExecutions, setNextExecutions] = useState<string[]>([]);
+  const [currentTime, setCurrentTime] = useState<string>('');
   const [isParsing, setIsParsing] = useState<boolean>(false);
-
-  // 初始化字段定义
-  const cronFields: CronField[] = [
-    { name: '秒', description: '0-59', value: '', parsed: '', valid: true },
-    { name: '分', description: '0-59', value: '', parsed: '', valid: true },
-    { name: '时', description: '0-23', value: '', parsed: '', valid: true },
-    { name: '日', description: '1-31', value: '', parsed: '', valid: true },
-    { name: '月', description: '1-12 或 JAN-DEC', value: '', parsed: '', valid: true },
-    { name: '周', description: '0-6 或 SUN-SAT (0和7都代表周日)', value: '', parsed: '', valid: true },
-    { name: '年', description: '可选，1970-2099', value: '', parsed: '', valid: true },
-  ];
 
   // 解析Cron表达式
   const parseCron = (expression: string): CronParseResult => {
@@ -237,6 +223,27 @@ const CronParser: React.FC = () => {
     return { parsed: `值为${num}`, valid: true };
   };
 
+  const handleGenNextExecutions = (cron?: string) => {
+    if (!cron || !parseResult.valid) {
+      return;
+    }
+    try {
+      setCurrentTime(new Date().toLocaleString());
+      const data = CronExpressionParser.parse(cron || cronExpression, {
+        tz: 'Asia/Shanghai',
+        currentDate: new Date(),
+      });
+      const times = 10;
+      const results = [];
+      for (let i = 0; i < times; i++) {
+        results.push(data.next().toString());
+      }
+      setNextExecutions(results);
+    } catch (e) {
+      setNextExecutions([]);
+    }
+  };
+
   // 生成人类可读的描述
   const generateHumanReadable = (fields: CronField[]): string => {
     const [second, minute, hour, day, month, week, year] = fields;
@@ -294,6 +301,7 @@ const CronParser: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsParsing(true);
+      handleGenNextExecutions(cronExpression);
       const result = parseCron(cronExpression);
       setParseResult(result);
       setIsParsing(false);
@@ -305,7 +313,7 @@ const CronParser: React.FC = () => {
   // 表格列定义
   const columns = [
     {
-      title: '字段',
+      title: '域',
       dataIndex: 'name',
       key: 'name',
       width: '10%',
@@ -358,35 +366,38 @@ const CronParser: React.FC = () => {
   ];
 
   return (
-    <div style={{ maxWidth: '90%', margin: '0 auto', padding: '6px 0' }}>
-      <Alert
-        message="Cron表达式说明"
-        description="Cron表达式是一个字符串，由空格分隔的5-7个字段组成，分别表示：秒 分 时 日 月 周 [年]。支持通配符(*), 范围(-), 列表(,), 步长(/)和问号(?)。"
-        type="info"
-        showIcon
-        style={{ marginBottom: 20 }}
-      />
-
+    <div>
       <Form layout="vertical">
-        <Form.Item label="Cron表达式" name="cron">
-          <Input
-            value={cronExpression}
-            onChange={(e) => setCronExpression(e.target.value)}
-            placeholder="请输入Cron表达式，例如：0 0 * * * 或 0 0 12 ? * WED"
-            style={{ fontSize: '16px' }}
-          />
+        <Text style={{ whiteSpace: 'nowrap', fontWeight: 'bold', fontSize: 16, margin: '12px 0' }}>Cron表达式</Text>
+        <Form.Item>
+          <Flex>
+            <Input
+              size="large"
+              value={cronExpression}
+              onChange={(e) => setCronExpression(e.target.value)}
+              placeholder="请输入Cron表达式，例如：0 0 * * * 或 0 0 12 ? * WED"
+              style={{ fontSize: '16px' }}
+            />
+            <Dropdown trigger={['click']} popupRender={() => <CheatSheet />}>
+              <Button style={{ width: 140, marginLeft: 12 }} type="primary" size="large">
+                <Space>
+                  <FileSearchOutlined /> 语法参考
+                  <CaretDownOutlined />
+                </Space>
+              </Button>
+            </Dropdown>
+          </Flex>
         </Form.Item>
 
         <Form.Item label="解析结果">
           {parseResult.valid ? (
-            <Alert message="解析成功" description={parseResult.humanReadable} type="success" showIcon />
+            <Alert message={parseResult.humanReadable} type="success" />
           ) : (
-            <Alert message="解析失败" description={parseResult.error} type="error" showIcon />
+            <Alert message={parseResult.error || '解析失败'} type="error" />
           )}
-        </Form.Item>
 
-        <Form.Item label="字段详情">
           <Table
+            style={{ marginTop: '12px' }}
             size="small"
             columns={columns}
             dataSource={parseResult.fields}
@@ -394,6 +405,34 @@ const CronParser: React.FC = () => {
             pagination={false}
             loading={isParsing}
             bordered
+          />
+        </Form.Item>
+
+        <Form.Item
+          style={{ marginBottom: 0 }}
+          label={
+            <div>
+              最近10次运行时间
+              <Button
+                style={{ marginLeft: 8, marginRight: 8 }}
+                size="small"
+                onClick={() => handleGenNextExecutions(cronExpression)}
+              >
+                刷新
+              </Button>
+              当前时间：{dayjs(currentTime).format('YYYY-MM-DD HH:mm:ss')}
+            </div>
+          }
+        >
+          <List
+            style={{ maxHeight: 'calc(100vh - 625px)', overflow: 'auto' }}
+            size="small"
+            dataSource={nextExecutions}
+            renderItem={(item, index) => (
+              <List.Item>
+                {`${index + 1}. `} {dayjs(item).format('YYYY-MM-DD HH:mm:ss')}
+              </List.Item>
+            )}
           />
         </Form.Item>
       </Form>

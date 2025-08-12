@@ -41,7 +41,7 @@ export function getMainWindowOptions(): BrowserWindowConstructorOptions {
     icon: ICON_PATH,
     show: false,
     webPreferences: {
-      devTools: isDev,
+      devTools: true,
       webSecurity: false,
       nodeIntegration: true,
       contextIsolation: true,
