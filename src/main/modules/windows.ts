@@ -3,6 +3,7 @@ import path from 'path';
 import { EWindowSize } from '@/common/constants';
 import { isDev, getPageUrl, isInMac } from '../utils';
 import { ICON_PATH } from '../utils/path';
+import { getWindowSize, getConfData, setConfData } from '@/main/store';
 
 /**
  * launch window
@@ -26,9 +27,10 @@ export function getLaunchWindowOptions(): BrowserWindowConstructorOptions {
  * @returns {BrowserWindowConstructorOptions}
  */
 export function getMainWindowOptions(): BrowserWindowConstructorOptions {
+  const { width, height } = getWindowSize();
   return {
-    width: EWindowSize.width,
-    height: EWindowSize.height,
+    width: width,
+    height: height,
     minHeight: 810,
     minWidth: 1180,
     frame: false,
@@ -87,6 +89,19 @@ export function createMainWindow() {
     mainWindow = null;
   });
 
+  mainWindow.on('resized', () => {
+    console.log('resized', mainWindow?.getBounds());
+    const { screen_size_fixed } = getConfData();
+    if (screen_size_fixed) {
+      setConfData({
+        screen_size: {
+          width: mainWindow?.getBounds().width as number,
+          height: mainWindow?.getBounds().height as number,
+        },
+      });
+    }
+  });
+
   globalThis.launchWindow = launchWindow;
   globalThis.mainWindow = mainWindow;
 }
@@ -141,7 +156,6 @@ export const windowClose = () => {
   return;
 };
 
-
-export const isFullScreen = () => { 
+export const isFullScreen = () => {
   return global.mainWindow?.isFullScreen();
 };
