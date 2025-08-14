@@ -3,6 +3,7 @@ import { rspack } from '@rspack/core';
 import path from 'path';
 
 const isDev = process.env.NODE_ENV === 'development';
+const ROOT = path.resolve(__dirname, '..');
 
 console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
@@ -10,11 +11,11 @@ const config: Configuration = {
   name: 'main',
   target: 'electron-main',
   entry: {
-    main: path.resolve(__dirname, './src/main/index.ts'),
-    preload: path.resolve(__dirname, './src/main/preload.ts'),
+    main: path.resolve(ROOT, './src/main/index.ts'),
+    preload: path.resolve(ROOT, './src/main/preload.ts'),
   },
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(ROOT, 'build'),
     filename: '[name].js',
     library: {
       type: 'commonjs2',
@@ -23,7 +24,7 @@ const config: Configuration = {
   resolve: {
     extensions: ['...', '.ts', '.js'],
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@': path.resolve(ROOT, 'src'),
     },
   },
   devtool: isDev ? 'source-map' : false,
@@ -51,8 +52,8 @@ const config: Configuration = {
     new rspack.CopyRspackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, './src/main/public'),
-          to: path.resolve(__dirname, 'build'),
+          from: path.resolve(ROOT, './src/main/public'),
+          to: path.resolve(ROOT, 'build'),
         },
       ],
     }),

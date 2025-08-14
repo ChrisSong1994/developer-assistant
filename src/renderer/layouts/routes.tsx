@@ -12,6 +12,7 @@ import Markdown from '@/renderer/pages/Markdown';
 import ImageCompress from '@/renderer/pages/ImageCompress';
 import DecimalConversion from '@/renderer/pages/DecimalConversion';
 import CronParser from '@/renderer/pages/CronParser';
+import OCR from '@/renderer/pages/OCR';
 
 export enum ToolCategory {
   TEXT = 'TEXT',
@@ -118,6 +119,13 @@ const routes = [
     icon: 'icon-cron',
     category: ToolCategory.TEXT,
     component: CronParser,
+  },
+  {
+    key: 'OCR',
+    title: 'OCR',
+    icon: 'icon-ocr',
+    category: ToolCategory.TEXT,
+    component: OCR,
   },
 ];
 
