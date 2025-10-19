@@ -39,8 +39,8 @@ importers:
         specifier: ^1.22.0
         version: 1.22.0(react@18.3.1)
       '@cherrystudio/mac-system-ocr':
-        specifier: ^0.2.2
-        version: 0.2.2
+        specifier: ^0.2.7
+        version: 0.2.7
       '@dnd-kit/core':
         specifier: ^6.3.1
         version: 6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -417,9 +417,9 @@ packages:
     peerDependencies:
       react: '*'
 
-  '@cherrystudio/mac-system-ocr@0.2.2':
-    resolution: {integrity: sha512-RUc6leiWeUrlfj7gzJx5H8A26yRbIbTjHTUPznrN7wWNimYH/8gQIIfT/Zl6Xn5ZAV6+G2dzeI4Sb1VLPI9WNg==}
-    engines: {os: darwin, node: '>=22.0.0 <24.0.0'}
+  '@cherrystudio/mac-system-ocr@0.2.7':
+    resolution: {integrity: sha512-uUeGqj+9GekOYsGiCzlP8rN9Tfo0UA7qT+L4zObf8oSdf8zdvutbs3hGOVlc6x8zxhSgixU1ui67KwyfjgMCyw==}
+    engines: {os: darwin, node: '>=18.0.0 <24.0.0'}
     os: [darwin]
 
   '@cspotcode/source-map-support@0.8.1':
@@ -6278,7 +6278,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@cherrystudio/mac-system-ocr@0.2.2':
+  '@cherrystudio/mac-system-ocr@0.2.7':
     dependencies:
       bindings: 1.5.0
       node-api-headers: 1.5.0
