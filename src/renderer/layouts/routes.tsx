@@ -13,6 +13,7 @@ import ImageCompress from '@/renderer/pages/ImageCompress';
 import DecimalConversion from '@/renderer/pages/DecimalConversion';
 import CronParser from '@/renderer/pages/CronParser';
 import OCR from '@/renderer/pages/OCR';
+import AstExplorer from '@/renderer/pages/AstExplorer';
 
 export enum ToolCategory {
   TEXT = 'TEXT',
@@ -126,6 +127,13 @@ const routes = [
     icon: 'icon-ocr',
     category: ToolCategory.TEXT,
     component: OCR,
+  },
+  {
+    key: 'AstExplorer',
+    title: 'AST',
+    icon: 'icon-yufaxiuzheng',
+    category: ToolCategory.TEXT,
+    component: AstExplorer,
   },
 ];
 
