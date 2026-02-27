@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { Select, Space, Spin, Typography, Splitter, Checkbox } from 'antd';
+import { Select, Space, Spin, Typography, Splitter, Switch } from 'antd';
 import { categories, getDefaultCategory, getDefaultParser } from './parsers';
 import { Parser, Category, Transformer } from './types';
 import { BaseEditor, EEditorLanguage } from '@/renderer/components/Editor';
+import { safeStringify } from '@/renderer/utils/safeStringify';
+import Tree from './components/visualization/Tree';
 
 const { Panel } = Splitter;
 const { Text } = Typography;
@@ -14,43 +16,50 @@ const AstExplorer = () => {
   const [transformCode, setTransformCode] = useState<string>('');
   const [transformedCode, setTransformedCode] = useState<string>('');
   const [transformEnabled, setTransformEnabled] = useState<boolean>(false);
-  
-  const [code, setCode] = useState<string>('// Type code here...');
+  const [viewType, setViewType] = useState<'tree' | 'json'>('tree');
+
+  const [code, setCode] = useState<string>(getDefaultCategory().codeExample?.trim() || '// Type code here...');
   const [ast, setAst] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [transformError, setTransformError] = useState<string | null>(null);
-  
+
   const parserInstanceRef = useRef<any>(null);
   const transformerInstanceRef = useRef<any>(null);
 
   useEffect(() => {
     // Load parser when parser changes
     setLoading(true);
-    parser.loadParser().then((instance) => {
-      parserInstanceRef.current = instance;
-      setLoading(false);
-      parseCode();
-    }).catch(err => {
-      console.error(err);
-      setError(err.message);
-      setLoading(false);
-    });
+    parser
+      .loadParser()
+      .then((instance) => {
+        parserInstanceRef.current = instance;
+        setLoading(false);
+        parseCode();
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(err.message);
+        setLoading(false);
+      });
   }, [parser]);
 
   useEffect(() => {
     if (transformer && transformEnabled) {
       setLoading(true);
-      transformer.loadTransformer().then((instance) => {
-        transformerInstanceRef.current = instance;
-        setTransformCode(transformer.defaultTransform);
-        setLoading(false);
-        runTransform();
-      }).catch(err => {
-        console.error(err);
-        setTransformError(err.message);
-        setLoading(false);
-      });
+      transformer
+        .loadTransformer()
+        .then((instance) => {
+          transformerInstanceRef.current = instance;
+          setTransformCode(transformer.defaultTransform);
+          setLoading(false);
+          runTransform();
+        })
+        .catch((err) => {
+          console.error(err);
+          setTransformError(err.message);
+          setLoading(false);
+        });
     } else {
       setTransformedCode('');
       setTransformError(null);
@@ -85,11 +94,7 @@ const AstExplorer = () => {
   const runTransform = () => {
     if (!transformerInstanceRef.current || !transformer || !transformEnabled) return;
     try {
-      const result = transformer.transform(
-        transformerInstanceRef.current,
-        transformCode,
-        code
-      );
+      const result = transformer.transform(transformerInstanceRef.current, transformCode, code);
       setTransformedCode(result);
       setTransformError(null);
     } catch (err: any) {
@@ -99,63 +104,80 @@ const AstExplorer = () => {
   };
 
   const handleCategoryChange = (val: string) => {
-    const cat = categories.find(c => c.id === val);
+    const cat = categories.find((c) => c.id === val);
     if (cat) {
       setCategory(cat);
       setParser(cat.parsers[0]);
       setTransformer(undefined);
       setTransformEnabled(false);
+      setTransformCode('');
+      setTransformedCode('');
+      setTransformError(null);
+      if (cat.codeExample) {
+        setCode(cat.codeExample.trim());
+      }
     }
   };
 
   const handleParserChange = (val: string) => {
-    const p = category.parsers.find(p => p.id === val);
+    const p = category.parsers.find((p) => p.id === val);
     if (p) setParser(p);
   };
 
   const handleTransformerChange = (val: string) => {
-    const t = category.transformers?.find(t => t.id === val);
+    const t = category.transformers?.find((t) => t.id === val);
     setTransformer(t);
   };
 
-  const handleTransformEnabledChange = (e: any) => {
-    setTransformEnabled(e.target.checked);
-    if (e.target.checked && !transformer && category.transformers?.length) {
+  const handleTransformEnabledChange = (checked: boolean) => {
+    setTransformEnabled(checked);
+    if (checked && !transformer && category.transformers?.length) {
       setTransformer(category.transformers[0]);
     }
   };
 
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ padding: '8px', borderBottom: '1px solid #f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div
+        style={{
+          padding: '8px',
+          borderBottom: '1px solid #f0f0f0',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
         <Space>
           <Text strong>Language:</Text>
           <Select
-           size="small"
+            size="small"
             value={category.id}
             onChange={handleCategoryChange}
-            options={categories.map(c => ({ label: c.displayName, value: c.id }))}
+            options={categories.map((c) => ({ label: c.displayName, value: c.id }))}
             style={{ width: 120 }}
           />
           <Text strong>Parser:</Text>
           <Select
-           size="small"
+            size="small"
             value={parser.id}
             onChange={handleParserChange}
-            options={category.parsers.map(p => ({ label: p.displayName, value: p.id }))}
+            options={category.parsers.map((p) => ({ label: p.displayName, value: p.id }))}
             style={{ width: 160 }}
           />
-          
-          <Checkbox checked={transformEnabled} onChange={handleTransformEnabledChange}>
-            Transform
-          </Checkbox>
-          
+
+          {category.transformers && category.transformers.length > 0 && (
+            <Space>
+              <Text strong>Transform:</Text>
+              <Switch size="small" value={transformEnabled} onChange={handleTransformEnabledChange}></Switch>
+            </Space>
+          )}
+
           {transformEnabled && category.transformers && (
             <Select
               value={transformer?.id}
               size="small"
               onChange={handleTransformerChange}
-              options={category.transformers.map(t => ({ label: t.displayName, value: t.id }))}
+              options={category.transformers.map((t) => ({ label: t.displayName, value: t.id }))}
               style={{ width: 160 }}
               placeholder="Select Transformer"
             />
@@ -163,36 +185,56 @@ const AstExplorer = () => {
         </Space>
         {loading && <Spin size="small" />}
       </div>
-      
+
       <div style={{ flex: 1, overflow: 'hidden' }}>
         <Splitter style={{ height: 'calc(-110px + 100vh)' }}>
           <Panel defaultSize="50%" min="20%">
             <Splitter layout="vertical">
               <Panel defaultSize="50%" min="20%">
                 <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                   <div style={{ padding: '4px 8px', background: '#fafafa', borderBottom: '1px solid #f0f0f0', fontSize: '12px', fontWeight: 'bold' }}>Source Code</div>
-                   <div style={{ flex: 1, overflow: 'hidden' }}>
-                      <BaseEditor
-                        language={EEditorLanguage.JAVASCRIPT}
-                        value={code}
-                        onChange={setCode}
-                        options={{ minimap: { enabled: false } }}
-                      />
-                   </div>
+                  <div
+                    style={{
+                      padding: '4px 8px',
+                      background: '#fafafa',
+                      borderBottom: '1px solid #f0f0f0',
+                      fontSize: '12px',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    Source Code
+                  </div>
+                  <div style={{ flex: 1, overflow: 'hidden' }}>
+                    <BaseEditor
+                      language={EEditorLanguage.JAVASCRIPT}
+                      value={code}
+                      onChange={setCode}
+                      options={{ minimap: { enabled: false } }}
+                    />
+                  </div>
                 </div>
               </Panel>
               {transformEnabled && (
                 <Panel defaultSize="50%" min="20%">
                   <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                     <div style={{ padding: '4px 8px', background: '#fafafa', borderBottom: '1px solid #f0f0f0', fontSize: '12px', fontWeight: 'bold' }}>Transform Code</div>
-                     <div style={{ flex: 1, overflow: 'hidden' }}>
-                        <BaseEditor
-                          language={EEditorLanguage.JAVASCRIPT}
-                          value={transformCode}
-                          onChange={setTransformCode}
-                          options={{ minimap: { enabled: false } }}
-                        />
-                     </div>
+                    <div
+                      style={{
+                        padding: '4px 8px',
+                        background: '#fafafa',
+                        borderBottom: '1px solid #f0f0f0',
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Transform Code
+                    </div>
+                    <div style={{ flex: 1, overflow: 'hidden' }}>
+                      <BaseEditor
+                        language={EEditorLanguage.JAVASCRIPT}
+                        value={transformCode}
+                        onChange={setTransformCode}
+                        options={{ minimap: { enabled: false } }}
+                      />
+                    </div>
                   </div>
                 </Panel>
               )}
@@ -200,40 +242,113 @@ const AstExplorer = () => {
           </Panel>
           <Panel defaultSize="50%" min="20%">
             <Splitter layout="vertical">
-               <Panel defaultSize={transformEnabled ? "50%" : "100%"} min="20%">
-                 <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                   <div style={{ padding: '4px 8px', background: '#fafafa', borderBottom: '1px solid #f0f0f0', fontSize: '12px', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between' }}>
-                     <span>AST</span>
-                     {error && <span style={{ color: 'red' }}>Error</span>}
-                   </div>
-                   {error && <div style={{ padding: 8, color: 'red', borderBottom: '1px solid #ffccc7', background: '#fff2f0', maxHeight: '100px', overflow: 'auto' }}>{error}</div>}
-                   <div style={{ flex: 1, overflow: 'hidden' }}>
+              <Panel defaultSize={transformEnabled ? '50%' : '100%'} min="20%">
+                <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                  <div
+                    style={{
+                      padding: '4px 8px',
+                      background: '#fafafa',
+                      borderBottom: '1px solid #f0f0f0',
+                      fontSize: '12px',
+                      fontWeight: 'bold',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <span>AST</span>
+                    <Space size="small">
+                      <Select
+                        size="small"
+                        value={viewType}
+                        onChange={setViewType}
+                        options={[
+                          { label: 'Tree', value: 'tree' },
+                          { label: 'JSON', value: 'json' },
+                        ]}
+                        style={{ width: 80 }}
+                      />
+                      {error && <span style={{ color: 'red' }}>Error</span>}
+                    </Space>
+                  </div>
+                  {error && (
+                    <div
+                      style={{
+                        padding: 8,
+                        color: 'red',
+                        borderBottom: '1px solid #ffccc7',
+                        background: '#fff2f0',
+                        maxHeight: '100px',
+                        overflow: 'auto',
+                      }}
+                    >
+                      {error}
+                    </div>
+                  )}
+                  <div style={{ flex: 1, overflow: 'hidden' }}>
+                    {viewType === 'json' ? (
                       <BaseEditor
                         language={EEditorLanguage.JSON}
-                        value={JSON.stringify(ast, null, 2)}
+                        value={safeStringify(ast, 2)}
                         options={{ readOnly: true, minimap: { enabled: false }, wordWrap: 'off' }}
                       />
-                   </div>
-                 </div>
-               </Panel>
-               {transformEnabled && (
-                 <Panel defaultSize="50%" min="20%">
-                   <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                     <div style={{ padding: '4px 8px', background: '#fafafa', borderBottom: '1px solid #f0f0f0', fontSize: '12px', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between' }}>
-                       <span>Transformed Code</span>
-                       {transformError && <span style={{ color: 'red' }}>Error</span>}
-                     </div>
-                     {transformError && <div style={{ padding: 8, color: 'red', borderBottom: '1px solid #ffccc7', background: '#fff2f0', maxHeight: '100px', overflow: 'auto' }}>{transformError}</div>}
-                     <div style={{ flex: 1, overflow: 'hidden' }}>
-                        <BaseEditor
-                          language={EEditorLanguage.JAVASCRIPT}
-                          value={transformedCode}
-                          options={{ readOnly: true, minimap: { enabled: false } }}
+                    ) : (
+                      <div style={{ height: '100%', overflow: 'auto' }}>
+                        <Tree
+                          parseResult={{
+                            ast: ast,
+                            treeAdapter: {
+                              type: category.id === 'javascript' || category.id === 'typescript' ? 'estree' : 'json',
+                              options: {}
+                            }
+                          }}
                         />
-                     </div>
-                   </div>
-                 </Panel>
-               )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </Panel>
+              {transformEnabled && (
+                <Panel defaultSize="50%" min="20%">
+                  <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                    <div
+                      style={{
+                        padding: '4px 8px',
+                        background: '#fafafa',
+                        borderBottom: '1px solid #f0f0f0',
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <span>Transformed Code</span>
+                      {transformError && <span style={{ color: 'red' }}>Error</span>}
+                    </div>
+                    {transformError && (
+                      <div
+                        style={{
+                          padding: 8,
+                          color: 'red',
+                          borderBottom: '1px solid #ffccc7',
+                          background: '#fff2f0',
+                          maxHeight: '100px',
+                          overflow: 'auto',
+                        }}
+                      >
+                        {transformError}
+                      </div>
+                    )}
+                    <div style={{ flex: 1, overflow: 'hidden' }}>
+                      <BaseEditor
+                        language={EEditorLanguage.JAVASCRIPT}
+                        value={transformedCode}
+                        options={{ readOnly: true, minimap: { enabled: false } }}
+                      />
+                    </div>
+                  </div>
+                </Panel>
+              )}
             </Splitter>
           </Panel>
         </Splitter>

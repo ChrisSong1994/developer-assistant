@@ -35,4 +35,5 @@ export interface Category {
   displayName: string;
   parsers: Parser[];
   transformers?: Transformer[];
+  codeExample?: string;
 }

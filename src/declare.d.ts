@@ -22,3 +22,12 @@ declare module 'react-color/es/components/google/GooglePointer';
 declare module 'gofmt.js'
 declare module 'generate-schema';
 declare module '@babel/standalone';
+declare module 'postcss-less';
+declare module 'postcss-scss';
+declare module 'yaml-ast-parser';
+declare module 'json-to-ast';
+declare module 'sql-parser-cst';
+declare module 'java-parser';
+declare module 'filbert';
+declare module 'luaparse';
+declare module 'astexplorer-syn';

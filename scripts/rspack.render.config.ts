@@ -20,10 +20,12 @@ const config: Configuration = {
     alias: {
       '@': path.resolve(ROOT, 'src'),
       'elkjs/lib/elk-api': 'elkjs/lib/elk-api.js', // for reaflow type module
+      path: require.resolve('path-browserify'),
+      'process/browser': require.resolve('process/browser'),
     },
   },
   devServer: {
-    port: 3000,
+    port: Number(process.env.DEV_SERVER_PORT ?? 3000),
     open: false,
     historyApiFallback: false,
   },
@@ -90,6 +92,10 @@ const config: Configuration = {
           to: path.resolve(ROOT, './build'),
         },
       ],
+    }),
+    new rspack.ProvidePlugin({
+      process: require.resolve('process/browser'),
+      Buffer: ['buffer', 'Buffer'],
     }),
     isDev ? new RefreshPlugin() : null,
   ].filter(Boolean),
