@@ -8,7 +8,7 @@ function readWasm() {
   return new Promise((resolve, reject) => {
     try {
       fs.readFile(wasmPath, (err, data) => {
-        if (err) throw err;
+        if (err) return reject(err);
         resolve(data);
       });
     } catch (error) {
