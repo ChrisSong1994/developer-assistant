@@ -1,12 +1,14 @@
-import { Category } from '../../types';
+import { Category } from '../../types/index';
 import { babel } from './babel';
 import { typescript } from './typescript';
+import { acorn } from './acorn';
+import { typescriptOfficial } from './typescript-official';
 import { babelTransformer } from './transformers/babel';
 
 export const javascript: Category = {
   id: 'javascript',
   displayName: 'JavaScript',
-  parsers: [babel, typescript],
+  parsers: [babel, typescript, typescriptOfficial, acorn],
   transformers: [babelTransformer],
   codeExample: `
 function tips() {

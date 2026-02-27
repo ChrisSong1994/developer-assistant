@@ -1,33 +1,37 @@
+
 import React from 'react';
 
-export interface Parser {
+export type Range = [number, number];
+
+export interface Parser<P = any, O = any> {
   id: string;
-  displayName: string;
+  displayName: string; // label
   version?: string;
-  homepage?: string;
+  homepage?: string; // link
   showInMenu?: boolean;
-  loadParser: (callback?: (parser: any) => void) => Promise<any>;
-  parse: (parser: any, code: string, options?: any) => any;
-  nodeToRange?: (node: any) => [number, number] | undefined;
+  loadParser: (callback?: (parser: P) => void) => Promise<P>;
+  parse: (parser: P, code: string, options?: O) => any;
+  nodeToRange?: (node: any) => Range | undefined;
   opensByDefault?: (node: any, key: string) => boolean;
   getNodeName?: (node: any) => string;
   forEachProperty?: (node: any) => Iterator<{ value: any; key: string; computed: boolean }>;
   renderSettings?: (settings: any, onChange: (settings: any) => void) => React.ReactNode;
-  getDefaultOptions?: () => any;
+  getDefaultOptions?: () => O;
   _ignoredProperties?: Set<string>;
   locationProps?: Set<string>;
   typeProps?: Set<string>;
   category?: Category;
+  editorLanguage?: string;
 }
 
-export interface Transformer {
+export interface Transformer<T = any> {
   id: string;
   displayName: string;
   version?: string;
   homepage?: string;
   defaultTransform: string;
-  loadTransformer: (callback?: (transformer: any) => void) => Promise<any>;
-  transform: (transformer: any, transformCode: string, code: string, options?: any) => any;
+  loadTransformer: (callback?: (transformer: T) => void) => Promise<T>;
+  transform: (transformer: T, transformCode: string, code: string, options?: any) => any;
 }
 
 export interface Category {

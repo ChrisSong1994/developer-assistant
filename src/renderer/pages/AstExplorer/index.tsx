@@ -1,28 +1,41 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Select, Space, Spin, Typography, Splitter, Switch } from 'antd';
-import { categories, getDefaultCategory, getDefaultParser } from './parsers';
-import { Parser, Category, Transformer } from './types';
+import { categories } from './parsers';
 import { BaseEditor, EEditorLanguage } from '@/renderer/components/Editor';
 import { safeStringify } from '@/renderer/utils/safeStringify';
 import Tree from './components/visualization/Tree';
+import { useAstExplorerStore } from './store';
 
 const { Panel } = Splitter;
 const { Text } = Typography;
 
 const AstExplorer = () => {
-  const [category, setCategory] = useState<Category>(getDefaultCategory());
-  const [parser, setParser] = useState<Parser>(getDefaultParser());
-  const [transformer, setTransformer] = useState<Transformer | undefined>(undefined);
-  const [transformCode, setTransformCode] = useState<string>('');
-  const [transformedCode, setTransformedCode] = useState<string>('');
-  const [transformEnabled, setTransformEnabled] = useState<boolean>(false);
-  const [viewType, setViewType] = useState<'tree' | 'json'>('tree');
-
-  const [code, setCode] = useState<string>(getDefaultCategory().codeExample?.trim() || '// Type code here...');
-  const [ast, setAst] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [transformError, setTransformError] = useState<string | null>(null);
+  const {
+    category,
+    parser,
+    transformer,
+    code,
+    ast,
+    transformCode,
+    transformedCode,
+    transformEnabled,
+    viewType,
+    loading,
+    error,
+    transformError,
+    setCategory,
+    setParser,
+    setTransformer,
+    setCode,
+    setAst,
+    setTransformCode,
+    setTransformedCode,
+    setTransformEnabled,
+    setViewType,
+    setLoading,
+    setError,
+    setTransformError,
+  } = useAstExplorerStore();
 
   const parserInstanceRef = useRef<any>(null);
   const transformerInstanceRef = useRef<any>(null);

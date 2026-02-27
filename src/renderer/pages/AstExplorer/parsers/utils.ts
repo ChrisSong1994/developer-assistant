@@ -13,7 +13,13 @@ export const defaultParserInterface = {
   },
 
   nodeToRange(node: any): [number, number] | undefined {
-    return node.range;
+    if (node.range) {
+      return node.range;
+    }
+    if (typeof node.start === 'number' && typeof node.end === 'number') {
+      return [node.start, node.end];
+    }
+    return undefined;
   },
 
   getNodeName(node: any) {

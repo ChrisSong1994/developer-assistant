@@ -35,7 +35,13 @@ const cfg_common = {
   },
   electronDownload: {
     cache: path.join(homedir, '.electron'),
-    mirror: 'https://registry.npmmirror.com/-/binary/electron/',
+    mirror: 'https://npmmirror.com/mirrors/electron/',
+  },
+  mac: {
+    electronLanguages: ['en'],
+  },
+  dmg: {
+    writeUpdateInfo: false,
   },
   asar: true,
 };
