@@ -94,6 +94,20 @@ const config: Configuration = {
     isDev ? new RefreshPlugin() : null,
   ].filter(Boolean),
 
+  optimization: {
+    minimize: !isDev,
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
+
   experiments: {
     css: true,
     asyncWebAssembly: true,
