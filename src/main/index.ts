@@ -5,6 +5,14 @@ import eventsRegistry from './eventsRegistry';
 import { windowInit } from './modules/windows';
 import { isDev } from './utils';
 
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
 export async function onReady() {
   // 创建主窗口
   windowInit();

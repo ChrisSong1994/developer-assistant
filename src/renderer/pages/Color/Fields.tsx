@@ -11,14 +11,16 @@ interface IProps {
   hsl: Record<string, any>;
   hex: Record<string, any>;
   hsv: Record<string, any>;
+  cmyk: Record<string, any>;
 }
 
 const Fields = (porps: IProps) => {
-  const { onChange, rgb, hsl, hsv, hex } = porps;
+  const { onChange, rgb, hsl, hsv, hex, cmyk } = porps;
 
   const rgbValue = `${rgb.r}, ${rgb.g}, ${rgb.b}`;
   const hslValue = `${Math.round(hsl.h)}°, ${Math.round(hsl.s * 100)}%, ${Math.round(hsl.l * 100)}%`;
   const hsvValue = `${Math.round(hsv.h)}°, ${Math.round(hsv.s * 100)}%, ${Math.round(hsv.v * 100)}%`;
+  const cmykValue = `${Math.round(cmyk.c * 100)}%, ${Math.round(cmyk.m * 100)}%, ${Math.round(cmyk.y * 100)}%, ${Math.round(cmyk.k * 100)}%`;
 
   const handleChange = (data: any, e: any) => {
     if (data.hex && color.isValidHex(data.hex)) {
@@ -70,6 +72,22 @@ const Fields = (porps: IProps) => {
         },
         e,
       );
+    } else if (data.cmyk && color.isvalidColorString(data.cmyk, 'cmyk')) {
+      const values = data.cmyk.split(',');
+      values[3] = values[3].replace('%', '');
+      values[2] = values[2].replace('%', '');
+      values[1] = values[1].replace('%', '');
+      values[0] = values[0].replace('%', '');
+      onChange(
+        {
+          c: Number(values[0]),
+          m: Number(values[1]),
+          y: Number(values[2]),
+          k: Number(values[3]),
+          source: 'cmyk',
+        },
+        e,
+      );
     }
   };
 
@@ -98,13 +116,16 @@ const Fields = (porps: IProps) => {
             </Tooltip>
           </div>
         </Col>
-        <Col span={8}>
+        <Col span={6}>
           <EditableInput labelPosition="left" label="RGB" value={rgbValue} onChange={handleChange} />
         </Col>
-        <Col span={8}>
+         <Col span={6}>
+          <EditableInput labelPosition="left" label="CMYK" value={cmykValue} onChange={handleChange} />
+        </Col>
+        <Col span={6}>
           <EditableInput labelPosition="left" label="HSV" value={hsvValue} onChange={handleChange} />
         </Col>
-        <Col span={8}>
+        <Col span={6}>
           <EditableInput labelPosition="left" label="HSL" value={hslValue} onChange={handleChange} />
         </Col>
       </Row>

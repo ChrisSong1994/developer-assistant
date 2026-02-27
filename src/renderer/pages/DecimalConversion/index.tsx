@@ -124,7 +124,7 @@ const BaseConverter = () => {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div>
       <Form form={form} layout="vertical">
         <Text style={{ whiteSpace: 'nowrap', fontWeight: 'bold', fontSize: 16, margin: '12px 0' }}>输入值</Text>
         <Form.Item>

@@ -4,21 +4,22 @@ import RefreshPlugin from '@rspack/plugin-react-refresh';
 import path from 'path';
 
 const isDev = process.env.NODE_ENV === 'development';
+const ROOT = path.resolve(__dirname, '..');
 
 const config: Configuration = {
   mode: isDev ? 'development' : 'production',
   entry: {
-    index: path.resolve(__dirname, './src/renderer/index.tsx'),
+    index: path.resolve(ROOT, './src/renderer/index.tsx'),
   },
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(ROOT, 'build'),
     publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx', '.jsx', '.mjs'],
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-      'elkjs/lib/elk-api': 'elkjs/lib/elk-api.js',   // for reaflow type module 
+      '@': path.resolve(ROOT, 'src'),
+      'elkjs/lib/elk-api': 'elkjs/lib/elk-api.js', // for reaflow type module
     },
   },
   devServer: {
@@ -79,19 +80,33 @@ const config: Configuration = {
   },
   plugins: [
     new rspack.HtmlRspackPlugin({
-      template: path.resolve(__dirname, './src/renderer/index.html'),
+      template: path.resolve(ROOT, './src/renderer/index.html'),
     }),
     new rspack.ProgressPlugin({}),
     new rspack.CopyRspackPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, './src/renderer/public'),
-          to: path.resolve(__dirname, './build'),
+          from: path.resolve(ROOT, './src/renderer/public'),
+          to: path.resolve(ROOT, './build'),
         },
       ],
     }),
     isDev ? new RefreshPlugin() : null,
   ].filter(Boolean),
+
+  optimization: {
+    minimize: !isDev,
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
 
   experiments: {
     css: true,

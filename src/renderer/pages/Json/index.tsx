@@ -213,10 +213,10 @@ const JsonParseComponent = () => {
               <Icon type="icon-history" withHoverBg size={18} />
             </Tooltip>
           )}
-          <Tooltip placement="bottom" title="JSON Path">
+          <Tooltip placement="bottom" title="切换 JSON Path">
             <Icon type="icon-jsonpath" withHoverBg size={18} onClick={handleToogleJsonPath} />
           </Tooltip>
-          <Tooltip placement="bottom" title="JSON Graph">
+          <Tooltip placement="bottom" title="切换 JSON Graph">
             <Icon type="icon-graph" withHoverBg size={18} onClick={handleToogleJsonGraph} />
           </Tooltip>
           <Tooltip placement="bottom" title="清除">

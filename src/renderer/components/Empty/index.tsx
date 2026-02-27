@@ -14,7 +14,7 @@ const Empty = (props: IEmptyProps) => {
     <div style={{ ...style }}>
       <BaseEmpty
         image={empty}
-        imageStyle={{ height: 72 }}
+        styles={{ image: { height: 72 } }}
         description={<span style={{ color: '#dadce0' }}>{description}</span>}
       />
     </div>

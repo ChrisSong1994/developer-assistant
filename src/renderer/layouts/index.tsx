@@ -1,12 +1,13 @@
 import { cx } from '@emotion/css';
 import { Layout, Tabs, Divider } from 'antd';
-import React, { FC, Fragment, useLayoutEffect, useMemo, useState } from 'react';
+import React, { FC, Fragment, useLayoutEffect, useMemo, useState, Suspense } from 'react';
 import { AppstoreOutlined } from '@ant-design/icons';
 import { debounce } from 'lodash';
 
 import { isInMac } from '@/renderer/utils';
 import { useConfigData } from '@/renderer/hooks';
 import ConfigMenu from '@/renderer/components/ConfigMenu';
+import ErrorBoundary from '@/renderer/components/ErrorBoundary';
 import Events from '@/renderer/utils/events';
 import Applications from '@/renderer/pages/Applications';
 import logo from '@/assets/logo.png';
@@ -42,7 +43,7 @@ const BaseLayout: FC = () => {
     const tabs: TabItem[] = routes.map((page: any) => ({
       label: '',
       key: page.key,
-      children: React.createElement(page.component, { key: page.key }),
+      children: <ErrorBoundary>{React.createElement(page.component, { key: page.key })}</ErrorBoundary>,
     }));
     tabs.push({
       label: '',

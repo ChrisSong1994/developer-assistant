@@ -1,88 +1,82 @@
----
-# frontmatter: https://jekyllrb.com/docs/front-matter/
-layout: post
-title: Blogging Like a Hacker
----
+## Markdown 基础语法
 
-## Markdown Basic Syntax
+我就是喜欢**粗体文本**。斜体文本真是*太棒了*。在命令提示符下，输入 `nano`。
 
-I just love **bold text**. Italicized text is the _cat's meow_. At the command prompt, type `nano`.
+我最喜欢的 markdown 编辑器是 [ByteMD](https://github.com/bytedance/bytemd)。
 
-My favorite markdown editor is [ByteMD](https://github.com/bytedance/bytemd).
+1. 第一项
+2. 第二项
+3. 第三项
 
-1. First item
-2. Second item
-3. Third item
-
-> Dorothy followed her through many of the beautiful rooms in her castle.
+> 多萝西跟着她穿过城堡里许多美丽的房间。
 
 ```js
-import gfm from '@bytemd/plugin-gfm'
-import { Editor, Viewer } from 'bytemd'
+import gfm from '@bytemd/plugin-gfm';
+import { Editor, Viewer } from 'bytemd';
 
 const plugins = [
   gfm(),
-  // Add more plugins here
-]
+  // 在这里添加更多插件
+];
 
 const editor = new Editor({
-  target: document.body, // DOM to render
+  target: document.body, // 要渲染的 DOM
   props: {
     value: '',
     plugins,
   },
-})
+});
 
 editor.on('change', (e) => {
-  editor.$set({ value: e.detail.value })
-})
+  editor.$set({ value: e.detail.value });
+});
 ```
 
-## GFM Extended Syntax
+## GFM 扩展语法
 
-Automatic URL Linking: https://github.com/bytedance/bytemd
+自动 URL 链接：https://github.com/bytedance/bytemd
 
-~~The world is flat.~~ We now know that the world is round.
+~~世界是平的。~~ 我们现在知道世界是圆的。
 
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
+- [x] 撰写新闻稿
+- [ ] 更新网站
+- [ ] 联系媒体
 
-| Syntax    | Description |
-| --------- | ----------- |
-| Header    | Title       |
-| Paragraph | Text        |
+| 语法 | 描述 |
+| ---- | ---- |
+| 标题 | 题目 |
+| 段落 | 文本 |
 
-## Footnotes
+## 脚注
 
-Here's a simple footnote,[^1] and here's a longer one.[^bignote]
+这是一个简单的脚注，[^1] 这是一个更长的脚注。[^bignote]
 
-[^1]: This is the first footnote.
-[^bignote]: Here's one with multiple paragraphs and code.
+[^1]: 这是第一个脚注。
+[^bignote]: 这是一个包含多个段落和代码的脚注。
 
-    Indent paragraphs to include them in the footnote.
+    缩进段落以将它们包含在脚注中。
 
     `{ my code }`
 
-    Add as many paragraphs as you like.
+    添加任意数量的段落。
 
-## Gemoji
+## 表情符号
 
-Thumbs up: :+1:, thumbs down: :-1:.
+点赞：:+1:，点踩：:-1:。
 
-Families: :family_man_man_boy_boy:
+家庭：:family_man_man_boy_boy:
 
-Long flags: :wales:, :scotland:, :england:.
+长旗帜：:wales:，:scotland:，:england:。
 
-## Math Equation
+## 数学公式
 
-Inline math equation: $a+b$
+行内数学公式：$a+b$
 
 $$
 \displaystyle \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
 $$
 
-## Mermaid Diagrams
+## Mermaid 图表
 
 ```mermaid
 graph TD;

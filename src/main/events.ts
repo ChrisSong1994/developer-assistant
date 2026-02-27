@@ -13,3 +13,4 @@ export { openUrl, showItemInFolder } from './modules/shell';
 export { windowClose, windowMaxmize, windowMinimize, windowRenderReady, isFullScreen } from './modules/windows';
 export { getFileFromPath } from './utils/file';
 export { getPublicFilePath } from './utils/path';
+export { getImgOcrText } from './modules/ocr';

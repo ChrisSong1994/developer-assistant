@@ -33,6 +33,10 @@ const Setting = (props: ISettingProps) => {
     await setData({ checkUpdate: bool });
   };
 
+  const handleFixedScreenSize = async (bool: boolean) => {
+    await setData({ screen_size_fixed: bool });
+  };
+
   const handleClearCacheData = async () => {
     await clearData();
   };
@@ -81,6 +85,15 @@ const Setting = (props: ISettingProps) => {
             unCheckedChildren="关闭"
             checked={data?.checkUpdate}
             onChange={handleSetCheckUpdate}
+          />
+        </div>
+        <div className={styles['setting-item']}>
+          <span> 固定窗口大小： </span>
+          <Switch
+            checkedChildren="开启"
+            unCheckedChildren="关闭"
+            checked={data?.screen_size_fixed}
+            onChange={handleFixedScreenSize}
           />
         </div>
         <div className={styles['setting-item']}>
