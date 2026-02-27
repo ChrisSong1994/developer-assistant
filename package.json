@@ -35,6 +35,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
+    "@babel/parser": "^7.29.0",
+    "@babel/standalone": "^7.29.1",
     "@bytemd/plugin-breaks": "^1.22.0",
     "@bytemd/plugin-frontmatter": "^1.22.0",
     "@bytemd/plugin-gemoji": "^1.22.0",

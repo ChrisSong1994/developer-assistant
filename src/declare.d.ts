@@ -21,3 +21,4 @@ declare module 'react-color/es/components/google/GooglePointerCircle';
 declare module 'react-color/es/components/google/GooglePointer';
 declare module 'gofmt.js'
 declare module 'generate-schema';
+declare module '@babel/standalone';

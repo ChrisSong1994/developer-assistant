@@ -5,3 +5,4 @@ dist
 build
 doc_build
 .userdata
+temp
