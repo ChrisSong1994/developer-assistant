@@ -6,19 +6,17 @@ import {
   LinkOutlined,
 } from '@ant-design/icons';
 import { Button, Checkbox, Divider, Dropdown, Input, Menu, Popover, Space, Tooltip } from 'antd';
-import type { CheckboxValueType } from 'antd/es/checkbox/Group';
-import _ from 'lodash';
 import { useEffect, useMemo, useState } from 'react';
 
-import { REGEXP_SYNTAX_COMMENTS_OPTIONS } from '@/constants';
-import regMatch from '@/utils/regMatch';
-import styles from './index.less';
+import CheatSheet from './CheatSheet';
+import regMatch from '@/renderer/utils/regMatch';
+import styles from './index.module.less';
 
 const TextArea = Input.TextArea;
 const Search = Input.Search;
 
 const Regexp = () => {
-  const [flags, setFlags] = useState<CheckboxValueType[]>(['g']);
+  const [flags, setFlags] = useState<string[]>(['g']);
   const [regexp, setRegexp] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [error, setError] = useState<any>(null);
@@ -45,7 +43,7 @@ const Regexp = () => {
             content={
               <div className={styles['regexp-matched']}>
                 <div className={styles['match-value']}>
-                  {`Matched ${matched.key} [${index},${next}] : ${matched.value} `}
+                  {`Matched $${matched.key} [${index},${next}] : ${matched.value} `}
                 </div>
                 {matched.groups &&
                   matched.groups.map((group: any) => {
@@ -59,7 +57,7 @@ const Regexp = () => {
         );
         preEnd = next;
       }
-      replacedStack.push(_.escape(result.slice(preEnd)));
+      replacedStack.push(result.slice(preEnd));
       return replacedStack;
     } else {
       return result;
@@ -93,10 +91,11 @@ const Regexp = () => {
     <div>
       <div className={styles['regexp-header']}>
         <Input
-          style={{ width: 'calc( 100% - 380px )' }}
           size="large"
           value={regexp}
-          onChange={(e) => setRegexp(e.target.value)}
+          onChange={(e) => {
+            setRegexp(e.target.value);
+          }}
           addonBefore={
             <span style={{ fontSize: 18, padding: '0 6px', display: 'flex', alignItems: 'center' }}>
               {error ? (
@@ -111,7 +110,7 @@ const Regexp = () => {
         />
         <Dropdown
           trigger={['click']}
-          dropdownRender={() => (
+          popupRender={() => (
             <Checkbox.Group value={flags} onChange={setFlags}>
               <Menu
                 items={[
@@ -147,15 +146,15 @@ const Regexp = () => {
             </Checkbox.Group>
           )}
         >
-          <Button style={{ width: 140, marginLeft: 20 }} type="primary" size="large">
+          <Button style={{ width: 140, marginLeft: 14 }} type="primary" size="large">
             <Space>
               <FlagOutlined /> 修饰符
               <CaretDownOutlined />
             </Space>
           </Button>
         </Dropdown>
-        <Dropdown trigger={['click']} menu={{ items: REGEXP_SYNTAX_COMMENTS_OPTIONS }}>
-          <Button style={{ width: 140, marginLeft: 16 }} type="primary" size="large">
+        <Dropdown trigger={['click']} popupRender={() => <CheatSheet />}>
+          <Button style={{ width: 140, marginLeft: 12 }} type="primary" size="large">
             <Space>
               <FileSearchOutlined /> 语法参考
               <CaretDownOutlined />
@@ -171,7 +170,7 @@ const Regexp = () => {
         onChange={(e) => setContent(e.target.value)}
       />
       <div className={styles['regexp-match']}>
-        {matchedsContents && matchedsContents.length ? (
+        {matchedsContents && matchedsContents?.length ? (
           <div className={styles['regexp-match-content']}>{matchedsContents}</div>
         ) : (
           <span>匹配结果...</span>

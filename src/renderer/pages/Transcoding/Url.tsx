@@ -1,9 +1,9 @@
 import { Button, Input, Space, Tooltip } from 'antd';
 import { Fragment, useState } from 'react';
 
-import ActionsBarWrap from '@/components/ActionsBarWrap';
-import Copy from '@/components/Copy';
-import Icon from '@/components/Icon';
+import ActionsBarWrap from '@/renderer/components/ActionsBarWrap';
+import Copy from '@/renderer/components/Copy';
+import Icon from '@/renderer/components/Icon';
 
 const TextArea = Input.TextArea;
 
@@ -26,7 +26,7 @@ const UrlCodingComponent = () => {
       <ActionsBarWrap palcement="right">
         <Copy value={decodeValue} size={18} />
         <Tooltip placement="bottom" title="清除">
-          <Icon type="icon-shanchu" size={18} onClick={() => setDecodeValue('')} />
+          <Icon type="icon-delete" size={18} onClick={() => setDecodeValue('')} />
         </Tooltip>
       </ActionsBarWrap>
       <TextArea
@@ -48,7 +48,7 @@ const UrlCodingComponent = () => {
         <ActionsBarWrap palcement="right">
           <Copy value={encodeValue} size={18} />
           <Tooltip placement="bottom" title="清除">
-            <Icon type="icon-shanchu" size={18} onClick={() => setEncodeValue('')} />
+            <Icon type="icon-delete" size={18} onClick={() => setEncodeValue('')} />
           </Tooltip>
         </ActionsBarWrap>
       </div>

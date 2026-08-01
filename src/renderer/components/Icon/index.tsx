@@ -1,22 +1,30 @@
 import { css } from '@emotion/css';
 import { memo } from 'react';
 
+import './index.less';
+
 interface IProps {
   type: string;
   className?: string;
   onClick?: () => void;
   size?: number;
+  withHoverBg?: boolean;
+  styles?: Record<string, any>;
   [k: string]: any;
 }
 
-const Icon = ({ type, className, size = 18, ...resetProps }: IProps) => {
+const Icon = ({ type, withHoverBg = false, className = '', size = 18, styles = {}, ...resetProps }: IProps) => {
   return (
     <i
-      className={`iconfont ${type} ${css(`
+      className={`iconfont
+      ${withHoverBg ? 'hover-bg' : ''} 
+      ${type} 
+      ${css(`
       padding: 0 3px;
-      font-size:${size}px;
       cursor:pointer;
-    `)} ${className}`}
+    `)} 
+    ${className}`}
+      style={{ ...styles, fontSize: size }}
       {...resetProps}
     />
   );

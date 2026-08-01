@@ -1,90 +1,178 @@
 import { cx } from '@emotion/css';
-import { Layout, Tabs } from 'antd';
-import React, { FC, useLayoutEffect, useState } from 'react';
+import { Layout, Tabs, Divider } from 'antd';
+import React, { FC, Fragment, useLayoutEffect, useMemo, useState, Suspense } from 'react';
+import { AppstoreOutlined } from '@ant-design/icons';
+import { debounce } from 'lodash';
 
-import ConfigMenu from '@/components/ConfigMenu';
-import Events from '@/utils/events';
-import logo from '../../assets/logo.png';
+import { isInMac } from '@/renderer/utils';
+import { useConfigData } from '@/renderer/hooks';
+import ConfigMenu from '@/renderer/components/ConfigMenu';
+import ErrorBoundary from '@/renderer/components/ErrorBoundary';
+import Events from '@/renderer/utils/events';
+import Applications from '@/renderer/pages/Applications';
+import logo from '@/assets/logo.png';
 import Icon from '../components/Icon';
-import styles from './index.less';
 import routes from './routes';
+import styles from './index.module.less';
 
 const { Header, Content, Sider } = Layout;
 
-// 菜单栏
-const MenuItems = routes.map((item) => {
-  return {
-    key: item.key,
-    label: item.title,
-    icon: item.icon,
-  };
-});
-
-// 页面
-const pages = routes.reduce((pre: any[], cur: any) => {
-  if (cur.component) {
-    return [...pre, { ...cur }];
-  }
-  if (cur.children) {
-    return [...pre, ...cur.children];
-  }
-  return pre;
-}, []);
+interface TabItem {
+  label: string;
+  key: string;
+  children: React.ReactNode;
+}
 
 const BaseLayout: FC = () => {
-  const defaultSelectKey = pages[0].key;
-  const [activeKey, setActiveKey] = useState<string>(defaultSelectKey);
+  const { data: configData, setData: setConfigData } = useConfigData();
 
-  const tabItems = pages.map((page: any) => ({
-    label: '',
-    key: page.key,
-    children: React.createElement(page.component, { key: page.key }),
-  }));
+  const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
+
+  const isMacPlatform = useMemo(() => {
+    return isInMac();
+  }, []);
+
+  const activeKey = useMemo(() => {
+    if (configData?.active_menu_key) {
+      return configData.active_menu_key;
+    }
+    return configData?.sider_menus?.[0] || '';
+  }, [configData]);
+
+  const tabItems = useMemo(() => {
+    const tabs: TabItem[] = routes.map((page: any) => ({
+      label: '',
+      key: page.key,
+      children: <ErrorBoundary>{React.createElement(page.component, { key: page.key })}</ErrorBoundary>,
+    }));
+    tabs.push({
+      label: '',
+      key: 'more',
+      children: <Applications />,
+    });
+    return tabs;
+  }, [routes, configData]);
+
+  // 菜单栏
+  const menuItems = useMemo(() => {
+    if (configData?.sider_menus?.length) {
+      return configData?.sider_menus.map((key) => {
+        const route: any = routes.find((item) => item.key === key);
+        return {
+          key: route.key,
+          label: route.title,
+          icon: route.icon,
+        };
+      });
+    } else {
+      return [];
+    }
+  }, [routes, configData]);
+
+  // 激活tab
+  const moreActiveTab = useMemo(() => {
+    if (configData?.sider_menus && configData?.more_active_menu_key) {
+      return routes.find((item: any) => {
+        return !configData.sider_menus.includes(item.key) && item.key === configData.more_active_menu_key;
+      });
+    }
+    return undefined;
+  }, [configData?.sider_menus, configData?.more_active_menu_key]);
+
+  const handleActive = (key: string) => {
+    setConfigData({
+      ...configData,
+      active_menu_key: key,
+    });
+  };
+
+  const handleWindowSize = debounce(async () => {
+    const isFS = await Events.isFullScreen();
+    setIsFullScreen(isFS);
+  }, 100);
 
   useLayoutEffect(() => {
     setTimeout(Events.windowRenderReady, 1000);
+    window.addEventListener('resize', handleWindowSize);
+    return () => {
+      window.removeEventListener('resize', handleWindowSize);
+    };
   }, []);
 
   return (
     <Layout className={styles['developer-container']}>
-      <Header className={styles['developer-container-header']}>
+      <Header
+        className={`${styles['developer-container-header']} ${isMacPlatform && !isFullScreen ? styles['is-mac'] : ''}`}
+      >
         <div className={styles['developer-container-header-logo']}>
-          <img src={logo} /> <div>开发者助手</div>
+          <img src={logo} /> <div>Developer Assistant</div>
         </div>
+
         <div className={styles['developer-container-header-action']}>
-          <ConfigMenu>
+          <ConfigMenu isMacPlatform={isMacPlatform}>
             <div className={styles['developer-container-header-action-btn']}>
-              <Icon type="icon-gengduo" />
+              <Icon type="icon-more" />
             </div>
           </ConfigMenu>
-          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
-            <Icon type="icon-minus" />
-          </div>
-          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMaxmize()}>
-            <Icon type="icon-quanping" />
-          </div>
-          <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowClose()}>
-            <Icon type="icon-guanbi" />
-          </div>
+          {isMacPlatform ? null : (
+            <Fragment>
+              <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMinimize()}>
+                <Icon type="icon-minus" />
+              </div>
+              <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowMaxmize()}>
+                <Icon type="icon-fullscreen" />
+              </div>
+              <div className={styles['developer-container-header-action-btn']} onClick={() => Events.windowClose()}>
+                <Icon type="icon-close" />
+              </div>
+            </Fragment>
+          )}
         </div>
       </Header>
 
       <Layout>
         <Sider width={72} theme="light" className={styles['developer-container-sider']}>
           <div className={styles['developer-container-sider-menu']}>
-            {MenuItems.map((item) => (
+            {menuItems.map((item) => (
               <div
                 className={cx([
                   styles['developer-container-sider-menu-item'],
                   activeKey === item.key ? styles['developer-container-sider-menu-item-active'] : '',
                 ])}
                 key={item.key}
-                onClick={() => setActiveKey(item.key)}
+                onClick={() => handleActive(item.key)}
               >
                 <Icon className={styles['developer-container-sider-menu-item-icon']} size={24} type={item.icon} />
                 <span className={styles['developer-container-sider-menu-item-label']}>{item.label}</span>
               </div>
             ))}
+            <Divider style={{ margin: '5px 0' }} />
+            {moreActiveTab ? (
+              <div
+                className={cx([
+                  styles['developer-container-sider-menu-item'],
+                  activeKey === moreActiveTab.key ? styles['developer-container-sider-menu-item-active'] : '',
+                ])}
+                onClick={() => handleActive(moreActiveTab.key)}
+              >
+                <Icon
+                  className={styles['developer-container-sider-menu-item-icon']}
+                  size={24}
+                  type={moreActiveTab.icon}
+                />
+                <span className={styles['developer-container-sider-menu-item-label']}>{moreActiveTab.title}</span>
+              </div>
+            ) : null}
+            <div
+              className={cx([
+                styles['developer-container-sider-menu-item'],
+                activeKey === 'more' ? styles['developer-container-sider-menu-item-active'] : '',
+              ])}
+              onClick={() => handleActive('more')}
+            >
+              <AppstoreOutlined style={{ fontSize: '24px' }} />
+              <span className={styles['developer-container-sider-menu-item-label']}>更多</span>
+            </div>
           </div>
         </Sider>
         <Content className={styles['developer-container-content']}>

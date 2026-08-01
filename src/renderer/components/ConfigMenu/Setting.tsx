@@ -1,10 +1,10 @@
 import { Button, Drawer, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 
-import { useConfigData, useLocalData } from '@/hooks';
-import Events from '@/utils/events';
+import { useConfigData, useLocalData } from '@/renderer/hooks';
+import Events from '@/renderer/utils/events';
 
-import styles from './index.less';
+import styles from './index.module.less';
 
 interface ISettingProps {
   open: boolean;
@@ -33,6 +33,10 @@ const Setting = (props: ISettingProps) => {
     await setData({ checkUpdate: bool });
   };
 
+  const handleFixedScreenSize = async (bool: boolean) => {
+    await setData({ screen_size_fixed: bool });
+  };
+
   const handleClearCacheData = async () => {
     await clearData();
   };
@@ -48,7 +52,11 @@ const Setting = (props: ISettingProps) => {
     <Drawer
       title="设置"
       placement="right"
-      headerStyle={{ height: 48 }}
+      styles={{
+        header: {
+          height: 48,
+        },
+      }}
       width={480}
       closable={false}
       onClose={onClose}
@@ -77,6 +85,15 @@ const Setting = (props: ISettingProps) => {
             unCheckedChildren="关闭"
             checked={data?.checkUpdate}
             onChange={handleSetCheckUpdate}
+          />
+        </div>
+        <div className={styles['setting-item']}>
+          <span> 固定窗口大小： </span>
+          <Switch
+            checkedChildren="开启"
+            unCheckedChildren="关闭"
+            checked={data?.screen_size_fixed}
+            onChange={handleFixedScreenSize}
           />
         </div>
         <div className={styles['setting-item']}>

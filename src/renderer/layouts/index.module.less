@@ -1,0 +1,127 @@
+@import '../styles/theme.less';
+
+.developer-container {
+  :global {
+    .ant-tabs-nav {
+      display: none !important;
+    }
+  }
+
+  .developer-container-sider {
+    padding: 12px 6px 0;
+    background: @backgroundColor;
+
+    &-menu {
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      justify-content: center;
+
+      &-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 58px;
+        height: 58px;
+        margin-bottom: 8px;
+        font-weight: 500;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.1s linear;
+
+        &:hover {
+          background-color: #ededed;
+        }
+
+        &-label {
+          font-size: 12px;
+        }
+
+        &-icon {
+          margin-bottom: 4px; // 调整间距
+        }
+      }
+
+      &-item-active {
+        color: #fff;
+        background-color: @primary-color;
+        &:hover {
+          background-color: @primary-color;
+        }
+      }
+    }
+  }
+
+  .developer-container-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 45px;
+    padding: 0 10px;
+    background-color: @backgroundColor;
+    transition: padding 0.1s linear;
+
+    .developer-container-header-logo {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: left;
+      -webkit-app-region: drag;
+
+      img {
+        width: 32px;
+        height: 32px;
+        margin: 0 10px;
+        border-radius: 4px;
+      }
+      div {
+        color: @primary-color;
+        font-weight: 500;
+        font-size: 18px;
+      }
+    }
+
+    .developer-container-header-action {
+      display: flex;
+      align-items: center;
+      height: 30px;
+      .developer-container-header-action-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        margin: 0 4px;
+        color: @primary-color;
+        font-weight: 550;
+        font-size: 22px;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.1s linear;
+        &:hover {
+          background-color: #ededed;
+        }
+      }
+    }
+  }
+
+  .is-mac {
+    padding-left: 68px;
+  }
+
+  .developer-container-content {
+    margin: 0;
+    padding: 0 6px 6px 0px;
+    overflow: auto;
+    background-color: @backgroundColor;
+
+    .developer-container-content-keep-alive {
+      height: 100%;
+      padding: 8px;
+      overflow: auto;
+      background-color: #fff;
+      border-radius: 6px;
+    }
+  }
+}

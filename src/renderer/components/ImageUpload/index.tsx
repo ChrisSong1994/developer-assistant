@@ -2,8 +2,8 @@ import { UploadOutlined } from '@ant-design/icons';
 import { Button, Image, Tooltip } from 'antd';
 import { CSSProperties, memo } from 'react';
 
-import { getFilePathExt } from '@/utils';
-import Events from '@/utils/events';
+import { getFilePathExt } from '@/renderer/utils';
+import Events from '@/renderer/utils/events';
 import Icon from '../Icon';
 import fallbackImg from './fallbackImg';
 
@@ -49,7 +49,7 @@ const ImageUpload = (props: IImageUploadProps) => {
     >
       {value ? (
         <Tooltip placement="bottom" title="清除">
-          <Icon type="icon-shanchu" style={{ position: 'absolute', top: 6, right: 6 }} onClick={handleClear} />
+          <Icon type="icon-delete" style={{ position: 'absolute', top: 6, right: 6 }} onClick={handleClear} />
         </Tooltip>
       ) : null}
 

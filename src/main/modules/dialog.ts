@@ -1,9 +1,10 @@
 import { dialog, OpenDialogOptions } from 'electron';
+import path from 'path';
 import fs from 'fs-extra';
 import _ from 'lodash';
 
 import { getFileFromPath } from '../utils/file';
-import { getConfData } from './data';
+import { getConfData } from '../store';
 
 export const getFilePath = async (options: OpenDialogOptions = {}) => {
   const { downloadPath } = await getConfData();
@@ -49,8 +50,13 @@ export const saveFileToLocal = async (options: OpenDialogOptions & { fileName: s
     defaultPath: options.defaultPath || `${downloadPath}/${options.fileName}`,
     properties: ['createDirectory', 'showOverwriteConfirmation'],
   });
+
   if (!result.canceled && result.filePath) {
     await fs.writeFile(result.filePath, options.payload, { encoding: 'utf8' });
+    const fileName = path.basename(result.filePath);
+    return { fileName: fileName, filePath: result.filePath };
+  } else {
+    return null;
   }
 };
 

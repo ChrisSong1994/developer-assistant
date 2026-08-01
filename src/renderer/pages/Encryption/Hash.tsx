@@ -1,8 +1,8 @@
-import Events from '@/utils/events';
+import Events from '@/renderer/utils/events';
 import { Button, Form, Input, Select } from 'antd';
 import { useState } from 'react';
 
-import { HASH_ARITHMETIC_OPTIONS } from '@/constants';
+import { HASH_ARITHMETIC_OPTIONS } from '@/renderer/constants';
 import { IHashOptions } from '../../../main/modules/crypto';
 
 const TextArea = Input.TextArea;

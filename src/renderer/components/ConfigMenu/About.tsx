@@ -1,7 +1,8 @@
 import { Button, Modal } from 'antd';
 
-import { useGlobalData } from '@/hooks';
-import Events from '@/utils/events';
+import { GITHUB_ISSUE_URL } from '@/common/constants';
+import { useGlobalData } from '@/renderer/hooks';
+import Events from '@/renderer/utils/events';
 import logo from '../../../assets/logo.png';
 
 interface IAboutProps {
@@ -21,9 +22,7 @@ const About = (props: IAboutProps) => {
         <p style={{ textIndent: 28 }}>
           开发者助手是一款开源免费的开发小工具集，涉及到json数据、文本diff、色彩转换、二维码和图片编辑等；假如你喜欢它请不要吝啬
           Star🌟，假如你发现问题或者有好的建议请
-          <a onClick={() => Events.openUrl({ url: 'https://github.com/ChrisSong1994/developer-assistant/issues' })}>
-            前往
-          </a>
+          <a onClick={() => Events.openUrl({ url: GITHUB_ISSUE_URL })}>前往</a>
           沟通。
         </p>
       </div>

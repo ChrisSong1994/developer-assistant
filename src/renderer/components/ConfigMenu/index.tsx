@@ -1,34 +1,32 @@
 import { InfoCircleOutlined } from '@ant-design/icons';
 import { Checkbox, Dropdown, MenuProps, Modal } from 'antd';
 import React, { Fragment, useEffect, useState } from 'react';
-import semver from 'semver';
 
-import Icon from '@/components/Icon';
-import { useConfigData } from '@/hooks';
-import { isEmpty } from '@/utils';
-import Events from '@/utils/events';
+import { GITHUB_RELEASE_URL, GITHUB_ISSUE_URL } from '@/common/constants';
+import Icon from '@/renderer/components/Icon';
+import { useConfigData } from '@/renderer/hooks';
+import Events from '@/renderer/utils/events';
 import About from './About';
 import Setting from './Setting';
 interface IConfigMenuProps {
   children: React.ReactNode;
+  isMacPlatform?: boolean;
 }
 
 const menuStyle = {
   width: 200,
 };
-const remotePackageUrl = 'https://raw.githubusercontent.com/ChrisSong1994/developer-assistant/main/package.json';
 
 const ConfigMenu = (props: IConfigMenuProps) => {
-  const { children } = props;
+  const { children, isMacPlatform } = props;
   const [settingOpen, setSettingOpen] = useState<boolean>(false);
   const [aboutOpen, setAboutOpen] = useState<boolean>(false);
   const { data, setData } = useConfigData();
 
   const handleCheckUpdate = async () => {
-    const localVersion = await Events.getAppVersion();
-    const remotePackage = await fetch(remotePackageUrl, { method: 'get', cache: 'no-cache' }).then((res) => res.json());
-    let closeCheckUpdate = false;
-    if (semver.gt(remotePackage.version, localVersion)) {
+    const result = await Events.checkUpdate();
+    if (result.isNeedUpdate) {
+      let closeCheckUpdate = false;
       Modal.confirm({
         title: '有新版本发布，是否更新？',
         cancelText: '关闭',
@@ -45,23 +43,23 @@ const ConfigMenu = (props: IConfigMenuProps) => {
           }
         },
         onOk() {
-          Events.openUrl({ url: 'https://github.com/ChrisSong1994/developer-assistant/releases' });
+          Events.openUrl({ url: GITHUB_RELEASE_URL });
         },
       });
     }
   };
 
   useEffect(() => {
-    if (!isEmpty(data) && data?.checkUpdate) {
+    if (data?.checkUpdate) {
       handleCheckUpdate();
     }
-  }, [data]);
+  }, [data?.checkUpdate]);
 
   const menuItems: MenuProps['items'] = [
     {
       label: <div onClick={() => setAboutOpen(true)}>关于</div>,
       key: 'about',
-      icon: <Icon type="icon-guanyu" />,
+      icon: <Icon type="icon-info" />,
     },
     {
       label: <div onClick={handleCheckUpdate}>检查更新</div>,
@@ -69,13 +67,9 @@ const ConfigMenu = (props: IConfigMenuProps) => {
       icon: <Icon type="icon-update" />,
     },
     {
-      label: (
-        <div onClick={() => Events.openUrl({ url: 'https://github.com/ChrisSong1994/developer-assistant/issues' })}>
-          意见反馈
-        </div>
-      ),
+      label: <div onClick={() => Events.openUrl({ url: GITHUB_ISSUE_URL })}>意见反馈</div>,
       key: 'feedback',
-      icon: <Icon type="icon-fankui" />,
+      icon: <Icon type="icon-feedback" />,
     },
     {
       type: 'divider',
@@ -83,7 +77,7 @@ const ConfigMenu = (props: IConfigMenuProps) => {
     {
       label: <div onClick={() => setSettingOpen(true)}>设置</div>,
       key: 'setting',
-      icon: <Icon type="icon-shezhi1" />,
+      icon: <Icon type="icon-setting" />,
     },
     {
       type: 'divider',
@@ -91,13 +85,17 @@ const ConfigMenu = (props: IConfigMenuProps) => {
     {
       label: <div onClick={() => Events.quit()}>退出</div>,
       key: 'quit',
-      icon: <Icon type="icon-tuichu" />,
+      icon: <Icon type="icon-exit" />,
     },
   ];
 
   return (
     <Fragment>
-      <Dropdown trigger={['click']} placement="bottom" menu={{ items: menuItems, style: menuStyle }}>
+      <Dropdown
+        trigger={['click']}
+        placement={isMacPlatform ? 'bottomLeft' : 'bottom'}
+        menu={{ items: menuItems, style: menuStyle }}
+      >
         {children}
       </Dropdown>
       <Setting open={settingOpen} onClose={() => setSettingOpen(false)} />

@@ -1,9 +1,9 @@
 import type { InputRef } from 'antd';
 import { Input } from 'antd';
 import { useEffect, useRef, useState } from 'react';
+import { isEmpty } from '@fett/utils';
 
-import { isEmpty } from '@/utils';
-import styles from './index.less';
+import styles from './index.module.less';
 interface IProps {
   value: string;
   defaultValue?: string;
@@ -45,7 +45,7 @@ const ToggleEditText = (props: IProps) => {
           placeholder={placeholder}
           defaultValue={value}
           ref={inputRef}
-          bordered={false}
+          variant="borderless"
           onBlur={handleBlur}
           onPressEnter={handleBlur}
         />

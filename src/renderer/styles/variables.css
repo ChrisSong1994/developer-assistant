@@ -1,0 +1,9 @@
+:root {
+  --container-bg-color: #ffffff;
+  --bg-color: #f6f8fa;
+  --primary-color: #1d2e54;
+  --border-bolor: #dadce0;
+  --icon-hover-color: #eef1f4;
+  --ant-button-primary-shadow: 0 2px 0 rgba(222, 231, 242, 0.46);
+  --ant-select-option-selected-bg: #fff;
+}

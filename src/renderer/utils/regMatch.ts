@@ -51,11 +51,13 @@ const regMatch = (reg: RegExp, str: string) => {
   if (reg.global) {
     matcheds.push(...str.matchAll(reg));
   } else {
-    matcheds.push(str.match);
+    matcheds.push(str.match(reg));
   }
 
   const result = matcheds.filter(Boolean).map((item: any, index: number) => {
-    const matchedGroupsValues: Array<string> = Array.from(item as RegExpMatchArray).slice(1);
+    const matchedGroupsValues: Array<string> = Array.from(item as RegExpMatchArray)
+      .slice(1)
+      .filter((v) => v !== undefined);
     const matched: IRegMatchedData = {
       index: item.index,
       length: item[0].length,

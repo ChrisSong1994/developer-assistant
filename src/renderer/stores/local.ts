@@ -1,14 +1,12 @@
 import { atom } from 'jotai';
 
-import Events from '@/utils/events';
-import { ILocalData } from '../../main/modules/data';
+import Events from '@/renderer/utils/events';
+import { IUserData } from '@/main/store';
 
-const localAtom = atom<ILocalData>({
-  color: [],
-  images_compress: [],
-});
+const localAtom = atom<IUserData>();
+
 localAtom.onMount = (setAtom) => {
-  Events.getConfData().then(setAtom);
+  Events.getUserData().then(setAtom);
 };
 
 export default localAtom;

@@ -2,8 +2,8 @@ import { Input, message, Tooltip } from 'antd';
 import type { TextAreaProps } from 'antd/lib/input';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import Icon from '@/components/Icon';
-import styles from './index.less';
+import Icon from '@/renderer/components/Icon';
+import styles from './index.module.less';
 
 const TextArea = Input.TextArea;
 

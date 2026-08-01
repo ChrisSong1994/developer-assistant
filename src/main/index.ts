@@ -1,11 +1,17 @@
 import { app } from 'electron';
-import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer';
+import { installDevtool } from './utils';
 
 import eventsRegistry from './eventsRegistry';
-import { dbInit } from './modules/data';
 import { windowInit } from './modules/windows';
+import { isDev } from './utils';
 
-const isDevelopment = process.env.NODE_ENV === 'development';
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
 
 export async function onReady() {
   // 创建主窗口
@@ -14,12 +20,9 @@ export async function onReady() {
   // 事件消息
   eventsRegistry();
 
-  // 数据初始化
-  await dbInit();
-
   // 加载开发插件
-  if (isDevelopment) {
-    await installExtension([REACT_DEVELOPER_TOOLS.id, REDUX_DEVTOOLS.id]);
+  if (isDev) {
+    await installDevtool();
   }
 }
 
@@ -32,6 +35,7 @@ app.on('window-all-closed', () => {
   }
 });
 
+app.on('before-quit', () => (global.is_will_quit = true))
 app.on('activate', () => {
   if (mainWindow === null) {
     windowInit();

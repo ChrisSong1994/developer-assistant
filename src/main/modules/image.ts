@@ -2,11 +2,9 @@ import { dialog, OpenDialogOptions } from 'electron';
 import fs from 'fs-extra';
 import _ from 'lodash';
 import path from 'path';
+import { Worker } from 'worker_threads';
 
-// @ts-ignore
-import imageTiny from '../lib/imageTiny';
-import { getNotExistFilePath } from '../utils/path';
-import { getConfData } from './data';
+import { getConfData } from '../store';
 
 export enum EImageStatus {
   PENDING = 'pending',
@@ -53,7 +51,7 @@ export const getImagesInfoFromPath = async (filePath: string | Array<string>): P
  * payload: base64 string
  */
 export const saveBase64ImageToLocal = async (
-  options: OpenDialogOptions & { fileName: string; payload: string; format: 'png' | 'jpg' | 'jpeg' | 'webp' },
+  options: OpenDialogOptions & { fileName: string; payload: string; format: 'png' | 'jpg' | 'jpeg' | 'webp' | 'svg' },
 ) => {
   const { downloadPath } = await getConfData();
   const result = await dialog.showSaveDialog(global.mainWindow, {
@@ -70,7 +68,7 @@ export const saveBase64ImageToLocal = async (
 export const uploadImages = async (options: OpenDialogOptions = {}) => {
   const { downloadPath } = await getConfData();
   const result = await dialog.showOpenDialog(global.mainWindow, {
-    properties: ['openFile', 'openDirectory', 'createDirectory','multiSelections'],
+    properties: ['openFile', 'openDirectory', 'createDirectory', 'multiSelections'],
     defaultPath: downloadPath,
     ...options,
   });
@@ -83,25 +81,44 @@ export const uploadImages = async (options: OpenDialogOptions = {}) => {
 
 export const imageCompress = async ({ data, quality = 80 }: { data: Array<IImageCompressInfo>; quality: number }) => {
   const { downloadPath } = await getConfData();
-  const imageCompressPromises = data.map(async (image) => {
-    if (image.status !== EImageStatus.PENDING) return image;
-    if (!fs.existsSync(image.originalFilePath)) {
-      return { ...image, status: EImageStatus.FAILURE, errorMessage: '原文件路径不存在' };
-    }
-    const compreeedFilePath = getNotExistFilePath(path.join(downloadPath, path.basename(image.originalFilePath)));
-    const buffer = await fs.readFile(image.originalFilePath);
-    const compressedBuffer = await imageTiny(buffer, quality);
-    const compreeedFileSize = Buffer.byteLength(compressedBuffer);
-    const compressedRatio = (((image.originalFileSize - compreeedFileSize) / image.originalFileSize) * 100).toFixed(1);
-    await fs.writeFile(compreeedFilePath, compressedBuffer);
-    return {
-      ...image,
-      status: EImageStatus.SUCCESS,
-      compreeedFilePath,
-      compreeedFileSize,
-      compressedRatio,
-    };
+  const workerScriptPath = path.join(__dirname, 'imageCompressWorker.js');
+
+  const result = await new Promise<IImageCompressInfo[]>((resolve, reject) => {
+    let settled = false;
+    const worker = new Worker(workerScriptPath, {
+      workerData: {
+        data,
+        quality,
+        downloadPath,
+      },
+    });
+
+    worker.on('message', (message: any) => {
+      if (message?.type === 'done') {
+        settled = true;
+        void worker.terminate();
+        resolve(message.data);
+      } else if (message?.type === 'error') {
+        const err = new Error(message?.error?.message || 'Image compress worker error');
+        (err as any).stack = message?.error?.stack;
+        settled = true;
+        void worker.terminate();
+        reject(err);
+      }
+    });
+    worker.on('error', (err) => {
+      if (settled) return;
+      settled = true;
+      reject(err);
+    });
+    worker.on('exit', (code) => {
+      if (settled) return;
+      if (code !== 0) {
+        settled = true;
+        reject(new Error(`Image compress worker stopped with exit code ${code}`));
+      }
+    });
   });
-  const result = Promise.all(imageCompressPromises);
+
   return result;
 };

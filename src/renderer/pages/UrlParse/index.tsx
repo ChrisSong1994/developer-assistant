@@ -1,10 +1,11 @@
 import { Descriptions, Input } from 'antd';
 import { useEffect, useMemo, useState } from 'react';
+import { isEmpty } from '@fett/utils';
 
-import Icon from '@/components/Icon';
-import { URL_PARAMS } from '@/constants';
-import { isEmpty, urlConverToObject } from '@/utils';
-import styles from './index.less';
+import Icon from '@/renderer/components/Icon';
+import { URL_PARAMS } from '@/renderer/constants';
+import { urlConverToObject } from '@/renderer/utils';
+import styles from './index.module.less';
 
 const Search = Input.Search;
 
@@ -57,11 +58,11 @@ const UrlParse = () => {
               if (key === 'searchParams') {
                 if (!isEmpty(value)) {
                   return (
-                    <Descriptions.Item key={key} label={key} labelStyle={{ width: 140 }}>
+                    <Descriptions.Item key={key} label={key} styles={{ label: { width: 140 } }}>
                       <Descriptions bordered column={1}>
                         {Object.keys(value).map((k) => {
                           return (
-                            <Descriptions.Item key={k} label={k} labelStyle={{ width: 140 }}>
+                            <Descriptions.Item key={k} label={k} styles={{ label: { width: 140 } }}>
                               {value[k]}
                             </Descriptions.Item>
                           );
@@ -71,20 +72,20 @@ const UrlParse = () => {
                   );
                 }
               } else {
-                return (
-                  <Descriptions.Item key={key} label={key} labelStyle={{ width: 140 }}>
+                return !isEmpty(value) ? (
+                  <Descriptions.Item key={key} label={key} styles={{ label: { width: 140 } }}>
                     {value}
                   </Descriptions.Item>
-                );
+                ) : null;
               }
-            })}
+            }).filter(Boolean)}
           </Descriptions>
         ) : (
           <div className={styles['url-description']}>
             <Descriptions bordered column={1}>
               {URL_PARAMS.map((item) => {
                 return (
-                  <Descriptions.Item key={item.key} label={item.key} labelStyle={{ width: 140 }}>
+                  <Descriptions.Item key={item.key} label={item.key} styles={{ label: { width: 140 } }}>
                     {item.description}
                   </Descriptions.Item>
                 );

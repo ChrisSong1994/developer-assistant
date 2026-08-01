@@ -1,15 +1,17 @@
-import Icon from '@/components/Icon';
-import { isEmpty } from '@/utils';
-import Events from '@/utils/events';
+import Icon from '@/renderer/components/Icon';
+import { Button } from 'antd';
+import { isEmpty } from '@fett/utils';
+import Events from '@/renderer/utils/events';
 import { memo, useMemo } from 'react';
 import BaseEditor from './BaseEditor';
 import { EEditorLanguage } from './index';
-import styles from './index.less';
+import styles from './index.module.less';
 interface IProps {
   value: string;
   onChange: (v: any) => void;
   style?: Record<string, any>;
   error?: string | null;
+  onRepair: () => void;
   onErrorClose?: () => void;
 }
 
@@ -37,7 +39,10 @@ const JsonEditor = (props: IProps) => {
       {errorShow ? (
         <div className={styles['error-panel']}>
           <div className={styles['text']}> {error}</div>
-          <Icon className={styles['close']} type="icon-guanbi" onClick={onErrorClose} />
+          <Button size="small" onClick={props.onRepair}>
+            修复
+          </Button>
+          <Icon className={styles['close']} type="icon-close" onClick={onErrorClose} />
         </div>
       ) : null}
     </div>

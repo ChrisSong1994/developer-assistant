@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Developer Assistant</title>
+    <meta
+      name="description"
+      content="开发者助手是一个开源的开发工具集客户端，包含了常用的 Json 处理、颜色拾取转换、编码、文本 diff 等工具。"
+    />
+    <meta name="keywords" content="Developer Assistant,开发者助手,开发工具,json处理,颜色拾取,编码,文本diff" />
+    <meta name="author" content="ChrisSong1994" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+    <meta name="yandexbot" content="index, follow" />
+    <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      src="https://giscus.app/client.js"
+      data-repo="ChrisSong1994/developer-assistant"
+      data-repo-id="R_kgDOH5G4ew"
+      data-category-id="DIC_kwDOH5G4e84CrGHh"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="top"
+      data-theme="preferred_color_scheme"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async
+    ></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8PYRLWVEFM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-8PYRLWVEFM');
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f8f8f8;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="flex items-center justify-center h-30 w-full text-[#1d2e54] text-lg font-medium">
+        <img class="w-12 h12 mr-2" src="./images/logo.png" alt="logo" />
+        <span class="text-4xl">Developer Assistant</span>
+      </div>
+      <p class="text-base text-center mt-4 text-gray-600">
+        开发者助手是一个开源的开发工具集客户端，包含了常用的 Json 处理、颜色拾取转换、编码、文本 diff 等工具。
+      </p>
+
+      <div class="flex items-center justify-center mt-4 mb-4">
+        <a
+          class="inline-block px-4 py-2 rounded text-center w-50 text-16/4 rounded-md bg-[#1d2e54] text-white cursor-pointer"
+          target="_blank"
+          href="https://github.com/ChrisSong1994/developer-assistant/releases"
+        >
+          <div class="flex items-center justify-center">
+            <svg class="icon w-5 h-5" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M921.84736468 997.93033544H101.54506534c-24.68943392 0-44.71162586-20.00838352-44.71162584-44.71162585V631.455181c0-24.70324234 20.02219194-44.71162586 44.71162584-44.71162585s44.71162586 20.00838352 44.71162586 44.71162585v277.05190275h730.87904765V631.455181c0-24.70324234 20.02219194-44.71162586 44.71162583-44.71162585 24.68943392 0 44.71162586 20.00838352 44.71162586 44.71162585V953.21870959c0 24.70324234-20.02219194 44.71162586-44.71162586 44.71162585z"
+                fill="#fff"
+              ></path>
+              <path
+                d="M511.69621502 839.9897621c-24.68943392 0-44.71162586-20.00838352-44.71162585-44.71162585V70.54383027c0-24.70324234 20.02219194-44.71162586 44.71162585-44.71162586s44.71162586 20.00838352 44.71162585 44.71162586v724.73430598c0 24.70324234-20.02219194 44.71162586-44.71162585 44.71162585z"
+                fill="#fff"
+              ></path>
+              <path
+                d="M511.69621502 869.73307344c-14.37455297 0-27.92060144-6.93182094-36.30230524-18.61373431L323.62569491 639.87831001c-14.41597819-20.04980875-9.84539506-47.998027 10.21822209-62.41400518 20.02219194-14.37455297 47.94279339-9.85920347 62.3863884 10.21822208l115.47971803 160.70225499 115.45210121-160.68844659c14.443595-20.09123397 42.37800485-24.60658347 62.38638839-10.23203048 20.04980875 14.41597819 24.62039188 42.33657964 10.21822208 62.40019679l-151.75440644 211.2272207a44.65639221 44.65639221 0 0 1-36.31611365 18.64135112z"
+                fill="#fff"
+              ></path>
+            </svg>
+            <span class="ml-2 text-lg">下载</span>
+          </div>
+        </a>
+        <a
+          class="inline-block px-4 py-2 ml-4 rounded text-center w-50 text-16/4 rounded-md shadow-xs shadow-[#1d2e54] bg-[#fff] text-[#1d2e54] cursor-pointer"
+          target="_blank"
+          href="https://github.com/ChrisSong1994/developer-assistant"
+        >
+          <div class="flex items-center justify-center">
+            <svg
+              class="icon h-6"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              version="1.1"
+              width="32"
+              data-view-component="true"
+              class="octicon octicon-mark-github v-align-middle"
+            >
+              <path
+                d="M12 1C5.9225 1 1 5.9225 1 12C1 16.8675 4.14875 20.9787 8.52125 22.4362C9.07125 22.5325 9.2775 22.2025 9.2775 21.9137C9.2775 21.6525 9.26375 20.7862 9.26375 19.865C6.5 20.3737 5.785 19.1912 5.565 18.5725C5.44125 18.2562 4.905 17.28 4.4375 17.0187C4.0525 16.8125 3.5025 16.3037 4.42375 16.29C5.29 16.2762 5.90875 17.0875 6.115 17.4175C7.105 19.0812 8.68625 18.6137 9.31875 18.325C9.415 17.61 9.70375 17.1287 10.02 16.8537C7.5725 16.5787 5.015 15.63 5.015 11.4225C5.015 10.2262 5.44125 9.23625 6.1425 8.46625C6.0325 8.19125 5.6475 7.06375 6.2525 5.55125C6.2525 5.55125 7.17375 5.2625 9.2775 6.67875C10.1575 6.43125 11.0925 6.3075 12.0275 6.3075C12.9625 6.3075 13.8975 6.43125 14.7775 6.67875C16.8813 5.24875 17.8025 5.55125 17.8025 5.55125C18.4075 7.06375 18.0225 8.19125 17.9125 8.46625C18.6138 9.23625 19.04 10.2125 19.04 11.4225C19.04 15.6437 16.4688 16.5787 14.0213 16.8537C14.42 17.1975 14.7638 17.8575 14.7638 18.8887C14.7638 20.36 14.75 21.5425 14.75 21.9137C14.75 22.2025 14.9563 22.5462 15.5063 22.4362C19.8513 20.9787 23 16.8537 23 12C23 5.9225 18.0775 1 12 1Z"
+              ></path>
+            </svg>
+            <span class="ml-2 text-lg">Github</span>
+          </div>
+        </a>
+      </div>
+      <div class="flex items-center justify-center w-full">
+        <img class="w-1/2 overflow-hidden rounded-md shadow-md shadow-[#1d2e54]" src="./images/color.png" />
+      </div>
+    </header>
+    <h1 class="text-2xl text-center mt-6 text-[#1d2e54] text-lg font-medium">功能特性</h1>
+    <main class="max-w-6xl mx-auto flex flex-wrap">
+      <div class="w-1/3 p-4">
+        <img class="rounded-md border border-gray-300" src="./images/json.png" alt="json" />
+        <div class="mt-4 text-[#1d2e54] text-lg font-medium">Json 处理</div>
+        <div class="text-sm leading-5 text-gray-400 text-left pt-2 px-2">支持 Json 格式化、压缩、美化 等操作。</div>
+      </div>
+      <div class="w-1/3 p-4">
+        <img class="rounded-md border border-gray-300" src="./images/color.png" alt="color" />
+        <div class="mt-4 text-[#1d2e54] text-lg font-medium">颜色拾取</div>
+        <div class="text-sm leading-5 text-gray-400 text-left pt-2 px-2">
+          支持拾取颜色，并转换为十六进制、RGB、HSL 等格式。
+        </div>
+      </div>
+      <div class="w-1/3 p-4">
+        <img class="rounded-md border border-gray-300" src="./images/image-compress.png" alt="compress" />
+        <div class="mt-4 text-[#1d2e54] text-lg font-medium">图片压缩</div>
+        <div class="text-sm leading-5 text-gray-400 text-left pt-2 px-2">
+          支持压缩图片，提供多种压缩选项，支持批量压缩。
+        </div>
+      </div>
+      <div class="w-1/3 p-4">
+        <img class="rounded-md border border-gray-300" src="./images/markdown.png" alt="markdown" />
+        <div class="mt-4 text-[#1d2e54] text-lg font-medium">Markdown编辑</div>
+        <div class="text-sm leading-5 text-gray-400 text-left pt-2 px-2">支持 Markdown 格式化、预览、导出等操作。</div>
+      </div>
+      <div class="w-1/3 p-4">
+        <img class="rounded-md border border-gray-300" src="./images/diff.png" alt="diff" />
+        <div class="mt-4 text-[#1d2e54] text-lg font-medium">文本对比</div>
+        <div class="text-sm leading-5 text-gray-400 text-left pt-2 px-2">支持文本对比，支持多种语法高亮对比。</div>
+      </div>
+      <div class="w-1/3 p-4">
+        <img class="rounded-md border border-gray-300" src="./images/qrcode.png" alt="qrcode" />
+        <div class="mt-4 text-[#1d2e54] text-lg font-medium">二维码</div>
+        <div class="text-sm leading-5 text-gray-400 text-left pt-2 px-2">支持二维码的生成和解码。</div>
+      </div>
+      <div class="w-1/3 p-4">
+        <img class="rounded-md border border-gray-300" src="./images/regexp.png" alt="regexp" />
+        <div class="mt-4 text-[#1d2e54] text-lg font-medium">正则工具</div>
+        <div class="text-sm leading-5 text-gray-400 text-left pt-2 px-2">
+          支持正则表达式测试、验证、文本替换等操作。
+        </div>
+      </div>
+      <div class="w-1/3 p-4">
+        <img class="rounded-md border border-gray-300" src="./images/urlcode.png" alt="url" />
+        <div class="mt-4 text-[#1d2e54] text-lg font-medium text-lg font-medium">编解码</div>
+        <div class="text-sm leading-5 text-gray-400 text-left pt-2 px-2">支持 Base64 编解码、URL 编解码等操作。</div>
+      </div>
+      <div class="w-1/3 p-4">
+        <img class="rounded-md border border-gray-300" src="./images/apps.png" alt="apps" />
+        <div class="mt-4 text-[#1d2e54] text-lg font-medium">工具集合</div>
+        <div class="text-sm leading-5 text-gray-400 text-left pt-2 px-2">
+          支持侧边栏自定义，拖拽排序，添加常用工具，方便快捷。
+        </div>
+      </div>
+    </main>
+    <div class="w-full h-10 text-gray-400 flex items-center justify-center">更多工具持续建设中...</div>
+    <div class="w-full flex items-center justify-center">
+      <div class="w-4xl rounded-md border border-gray-300 p-4 bg-gray-100 w-1/2">
+        <div class="text-[#1d2e54] text-lg font-medium">温馨提示：</div>
+        <div class="text-gray-400 text-base">
+          在 MacOS 系统下安装出现权限问题，请在终端执行以下命令：
+          <p>sudo spctl --master-disable # 允许任何来源</p>
+          <p>xattr -d com.apple.quarantine /Applications/Developer\ Assistant.app # 移除隔离属性</p>
+          <p>注意⚠️：移除隔离属性会绕过 macOS 的安全检查，仅对完全信任的文件使用此命令，避免运行恶意软件。</p>
+        </div>
+      </div>
+    </div>
+    <div class="giscus w-1/2 max-w-[1000px] min-w-[700px] flex items-center justify-center m-auto mt-4"></div>
+    <footer class="flex items-center justify-center w-full mt-4 pt-4 pb-4">
+      <p class="text-base text-center mt-4 text-gray-600">
+        Copyright © 2025 <a href="https://github.com/ChrisSong1994">ChrisSong1994</a>
+      </p>
+    </footer>
+  </body>
+</html>

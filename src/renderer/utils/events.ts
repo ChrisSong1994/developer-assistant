@@ -1,5 +1,5 @@
 // @ts-ignore
-const { dispatch } = window.electronBridge;
+const dispatch = window?.electronBridge?.dispatch;
 import { Events } from '../../main/types';
 
 const events: Events = new Proxy(

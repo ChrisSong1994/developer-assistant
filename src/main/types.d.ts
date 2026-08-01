@@ -9,5 +9,6 @@ export interface EventData {
 
 declare global {
   var mainWindow: any;
-  var launchWindow :any;
+  var launchWindow: any;
+  var is_will_quit: boolean;
 }

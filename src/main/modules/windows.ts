@@ -1,10 +1,9 @@
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron';
 import path from 'path';
-import { EWindowSize } from '../../types/global';
-import { isDevelopment, isInMac } from '../utils';
-import { getPublicFilePath, ICON_PATH } from '../utils/path';
-
-export let browserWindows: Array<BrowserWindow | null> = [];
+import { EWindowSize } from '@/common/constants';
+import { isDev, getPageUrl, isInMac } from '../utils';
+import { ICON_PATH } from '../utils/path';
+import { getWindowSize, getConfData, setConfData } from '@/main/store';
 
 /**
  * launch window
@@ -18,7 +17,7 @@ export function getLaunchWindowOptions(): BrowserWindowConstructorOptions {
     icon: ICON_PATH,
     resizable: false,
     webPreferences: {
-      devTools: isDevelopment,
+      devTools: true,
     },
   };
 }
@@ -28,17 +27,24 @@ export function getLaunchWindowOptions(): BrowserWindowConstructorOptions {
  * @returns {BrowserWindowConstructorOptions}
  */
 export function getMainWindowOptions(): BrowserWindowConstructorOptions {
+  const { width, height } = getWindowSize();
   return {
-    width: EWindowSize.width,
-    height: EWindowSize.height,
+    width: width,
+    height: height,
     minHeight: 810,
     minWidth: 1180,
-    titleBarStyle: 'hidden',
+    frame: false,
+    titleBarStyle: 'hiddenInset',
+    trafficLightPosition: {
+      y: 16,
+      x: 10,
+    },
     resizable: true,
     icon: ICON_PATH,
     show: false,
     webPreferences: {
-      devTools: isDevelopment,
+      devTools: true,
+      webSecurity: false,
       nodeIntegration: true,
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js'),
@@ -57,30 +63,44 @@ export function createMainWindow() {
   launchWindow = new BrowserWindow(getLaunchWindowOptions());
   mainWindow = new BrowserWindow(getMainWindowOptions());
   if (isInMac()) {
-    mainWindow.setWindowButtonVisibility(false); // 隐藏信号灯
     launchWindow.setWindowButtonVisibility(false);
   }
 
-  if (isDevelopment) {
-    launchWindow.loadURL('http://localhost:3001/launch/index.html');
-    mainWindow.loadURL('http://localhost:3001');
-  } else {
-    launchWindow.loadURL(getPublicFilePath({ name: 'launch/index.html' }));
-    mainWindow.loadURL(getPublicFilePath({ name: 'index.html' }));
-  }
+  launchWindow.loadURL(getPageUrl('launch'));
+  mainWindow.loadURL(getPageUrl('index'));
 
   mainWindow.webContents.once('dom-ready', () => {
-    if (isDevelopment) {
+    if (isDev) {
       mainWindow?.webContents.openDevTools();
     }
   });
 
+  // 仅在 macOS 下生效
+  mainWindow.on('close', (event: any) => {
+    if (global.is_will_quit) {
+      mainWindow = null;
+    } else {
+      event.preventDefault();
+      mainWindow?.hide();
+    }
+  });
+
   mainWindow.on('closed', () => {
-    browserWindows = browserWindows.filter((bw) => mainWindow !== bw);
     mainWindow = null;
   });
 
-  browserWindows.push(mainWindow);
+  mainWindow.on('resized', () => {
+    console.log('resized', mainWindow?.getBounds());
+    const { screen_size_fixed } = getConfData();
+    if (screen_size_fixed) {
+      setConfData({
+        screen_size: {
+          width: mainWindow?.getBounds().width as number,
+          height: mainWindow?.getBounds().height as number,
+        },
+      });
+    }
+  });
 
   globalThis.launchWindow = launchWindow;
   globalThis.mainWindow = mainWindow;
@@ -134,4 +154,8 @@ export const windowClose = () => {
   }
 
   return;
+};
+
+export const isFullScreen = () => {
+  return global.mainWindow?.isFullScreen();
 };

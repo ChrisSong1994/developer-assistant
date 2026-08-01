@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import styles from './index.less';
+import styles from './index.module.less';
 
 interface IActionsBarProps {
   children: React.ReactNode;
