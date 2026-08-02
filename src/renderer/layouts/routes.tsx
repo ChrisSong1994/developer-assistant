@@ -14,6 +14,7 @@ import DecimalConversion from '@/renderer/pages/DecimalConversion';
 import CronParser from '@/renderer/pages/CronParser';
 // import OCR from '@/renderer/pages/OCR';
 import AstExplorer from '@/renderer/pages/AstExplorer';
+import TextAnalysis from '@/renderer/pages/TextAnalysis';
 
 export enum ToolCategory {
   TEXT = 'TEXT',
@@ -134,6 +135,13 @@ const routes = [
     icon: 'icon-yufaxiuzheng',
     category: ToolCategory.TEXT,
     component: AstExplorer,
+  },
+  {
+    key: 'TextAnalysis',
+    title: '文本分析',
+    icon: 'icon-wenbenfenxi',
+    category: ToolCategory.TEXT,
+    component: TextAnalysis,
   },
 ];
 

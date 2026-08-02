@@ -105,6 +105,14 @@ const config: Configuration = {
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
+        // gpt-tokenizer 词表文件较大，隔离成异步 chunk，仅在动态 import 时加载，避免拖慢首屏
+        tokenizer: {
+          test: /[\\/]node_modules[\\/]gpt-tokenizer[\\/]/,
+          name: 'tokenizer',
+          chunks: 'async',
+          priority: 20,
+          enforce: true,
+        },
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',

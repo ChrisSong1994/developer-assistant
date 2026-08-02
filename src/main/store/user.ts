@@ -17,6 +17,15 @@ export interface IUserData {
   color: Array<IColorItem>;
   images_compress: Array<IImageCompressInfo>;
   json_history: Array<JsonHistoryItem>;
+  // 文本分析模块：可编辑成本价格表（默认值见 renderer 页面 constants）
+  text_analysis_price_table?: Array<{
+    id: string;
+    model: string;
+    encoding: 'o200k_base' | 'cl100k_base' | 'p50k_base' | 'r50k_base';
+    inputPrice: number;
+    outputPrice: number;
+    currency: 'USD' | 'CNY';
+  }>;
 }
 
 export const userStore = new Store<IUserData>({

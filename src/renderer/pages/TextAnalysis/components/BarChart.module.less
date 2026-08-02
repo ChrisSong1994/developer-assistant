@@ -1,0 +1,55 @@
+@import '@/renderer/styles/theme.less';
+
+.bar-chart {
+  overflow: auto;
+
+  .bar-row {
+    display: flex;
+    align-items: center;
+    padding: 3px 0;
+
+    .bar-label {
+      flex-shrink: 0;
+      width: 96px;
+      margin-right: 8px;
+      overflow: hidden;
+      text-align: right;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 16px;
+      overflow: hidden;
+      background-color: #f0f0f0;
+      border-radius: 4px;
+
+      .bar-fill {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.3s ease;
+      }
+    }
+
+    .bar-value {
+      flex-shrink: 0;
+      width: 56px;
+      margin-left: 8px;
+      text-align: left;
+      font-size: 12px;
+      color: #333;
+    }
+  }
+}
+
+.bar-chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  color: #999;
+  font-size: 13px;
+}

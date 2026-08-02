@@ -1,0 +1,19 @@
+@import '@/renderer/styles/theme.less';
+
+.text-analysis {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: calc(100vh - 100px);
+  padding: 12px;
+
+  .text-analysis-tabs {
+    flex: 1;
+    margin-top: 12px;
+    min-height: 0;
+
+    :global(.ant-tabs-content-holder) {
+      overflow: auto;
+    }
+  }
+}
