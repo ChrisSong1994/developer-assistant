@@ -56,14 +56,18 @@ const BaseLayout: FC = () => {
   // 菜单栏
   const menuItems = useMemo(() => {
     if (configData?.sider_menus?.length) {
-      return configData?.sider_menus.map((key) => {
-        const route: any = routes.find((item) => item.key === key);
-        return {
-          key: route.key,
-          label: route.title,
-          icon: route.icon,
-        };
-      });
+      return configData?.sider_menus
+        .map((key) => {
+          const route: any = routes.find((item) => item.key === key);
+          // 跳过已不存在的菜单 key，避免访问 route.key 崩溃
+          if (!route) return null;
+          return {
+            key: route.key,
+            label: route.title,
+            icon: route.icon,
+          };
+        })
+        .filter(Boolean);
     } else {
       return [];
     }
@@ -81,7 +85,6 @@ const BaseLayout: FC = () => {
 
   const handleActive = (key: string) => {
     setConfigData({
-      ...configData,
       active_menu_key: key,
     });
   };

@@ -36,6 +36,12 @@ export default function AppItem(props: AppItemProps) {
 
   const mounted = useMountStatus();
   const mountedWhileDragging = isDragging && !mounted;
+
+  // 菜单可能被移除/注释，持久化配置里可能残留失效 key，此时跳过渲染
+  if (!data) {
+    return null;
+  }
+
   const handleActive = () => {
     onClick && onClick(data.key);
   };

@@ -12,7 +12,7 @@ import {
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
 import { MenuKeys } from '@/renderer/layouts/routes';
-import { useConfigData } from '@/renderer/hooks';
+import { useConfigData, useMenus } from '@/renderer/hooks';
 import AppItem from './AppItem';
 import styles from './index.module.less';
 
@@ -33,18 +33,20 @@ export type TMenus = {
 
 const Applications = () => {
   const { data: configData, setData: setConfigData } = useConfigData();
+  const menusMap = useMenus();
+  // 过滤掉持久化配置中已不存在的菜单 key，避免幽灵项渲染/参与拖拽
+  const filterValidMenus = (keys: any[]) => keys.filter((key) => menusMap.has(key));
   const newMenus = MenuKeys.filter(
     (key) => !configData?.sider_menus.includes(key) && !configData?.other_menus.includes(key),
   );
   const [menus, setMenus] = useState<TMenus>({
-    sider: configData?.sider_menus || [],
-    other: [...(configData?.other_menus || []), ...newMenus],
+    sider: filterValidMenus(configData?.sider_menus || []),
+    other: [...filterValidMenus(configData?.other_menus || []), ...newMenus],
   });
 
   const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null);
   const handleActive = (key: string) => {
     setConfigData({
-      ...configData,
       active_menu_key: key,
       more_active_menu_key: key,
     });
@@ -62,9 +64,8 @@ const Applications = () => {
 
   const handleMenusSwitch = (menus: TMenus) => {
     setConfigData({
-      ...configData,
-      sider_menus: menus.sider,
-      other_menus: menus.other,
+      sider_menus: filterValidMenus(menus.sider),
+      other_menus: filterValidMenus(menus.other),
     });
   };
   return (
@@ -93,6 +94,11 @@ const Applications = () => {
             const overItems = menus[overContainer];
             const overIndex = overItems.indexOf(overId);
             const activeIndex = activeItems.indexOf(active.id);
+
+            // 拖拽项不在当前列表（可能已被移除），跳过，避免把 undefined 写进数组
+            if (activeIndex < 0) {
+              return menus;
+            }
 
             const isBelowOverItem =
               over &&
