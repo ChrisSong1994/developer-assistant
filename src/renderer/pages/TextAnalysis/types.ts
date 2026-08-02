@@ -5,26 +5,6 @@
 // 支持的 BPE 编码
 export type TEncodingName = 'o200k_base' | 'cl100k_base' | 'p50k_base' | 'r50k_base';
 
-// 成本币种
-export type TCurrency = 'USD' | 'CNY';
-
-// 价格表行（用户可编辑）
-export interface IPriceRow {
-  id: string;
-  model: string; // 模型显示名，如 'GPT-4o'
-  encoding: TEncodingName; // 计价所用编码
-  inputPrice: number; // 输入单价（每 1M tokens）
-  outputPrice: number; // 输出单价（每 1M tokens）
-  currency: TCurrency;
-}
-
-// 计算后的成本行
-export interface ICostRow extends IPriceRow {
-  inputTokens: number;
-  outputTokens: number;
-  cost: number; // = inputTokens*inputPrice/1e6 + outputTokens*outputPrice/1e6
-}
-
 // 文本统计结果
 export interface ITextStats {
   // —— 字符统计 ——

@@ -1,15 +1,14 @@
 /**
- * Token 计算 tab：编码/模型切换、token 数卡片、token 分布、token 预览、成本估算表
+ * Token 计算 tab：编码/模型切换、token 数卡片、token 分布、token 预览
  */
-import { Select, Spin, Statistic, Table, Tooltip } from 'antd';
+import { Select, Statistic, Table, Tooltip } from 'antd';
 import { useEffect, useMemo, useState } from 'react';
 
 import { ENCODING_MODEL_OPTIONS } from '../constants';
 import { TEncodingName } from '../types';
-import { batchCountTokens, tokenLengthDistribution, tokenizeWithDetails } from '../utils/tokenize';
+import { tokenLengthDistribution, tokenizeWithDetails } from '../utils/tokenize';
 import type { ITokenizeResult } from '../utils/tokenize';
 import BarChart from './BarChart';
-import CostTable from './CostTable';
 
 interface IProps {
   text: string;
@@ -20,7 +19,6 @@ const TokenTab = ({ text }: IProps) => {
   const [result, setResult] = useState<ITokenizeResult>({ total: 0, details: [] });
   const [distribution, setDistribution] = useState<Array<{ label: string; value: number }>>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [tokenCountByEncoding, setTokenCountByEncoding] = useState<Partial<Record<TEncodingName, number>>>({});
 
   // 当前编码：token 化 + 长度分布
   useEffect(() => {
@@ -50,21 +48,6 @@ const TokenTab = ({ text }: IProps) => {
       clearTimeout(timer);
     };
   }, [text, encoding]);
-
-  // 各编码批量计数（成本表用，一次算完）
-  useEffect(() => {
-    let cancelled = false;
-    if (!text) {
-      setTokenCountByEncoding({});
-      return;
-    }
-    batchCountTokens(text).then((counts) => {
-      if (!cancelled) setTokenCountByEncoding(counts);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [text]);
 
   const charCount = useMemo(() => text.length, [text]);
   const tokenDensity = useMemo(() => {
@@ -125,14 +108,6 @@ const TokenTab = ({ text }: IProps) => {
           <BarChart data={distribution} height={160} />
         </div>
       ) : null}
-
-      <Spin spinning={loading}>
-        {/* 成本估算 */}
-        <div style={{ margin: '8px 0' }}>
-          <div style={{ fontWeight: 500, fontSize: 14, marginBottom: 8 }}>API 成本估算</div>
-          <CostTable tokenCountByEncoding={tokenCountByEncoding} />
-        </div>
-      </Spin>
 
       {/* token 预览 */}
       <div style={{ margin: '8px 0' }}>

@@ -3,7 +3,7 @@
  * - 首屏不加载词表，首次计数时才动态 import 对应编码 chunk
  * - 统一传 { disallowedSpecial: new Set() }，避免文本含 <|...|> 特殊 token 时抛错
  */
-import { ALL_ENCODINGS, TOKEN_PREVIEW_LIMIT } from '../constants';
+import { TOKEN_PREVIEW_LIMIT } from '../constants';
 import { TEncodingName } from '../types';
 
 // 库返回模块的结构性类型（避免依赖 gpt-tokenizer 的类型解析）
@@ -92,44 +92,3 @@ export async function tokenLengthDistribution(
   return Array.from(buckets.entries()).map(([label, value]) => ({ label, value }));
 }
 
-/** 批量计数：一次算出多个编码的 token 数（并行） */
-export async function batchCountTokens(
-  text: string,
-  encodings: TEncodingName[] = ALL_ENCODINGS,
-): Promise<Partial<Record<TEncodingName, number>>> {
-  const results = await Promise.all(
-    encodings.map(async (encoding) => {
-      const count = await countTokens(text, encoding);
-      return { encoding, count };
-    }),
-  );
-  const map: Partial<Record<TEncodingName, number>> = {};
-  results.forEach(({ encoding, count }) => {
-    map[encoding] = count;
-  });
-  return map;
-}
-
-/** 按模型名计算 token 数（模型 → 编码映射） */
-export async function countTokensByModel(text: string, model: string): Promise<number> {
-  const encoding = MODEL_ENCODING_MAP[model] || 'o200k_base';
-  return countTokens(text, encoding);
-}
-
-// 常见模型 → 编码映射（与 constants.ENCODING_MODEL_OPTIONS 对应）
-const MODEL_ENCODING_MAP: Record<string, TEncodingName> = {
-  'gpt-4o': 'o200k_base',
-  'gpt-4o-mini': 'o200k_base',
-  'gpt-4.1': 'o200k_base',
-  'gpt-4.1-mini': 'o200k_base',
-  'gpt-5': 'o200k_base',
-  o1: 'o200k_base',
-  o3: 'o200k_base',
-  'gpt-4': 'cl100k_base',
-  'gpt-3.5-turbo': 'cl100k_base',
-  'text-davinci-003': 'p50k_base',
-  'code-davinci-002': 'p50k_base',
-  'text-davinci-002': 'p50k_base',
-  'text-davinci-001': 'r50k_base',
-  'gpt-2': 'r50k_base',
-};

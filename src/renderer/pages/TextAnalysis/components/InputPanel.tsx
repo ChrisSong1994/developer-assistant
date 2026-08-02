@@ -1,12 +1,11 @@
 /**
- * 顶部共享输入区：BaseEditor(plaintext) + 操作栏（复制/清空/导入文件）
+ * 顶部共享输入区：textarea + 操作栏（复制/清空/导入文件）
  */
-import { Tooltip } from 'antd';
+import { Input, Tooltip } from 'antd';
 import { memo } from 'react';
 
 import ActionsBarWrap from '@/renderer/components/ActionsBarWrap';
 import Copy from '@/renderer/components/Copy';
-import { BaseEditor, EEditorLanguage } from '@/renderer/components/Editor';
 import Icon from '@/renderer/components/Icon';
 import Events from '@/renderer/utils/events';
 
@@ -34,11 +33,13 @@ const InputPanel = ({ value, onChange }: IProps) => {
           <Icon type="icon-delete" size={18} onClick={handleClear} />
         </Tooltip>
       </ActionsBarWrap>
-      <BaseEditor
-        language={EEditorLanguage.PLAINTEXT}
-        style={{ height: 200, border: '1px solid #e8e8e8', borderRadius: 4 }}
+      <Input.TextArea
         value={value}
-        onChange={onChange}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="请输入要分析的文本…"
+        spellCheck={false}
+        autoSize={{ minRows: 8, maxRows: 16 }}
+        style={{ border: '1px solid #e8e8e8', borderRadius: 4 }}
       />
     </div>
   );

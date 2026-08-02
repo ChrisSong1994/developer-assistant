@@ -1,13 +1,7 @@
 /**
  * 文本分析模块常量
  */
-import { IPriceRow, TCurrency, TEncodingName } from './types';
-
-// 币种符号
-export const CURRENCY_SYMBOL: Record<TCurrency, string> = {
-  USD: '$',
-  CNY: '¥',
-};
+import { TEncodingName } from './types';
 
 // 阅读速度（每分钟）
 export const READING_SPEED = {
@@ -29,31 +23,6 @@ export const ENCODING_MODEL_OPTIONS: Array<{
   { label: 'cl100k_base', value: 'cl100k_base', group: '原始编码' },
   { label: 'p50k_base', value: 'p50k_base', group: '原始编码' },
   { label: 'r50k_base', value: 'r50k_base', group: '原始编码' },
-];
-
-// 所有编码（去重）
-export const ALL_ENCODINGS: TEncodingName[] = ['o200k_base', 'cl100k_base', 'p50k_base', 'r50k_base'];
-
-// 默认价格表（每 1M tokens，默认值仅供参考，以官方最新定价为准）
-export const DEFAULT_PRICE_TABLE: IPriceRow[] = [
-  { id: 'gpt-5', model: 'GPT-5', encoding: 'o200k_base', inputPrice: 1.25, outputPrice: 10.0, currency: 'USD' },
-  { id: 'gpt-5-mini', model: 'GPT-5 mini', encoding: 'o200k_base', inputPrice: 0.25, outputPrice: 2.0, currency: 'USD' },
-  { id: 'gpt-5-nano', model: 'GPT-5 nano', encoding: 'o200k_base', inputPrice: 0.05, outputPrice: 0.4, currency: 'USD' },
-  { id: 'gpt-5-pro', model: 'GPT-5 pro', encoding: 'o200k_base', inputPrice: 2.0, outputPrice: 12.0, currency: 'USD' },
-  { id: 'gpt-4o', model: 'GPT-4o', encoding: 'o200k_base', inputPrice: 2.5, outputPrice: 10.0, currency: 'USD' },
-  { id: 'gpt-4o-mini', model: 'GPT-4o mini', encoding: 'o200k_base', inputPrice: 0.15, outputPrice: 0.6, currency: 'USD' },
-  { id: 'gpt-4.1', model: 'GPT-4.1', encoding: 'o200k_base', inputPrice: 2.0, outputPrice: 8.0, currency: 'USD' },
-  { id: 'gpt-4.1-mini', model: 'GPT-4.1 mini', encoding: 'o200k_base', inputPrice: 0.4, outputPrice: 1.6, currency: 'USD' },
-  { id: 'o3', model: 'o3', encoding: 'o200k_base', inputPrice: 2.0, outputPrice: 8.0, currency: 'USD' },
-  { id: 'o3-mini', model: 'o3-mini', encoding: 'o200k_base', inputPrice: 1.1, outputPrice: 4.4, currency: 'USD' },
-  { id: 'gpt-4-turbo', model: 'GPT-4 Turbo', encoding: 'cl100k_base', inputPrice: 10.0, outputPrice: 30.0, currency: 'USD' },
-  { id: 'gpt-3.5-turbo', model: 'GPT-3.5-Turbo', encoding: 'cl100k_base', inputPrice: 0.5, outputPrice: 1.5, currency: 'USD' },
-  { id: 'claude-sonnet-4.5', model: 'Claude Sonnet 4.5', encoding: 'o200k_base', inputPrice: 3.0, outputPrice: 15.0, currency: 'USD' },
-  { id: 'claude-opus-4.1', model: 'Claude Opus 4.1', encoding: 'o200k_base', inputPrice: 15.0, outputPrice: 75.0, currency: 'USD' },
-  { id: 'claude-haiku-4.5', model: 'Claude Haiku 4.5', encoding: 'o200k_base', inputPrice: 1.0, outputPrice: 5.0, currency: 'USD' },
-  { id: 'gemini-2.5-pro', model: 'Gemini 2.5 Pro', encoding: 'cl100k_base', inputPrice: 1.25, outputPrice: 10.0, currency: 'USD' },
-  { id: 'gemini-2.5-flash', model: 'Gemini 2.5 Flash', encoding: 'cl100k_base', inputPrice: 0.3, outputPrice: 2.5, currency: 'USD' },
-  { id: 'deepseek-v3.2', model: 'DeepSeek-V3.2', encoding: 'cl100k_base', inputPrice: 0.28, outputPrice: 0.42, currency: 'USD' },
 ];
 
 // 停用词表（中英混合）
