@@ -158,11 +158,6 @@ const ImageCompress = () => {
 
   return (
     <div className={styles['image-compress']}>
-      <Space style={{ paddingBottom: 12 }}>
-        <Button icon={<UploadOutlined />} onClick={handleUploadImages}>
-          上传图片
-        </Button>
-      </Space>
       {/* Empty 高度为了撑开表格  */}
       <ConfigProvider
         renderEmpty={() => <Empty style={{ height: tableHeight - 100, paddingTop: 100 }} description="暂无数据" />}
@@ -193,6 +188,9 @@ const ImageCompress = () => {
         </Space>
 
         <Space>
+          <Button size="large" icon={<UploadOutlined />} onClick={handleUploadImages}>
+            上传图片
+          </Button>
           <Button
             size="large"
             type="primary"
