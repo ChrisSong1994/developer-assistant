@@ -61,8 +61,22 @@ const cfg_common = {
   asar: true,
 };
 
+// 项目 .npmrc 的 electron_mirror 会被 npm 导出为 npm_config_electron_mirror,
+// @electron/get 的 mirrorVar() 会把它套用到「所有」工件下载上,导致 dmgbuild-bundle
+// (来自 electron-userland/electron-builder-binaries) 误从 electron 镜像下载而 404。
+// 这里在 build 前清掉这些 env,让 dmgbuild-bundle 回落到 GitHub 官方源;
+// electron 二进制下载不受影响,仍走下方 electronDownload.mirror 配置。
+const clearElectronMirrorEnv = () => {
+  for (const key of Object.keys(process.env)) {
+    if (/^(npm_config_electron_mirror|NPM_CONFIG_ELECTRON_MIRROR|npm_package_config_electron_mirror|ELECTRON_MIRROR)$/i.test(key)) {
+      delete process.env[key];
+    }
+  }
+};
+
 const beforeMake = async () => {
   console.log('-> beforeMake...');
+  clearElectronMirrorEnv();
   fs.removeSync(dist_dir);
   fs.ensureDirSync(dist_dir);
 
