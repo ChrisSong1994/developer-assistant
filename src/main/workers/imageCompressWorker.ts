@@ -20,6 +20,8 @@ interface IImageCompressInfo {
   format: string;
   status: EImageStatus;
   errorMessage?: string;
+  /** 单张独立的压缩质量,未设置时走批量/默认质量 */
+  quality?: number;
 }
 
 // 批量压缩时关掉 libvips 缓存,避免长期内存膨胀
@@ -70,7 +72,7 @@ async function compressOne(image: IImageCompressInfo, quality: number, downloadP
     // failOn: 'none' 容错损坏图片;rotate() 按 EXIF 自动转正
     await sharp(image.originalFilePath, { failOn: 'none' })
       .rotate()
-      .toFormat(format, formatOptions(quality))
+      .toFormat(format, formatOptions(image.quality ?? quality))
       .toFile(compreeedFilePath);
 
     const { size: compreeedFileSize } = await fs.stat(compreeedFilePath);

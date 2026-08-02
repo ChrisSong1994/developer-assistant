@@ -21,6 +21,8 @@ export interface IImageCompressInfo {
   format: string;
   status: EImageStatus;
   errorMessage?: string;
+  /** 单张独立的压缩质量,未设置时走批量/默认质量 */
+  quality?: number;
 }
 
 const INIT_IMAGE_INFO = {
@@ -79,7 +81,8 @@ export const uploadImages = async (options: OpenDialogOptions = {}) => {
   return await getImagesInfoFromPath(result.filePaths);
 };
 
-let compressWorker: Worker | null = null;
+// 单张压缩与批量压缩可能并存,用 Set 管理多个 worker,取消时全部终止
+const compressWorkers = new Set<Worker>();
 
 export const imageCompress = async ({ data, quality = 80 }: { data: Array<IImageCompressInfo>; quality: number }) => {
   const { downloadPath } = await getConfData();
@@ -94,7 +97,8 @@ export const imageCompress = async ({ data, quality = 80 }: { data: Array<IImage
         downloadPath,
       },
     });
-    compressWorker = worker;
+    compressWorkers.add(worker);
+    const cleanup = () => compressWorkers.delete(worker);
 
     worker.on('message', (message: any) => {
       if (message?.type === 'item') {
@@ -102,14 +106,14 @@ export const imageCompress = async ({ data, quality = 80 }: { data: Array<IImage
         global.mainWindow?.webContents.send('imageCompress:item', message.image);
       } else if (message?.type === 'done') {
         settled = true;
-        compressWorker = null;
+        cleanup();
         void worker.terminate();
         resolve(message.data);
       } else if (message?.type === 'error') {
         const err = new Error(message?.error?.message || 'Image compress worker error');
         (err as any).stack = message?.error?.stack;
         settled = true;
-        compressWorker = null;
+        cleanup();
         void worker.terminate();
         reject(err);
       }
@@ -117,14 +121,14 @@ export const imageCompress = async ({ data, quality = 80 }: { data: Array<IImage
     worker.on('error', (err) => {
       if (settled) return;
       settled = true;
-      compressWorker = null;
+      cleanup();
       reject(err);
     });
     worker.on('exit', (code) => {
       if (settled) return;
       if (code !== 0) {
         settled = true;
-        compressWorker = null;
+        cleanup();
         reject(new Error(`Image compress worker stopped with exit code ${code}`));
       }
     });
@@ -134,7 +138,7 @@ export const imageCompress = async ({ data, quality = 80 }: { data: Array<IImage
 };
 
 export const cancelImageCompress = () => {
-  compressWorker?.terminate();
-  compressWorker = null;
+  compressWorkers.forEach((worker) => worker.terminate());
+  compressWorkers.clear();
   return true;
 };
