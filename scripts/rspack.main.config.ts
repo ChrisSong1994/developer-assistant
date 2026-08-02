@@ -14,6 +14,7 @@ const config: Configuration = {
     main: path.resolve(ROOT, './src/main/index.ts'),
     preload: path.resolve(ROOT, './src/main/preload.ts'),
     imageCompressWorker: path.resolve(ROOT, './src/main/workers/imageCompressWorker.ts'),
+    imageConvertWorker: path.resolve(ROOT, './src/main/workers/imageConvertWorker.ts'),
   },
   output: {
     path: path.resolve(ROOT, 'build'),

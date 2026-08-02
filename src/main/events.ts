@@ -9,6 +9,7 @@ export {
   saveFileToLocal,
 } from './modules/dialog';
 export { cancelImageCompress, imageCompress, saveBase64ImageToLocal, uploadImages } from './modules/image';
+export { cancelImageConvert, imageConvert, uploadConvertImages } from './modules/imageConvert';
 export { openUrl, showItemInFolder } from './modules/shell';
 export { windowClose, windowMaxmize, windowMinimize, windowRenderReady, isFullScreen } from './modules/windows';
 export { getFileFromPath } from './utils/file';

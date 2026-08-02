@@ -10,11 +10,13 @@ import UrlParse from '@/renderer/pages/UrlParse';
 import Transform from '@/renderer/pages/Transform';
 import Markdown from '@/renderer/pages/Markdown';
 import ImageCompress from '@/renderer/pages/ImageCompress';
+import ImageConvert from '@/renderer/pages/ImageConvert';
 import DecimalConversion from '@/renderer/pages/DecimalConversion';
 import CronParser from '@/renderer/pages/CronParser';
 // import OCR from '@/renderer/pages/OCR';
 import AstExplorer from '@/renderer/pages/AstExplorer';
 import TextAnalysis from '@/renderer/pages/TextAnalysis';
+import JwtDecode from '@/renderer/pages/JwtDecode';
 
 export enum ToolCategory {
   TEXT = 'TEXT',
@@ -51,6 +53,13 @@ const routes = [
     icon: 'icon-picture',
     category: ToolCategory.IMAGE,
     component: ImageCompress,
+  },
+  {
+    key: 'ImageConvert',
+    title: '图片格式转换',
+    icon: 'icon-picture',
+    category: ToolCategory.IMAGE,
+    component: ImageConvert,
   },
   {
     key: 'Transform',
@@ -142,6 +151,13 @@ const routes = [
     icon: 'icon-wenbenfenxi',
     category: ToolCategory.TEXT,
     component: TextAnalysis,
+  },
+  {
+    key: 'JwtDecode',
+    title: 'JWT 解码',
+    icon: 'icon-key',
+    category: ToolCategory.CODING,
+    component: JwtDecode,
   },
 ];
 

@@ -25,7 +25,7 @@ export const configStore = new Store<IConfigData>({
     downloadPath: getDownloadsPath(),
     checkUpdate: false,
     sider_menus: ['Color', 'JSON', 'Regexp', 'Image', 'Diff', 'UrlParse', 'QrCode'],
-    other_menus: ['Transform', 'Transcoding', 'Encryption', 'Markdown'],
+    other_menus: ['Transform', 'Transcoding', 'Encryption', 'Markdown', 'ImageConvert'],
     active_menu_key: undefined,
     more_active_menu_key: undefined,
     screen_size_fixed: false,

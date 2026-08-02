@@ -6,7 +6,7 @@ import dispatch from '../main/dispatch';
 const apiKey = 'electronBridge';
 
 // 主进程 → 渲染进程推送通道白名单
-const PUSH_CHANNELS = ['imageCompress:item'];
+const PUSH_CHANNELS = ['imageCompress:item', 'imageConvert:item'];
 
 const api: any = {
   platform: os.platform(),
