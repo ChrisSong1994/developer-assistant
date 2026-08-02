@@ -79,6 +79,8 @@ export const uploadImages = async (options: OpenDialogOptions = {}) => {
   return await getImagesInfoFromPath(result.filePaths);
 };
 
+let compressWorker: Worker | null = null;
+
 export const imageCompress = async ({ data, quality = 80 }: { data: Array<IImageCompressInfo>; quality: number }) => {
   const { downloadPath } = await getConfData();
   const workerScriptPath = path.join(__dirname, 'imageCompressWorker.js');
@@ -92,16 +94,22 @@ export const imageCompress = async ({ data, quality = 80 }: { data: Array<IImage
         downloadPath,
       },
     });
+    compressWorker = worker;
 
     worker.on('message', (message: any) => {
-      if (message?.type === 'done') {
+      if (message?.type === 'item') {
+        // 逐张进度推送给渲染进程,表格实时更新
+        global.mainWindow?.webContents.send('imageCompress:item', message.image);
+      } else if (message?.type === 'done') {
         settled = true;
+        compressWorker = null;
         void worker.terminate();
         resolve(message.data);
       } else if (message?.type === 'error') {
         const err = new Error(message?.error?.message || 'Image compress worker error');
         (err as any).stack = message?.error?.stack;
         settled = true;
+        compressWorker = null;
         void worker.terminate();
         reject(err);
       }
@@ -109,16 +117,24 @@ export const imageCompress = async ({ data, quality = 80 }: { data: Array<IImage
     worker.on('error', (err) => {
       if (settled) return;
       settled = true;
+      compressWorker = null;
       reject(err);
     });
     worker.on('exit', (code) => {
       if (settled) return;
       if (code !== 0) {
         settled = true;
+        compressWorker = null;
         reject(new Error(`Image compress worker stopped with exit code ${code}`));
       }
     });
   });
 
   return result;
+};
+
+export const cancelImageCompress = () => {
+  compressWorker?.terminate();
+  compressWorker = null;
+  return true;
 };

@@ -1,6 +1,6 @@
-import { ClearOutlined, CompressOutlined, UploadOutlined } from '@ant-design/icons';
+import { ClearOutlined, CompressOutlined, StopOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, ConfigProvider, Segmented, Space, Table } from 'antd';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import Empty from '@/renderer/components/Empty';
 import Icon from '@/renderer/components/Icon';
@@ -23,6 +23,30 @@ const ImageCompress = () => {
   const { height } = useWindowSize();
   const tableHeight = useMemo(() => height - TABLE_HEIGHT_PADDING, [height]); // 编辑器高度
 
+  // 压缩中逐张进度:镜像到 state 供表格实时渲染,同时存 ref 供异常/取消时合并
+  const [progress, setProgress] = useState<Record<string, IImageCompressInfo>>({});
+  const progressRef = useRef<Record<string, IImageCompressInfo>>({});
+  const applyProgress = (img: IImageCompressInfo) => {
+    progressRef.current[img.originalFilePath] = img;
+    setProgress({ ...progressRef.current });
+  };
+  const clearProgress = () => {
+    progressRef.current = {};
+    setProgress({});
+  };
+  // 表格数据源:未完成的用原始行,已完成的用进度行(基于 originalFilePath 对应 rowKey,稳定)
+  const displayImages = useMemo(
+    () => images.map((img: IImageCompressInfo) => progress[img.originalFilePath] ?? img),
+    [images, progress],
+  );
+
+  useEffect(() => {
+    const unsubscribe = window.electronBridge?.on('imageCompress:item', (img) => applyProgress(img));
+    return () => {
+      unsubscribe?.();
+    };
+  }, []);
+
   const handleUploadImages = async () => {
     const result = await Events.uploadImages({
       filters: [{ name: '图片选择', extensions: ['*.png', '*.jpg', '*.jpeg', '*.webp'] }],
@@ -35,13 +59,26 @@ const ImageCompress = () => {
 
   const handleCompress = async () => {
     setCompressLoading(true);
-    const result = await Events.imageCompress({
-      data: images,
-      quality: quality,
-    });
-    // @ts-ignore
-    if (result) setLocalData({ [IMAGES_COMPRESS_KEY]: result });
-    setCompressLoading(false);
+    clearProgress();
+    try {
+      const result = await Events.imageCompress({
+        data: images,
+        quality: quality,
+      });
+      // @ts-ignore
+      if (result) setLocalData({ [IMAGES_COMPRESS_KEY]: result });
+    } catch (error) {
+      // 取消或异常:保留已完成的逐张结果,一次持久化
+      const keepImages = images.map((img: IImageCompressInfo) => progressRef.current[img.originalFilePath] ?? img);
+      setLocalData({ [IMAGES_COMPRESS_KEY]: keepImages });
+    } finally {
+      clearProgress();
+      setCompressLoading(false);
+    }
+  };
+
+  const handleCancel = async () => {
+    await Events.cancelImageCompress();
   };
 
   const handleShowItem = async (filePath: string) => {
@@ -136,7 +173,7 @@ const ImageCompress = () => {
           pagination={false}
           scroll={{ y: tableHeight - 60 }}
           columns={columns}
-          dataSource={images}
+          dataSource={displayImages}
         />
       </ConfigProvider>
       <div className={styles['image-compress-footer']}>
@@ -156,9 +193,21 @@ const ImageCompress = () => {
         </Space>
 
         <Space>
-          <Button size="large" type="primary" icon={<CompressOutlined />} onClick={handleCompress}>
+          <Button
+            size="large"
+            type="primary"
+            icon={<CompressOutlined />}
+            loading={compressLoading}
+            disabled={compressLoading}
+            onClick={handleCompress}
+          >
             开始压缩
           </Button>
+          {compressLoading && (
+            <Button size="large" danger icon={<StopOutlined />} onClick={handleCancel}>
+              取消
+            </Button>
+          )}
           <Button size="large" icon={<ClearOutlined />} onClick={handleClear}>
             清理列表
           </Button>

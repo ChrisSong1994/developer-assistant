@@ -28,6 +28,11 @@ const config: Configuration = {
       '@': path.resolve(ROOT, 'src'),
     },
   },
+  // sharp 是 N-API 原生模块,必须外部化,运行时从 node_modules 解析(worker 内 require)
+  externals: [
+    { sharp: 'commonjs sharp' },
+    /^@img\/sharp/,
+  ],
   devtool: isDev ? 'source-map' : false,
   module: {
     rules: [
